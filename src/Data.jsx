@@ -57,10 +57,27 @@ const socialLinks = [
   },
 ];
 
+const calculateAge = (day, month, year) => {
+  const birthDate = new Date(year, month - 1, day);
+  const today = new Date();
+
+  let age = today.getFullYear() - birthDate.getFullYear();
+  const hasHadBirthdayThisYear =
+    today.getMonth() > birthDate.getMonth() ||
+    (today.getMonth() === birthDate.getMonth() &&
+      today.getDate() >= birthDate.getDate());
+
+  if (!hasHadBirthdayThisYear) {
+    age -= 1;
+  }
+
+  return age;
+};
+
 const personalInfo = [
   {
     title: "Age",
-    text: "25",
+    text: String(calculateAge(13, 7, 1999)),
     icon: IconUser,
     iconColor: "text-red-400",
   },
