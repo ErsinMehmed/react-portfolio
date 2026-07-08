@@ -1,33 +1,54 @@
 import React, { useState } from "react";
 import Layout from "../components/Layout";
+import InViewAnimation from "../components/InViewAnimation";
+import ProjectCard from "../components/Projects/ProjectCard";
+import ProjectModal from "../components/Projects/ProjectModal";
+import { projects } from "../Data";
 
-const projectTypes = ["All", "Personal", "Professional"];
+const sections = [
+  { key: "professional", title: "Professional", items: projects.professional },
+  { key: "personal", title: "Personal", items: projects.personal },
+];
 
 const Project = () => {
-  const [selectedType, setSelectedType] = useState("All");
+  const [selected, setSelected] = useState(null);
 
   return (
     <Layout
       classes='px-6 md:px-10 lg:px-14'
+      contentClasses='2xl:max-w-[820px]'
       header='Projects'>
-      <div className='flex gap-4 justify-center sm:justify-end mb-5 mt-6'>
-        {projectTypes.map((item, index) => (
-          <span
-            key={index}
-            className={`${
-              selectedType === item
-                ? "text-[#1b74e4]"
-                : "text-slate-700 hover:text-[#1b74e4]"
-            } cursor-pointer font-semibold text-base`}
-            onClick={() => setSelectedType(item)}>
-            {item}
-          </span>
+      <div className='mt-8 space-y-14'>
+        {sections.map((section) => (
+          <InViewAnimation key={section.key}>
+            <div className='mb-6 flex items-center gap-3'>
+              <span className='h-5 w-1.5 rounded-full bg-[#1b74e4]' />
+              <h3 className='font-display text-xl font-bold tracking-tight text-slate-800 sm:text-2xl'>
+                {section.title}
+              </h3>
+              <span className='text-sm font-semibold text-slate-400'>
+                {section.items.length}
+              </span>
+            </div>
+
+            <div className='grid grid-cols-1 gap-5 sm:grid-cols-2'>
+              {section.items.map((project, index) => (
+                <ProjectCard
+                  key={index}
+                  project={project}
+                  type={section.key}
+                  onClick={() => setSelected({ project, type: section.key })}
+                />
+              ))}
+            </div>
+          </InViewAnimation>
         ))}
       </div>
 
-      <div className='w-full text-center text-slate-700 text-2xl py-16 font-semibold'>
-        Coming Soon
-      </div>
+      <ProjectModal
+        data={selected}
+        onClose={() => setSelected(null)}
+      />
     </Layout>
   );
 };

@@ -30,7 +30,7 @@ const Layout = (props) => {
     <div className='w-full min-h-screen pb-12 lg:pb-8 bg-gradient-to-r from-sky-100 via-blue-50 to-indigo-100'>
       <div className='h-full w-full min-h-screen max-w-[2000px] mx-auto'>
         <div className='relative h-full lg:px-4 xl:px-32 2xl:px-40 lg:flex 2xl:justify-center gap-10 pt-0.5 lg:pt-[158px]'>
-          <span className='w-fit lg:w-[350px] xl:w-[400px] lg:block'>
+          <span className='w-fit lg:w-[350px] xl:w-[400px] lg:block lg:shrink-0'>
             <ProfileCard />
           </span>
 

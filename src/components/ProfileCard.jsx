@@ -11,7 +11,7 @@ const ProfileCard = () => {
       <div className='relative mx-auto mb-6 mt-32 w-full bg-white px-7 pb-6 text-center shadow-[0_24px_70px_-30px_rgba(27,74,120,0.45)] ring-1 ring-slate-900/[0.04] sm:mt-36 md:mt-40 lg:mb-0 lg:mt-0 lg:rounded-[28px]'>
         <img
           src={"images/profile.png"}
-          className='absolute left-1/2 -mt-[120px] h-52 w-52 -translate-x-1/2 rounded-[22px] object-cover shadow-[0_18px_40px_-16px_rgba(27,74,120,0.55)] ring-4 ring-white'
+          className='absolute left-1/2 -mt-[120px] h-52 w-52 lg:h-48 lg:w-48 xl:h-52 xl:w-52 -translate-x-1/2 rounded-[22px] object-cover shadow-[0_18px_40px_-16px_rgba(27,74,120,0.55)] ring-4 ring-white'
           alt='Ersin Hyusein, web developer'
         />
 

@@ -427,8 +427,45 @@ const techSkills = [
 
 const projects = {
   professional: [
+     {
+      name: "Soko Beauty online store",
+      company: "Freelance",
+      live: "https://sokobeauty.bg",
+      technologies: [
+        "JavaScript",
+        "React.js",
+        "Next.js",
+        "Tailwind",
+        "Shadcn UI",
+        "MongoDB",
+        "Redis",
+        "Stripe",
+      ],
+      description:
+        "A freelance e-commerce store for Soko Beauty, a shop specialising in authentic Korean skincare and cosmetics. Customers browse curated products, manage a cart, and check out securely with Stripe, using card or cash-on-delivery payment.",
+    },
+    {
+      name: "myPOS Partner Portal",
+      company: "myPOS",
+      live: "https://partners.mypos.com/en",
+      technologies: [
+        "JavaScript",
+        "AJAX",
+        "React.js",
+        "Next.js",
+        "Shadcn UI",
+        "MongoDB",
+        "Redis",
+        "Jira",
+        "CI/CD",
+      ],
+      description:
+        "A partner portal for companies building payment solutions on myPOS. Partners can create and monitor integrations, manage connected merchants, online stores, and POS devices across multiple countries, and explore analytics on transaction trends and multi-currency volumes, alongside a sandbox environment and API documentation.",
+    },
     {
       name: "Web-based system for managing business processes related to payments.",
+      company: "myPOS",
+      live: "https://www.mypos.com",
       technologies: [
         "HTML",
         "Twig",
@@ -436,22 +473,29 @@ const projects = {
         "Bootstrap",
         "JavaScript",
         "jQuery",
+        "AJAX",
         "React.js",
         "Mobx",
         "PHP",
         "Symfony",
         "MySQL",
+        "Redis",
+        "Jira",
+        "CI/CD",
+        "Claude Code",
       ],
       description:
         "This project consists of two components: a website and a user account system. Users can manage all processes related to payments received from their terminals through the account section, along with additional functionalities such as creating online stores with various products, issuing invoices to their clients through an innovative interface, and tracking all incoming funds in their account.",
     },
     {
       name: "Web-based system for buying and selling cars.",
+      company: "James IT Services",
       technologies: [
         "HTML",
         "CSS",
         "Tailwind",
         "JavaScript",
+        "AJAX",
         "Vue.js",
         "Inertia.js",
         "PHP",
@@ -463,11 +507,13 @@ const projects = {
     },
     {
       name: "Web based system for property valuation",
+      company: "James IT Services",
       technologies: [
         "HTML",
         "CSS",
         "Tailwind",
         "JavaScript",
+        "AJAX",
         "Vue.js",
         "Inertia.js",
         "PHP",
@@ -481,6 +527,7 @@ const projects = {
   personal: [
     {
       name: "Web based management system",
+      github: "https://github.com/ErsinMehmed/management-system-next",
       technologies: [
         "HTML",
         "CSS",
@@ -496,6 +543,7 @@ const projects = {
     },
     {
       name: "System for job searching and offering - Job Portal",
+      github: "https://github.com/ErsinMehmed/job-portal",
       technologies: [
         "HTML",
         "CSS",
@@ -511,6 +559,7 @@ const projects = {
     },
     {
       name: "Appointment system",
+      github: "https://github.com/ErsinMehmed/appointmet-system",
       technologies: [
         "HTML",
         "CSS",
@@ -526,12 +575,14 @@ const projects = {
     },
     {
       name: "Laravel Blog",
+      github: "https://github.com/ErsinMehmed/laravel-blog",
       technologies: ["HTML", "CSS", "Bootstrap", "PHP", "Laravel", "MySQL"],
       description:
         "The Laravel Blog project is a dynamic web application built using HTML, CSS, Bootstrap, PHP, Laravel, and MySQL. It serves as a versatile platform for creating, updating, reading, and deleting (CRUD) blog posts, providing users with the ability to manage their content seamlessly. Additionally, the system supports user profiles, allowing individuals to create and personalize their accounts. Through its intuitive interface and robust backend powered by Laravel, users can easily compose, edit, and publish blog posts while maintaining full control over their profiles. With features for both content creation and user management, the blog offers a comprehensive solution for blogging enthusiasts and content creators alike.",
     },
     {
       name: "Work flow management system",
+      github: "https://github.com/ErsinMehmed/workflow-system",
       technologies: [
         "HTML",
         "CSS",
@@ -547,6 +598,7 @@ const projects = {
     },
     {
       name: "Web platform for price comparing and products",
+      github: "https://github.com/ErsinMehmed/price-comparing-platform",
       technologies: [
         "HTML",
         "CSS",
@@ -561,12 +613,14 @@ const projects = {
     },
     {
       name: "System for work process management",
+      github: "https://github.com/ErsinMehmed/management-system",
       technologies: ["C#", "SQL"],
       description:
         "The system allows users after logging into the system and many functional options. The main functionalities are: adding new products and employees, screen with employees and products, editing employees and products, exporting data from the system.",
     },
     {
       name: "System for work process management in a pizzeria",
+      github: "https://github.com/ErsinMehmed/managament-system",
       technologies: ["Java", "SQL", "SQLite"],
       description:
         "The system allows users, after logging into the system, many functional options. The main functionalities are: adding new products according to different criteria, viewing products and filtering according to different criteria, entering stocks, reporting used products.",
