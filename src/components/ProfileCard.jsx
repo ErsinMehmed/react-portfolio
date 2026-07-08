@@ -3,28 +3,29 @@ import { socialLinks, personalInfo } from "../Data";
 
 const ProfileCard = () => {
   const handleDownload = () => {
-    window.open("files/Ersin-Hyusein-CV.pdf", "_blank");
+    window.open("files/Ersin_Hyusein_CV_EN.pdf", "_blank");
   };
 
   return (
-    <div className='lg:sticky top-44'>
-      <div className='w-full mb-6 lg:mb-0 mx-auto relative bg-white text-center px-8 lg:rounded-[20px] mt-40 sm:mt-44 md:mt-56 lg:mt-0 shadow'>
+    <div className='lg:sticky top-[158px]'>
+      <div className='relative mx-auto mb-6 mt-32 w-full bg-white px-7 pb-6 text-center shadow-[0_24px_70px_-30px_rgba(27,74,120,0.45)] ring-1 ring-slate-900/[0.04] sm:mt-36 md:mt-40 lg:mb-0 lg:mt-0 lg:rounded-[28px]'>
         <img
           src={"images/profile.png"}
-          className='w-56 h-56 sm:w-60 sm:h-60 absolute left-[50%] transform -translate-x-[50%] drop-shadow-xl mx-auto rounded-[20px] -mt-[140px]'
-          alt='profile'
+          className='absolute left-1/2 -mt-[120px] h-52 w-52 -translate-x-1/2 rounded-[22px] object-cover shadow-[0_18px_40px_-16px_rgba(27,74,120,0.55)] ring-4 ring-white'
+          alt='Ersin Hyusein, web developer'
         />
 
-        <div className='pt-24 pb-8'>
-          <h2 className='mt-6 mb-1 text-slate-700 text-2xl sm:text-3xl font-semibold'>
+        <div className='pt-[104px]'>
+          <h2 className='font-display text-[24px] font-bold tracking-tight text-slate-800'>
             Ersin Hyusein
           </h2>
 
-          <h3 className='mb-4 text-gray-600 inline-block px-5 py-1.5 rounded-lg'>
-            Web Developer
-          </h3>
+          <p className='mt-1 inline-flex items-center gap-2 text-sm font-medium text-slate-500'>
+            <span className='h-1.5 w-1.5 rounded-full bg-[#1b74e4]' />
+            Full Stack Web Developer
+          </p>
 
-          <div className='flex justify-center space-x-3'>
+          <div className='mt-4 flex justify-center gap-2.5'>
             {socialLinks.map((link, index) => {
               const IconComponent = link.icon;
 
@@ -33,55 +34,58 @@ const ProfileCard = () => {
                   key={index}
                   href={link.href}
                   target='_blank'
-                  rel='noreferrer'>
-                  <span className='w-10 h-10 flex items-center group justify-center rounded-lg bg-[#f3f6f6] hover:bg-[#1b74e4] text-[#1773EA]'>
-                    <IconComponent />
+                  rel='noreferrer'
+                  aria-label='Social link'>
+                  <span className='flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 text-slate-500 transition-all duration-200 ease-out hover:-translate-y-0.5 hover:border-[#1b74e4] hover:bg-[#1b74e4] hover:text-white'>
+                    <IconComponent className='h-[18px] w-[18px]' />
                   </span>
                 </a>
               );
             })}
           </div>
 
-          <div className='p-6 rounded-2xl mt-7 bg-[#F3F6F6]'>
-            {personalInfo.map((item, index) => (
-              <div
-                key={index}
-                className={`flex ${
-                  index === personalInfo.length - 1
-                    ? ""
-                    : "border-b border-gray-200"
-                } py-2.5`}>
-                <span
-                  className={`w-10 h-10 flex items-center justify-center rounded-lg bg-white ${item.iconColor} shadow-md`}>
-                  <item.icon className='w-5 h-5' />
-                </span>
+          <dl className='mt-5 divide-y divide-slate-200/50 rounded-2xl bg-[#f7f9fb] px-5 text-left'>
+            {personalInfo.map((item, index) => {
+              const isPhone = index === 2;
+              const isEmail = index === 3;
 
-                <div className='text-left ml-2.5 font-semibold text-slate-800'>
-                  <p className='text-sm text-slate-600'>{item.title}</p>
+              return (
+                <div
+                  key={index}
+                  className='flex items-center gap-3.5 py-2.5'>
+                  <item.icon className='h-[18px] w-[18px] shrink-0 text-slate-400' />
 
-                  {index === 2 || index === 3 ? (
-                    <a
-                      className='hover:underline transition-all text-sm'
-                      href={
-                        index === 2
-                          ? "tel:+359 899 626273"
-                          : "mailto:ersin99mehmed@abv.bg"
-                      }>
-                      {item.text}
-                    </a>
-                  ) : (
-                    <p className='text-sm'>{item.text}</p>
-                  )}
+                  <div className='min-w-0 flex-1'>
+                    <dt className='text-[11px] font-semibold uppercase tracking-wider text-slate-400'>
+                      {item.title}
+                    </dt>
+
+                    <dd className='text-[15px] font-semibold text-slate-700'>
+                      {isPhone || isEmail ? (
+                        <a
+                          className='transition-colors hover:text-[#1b74e4]'
+                          href={
+                            isPhone
+                              ? "tel:+359899626273"
+                              : "mailto:ersin99mehmed@abv.bg"
+                          }>
+                          {item.text}
+                        </a>
+                      ) : (
+                        item.text
+                      )}
+                    </dd>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              );
+            })}
+          </dl>
 
           <button
             type='button'
-            className='mx-auto flex items-center sm:text-xl font-semibold rounded-3xl mt-5 sm:mt-6 bg-[#1b74e4] hover:bg-[#65a4f1] px-8 sm:px-10 py-2 sm:py-3 text-white active:scale-95 transition-all'
+            className='group mt-5 inline-flex w-full items-center justify-center gap-2.5 rounded-2xl bg-[#1b74e4] px-8 py-3 text-base font-semibold text-white shadow-[0_14px_30px_-12px_rgba(27,116,228,0.7)] transition-all duration-200 ease-out hover:bg-[#1667cf] active:scale-[0.98]'
             onClick={handleDownload}>
-            <IconDownload className='w-6 h-6 mr-2 mt-0.5 sm:mt-1' />
+            <IconDownload className='h-5 w-5 transition-transform duration-200 ease-out group-hover:-translate-y-0.5' />
             Download CV
           </button>
         </div>
