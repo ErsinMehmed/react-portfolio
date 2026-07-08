@@ -22,7 +22,7 @@ const ProfileCard = () => {
 
           <p className='mt-1 inline-flex items-center gap-2 text-sm font-medium text-slate-500'>
             <span className='h-1.5 w-1.5 rounded-full bg-[#1b74e4]' />
-            Full Stack Web Developer
+            Senior Full Stack Web Developer
           </p>
 
           <div className='mt-4 flex justify-center gap-2.5'>

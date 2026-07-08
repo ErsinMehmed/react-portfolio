@@ -9,7 +9,7 @@ import IconWork from "../icons/Work";
 import { useInView } from "react-intersection-observer";
 import { techSkills, educations, experiences } from "../Data";
 
-const filterNames = ["All", "Frontend", "Backend", "Database", "Other"];
+const filterNames = ["All", "Frontend", "Backend", "Database", "AI", "Other"];
 
 const Resume = () => {
   const [selectedKind, setSelectedKind] = useState("All");
@@ -25,80 +25,88 @@ const Resume = () => {
   return (
     <Layout
       classes='px-6 md:px-10 lg:px-14'
+      contentClasses='2xl:max-w-[820px]'
       header='Resume'>
-      <div className='mt-8 mb-10 2xl:mb-12'>
+      <div className='mt-8'>
         <InViewAnimation>
-          <div className='flex items-center space-x-2 mb-4'>
-            <IconAcademicCap className='w-6 h-6 sm:w-7 sm:h-7 text-[#1b74e4]' />
-            <h4 className='text-xl sm:text-2xl text-slate-700 font-semibold'>
+          <div className='mb-6 flex items-center gap-2.5'>
+            <IconAcademicCap className='h-5 w-5 text-[#1b74e4]' />
+            <h3 className='font-display text-xl font-bold tracking-tight text-slate-800 sm:text-2xl'>
               Education
-            </h4>
+            </h3>
           </div>
 
-          <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-x-5'>
+          <div>
             {educations.map((item, index) => (
               <InViewAnimation
                 key={index}
-                delay={index * 0.2}>
-                <EducationBox item={item} />
+                delay={index * 0.12}>
+                <EducationBox
+                  item={item}
+                  isLast={index === educations.length - 1}
+                />
               </InViewAnimation>
             ))}
           </div>
         </InViewAnimation>
 
         <InViewAnimation>
-          <div className='flex items-center space-x-2 my-4'>
-            <IconWork className='w-6 h-6 sm:w-7 sm:h-7 text-[#1b74e4]' />
-            <h4 className='text-xl sm:text-2xl text-slate-700 font-semibold'>
+          <div className='mb-6 mt-12 flex items-center gap-2.5'>
+            <IconWork className='h-5 w-5 text-[#1b74e4]' />
+            <h3 className='font-display text-xl font-bold tracking-tight text-slate-800 sm:text-2xl'>
               Experience
-            </h4>
+            </h3>
           </div>
 
-          <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-x-5'>
+          <div>
             {experiences.map((item, index) => (
               <InViewAnimation
                 key={index}
-                delay={index * 0.2}>
-                <ExperienceBox item={item} />
+                delay={index * 0.1}>
+                <ExperienceBox
+                  item={item}
+                  isLast={index === experiences.length - 1}
+                />
               </InViewAnimation>
             ))}
           </div>
         </InViewAnimation>
       </div>
 
-      <InViewAnimation delay={0.2}>
-        <div className='px-3'>
-          <h4 className='text-xl sm:text-2xl text-slate-700 font-semibold mb-0.5 text-center'>
+      <InViewAnimation delay={0.15}>
+        <div className='mt-14'>
+          <h3 className='font-display text-xl font-bold tracking-tight text-slate-800 sm:text-2xl'>
             Professional Skills
-          </h4>
+          </h3>
 
-          <div className='text-sm mb-5 text-gray-500 text-center'>
-            Hover over name of the programming language, technology, library or
-            software to get more information
-          </div>
+          <p className='mt-1.5 max-w-[60ch] text-sm text-slate-500'>
+            Hover over the name of a language, technology, library or tool for
+            more details.
+          </p>
 
-          <div className='flex gap-4 justify-center sm:justify-end mb-5'>
+          <div className='mt-5 flex flex-wrap gap-2'>
             {filterNames.map((item, index) => (
-              <span
+              <button
                 key={index}
-                className={`${
+                type='button'
+                onClick={() => setSelectedKind(item)}
+                className={`rounded-full px-3.5 py-1.5 text-sm font-semibold transition-colors duration-200 ${
                   selectedKind === item
-                    ? "text-[#1b74e4]"
-                    : "text-slate-700 hover:text-[#1b74e4]"
-                } cursor-pointer font-semibold text-base`}
-                onClick={() => setSelectedKind(item)}>
+                    ? "bg-[#1b74e4] text-white"
+                    : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+                }`}>
                 {item}
-              </span>
+              </button>
             ))}
           </div>
 
           <div
             ref={ref}
-            className='grid grid-cols-1 sm:grid-cols-2 gap-y-6 gap-x-10'>
+            className='mt-7 grid grid-cols-1 gap-x-10 gap-y-5 sm:grid-cols-2'>
             {filteredSkills.map((item, index) => (
               <InViewAnimation
-                key={index}
-                delay={index <= 12 ? index * 0.1 : index * 0.08}>
+                key={item.title}
+                delay={index <= 12 ? index * 0.08 : index * 0.05}>
                 <SkillBox
                   item={item}
                   index={index}

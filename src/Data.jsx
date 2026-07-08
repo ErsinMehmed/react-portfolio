@@ -134,14 +134,14 @@ const educations = [
 const experiences = [
   {
     title: "Backend web developer",
-    period: "08.2023 - Present",
+    period: "07.2023 - 07.2026",
     location: "Varna",
     company: "MyPOS Technologies",
     color: "bg-[#fff4f4]",
   },
   {
     title: "Full stack web developer",
-    period: "10.2022 - 07.2023",
+    period: "10.2022 - 06.2023",
     location: "Varna",
     company: "James IT Services",
     color: "bg-[#eef5fa]",
@@ -209,14 +209,14 @@ const techSkills = [
     percentage: "100",
     kind: "Frontend",
     description:
-      "I have advanced expertise in HTML and have utilized it extensively in a wide range of projects.",
+      "Semantic, accessible markup is second nature to me and forms the backbone of every interface I build.",
     color: "bg-red-400",
   },
   {
     title: "CSS",
     kind: "Frontend",
     description:
-      "I am highly skilled in CSS and have implemented it across numerous projects. My strengths include using grid and flexbox for layout positioning, as well as creating engaging animations.",
+      "Comfortable crafting responsive layouts with grid and flexbox, along with smooth animations and polished micro-interactions.",
     percentage: "90",
     color: "bg-rose-400",
   },
@@ -224,7 +224,7 @@ const techSkills = [
     title: "Tailwind",
     kind: "Frontend",
     description:
-      "I have extensive experience with Tailwind CSS and have used it in many professional projects for rapid UI development.",
+      "My go-to for styling, letting me ship clean, consistent interfaces fast with utility classes and shared design tokens.",
     percentage: "90",
     color: "bg-pink-400",
   },
@@ -232,7 +232,7 @@ const techSkills = [
     title: "Bootstrap",
     kind: "Frontend",
     description:
-      "I am proficient in Bootstrap and have applied it effectively in project development, especially for responsive designs.",
+      "Applied across several projects for quick, responsive layouts built on reliable prebuilt components.",
     percentage: "70",
     color: "bg-fuchsia-400",
   },
@@ -240,7 +240,7 @@ const techSkills = [
     title: "JavaScript",
     kind: "Frontend",
     description:
-      "I am highly proficient in JavaScript and have utilized it for various functionalities, including animations, form validations, and dynamic UI interactions.",
+      "The core of my front-end work: dynamic UI logic, form validation, async requests, and rich DOM interactions.",
     percentage: "90",
     color: "bg-purple-400",
   },
@@ -249,7 +249,7 @@ const techSkills = [
     kind: "Frontend",
     percentage: "70",
     description:
-      "I have strong proficiency in Vue.js, having used it in one of my professional projects to build robust front-end applications.",
+      "Built production front-ends with Vue, using its reactivity and component model to keep code clean and maintainable.",
     color: "bg-violet-400",
   },
   {
@@ -257,22 +257,23 @@ const techSkills = [
     kind: "Frontend",
     percentage: "50",
     description:
-      "I have intermediate-level experience with Inertia.js, utilizing it to bridge the gap between front-end and back-end frameworks.",
+      "Used to connect a Laravel back-end with a modern SPA front-end without maintaining a separate API layer.",
     color: "bg-indigo-400",
   },
   {
     title: "React.js",
     kind: "Frontend",
-    percentage: "80",
+    percentage: "90",
     description:
-      "I possess a solid understanding of React.js, having used it to develop scalable and efficient front-end applications.",
+      "My main library for building scalable, component-driven interfaces with hooks and reusable state.",
     color: "bg-blue-400",
   },
   {
     title: "Mobx",
     kind: "Frontend",
     percentage: "90",
-    description: "I have extensive experience with MobX, leveraging it for efficient state management in React applications.",
+    description:
+      "My preferred state manager in React, keeping complex application state predictable and reactive.",
     color: "bg-sky-400",
   },
   {
@@ -280,7 +281,7 @@ const techSkills = [
     kind: "Frontend",
     percentage: "80",
     description:
-      "I am proficient in jQuery and have used it for real-time DOM manipulation and seamless UI interactions in multiple projects.",
+      "Handled DOM manipulation, events, and AJAX-driven interactions across legacy and hybrid projects.",
     color: "bg-cyan-400",
   },
   {
@@ -288,7 +289,7 @@ const techSkills = [
     kind: "Frontend",
     percentage: "85",
     description:
-      "I have solid experience with AJAX and have used it in projects to dynamically retrieve and save data from databases.",
+      "Used throughout my projects to fetch and save data asynchronously without full page reloads.",
     color: "bg-teal-400",
   },
   {
@@ -296,59 +297,55 @@ const techSkills = [
     kind: "Backend",
     percentage: "85",
     description:
-      "I am highly proficient in PHP, using it for data retrieval, CRUD operations, and developing back-end functionalities.",
+      "My primary back-end language for building APIs, CRUD logic, and server-side application features.",
     color: "bg-emerald-400",
   },
   {
     title: "Symfony",
     kind: "Backend",
     percentage: "80",
-    description: "I have intermediate expertise in Symfony, building structured and efficient back-end applications.",
+    description:
+      "Build structured, maintainable back-ends with Symfony's services, components, and Doctrine ORM.",
     color: "bg-green-400",
   },
   {
     title: "Laravel",
     kind: "Backend",
     percentage: "70",
-    description: "I use Laravel extensively in my professional work for building scalable back-end systems.",
+    description:
+      "Used professionally for scalable back-ends: routing, Eloquent models, queues, and authentication.",
     color: "bg-lime-400",
   },
   {
     title: "Next.js",
     kind: "Backend",
-    percentage: "60",
+    percentage: "80",
     description:
-      "I have significant experience with Next.js, utilizing it for server-side rendering and building modern web applications.",
+      "Build modern React applications with server-side rendering, file-based routing, and API routes.",
     color: "bg-lime-300",
   },
   {
-    title: ".NET",
+    title: "Node.js",
     kind: "Backend",
-    percentage: "40",
-    description: "I have a good command of .NET, with advanced knowledge and practical experience in building back-end applications.",
-    color: "bg-yellow-400",
-  },
-  {
-    title: "ASP.NET",
-    kind: "Backend",
-    percentage: "40",
-    description: "I am experienced with ASP.NET, having an advanced understanding of its use in building web applications.",
-    color: "bg-amber-400",
+    percentage: "50",
+    description:
+      "Used Node.js to build lightweight back-end services, tooling, and JavaScript-based APIs.",
+    color: "bg-green-400",
   },
   {
     title: "MySQL",
     kind: "Database",
     percentage: "80",
     description:
-      "I am highly skilled in MySQL, with expertise in CRUD operations and optimizing database queries.",
+      "Comfortable designing schemas, writing CRUD queries, and tuning them for better performance.",
     color: "bg-red-400",
   },
   {
     title: "SQL",
     kind: "Database",
-    percentage: "70",
+    percentage: "75",
     description:
-      "I am proficient in SQL, having used it extensively for database operations and data analysis.",
+      "Solid with relational queries, joins, and aggregations for everyday data operations and reporting.",
     color: "bg-pink-400",
   },
   {
@@ -356,22 +353,75 @@ const techSkills = [
     kind: "Database",
     percentage: "70",
     description:
-      "I have strong proficiency in MongoDB, utilizing it for dynamic database operations and complex queries.",
+      "Used for flexible, document-based storage and aggregation pipelines over dynamic data.",
     color: "bg-pink-400",
+  },
+  {
+    title: "PostgreSQL",
+    kind: "Database",
+    percentage: "75",
+    description:
+      "I work confidently with PostgreSQL, from schema design to writing and optimizing complex relational queries.",
+    color: "bg-sky-400",
+  },
+  {
+    title: "Claude Code",
+    kind: "AI",
+    percentage: "90",
+    description:
+      "My primary agentic coding partner in the terminal and IDE. I've used it to build:",
+    items: [
+      "Custom AI agents",
+      "Reusable AI skills",
+      "MCP servers",
+      "Automated multi-step workflows",
+    ],
+    color: "bg-orange-400",
+  },
+  {
+    title: "Codex",
+    kind: "AI",
+    percentage: "75",
+    description: "OpenAI Codex is part of my daily workflow. I've used it for:",
+    items: [
+      "Generating features and boilerplate",
+      "Refactoring and debugging code",
+      "Rapid prototyping of ideas",
+    ],
+    color: "bg-emerald-400",
   },
   {
     title: "GitHub",
     kind: "Other",
-    percentage: "80",
-    description: "I have extensive experience with GitHub for version control and collaboration in development projects.",
+    percentage: "100",
+    description:
+      "My daily tool for version control, pull requests, and collaborating smoothly across a team.",
     color: "bg-rose-400",
   },
   {
     title: "Jira",
     kind: "Other",
     percentage: "90",
-    description: "I am highly skilled in Jira, using it for agile project management and issue tracking.",
+    description:
+      "Run agile workflows in Jira, from sprint planning and issue tracking to managing boards.",
     color: "bg-rose-400",
+  },
+  {
+    title: "Testing",
+    kind: "Other",
+    percentage: "80",
+    description:
+      "Cover the full testing spectrum to keep code reliable and catch regressions early:",
+    items: ["Unit tests", "Integration tests", "End-to-end (E2E) tests"],
+    color: "bg-amber-400",
+  },
+  {
+    title: "CI/CD",
+    kind: "Other",
+    percentage: "75",
+    description:
+      "Set up and maintain CI/CD pipelines that automate builds, tests, and deployments for faster, safer releases.",
+    color: "bg-indigo-400",
   },
 ];
 
