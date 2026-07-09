@@ -108,7 +108,7 @@ const ProfileCard = () => {
                         ) : isEmail ? (
                           <a
                             className='transition-colors hover:text-[#1b74e4]'
-                            href="mailto:ersin99mehmed@abv.bg"
+                            href="mailto:ersin99mehmed@gmail.com"
                           >
                             {item.text}
                           </a>

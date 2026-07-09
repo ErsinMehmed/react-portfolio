@@ -95,7 +95,7 @@ const personalInfo = [
   },
   {
     title: "Email",
-    text: "ersin99mehmed@abv.bg",
+    text: "ersin99mehmed@gmail.com",
     icon: IconEmail,
     iconColor: "text-blue-400",
   },
