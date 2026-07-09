@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState, useCallback, useMemo } from "react";
 import { bg } from "./translations";
 
 const LanguageContext = createContext({
@@ -17,11 +17,22 @@ export const LanguageProvider = ({ children }) => {
     document.documentElement.lang = lang;
   }, [lang]);
 
-  // The English text is the key; falls back to English when no translation.
-  const t = (text) => (lang === "bg" ? bg[text] ?? text : text);
+  const setLanguage = useCallback((newLang) => {
+    setLang(newLang);
+  }, []);
+
+  const t = useCallback(
+    (text) => (lang === "bg" ? bg[text] ?? text : text),
+    [lang]
+  );
+
+  const contextValue = useMemo(
+    () => ({ lang, setLang: setLanguage, t }),
+    [lang, setLanguage, t]
+  );
 
   return (
-    <LanguageContext.Provider value={{ lang, setLang, t }}>
+    <LanguageContext.Provider value={contextValue}>
       {children}
     </LanguageContext.Provider>
   );
