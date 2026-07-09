@@ -3,9 +3,47 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    /* Strong easing curves (Emil Kowalski) — the built-in CSS easings are too weak */
+    --ease-out-strong: cubic-bezier(0.23, 1, 0.32, 1);
+    --ease-in-out-strong: cubic-bezier(0.77, 0, 0.175, 1);
+  }
+
   body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+  }
+}
+
+@layer utilities {
+  /* Gentle idle float that keeps the horizontally-centered transform */
+  @keyframes float-x {
+    0%,
+    100% {
+      transform: translate(-50%, 0);
+    }
+    50% {
+      transform: translate(-50%, -6px);
+    }
+  }
+
+  .animate-float-x {
+    animation: float-x 6s ease-in-out infinite;
+  }
+}
+
+/* Respect reduced-motion: drop continuous/ambient motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-float-x {
+    animation: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

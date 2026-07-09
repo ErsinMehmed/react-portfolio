@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Tooltip } from "flowbite-react";
 import { motion } from "framer-motion";
+import NumberTicker from "../NumberTicker";
 import {
   siHtml5,
   siCss,
@@ -48,6 +49,8 @@ const iconMap = {
   Jira: siJira,
   "Claude Code": siClaude,
 };
+
+const easeOutStrong = [0.23, 1, 0.32, 1];
 
 // SQL and AJAX are not brands, so they have no official logo. Use fitting
 // generic glyphs (a database cylinder and code brackets) instead.
@@ -162,61 +165,57 @@ const tooltipTheme = {
   },
 };
 
-const SkillBox = (props) => {
-  const [percentage, setPercentage] = useState(0);
-
-  useEffect(() => {
-    let interval = 0;
-
-    if (props.inView) {
-      interval = setInterval(() => {
-        if (percentage < props.item.percentage) {
-          setPercentage((prevPercentage) => prevPercentage + 1);
-        }
-      }, 25);
-    }
-
-    return () => clearInterval(interval);
-  }, [percentage, props.item.percentage, props.inView]);
-
+const SkillBox = ({ item, index }) => {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: props.index * 0.05 }}
+      initial={{ opacity: 0, y: 14 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.4 }}
+      transition={{
+        duration: 0.4,
+        delay: Math.min(index, 10) * 0.035,
+        ease: easeOutStrong,
+      }}
     >
       <div className='mb-1.5 flex items-center justify-between text-sm font-semibold text-slate-700'>
         <span className='flex min-w-0 items-center gap-2'>
           <TechLogo
-            item={props.item}
+            item={item}
             className='h-[18px] w-[18px] shrink-0'
           />
 
-          {props.item.description ? (
+          {item.description ? (
             <Tooltip
-              content={<SkillCard item={props.item} />}
+              content={<SkillCard item={item} />}
               placement='right'
               arrow={false}
               theme={tooltipTheme}
             >
               <span className='cursor-pointer truncate transition-opacity hover:opacity-60'>
-                {props.item.title}
+                {item.title}
               </span>
             </Tooltip>
           ) : (
-            <span className='cursor-default truncate'>{props.item.title}</span>
+            <span className='cursor-default truncate'>{item.title}</span>
           )}
         </span>
 
-        <span className='tabular-nums text-slate-400'>{percentage}%</span>
+        <NumberTicker
+          value={Number(item.percentage)}
+          suffix='%'
+          className='text-slate-400'
+        />
       </div>
 
-      <div className='h-1.5 w-full rounded-full bg-slate-100'>
-        <div
-          className={`${props.item.color} h-1.5 rounded-full`}
-          style={{
-            width: `${percentage}%`,
-          }}
+      {/* Bar grows via a GPU transform (scaleX) instead of animating width */}
+      <div className='h-1.5 w-full overflow-hidden rounded-full bg-slate-100'>
+        <motion.div
+          className={`${item.color} h-1.5 origin-left rounded-full`}
+          style={{ width: `${item.percentage}%` }}
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 0.9, delay: 0.1, ease: easeOutStrong }}
         />
       </div>
     </motion.div>

@@ -1,6 +1,18 @@
 import Layout from "../components/Layout";
 import InViewAnimation from "../components/InViewAnimation";
-import { mainSkills } from "../Data";
+import NumberTicker from "../components/NumberTicker";
+import { mainSkills, techSkills, projects, certifications } from "../Data";
+
+const stats = [
+  { value: 5, suffix: "+", label: "Years of experience" },
+  {
+    value: projects.professional.length + projects.personal.length,
+    suffix: "+",
+    label: "Projects built",
+  },
+  { value: techSkills.length, suffix: "+", label: "Technologies" },
+  { value: certifications.length, suffix: "", label: "Certifications" },
+];
 
 const Home = () => {
   return (
@@ -30,6 +42,25 @@ const Home = () => {
       </InViewAnimation>
 
       <InViewAnimation>
+        <dl className='mt-8 grid grid-cols-2 gap-x-6 gap-y-6 border-y border-slate-200/70 py-6 sm:grid-cols-4'>
+          {stats.map((stat) => (
+            <div key={stat.label}>
+              <dt className='sr-only'>{stat.label}</dt>
+              <dd className='font-display text-[28px] font-bold leading-none tracking-tight text-slate-800 sm:text-[32px]'>
+                <NumberTicker
+                  value={stat.value}
+                  suffix={stat.suffix}
+                />
+              </dd>
+              <p className='mt-2 text-xs font-medium text-slate-400'>
+                {stat.label}
+              </p>
+            </div>
+          ))}
+        </dl>
+      </InViewAnimation>
+
+      <InViewAnimation>
         <h3 className='mb-1 mt-14 font-display text-2xl font-bold tracking-tight text-slate-800 sm:text-3xl'>
           What I do
         </h3>
@@ -39,8 +70,8 @@ const Home = () => {
         {mainSkills.map((item, index) => (
           <InViewAnimation
             key={index}
-            delay={index * 0.12}>
-            <div className='group grid grid-cols-[2rem_1fr] gap-x-4 border-b border-slate-200/70 py-6 sm:grid-cols-[2.75rem_1fr] sm:gap-x-6'>
+            delay={index * 0.07}>
+            <div className='grid grid-cols-[2rem_1fr] gap-x-4 border-b border-slate-200/70 py-6 sm:grid-cols-[2.75rem_1fr] sm:gap-x-6'>
               <span className='pt-1 font-display text-sm font-bold tabular-nums text-[#1b74e4]'>
                 {String(index + 1).padStart(2, "0")}
               </span>
