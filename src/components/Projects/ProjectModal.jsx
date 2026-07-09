@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLanguage } from "../../i18n/LanguageContext";
 
 const GitHubMark = ({ className }) => (
   <svg
@@ -45,6 +46,7 @@ const ProjectModal = ({ data, onClose }) => {
     };
   }, [data, onClose]);
 
+  const { t } = useLanguage();
   const project = data?.project;
   const type = data?.type;
 
@@ -84,20 +86,22 @@ const ProjectModal = ({ data, onClose }) => {
                   ? "bg-blue-50 text-[#1b74e4]"
                   : "bg-slate-100 uppercase tracking-wide text-slate-500"
               }`}>
-              {type === "professional" ? project.company : "Personal project"}
+              {type === "professional"
+                ? t(project.company)
+                : t("Personal project")}
             </span>
 
             <h3 className='mt-3 pr-8 font-display text-2xl font-bold leading-tight tracking-tight text-slate-800'>
-              {project.name}
+              {t(project.name)}
             </h3>
 
             <p className='mt-4 leading-relaxed text-slate-600'>
-              {project.description}
+              {t(project.description)}
             </p>
 
             <div className='mt-6'>
               <p className='mb-2 text-[11px] font-semibold uppercase tracking-wider text-slate-400'>
-                Tech stack
+                {t("Tech stack")}
               </p>
               <div className='flex flex-wrap gap-2'>
                 {(project.technologies || []).map((tech, i) => (
@@ -119,7 +123,7 @@ const ProjectModal = ({ data, onClose }) => {
                     rel='noreferrer'
                     className='inline-flex items-center gap-2 rounded-xl bg-[#1b74e4] px-5 py-2.5 text-sm font-semibold text-white shadow-[0_12px_26px_-12px_rgba(27,116,228,0.7)] transition-colors hover:bg-[#1667cf]'>
                     <ExternalIcon className='h-4 w-4' />
-                    Live demo
+                    {t("Live demo")}
                   </a>
                 )}
 
@@ -130,7 +134,7 @@ const ProjectModal = ({ data, onClose }) => {
                     rel='noreferrer'
                     className='inline-flex items-center gap-2 rounded-xl border border-slate-200 px-5 py-2.5 text-sm font-semibold text-slate-700 transition-colors hover:border-slate-300 hover:bg-slate-50'>
                     <GitHubMark className='h-4 w-4' />
-                    View code
+                    {t("View code")}
                   </a>
                 )}
               </div>
@@ -138,8 +142,9 @@ const ProjectModal = ({ data, onClose }) => {
 
             {type === "professional" && !project.live && !project.github && (
               <p className='mt-7 rounded-xl bg-slate-50 px-4 py-3 text-sm text-slate-500'>
-                Proprietary company project, source code is not publicly
-                available.
+                {t(
+                  "Proprietary company project, source code is not publicly available."
+                )}
               </p>
             )}
           </motion.div>

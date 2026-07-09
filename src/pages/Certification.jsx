@@ -3,6 +3,7 @@ import Layout from "../components/Layout";
 import InViewAnimation from "../components/InViewAnimation";
 import CertificationCard from "../components/Certifications/CertificationCard";
 import { certifications } from "../Data";
+import { useLanguage } from "../i18n/LanguageContext";
 
 const normalizeKind = (item) => {
   const raw = item.kind || item.kindEn || "Certificate";
@@ -18,6 +19,7 @@ const categoryOrder = [
 ];
 
 const Certification = () => {
+  const { t } = useLanguage();
   const groups = categoryOrder
     .map((category) => ({
       ...category,
@@ -38,7 +40,7 @@ const Certification = () => {
             <div className='mb-6 flex items-center gap-3'>
               <span className='h-5 w-1.5 rounded-full bg-[#1b74e4]' />
               <h3 className='font-display text-xl font-bold tracking-tight text-slate-800 sm:text-2xl'>
-                {group.title}
+                {t(group.title)}
               </h3>
               <span className='text-sm font-semibold text-slate-400'>
                 {group.items.length}

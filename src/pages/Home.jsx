@@ -2,6 +2,7 @@ import Layout from "../components/Layout";
 import InViewAnimation from "../components/InViewAnimation";
 import NumberTicker from "../components/NumberTicker";
 import { mainSkills, techSkills, projects, certifications } from "../Data";
+import { useLanguage } from "../i18n/LanguageContext";
 
 const stats = [
   { value: 5, suffix: "+", label: "Years of experience" },
@@ -15,6 +16,8 @@ const stats = [
 ];
 
 const Home = () => {
+  const { t } = useLanguage();
+
   return (
     <Layout
       classes='px-6 md:px-10 lg:px-14'
@@ -23,20 +26,15 @@ const Home = () => {
       <InViewAnimation>
         <div className='space-y-4 pt-6'>
           <p className='text-lg leading-8 text-slate-600'>
-            Hi, my name is Ersin, and I am a software developer and sports
-            coach. I have been programming for 5 years, combining my passion for
-            technology with professional experience. Over the years, I’ve honed
-            my skills by working on various projects, both at work and in my
-            spare time, constantly striving to deliver high-quality solutions.
+            {t(
+              "Hi, my name is Ersin, and I am a software developer. I have been programming for 6 years, combining my passion for technology with professional experience. Over the years, I’ve honed my skills by working on various projects, both at work and in my spare time, constantly striving to deliver high-quality solutions."
+            )}
           </p>
 
           <p className='leading-7 text-slate-500'>
-            I have both theoretical and practical expertise in back-end and
-            front-end programming, with a strong focus on web development. Web
-            programming is my greatest strength, and I continuously work on
-            refining my skills in this area. On this site, you can explore more
-            details about my work, including the developments and projects I am
-            currently involved in.
+            {t(
+              "I have both theoretical and practical expertise in back-end and front-end programming, with a strong focus on web development. Web programming is my greatest strength, and I continuously work on refining my skills in this area. On this site, you can explore more details about my work, including the developments and projects I am currently involved in."
+            )}
           </p>
         </div>
       </InViewAnimation>
@@ -45,7 +43,7 @@ const Home = () => {
         <dl className='mt-8 grid grid-cols-2 gap-x-6 gap-y-6 border-y border-slate-200/70 py-6 sm:grid-cols-4'>
           {stats.map((stat) => (
             <div key={stat.label}>
-              <dt className='sr-only'>{stat.label}</dt>
+              <dt className='sr-only'>{t(stat.label)}</dt>
               <dd className='font-display text-[28px] font-bold leading-none tracking-tight text-slate-800 sm:text-[32px]'>
                 <NumberTicker
                   value={stat.value}
@@ -53,7 +51,7 @@ const Home = () => {
                 />
               </dd>
               <p className='mt-2 text-xs font-medium text-slate-400'>
-                {stat.label}
+                {t(stat.label)}
               </p>
             </div>
           ))}
@@ -62,7 +60,7 @@ const Home = () => {
 
       <InViewAnimation>
         <h3 className='mb-1 mt-14 font-display text-2xl font-bold tracking-tight text-slate-800 sm:text-3xl'>
-          What I do
+          {t("What I do")}
         </h3>
       </InViewAnimation>
 
@@ -79,10 +77,10 @@ const Home = () => {
               <div>
                 <h4 className='flex items-center gap-2.5 font-display text-lg font-semibold text-slate-800 sm:text-xl'>
                   <item.icon className='h-5 w-5 shrink-0' />
-                  {item.title}
+                  {t(item.title)}
                 </h4>
 
-                <p className='mt-2 leading-7 text-slate-500'>{item.text}</p>
+                <p className='mt-2 leading-7 text-slate-500'>{t(item.text)}</p>
               </div>
             </div>
           </InViewAnimation>

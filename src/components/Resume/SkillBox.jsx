@@ -2,6 +2,7 @@ import React from "react";
 import { Tooltip } from "flowbite-react";
 import { motion } from "framer-motion";
 import NumberTicker from "../NumberTicker";
+import { useLanguage } from "../../i18n/LanguageContext";
 import {
   siHtml5,
   siCss,
@@ -108,55 +109,59 @@ const levelFromPercentage = (value) => {
   return "Familiar";
 };
 
-const SkillCard = ({ item }) => (
-  <div className='w-[240px] p-3.5 text-left'>
-    <div className='flex items-center gap-3'>
-      <span className='flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-slate-50 ring-1 ring-slate-100'>
-        <TechLogo
-          item={item}
-          className='h-[18px] w-[18px]'
-        />
-      </span>
+const SkillCard = ({ item }) => {
+  const { t } = useLanguage();
 
-      <div className='min-w-0 flex-1'>
-        <p className='font-display text-sm font-bold leading-tight text-slate-800'>
-          {item.title}
-        </p>
-        <p className='mt-0.5 text-[11px] font-semibold uppercase tracking-wide text-slate-400'>
-          {levelFromPercentage(item.percentage)}
-        </p>
+  return (
+    <div className='w-[240px] p-3.5 text-left'>
+      <div className='flex items-center gap-3'>
+        <span className='flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-slate-50 ring-1 ring-slate-100'>
+          <TechLogo
+            item={item}
+            className='h-[18px] w-[18px]'
+          />
+        </span>
+
+        <div className='min-w-0 flex-1'>
+          <p className='font-display text-sm font-bold leading-tight text-slate-800'>
+            {item.title}
+          </p>
+          <p className='mt-0.5 text-[11px] font-semibold uppercase tracking-wide text-slate-400'>
+            {t(levelFromPercentage(item.percentage))}
+          </p>
+        </div>
+
+        <span className='text-sm font-bold tabular-nums text-[#1b74e4]'>
+          {item.percentage}%
+        </span>
       </div>
 
-      <span className='text-sm font-bold tabular-nums text-[#1b74e4]'>
-        {item.percentage}%
-      </span>
+      <div className='mt-3 h-1 w-full overflow-hidden rounded-full bg-slate-100'>
+        <div
+          className={`${item.color} h-1 rounded-full`}
+          style={{ width: `${item.percentage}%` }}
+        />
+      </div>
+
+      <p className='mt-3 text-[13px] leading-relaxed text-slate-500'>
+        {t(item.description)}
+      </p>
+
+      {item.items && (
+        <ul className='mt-2 space-y-1'>
+          {item.items.map((entry, i) => (
+            <li
+              key={i}
+              className='flex items-center gap-2 text-[13px] text-slate-600'>
+              <span className='h-1.5 w-1.5 shrink-0 rounded-full bg-[#1b74e4]' />
+              {t(entry)}
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
-
-    <div className='mt-3 h-1 w-full overflow-hidden rounded-full bg-slate-100'>
-      <div
-        className={`${item.color} h-1 rounded-full`}
-        style={{ width: `${item.percentage}%` }}
-      />
-    </div>
-
-    <p className='mt-3 text-[13px] leading-relaxed text-slate-500'>
-      {item.description}
-    </p>
-
-    {item.items && (
-      <ul className='mt-2 space-y-1'>
-        {item.items.map((entry, i) => (
-          <li
-            key={i}
-            className='flex items-center gap-2 text-[13px] text-slate-600'>
-            <span className='h-1.5 w-1.5 shrink-0 rounded-full bg-[#1b74e4]' />
-            {entry}
-          </li>
-        ))}
-      </ul>
-    )}
-  </div>
-);
+  );
+};
 
 const tooltipTheme = {
   base: "absolute z-10 inline-block max-w-[260px] rounded-2xl shadow-[0_16px_40px_-12px_rgba(27,74,120,0.35)]",

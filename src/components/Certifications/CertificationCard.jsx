@@ -1,4 +1,5 @@
 import React from "react";
+import { useLanguage } from "../../i18n/LanguageContext";
 
 const kinds = {
   Award: {
@@ -24,6 +25,7 @@ const kinds = {
 };
 
 const CertificationCard = ({ item }) => {
+  const { t } = useLanguage();
   const raw = item.kind || item.kindEn || "Certificate";
   const kind = raw.startsWith("Certificat") ? "Certificate" : raw;
   const cfg = kinds[kind] || kinds.Certificate;
@@ -41,7 +43,7 @@ const CertificationCard = ({ item }) => {
       </span>
 
       <p className='text-[13.5px] leading-relaxed text-slate-500'>
-        {item.description}
+        {t(item.description)}
       </p>
     </div>
   );

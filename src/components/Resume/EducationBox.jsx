@@ -1,7 +1,9 @@
 import React from "react";
+import { useLanguage } from "../../i18n/LanguageContext";
 
 const EducationBox = (props) => {
   const { item, isLast } = props;
+  const { t } = useLanguage();
 
   return (
     <div className='grid grid-cols-[auto_1fr] gap-x-4 sm:gap-x-5'>
@@ -16,11 +18,14 @@ const EducationBox = (props) => {
         </span>
 
         <h3 className='mt-2 font-display text-lg font-semibold text-slate-800'>
-          {item.title}
-          <span className='font-medium text-slate-500'> · {item.degree}</span>
+          {t(item.title)}
+          <span className='font-medium text-slate-500'>
+            {" "}
+            · {t(item.degree)}
+          </span>
         </h3>
 
-        <p className='mt-0.5 text-sm text-slate-500'>{item.institution}</p>
+        <p className='mt-0.5 text-sm text-slate-500'>{t(item.institution)}</p>
       </div>
     </div>
   );

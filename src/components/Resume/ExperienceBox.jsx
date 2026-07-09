@@ -1,4 +1,5 @@
 import React from "react";
+import { useLanguage } from "../../i18n/LanguageContext";
 
 const parsePart = (value) => {
   if (/present/i.test(value)) {
@@ -30,6 +31,11 @@ const getDuration = (period) => {
 
 const ExperienceBox = (props) => {
   const { item, isLast } = props;
+  const { t } = useLanguage();
+
+  const duration = getDuration(item.period)
+    .replace(/yr/g, t("yr"))
+    .replace(/mo/g, t("mo"));
 
   return (
     <div className='grid grid-cols-[auto_1fr] gap-x-4 sm:gap-x-5'>
@@ -44,17 +50,18 @@ const ExperienceBox = (props) => {
             {item.period}
           </span>
 
-          <span className='text-xs font-medium text-slate-400'>
-            {getDuration(item.period)}
-          </span>
+          <span className='text-xs font-medium text-slate-400'>{duration}</span>
         </div>
 
         <h3 className='mt-2 font-display text-lg font-semibold text-slate-800'>
-          {item.title}
-          <span className='font-medium text-slate-500'> · {item.location}</span>
+          {t(item.title)}
+          <span className='font-medium text-slate-500'>
+            {" "}
+            · {t(item.location)}
+          </span>
         </h3>
 
-        <p className='mt-0.5 text-sm text-slate-500'>{item.company}</p>
+        <p className='mt-0.5 text-sm text-slate-500'>{t(item.company)}</p>
       </div>
     </div>
   );

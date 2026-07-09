@@ -8,10 +8,12 @@ import InViewAnimation from "../components/InViewAnimation";
 import IconWork from "../icons/Work";
 import { useInView } from "react-intersection-observer";
 import { techSkills, educations, experiences } from "../Data";
+import { useLanguage } from "../i18n/LanguageContext";
 
 const filterNames = ["All", "Frontend", "Backend", "Database", "AI", "Other"];
 
 const Resume = () => {
+  const { t } = useLanguage();
   const [selectedKind, setSelectedKind] = useState("All");
   const [ref, inView] = useInView({
     triggerOnce: true,
@@ -32,7 +34,7 @@ const Resume = () => {
           <div className='mb-6 flex items-center gap-2.5'>
             <IconAcademicCap className='h-5 w-5 text-[#1b74e4]' />
             <h3 className='font-display text-xl font-bold tracking-tight text-slate-800 sm:text-2xl'>
-              Education
+              {t("Education")}
             </h3>
           </div>
 
@@ -54,7 +56,7 @@ const Resume = () => {
           <div className='mb-6 mt-12 flex items-center gap-2.5'>
             <IconWork className='h-5 w-5 text-[#1b74e4]' />
             <h3 className='font-display text-xl font-bold tracking-tight text-slate-800 sm:text-2xl'>
-              Experience
+              {t("Experience")}
             </h3>
           </div>
 
@@ -76,12 +78,13 @@ const Resume = () => {
       <InViewAnimation delay={0.15}>
         <div className='mt-14'>
           <h3 className='font-display text-xl font-bold tracking-tight text-slate-800 sm:text-2xl'>
-            Professional Skills
+            {t("Professional Skills")}
           </h3>
 
           <p className='mt-1.5 max-w-[60ch] text-sm text-slate-500'>
-            Hover over the name of a language, technology, library or tool for
-            more details.
+            {t(
+              "Hover over the name of a language, technology, library or tool for more details."
+            )}
           </p>
 
           <div className='mt-5 flex flex-wrap gap-2'>
@@ -95,7 +98,7 @@ const Resume = () => {
                     ? "bg-[#1b74e4] text-white"
                     : "bg-slate-100 text-slate-600 hover:bg-slate-200"
                 }`}>
-                {item}
+                {t(item)}
               </button>
             ))}
           </div>

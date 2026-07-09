@@ -5,8 +5,11 @@ import Footer from "./Footer";
 import MobileMenu from "./MobileMenu";
 import ProfileCard from "./ProfileCard";
 import ChevronUp from "./../icons/ChevronUp";
+import LanguageToggle from "./LanguageToggle";
+import { useLanguage } from "../i18n/LanguageContext";
 
 const Layout = (props) => {
+  const { t } = useLanguage();
   const [showScrollButton, setShowScrollButton] = useState(false);
 
   useEffect(() => {
@@ -28,6 +31,10 @@ const Layout = (props) => {
 
   return (
     <div className='w-full min-h-screen pb-12 lg:pb-8 bg-gradient-to-r from-sky-100 via-blue-50 to-indigo-100'>
+      <div className='fixed right-4 top-4 z-40 lg:hidden'>
+        <LanguageToggle className='shadow-sm' />
+      </div>
+
       <div className='h-full w-full min-h-screen max-w-[2000px] mx-auto'>
         <div className='relative h-full lg:px-4 xl:px-32 2xl:px-40 lg:flex 2xl:justify-center gap-10 pt-0.5 lg:pt-[158px]'>
           <span className='w-fit lg:w-[350px] xl:w-[400px] lg:block lg:shrink-0'>
@@ -46,7 +53,7 @@ const Layout = (props) => {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6 }}>
               <h2 className='font-display font-bold tracking-tight text-3xl sm:text-4xl text-slate-800 flex items-center'>
-                {props.header}
+                {t(props.header)}
                 <div className='h-0.5 w-32 sm:w-44 ml-8 bg-[#1b74e4] mt-1.5 rounded' />
               </h2>
 
