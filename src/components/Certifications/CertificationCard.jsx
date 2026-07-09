@@ -29,23 +29,47 @@ const CertificationCard = ({ item }) => {
   const raw = item.kind || item.kindEn || "Certificate";
   const kind = raw.startsWith("Certificat") ? "Certificate" : raw;
   const cfg = kinds[kind] || kinds.Certificate;
+  const hasLink = Boolean(item.link);
+
+  const Wrapper = hasLink ? "a" : "div";
+  const linkProps = hasLink
+    ? { href: item.link, target: "_blank", rel: "noreferrer" }
+    : {};
 
   return (
-    <div className='flex h-full flex-col rounded-2xl border border-slate-200/80 bg-white p-5 shadow-sm'>
-      <span
-        className={`mb-4 flex h-11 w-11 shrink-0 items-center justify-center rounded-xl ${cfg.chip}`}>
-        <svg
-          viewBox='0 0 24 24'
-          fill='currentColor'
-          className='h-[22px] w-[22px]'>
-          <path d={cfg.path} />
-        </svg>
-      </span>
+    <Wrapper
+      {...linkProps}
+      className={`group flex h-full flex-col rounded-2xl border border-slate-200/80 bg-white p-5 shadow-sm transition-all duration-200 ease-out ${
+        hasLink
+          ? "cursor-pointer hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-[0_20px_45px_-24px_rgba(27,74,120,0.4)]"
+          : ""
+      }`}>
+      <div className='mb-4 flex items-start justify-between'>
+        <span
+          className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl ${cfg.chip}`}>
+          <svg
+            viewBox='0 0 24 24'
+            fill='currentColor'
+            className='h-[22px] w-[22px]'>
+            <path d={cfg.path} />
+          </svg>
+        </span>
+
+        {hasLink && (
+          <svg
+            viewBox='0 0 24 24'
+            fill='currentColor'
+            aria-hidden='true'
+            className='h-4 w-4 text-slate-300 transition-colors duration-200 group-hover:text-[#1b74e4]'>
+            <path d='M14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7zM19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7z' />
+          </svg>
+        )}
+      </div>
 
       <p className='text-[13.5px] leading-relaxed text-slate-500'>
         {t(item.description)}
       </p>
-    </div>
+    </Wrapper>
   );
 };
 

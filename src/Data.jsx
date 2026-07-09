@@ -639,6 +639,7 @@ const certifications = [
     kind: "Certificatе",
     image: "uni_logo.png",
     description: `Certificate for first place in 2022, "Review of student activities" at the Department of Informatics with development (Platform for comparison of prices and products from various websites).`,
+    link: "https://drive.google.com/file/d/1nDOgwq-P4clUqj1Do4z7geZeRlp3ydts/view?usp=drive_link",
   },
   {
     kind: "Certificatе",
@@ -657,6 +658,7 @@ const certifications = [
     image: "uni_logo.png",
     description:
       "Part of the IT Master Class 9. The university provides us to become a part of the companies in the IT field and gain some of their experience. ",
+    link: "https://drive.google.com/file/d/17jWjvh_H5fHYULY8PMjKXbe8h5MlxwNa/view?usp=sharing",
   },
   {
     kindEn: "Course",
@@ -668,18 +670,21 @@ const certifications = [
     kindEn: "Scientific publication",
     image: "uni_logo.png",
     description: `Report in the collection "STUDENT SCIENTIFIC CONFERENCE" on the topic "Development of web platforms", Publishing House "Science and Economics" University of Economics - Varna 2022.`,
+    link: "https://ue-varna.bg/uploads/filemanager/303/publishing-complex/2022/Studentska-nauchna-konferencia-2022.pdf#page=100",
   },
   {
     kind: "Certificatе",
     image: "Microsoft_Azure.svg.png",
     description:
       "Certificate of successfully completed course on Microsoft Azure Cloud (fundamental). The course includes working with Databricks, Data Factory, Key Vault, Containers.",
+    link: "https://drive.google.com/file/d/1I9w_0YEFwDuOgDsLr3Vpf1MgFiGLaB9v/view?usp=sharing",
   },
   {
     kind: "Certificatе",
     image: "SAFe-cert.png",
     description:
       "Certificate of successfully completed course on Scaled Agile (SAFe methodology). The course topics includes Benefits of SAFe, SAFe Principles, SAFe and Agile, Why SAFe.",
+    link: "https://drive.google.com/file/d/1mJdWkQU58tuGvJj2yO5DRz5qD0dlZqnj/view?usp=sharing",
   },
 ];
 
