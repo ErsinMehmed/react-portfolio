@@ -1,0 +1,10 @@
+[build]
+  command = "npm run build"
+  publish = "build"
+
+# React Router is client-side; every deep link must fall back to index.html
+# so refreshing /resume or /projects doesn't 404 on Netlify's CDN.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

@@ -8,6 +8,9 @@
 # testing
 /coverage
 
+# production build (Netlify builds this from source; don't commit it)
+/build
+
 # misc
 .DS_Store
 .env.local
