@@ -18,6 +18,14 @@ const filterCategories = [
   { kind: "Other", labelKey: "filter.other" },
 ];
 
+// Category display order when "All" is selected, so skills group by
+// Frontend -> Backend -> Database -> AI -> Other rather than mixing.
+const kindOrder = ["Frontend", "Backend", "Database", "AI", "Other"];
+const kindRank = (kind) => {
+  const i = kindOrder.indexOf(kind);
+  return i === -1 ? kindOrder.length : i;
+};
+
 const Resume = () => {
   const { t } = useLanguage();
   const [selectedKind, setSelectedKind] = useState("All");
@@ -28,7 +36,12 @@ const Resume = () => {
       : techSkills
   )
     .slice()
-    .sort((a, b) => b.years - a.years || b.projects - a.projects);
+    .sort(
+      (a, b) =>
+        kindRank(a.kind) - kindRank(b.kind) ||
+        b.years - a.years ||
+        b.projects - a.projects
+    );
 
   return (
     <Layout
