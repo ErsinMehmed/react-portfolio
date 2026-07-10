@@ -8,6 +8,7 @@ export const translations = {
   "nav.projects": { en: "Projects", bg: "Проекти" },
   "nav.certifications": { en: "Certifications", bg: "Сертификати" },
   "page.aboutMe": { en: "About Me", bg: "За мен" },
+  loading: { en: "Loading ...", bg: "Зареждане ..." },
 
   // --- 404 page ---
   "notFound.title": { en: "Page not found", bg: "Страницата не е намерена" },
