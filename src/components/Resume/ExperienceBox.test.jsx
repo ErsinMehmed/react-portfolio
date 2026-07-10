@@ -31,3 +31,11 @@ test("treats a single month range as 1 mo", () => {
   renderExperience("03.2022 - 03.2022");
   expect(screen.getByText("1 mo")).toBeInTheDocument();
 });
+
+test("keeps the 'Present' label and still computes an ongoing duration", () => {
+  renderExperience("07.2023 - Present");
+  // The badge shows the (English) present label rather than a raw date.
+  expect(screen.getByText("07.2023 - Present")).toBeInTheDocument();
+  // Duration runs to today, so it must be a non-empty yr/mo string.
+  expect(screen.getByText(/\d+ (yr|mo)/)).toBeInTheDocument();
+});
