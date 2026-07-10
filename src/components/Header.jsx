@@ -13,7 +13,7 @@ const Header = () => {
       (item) => item.href === location.pathname
     );
 
-    document.title = `Ersin Hyusein ${
+    document.title = `${t("profile.name")}${
       currentRoute.title !== "nav.about" ? " | " + t(currentRoute.title) : ""
     }`;
   });

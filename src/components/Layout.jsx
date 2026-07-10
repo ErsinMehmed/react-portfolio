@@ -52,12 +52,14 @@ const Layout = (props) => {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6 }}>
-              <h2 className='font-display font-bold tracking-tight text-3xl sm:text-4xl text-slate-800 flex items-center'>
-                {t(props.header)}
-                <div className='h-0.5 w-32 sm:w-44 ml-8 bg-[#1b74e4] mt-1.5 rounded' />
-              </h2>
+              <main>
+                <h2 className='font-display font-bold tracking-tight text-3xl sm:text-4xl text-slate-800 flex items-center'>
+                  {t(props.header)}
+                  <div className='h-0.5 w-32 sm:w-44 ml-8 bg-[#1b74e4] mt-1.5 rounded' />
+                </h2>
 
-              {props.children}
+                {props.children}
+              </main>
               <Footer />
             </motion.div>
           </div>

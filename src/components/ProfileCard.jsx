@@ -30,9 +30,7 @@ const ProfileCard = () => {
   };
 
   const handlePhoneClick = (e) => {
-    if (isMobile) {
-      window.location.href = "tel:+359899626273";
-    } else {
+    if (!isMobile) {
       e.preventDefault();
       setIsQrModalOpen(true);
     }
@@ -80,7 +78,7 @@ const ProfileCard = () => {
               })}
             </div>
 
-            <dl className='mt-5 divide-y divide-slate-200/50 rounded-2xl bg-[#f7f9fb] px-5 text-left'>
+            <div className='mt-5 divide-y divide-slate-200/50 rounded-2xl bg-[#f7f9fb] px-5 text-left'>
               {personalInfo.map((item, index) => {
                 const isPhone = index === 2;
                 const isEmail = index === 3;
@@ -91,7 +89,7 @@ const ProfileCard = () => {
                     className='flex items-center gap-3.5 py-2.5'>
                     <item.icon className='h-[18px] w-[18px] shrink-0 text-slate-500' />
 
-                    <div className='min-w-0 flex-1'>
+                    <dl className='min-w-0 flex-1'>
                       <dt className='text-[11px] font-semibold uppercase tracking-wider text-slate-500'>
                         {t(item.title)}
                       </dt>
@@ -101,7 +99,7 @@ const ProfileCard = () => {
                           <a
                             className='transition-colors hover:text-[#1b74e4] cursor-pointer'
                             onClick={handlePhoneClick}
-                            href={isMobile ? telLink : undefined}
+                            href={telLink}
                           >
                             {item.text}
                           </a>
@@ -116,11 +114,11 @@ const ProfileCard = () => {
                           t(item.text)
                         )}
                       </dd>
-                    </div>
+                    </dl>
                   </div>
                 );
               })}
-            </dl>
+            </div>
 
             <button
               type='button'
