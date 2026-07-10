@@ -101,19 +101,48 @@ const TechLogo = ({ item, className }) => {
   );
 };
 
-const levelFromPercentage = (value) => {
-  const n = Number(value);
-  if (n >= 90) return "level.expert";
-  if (n >= 75) return "level.advanced";
-  if (n >= 50) return "level.intermediate";
-  return "level.familiar";
+// Two-metric summary shared by the card and its hover tooltip: years of
+// hands-on experience and number of projects shipped. Honest, concrete
+// signal that replaces the old, arbitrary "proficiency %".
+const SkillMetrics = ({ item, animate = false }) => {
+  const { t } = useLanguage();
+
+  return (
+    <span className='inline-flex items-center gap-2 tabular-nums'>
+      <span>
+        {animate ? (
+          <NumberTicker
+            value={item.years}
+            className='font-bold text-slate-700'
+          />
+        ) : (
+          <span className='font-bold text-slate-700'>{item.years}</span>
+        )}{" "}
+        {t("duration.yr")}
+      </span>
+
+      <span className='text-slate-300'>&middot;</span>
+
+      <span>
+        {animate ? (
+          <NumberTicker
+            value={item.projects}
+            className='font-bold text-slate-700'
+          />
+        ) : (
+          <span className='font-bold text-slate-700'>{item.projects}</span>
+        )}{" "}
+        {t("skill.projects")}
+      </span>
+    </span>
+  );
 };
 
 const SkillCard = ({ item }) => {
   const { t } = useLanguage();
 
   return (
-    <div className='w-[240px] p-3.5 text-left'>
+    <div className='w-[248px] p-3.5 text-left'>
       <div className='flex items-center gap-3'>
         <span className='flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-slate-50 ring-1 ring-slate-100'>
           <TechLogo
@@ -126,21 +155,10 @@ const SkillCard = ({ item }) => {
           <p className='font-display text-sm font-bold leading-tight text-slate-800'>
             {item.title}
           </p>
-          <p className='mt-0.5 text-[11px] font-semibold uppercase tracking-wide text-slate-500'>
-            {t(levelFromPercentage(item.percentage))}
+          <p className='mt-0.5 text-[12px] text-slate-500'>
+            <SkillMetrics item={item} />
           </p>
         </div>
-
-        <span className='text-sm font-bold tabular-nums text-[#1b74e4]'>
-          {item.percentage}%
-        </span>
-      </div>
-
-      <div className='mt-3 h-1 w-full overflow-hidden rounded-full bg-slate-100'>
-        <div
-          className={`${item.color} h-1 rounded-full`}
-          style={{ width: `${item.percentage}%` }}
-        />
       </div>
 
       <p className='mt-3 text-[13px] leading-relaxed text-slate-500'>
@@ -164,15 +182,39 @@ const SkillCard = ({ item }) => {
 };
 
 const tooltipTheme = {
-  base: "absolute z-10 inline-block max-w-[260px] rounded-2xl shadow-[0_16px_40px_-12px_rgba(27,74,120,0.35)]",
+  base: "absolute z-10 inline-block max-w-[280px] rounded-2xl shadow-[0_16px_40px_-12px_rgba(27,74,120,0.35)]",
   style: {
     dark: "border border-slate-200/80 bg-white",
   },
 };
 
 const SkillBox = ({ item, index }) => {
+  const card = (
+    <div className='group flex h-full items-center gap-3.5 rounded-xl border border-slate-200/70 bg-white px-4 py-3 transition-all duration-200 ease-out hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-[0_16px_36px_-20px_rgba(27,74,120,0.45)]'>
+      <span className='flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-slate-50 ring-1 ring-slate-100 transition-colors group-hover:ring-slate-200'>
+        <TechLogo
+          item={item}
+          className='h-5 w-5'
+        />
+      </span>
+
+      <div className='min-w-0 flex-1'>
+        <p className='truncate font-display text-[15px] font-semibold leading-tight text-slate-800'>
+          {item.title}
+        </p>
+        <p className='mt-1 text-[12.5px] text-slate-500'>
+          <SkillMetrics
+            item={item}
+            animate
+          />
+        </p>
+      </div>
+    </div>
+  );
+
   return (
     <motion.div
+      className='h-full'
       initial={{ opacity: 0, y: 14 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.4 }}
@@ -180,49 +222,22 @@ const SkillBox = ({ item, index }) => {
         duration: 0.4,
         delay: Math.min(index, 10) * 0.035,
         ease: easeOutStrong,
-      }}
-    >
-      <div className='mb-1.5 flex items-center justify-between text-sm font-semibold text-slate-700'>
-        <span className='flex min-w-0 items-center gap-2'>
-          <TechLogo
-            item={item}
-            className='h-[18px] w-[18px] shrink-0'
-          />
-
-          {item.description ? (
-            <Tooltip
-              content={<SkillCard item={item} />}
-              placement='right'
-              arrow={false}
-              theme={tooltipTheme}
-            >
-              <span className='cursor-pointer truncate transition-opacity hover:opacity-60'>
-                {item.title}
-              </span>
-            </Tooltip>
-          ) : (
-            <span className='cursor-default truncate'>{item.title}</span>
-          )}
-        </span>
-
-        <NumberTicker
-          value={Number(item.percentage)}
-          suffix='%'
-          className='text-slate-500'
-        />
-      </div>
-
-      {/* Bar grows via a GPU transform (scaleX) instead of animating width */}
-      <div className='h-1.5 w-full overflow-hidden rounded-full bg-slate-100'>
-        <motion.div
-          className={`${item.color} h-1.5 origin-left rounded-full`}
-          style={{ width: `${item.percentage}%` }}
-          initial={{ scaleX: 0 }}
-          whileInView={{ scaleX: 1 }}
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 0.9, delay: 0.1, ease: easeOutStrong }}
-        />
-      </div>
+      }}>
+      {item.description ? (
+        <Tooltip
+          content={<SkillCard item={item} />}
+          placement='top'
+          arrow={false}
+          theme={tooltipTheme}>
+          <div
+            tabIndex={0}
+            className='h-full cursor-pointer rounded-xl outline-none focus-visible:ring-2 focus-visible:ring-[#1b74e4] focus-visible:ring-offset-2'>
+            {card}
+          </div>
+        </Tooltip>
+      ) : (
+        <div className='h-full'>{card}</div>
+      )}
     </motion.div>
   );
 };

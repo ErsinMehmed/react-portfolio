@@ -124,9 +124,10 @@ export const translations = {
     bg: "Професионални умения",
   },
   "resume.hoverHint": {
-    en: "Hover over the name of a language, technology, library or tool for more details.",
-    bg: "Задръжте върху името на език, технология, библиотека или инструмент за повече детайли.",
+    en: "Each skill shows years of hands-on experience and projects shipped. Hover over a skill to see how I've used it.",
+    bg: "Всяко умение показва години практически опит и брой проекти. Задръжте върху умение, за да видите как съм го използвал.",
   },
+  "skill.projects": { en: "projects", bg: "проекта" },
 
   // --- Filters ---
   "filter.all": { en: "All", bg: "Всички" },
@@ -135,12 +136,6 @@ export const translations = {
   "filter.database": { en: "Database", bg: "Бази данни" },
   "filter.ai": { en: "AI" },
   "filter.other": { en: "Other", bg: "Други" },
-
-  // --- Skill levels ---
-  "level.expert": { en: "Expert", bg: "Експерт" },
-  "level.advanced": { en: "Advanced", bg: "Напреднал" },
-  "level.intermediate": { en: "Intermediate", bg: "Средно ниво" },
-  "level.familiar": { en: "Familiar", bg: "Начално ниво" },
 
   // --- Duration units ---
   "duration.yr": { en: "yr", bg: "г." },

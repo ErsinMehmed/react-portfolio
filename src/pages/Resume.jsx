@@ -6,7 +6,6 @@ import EducationBox from "../components/Resume/EducationBox";
 import ExperienceBox from "../components/Resume/ExperienceBox";
 import InViewAnimation from "../components/InViewAnimation";
 import IconWork from "../icons/Work";
-import { useInView } from "react-intersection-observer";
 import { techSkills, educations, experiences } from "../Data";
 import { useLanguage } from "../i18n/LanguageContext";
 
@@ -22,9 +21,6 @@ const filterCategories = [
 const Resume = () => {
   const { t } = useLanguage();
   const [selectedKind, setSelectedKind] = useState("All");
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-  });
 
   const filteredSkills =
     selectedKind !== "All"
@@ -108,19 +104,13 @@ const Resume = () => {
             ))}
           </div>
 
-          <div
-            ref={ref}
-            className='mt-7 grid grid-cols-1 gap-x-10 gap-y-5 sm:grid-cols-2'>
+          <div className='mt-7 grid grid-cols-1 gap-3.5 sm:grid-cols-2'>
             {filteredSkills.map((item, index) => (
-              <InViewAnimation
+              <SkillBox
                 key={item.title}
-                delay={index <= 12 ? index * 0.08 : index * 0.05}>
-                <SkillBox
-                  item={item}
-                  index={index}
-                  inView={inView}
-                />
-              </InViewAnimation>
+                item={item}
+                index={index}
+              />
             ))}
           </div>
         </div>
