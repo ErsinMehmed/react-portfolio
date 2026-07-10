@@ -266,6 +266,14 @@ const techSkills = [
     color: "bg-purple-400",
   },
   {
+    title: "TypeScript",
+    kind: "Frontend",
+    description: "skillDesc.typescript",
+    years: 3,
+    projects: 6,
+    color: "bg-blue-500",
+  },
+  {
     title: "Vue.js",
     kind: "Frontend",
     description: "skillDesc.vue",
@@ -455,6 +463,7 @@ const projects = {
       live: "https://sokobeauty.bg",
       technologies: [
         "JavaScript",
+        "TypeScript",
         "React.js",
         "Next.js",
         "Tailwind",
@@ -471,6 +480,7 @@ const projects = {
       live: "https://partners.mypos.com/en",
       technologies: [
         "JavaScript",
+        "TypeScript",
         "AJAX",
         "React.js",
         "Next.js",
@@ -492,6 +502,7 @@ const projects = {
         "CSS",
         "Bootstrap",
         "JavaScript",
+        "TypeScript",
         "jQuery",
         "AJAX",
         "React.js",
@@ -514,6 +525,7 @@ const projects = {
         "CSS",
         "Tailwind",
         "JavaScript",
+        "TypeScript",
         "AJAX",
         "Vue.js",
         "Inertia.js",

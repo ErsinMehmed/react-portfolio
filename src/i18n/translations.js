@@ -215,6 +215,10 @@ export const translations = {
     en: "The core of my front-end work: dynamic UI logic, form validation, async requests, and rich DOM interactions.",
     bg: "Ядрото на front-end работата ми: динамична UI логика, валидация на форми, асинхронни заявки и богати DOM взаимодействия.",
   },
+  "skillDesc.typescript": {
+    en: "Static typing on top of JavaScript: safer refactors, self-documenting APIs, and fewer runtime surprises across my React and Node code.",
+    bg: "Статична типизация върху JavaScript: по-сигурни рефакторинги, самодокументиращи се API-та и по-малко изненади по време на изпълнение в React и Node кода ми.",
+  },
   "skillDesc.vue": {
     en: "Built production front-ends with Vue, using its reactivity and component model to keep code clean and maintainable.",
     bg: "Изграждал съм продукшън front-end с Vue, използвайки реактивността и компонентния му модел, за да поддържам кода чист и лесен за поддръжка.",
