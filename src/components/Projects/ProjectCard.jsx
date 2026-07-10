@@ -44,7 +44,7 @@ const ProjectCard = ({ project, type, onClick }) => {
           </span>
         ))}
         {extra > 0 && (
-          <span className='px-1.5 py-1 text-[11px] font-semibold text-slate-400'>
+          <span className='px-1.5 py-1 text-[11px] font-semibold text-slate-500'>
             +{extra}
           </span>
         )}

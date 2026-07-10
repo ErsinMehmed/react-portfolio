@@ -50,7 +50,7 @@ const ExperienceBox = (props) => {
             {item.period}
           </span>
 
-          <span className='text-xs font-medium text-slate-400'>{duration}</span>
+          <span className='text-xs font-medium text-slate-500'>{duration}</span>
         </div>
 
         <h3 className='mt-2 font-display text-lg font-semibold text-slate-800'>

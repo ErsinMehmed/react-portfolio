@@ -44,18 +44,22 @@ const socialLinks = [
   {
     href: "https://www.facebook.com/ersin.mehmed/",
     icon: IconFacebook,
+    label: "Facebook",
   },
   {
-    href: "https://github.com/ErsinMehmed",
+    href: "https://www.instagram.com/ersogram",
     icon: IconInstagram,
+    label: "Instagram",
   },
   {
     href: "https://www.linkedin.com/in/ersin-hyusein-72a184241/",
     icon: IconLinkedIn,
+    label: "LinkedIn",
   },
   {
     href: "https://github.com/ErsinMehmed",
     icon: IconGitHub,
+    label: "GitHub",
   },
 ];
 
@@ -607,51 +611,42 @@ const projects = {
 const certifications = [
   {
     kind: "Award",
-    image: "uni_logo.png",
     description: "cert.craictAward.description",
   },
   {
     kind: "Certificatе",
-    image: "uni_logo.png",
     description: "cert.studentActivityAward.description",
     link: "https://drive.google.com/file/d/1nDOgwq-P4clUqj1Do4z7geZeRlp3ydts/view?usp=drive_link",
   },
   {
     kind: "Certificatе",
-    image: "mon-logo.png",
     description: "cert.computerLiteracy.description",
   },
   {
     kind: "Sport achievements",
-    image: "handball.png",
     description: "cert.sportAchievements.description",
   },
   {
     kindEn: "Course",
-    image: "uni_logo.png",
     description: "cert.itMasterClass9.description",
     link: "https://drive.google.com/file/d/17jWjvh_H5fHYULY8PMjKXbe8h5MlxwNa/view?usp=sharing",
   },
   {
     kindEn: "Course",
-    image: "uni_logo.png",
     description: "cert.itMasterClass10.description",
   },
   {
     kindEn: "Scientific publication",
-    image: "uni_logo.png",
     description: "cert.scientificPublication.description",
     link: "https://ue-varna.bg/uploads/filemanager/303/publishing-complex/2022/Studentska-nauchna-konferencia-2022.pdf#page=100",
   },
   {
     kind: "Certificatе",
-    image: "Microsoft_Azure.svg.png",
     description: "cert.azureCourse.description",
     link: "https://drive.google.com/file/d/1I9w_0YEFwDuOgDsLr3Vpf1MgFiGLaB9v/view?usp=sharing",
   },
   {
     kind: "Certificatе",
-    image: "SAFe-cert.png",
     description: "cert.safeCourse.description",
     link: "https://drive.google.com/file/d/1mJdWkQU58tuGvJj2yO5DRz5qD0dlZqnj/view?usp=sharing",
   },

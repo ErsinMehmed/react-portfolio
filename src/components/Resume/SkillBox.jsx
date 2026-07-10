@@ -126,7 +126,7 @@ const SkillCard = ({ item }) => {
           <p className='font-display text-sm font-bold leading-tight text-slate-800'>
             {item.title}
           </p>
-          <p className='mt-0.5 text-[11px] font-semibold uppercase tracking-wide text-slate-400'>
+          <p className='mt-0.5 text-[11px] font-semibold uppercase tracking-wide text-slate-500'>
             {t(levelFromPercentage(item.percentage))}
           </p>
         </div>
@@ -208,7 +208,7 @@ const SkillBox = ({ item, index }) => {
         <NumberTicker
           value={Number(item.percentage)}
           suffix='%'
-          className='text-slate-400'
+          className='text-slate-500'
         />
       </div>
 

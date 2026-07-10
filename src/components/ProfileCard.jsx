@@ -71,7 +71,7 @@ const ProfileCard = () => {
                     href={link.href}
                     target='_blank'
                     rel='noreferrer'
-                    aria-label='Social link'>
+                    aria-label={link.label}>
                     <span className='flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 text-slate-500 transition-all duration-200 ease-out hover:-translate-y-0.5 hover:border-[#1b74e4] hover:bg-[#1b74e4] hover:text-white'>
                       <IconComponent className='h-[18px] w-[18px]' />
                     </span>
@@ -89,10 +89,10 @@ const ProfileCard = () => {
                   <div
                     key={index}
                     className='flex items-center gap-3.5 py-2.5'>
-                    <item.icon className='h-[18px] w-[18px] shrink-0 text-slate-400' />
+                    <item.icon className='h-[18px] w-[18px] shrink-0 text-slate-500' />
 
                     <div className='min-w-0 flex-1'>
-                      <dt className='text-[11px] font-semibold uppercase tracking-wider text-slate-400'>
+                      <dt className='text-[11px] font-semibold uppercase tracking-wider text-slate-500'>
                         {t(item.title)}
                       </dt>
 

@@ -28,7 +28,7 @@ const Project = () => {
               <h3 className='font-display text-xl font-bold tracking-tight text-slate-800 sm:text-2xl'>
                 {t(section.title)}
               </h3>
-              <span className='text-sm font-semibold text-slate-400'>
+              <span className='text-sm font-semibold text-slate-500'>
                 {section.items.length}
               </span>
             </div>

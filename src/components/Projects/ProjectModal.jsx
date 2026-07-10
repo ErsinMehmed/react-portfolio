@@ -76,7 +76,7 @@ const ProjectModal = ({ data, onClose }) => {
               type='button'
               onClick={onClose}
               aria-label='Close'
-              className='absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-700'>
+              className='absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-700'>
               <CloseIcon className='h-5 w-5' />
             </button>
 
@@ -100,7 +100,7 @@ const ProjectModal = ({ data, onClose }) => {
             </p>
 
             <div className='mt-6'>
-              <p className='mb-2 text-[11px] font-semibold uppercase tracking-wider text-slate-400'>
+              <p className='mb-2 text-[11px] font-semibold uppercase tracking-wider text-slate-500'>
                 {t("projects.techStack")}
               </p>
               <div className='flex flex-wrap gap-2'>

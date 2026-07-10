@@ -46,7 +46,7 @@ const Home = () => {
                   suffix={stat.suffix}
                 />
               </dd>
-              <p className='mt-2 text-xs font-medium text-slate-400'>
+              <p className='mt-2 text-xs font-medium text-slate-500'>
                 {t(stat.label)}
               </p>
             </div>
