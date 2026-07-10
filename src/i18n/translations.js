@@ -352,12 +352,12 @@ export const translations = {
   "company.freelance": { en: "Freelance", bg: "Фрийланс" },
 
   "project.myposPartnerPortal.name": {
-    en: "myPOS Partner Portal",
-    bg: "myPOS Партньорски портал",
+    en: "MyPOS Partner Portal",
+    bg: "MyPOS Партньорски портал",
   },
   "project.myposPartnerPortal.description": {
-    en: "A partner portal for companies building payment solutions on myPOS. Partners can create and monitor integrations, manage connected merchants, online stores, and POS devices across multiple countries, and explore analytics on transaction trends and multi-currency volumes, alongside a sandbox environment and API documentation.",
-    bg: "Партньорски портал за компании, изграждащи платежни решения върху myPOS. Партньорите могат да създават и наблюдават интеграции, да управляват свързани търговци, онлайн магазини и POS устройства в множество държави, както и да разглеждат анализи за тенденции на транзакциите и обеми в различни валути, заедно със sandbox среда и API документация.",
+    en: "A partner portal for companies building payment solutions on MyPOS. Partners can create and monitor integrations, manage connected merchants, online stores, and POS devices across multiple countries, and explore analytics on transaction trends and multi-currency volumes, alongside a sandbox environment and API documentation.",
+    bg: "Партньорски портал за компании, изграждащи платежни решения върху MyPOS. Партньорите могат да създават и наблюдават интеграции, да управляват свързани търговци, онлайн магазини и POS устройства в множество държави, както и да разглеждат анализи за тенденции на транзакциите и обеми в различни валути, заедно със sandbox среда и API документация.",
   },
 
   "project.sokoBeauty.name": {
@@ -477,8 +477,8 @@ export const translations = {
 
   // --- Certification descriptions ---
   "cert.myposAutopilotAward.description": {
-    en: "First place among 24 company-wide submissions in myPOS's internal AI innovation contest in 2026, for AutoPilot: an end-to-end automation of developers' day-to-day workflow, built with Claude Code.",
-    bg: "Първо място сред 24 проекта на вътрешния конкурс за AI иновации в myPOS през 2026 г. с AutoPilot - end-to-end автоматизация на ежедневната работа на разработчиците, изградена с Claude Code.",
+    en: "First place among 24 company-wide submissions in MyPOS's internal AI innovation contest in 2026, for AutoPilot: an end-to-end automation of developers' day-to-day workflow, built with Claude Code.",
+    bg: "Първо място сред 24 проекта на вътрешния конкурс за AI иновации в MyPOS през 2026 г. с AutoPilot - end-to-end автоматизация на ежедневната работа на разработчиците, изградена с Claude Code.",
   },
   "cert.craictAward.description": {
     en: "The recipient of the CRAICT Award at UE Varna in 2023, honored as a Laureate, signifies an individual recognized for talent and achievements. This award, part of a fund supporting talented students, highlights their outstanding contributions and dedication to their field of study or area of expertise within the university community.",

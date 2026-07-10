@@ -230,7 +230,7 @@ const techSkills = [
     kind: "Frontend",
     description: "skillDesc.html",
     years: 6,
-    projects: 15,
+    projects: 10,
     color: "bg-red-400",
   },
   {
@@ -238,7 +238,7 @@ const techSkills = [
     kind: "Frontend",
     description: "skillDesc.css",
     years: 6,
-    projects: 15,
+    projects: 10,
     color: "bg-rose-400",
   },
   {
@@ -246,7 +246,7 @@ const techSkills = [
     kind: "Frontend",
     description: "skillDesc.tailwind",
     years: 4,
-    projects: 10,
+    projects: 8,
     color: "bg-pink-400",
   },
   {
@@ -262,7 +262,7 @@ const techSkills = [
     kind: "Frontend",
     description: "skillDesc.javascript",
     years: 6,
-    projects: 15,
+    projects: 10,
     color: "bg-purple-400",
   },
   {
@@ -270,7 +270,7 @@ const techSkills = [
     kind: "Frontend",
     description: "skillDesc.typescript",
     years: 3,
-    projects: 6,
+    projects: 4,
     color: "bg-blue-500",
   },
   {
@@ -425,7 +425,7 @@ const techSkills = [
     kind: "Other",
     description: "skillDesc.github",
     years: 5,
-    projects: 15,
+    projects: 14,
     color: "bg-rose-400",
   },
   {
@@ -476,7 +476,7 @@ const projects = {
     },
     {
       name: "project.myposPartnerPortal.name",
-      company: "myPOS",
+      company: "MyPOS",
       live: "https://partners.mypos.com/en",
       technologies: [
         "JavaScript",
@@ -494,7 +494,7 @@ const projects = {
     },
     {
       name: "project.paymentsSystem.name",
-      company: "myPOS",
+      company: "MyPOS",
       live: "https://www.mypos.com",
       technologies: [
         "HTML",
