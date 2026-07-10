@@ -1,8 +1,8 @@
 import React from "react";
 import { Tooltip } from "flowbite-react";
 import { motion } from "framer-motion";
-import NumberTicker from "../NumberTicker";
 import { useLanguage } from "../../i18n/LanguageContext";
+import { techSkills } from "../../Data";
 import {
   siHtml5,
   siCss,
@@ -101,39 +101,38 @@ const TechLogo = ({ item, className }) => {
   );
 };
 
-// Two-metric summary shared by the card and its hover tooltip: years of
-// hands-on experience and number of projects shipped. Honest, concrete
-// signal that replaces the old, arbitrary "proficiency %".
-const SkillMetrics = ({ item, animate = false }) => {
+// Longest tenure across all skills, so the gauge below reads on a shared,
+// honest scale: one filled segment per year of hands-on experience.
+const MAX_YEARS = Math.max(...techSkills.map((s) => s.years));
+
+// A segmented meter where each segment is one real year of experience,
+// filled up to the skill's tenure. Unlike a "proficiency %", every mark
+// maps to a concrete quantity.
+const YearGauge = ({ years, className = "" }) => (
+  <span
+    className={`flex items-center gap-[3px] ${className}`}
+    aria-hidden='true'>
+    {Array.from({ length: MAX_YEARS }).map((_, i) => (
+      <span
+        key={i}
+        className={`h-1 flex-1 rounded-full ${
+          i < years ? "bg-[#1b74e4]" : "bg-slate-200/80"
+        }`}
+      />
+    ))}
+  </span>
+);
+
+const SkillMetrics = ({ item }) => {
   const { t } = useLanguage();
 
   return (
-    <span className='inline-flex items-center gap-2 tabular-nums'>
-      <span>
-        {animate ? (
-          <NumberTicker
-            value={item.years}
-            className='font-bold text-slate-700'
-          />
-        ) : (
-          <span className='font-bold text-slate-700'>{item.years}</span>
-        )}{" "}
-        {t("duration.yr")}
-      </span>
-
-      <span className='text-slate-300'>&middot;</span>
-
-      <span>
-        {animate ? (
-          <NumberTicker
-            value={item.projects}
-            className='font-bold text-slate-700'
-          />
-        ) : (
-          <span className='font-bold text-slate-700'>{item.projects}</span>
-        )}{" "}
-        {t("skill.projects")}
-      </span>
+    <span className='tabular-nums'>
+      <span className='font-bold text-slate-700'>{item.years}</span>{" "}
+      {t("duration.yr")}
+      <span className='mx-1 text-slate-300'>&middot;</span>
+      <span className='font-bold text-slate-700'>{item.projects}</span>{" "}
+      {t("skill.projects")}
     </span>
   );
 };
@@ -161,6 +160,11 @@ const SkillCard = ({ item }) => {
         </div>
       </div>
 
+      <YearGauge
+        years={item.years}
+        className='mt-3'
+      />
+
       <p className='mt-3 text-[13px] leading-relaxed text-slate-500'>
         {t(item.description)}
       </p>
@@ -182,6 +186,9 @@ const SkillCard = ({ item }) => {
 };
 
 const tooltipTheme = {
+  // Flowbite's trigger wrapper defaults to w-fit, which would collapse the
+  // card to its content width inside the grid cell. Stretch it to fill.
+  target: "h-full w-full",
   base: "absolute z-10 inline-block max-w-[280px] rounded-2xl shadow-[0_16px_40px_-12px_rgba(27,74,120,0.35)]",
   style: {
     dark: "border border-slate-200/80 bg-white",
@@ -190,23 +197,24 @@ const tooltipTheme = {
 
 const SkillBox = ({ item, index }) => {
   const card = (
-    <div className='group flex h-full items-center gap-3.5 rounded-xl border border-slate-200/70 bg-white px-4 py-3 transition-all duration-200 ease-out hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-[0_16px_36px_-20px_rgba(27,74,120,0.45)]'>
-      <span className='flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-slate-50 ring-1 ring-slate-100 transition-colors group-hover:ring-slate-200'>
-        <TechLogo
-          item={item}
-          className='h-5 w-5'
-        />
-      </span>
+    <div className='group flex h-full flex-col rounded-xl border border-slate-200/70 bg-white px-3.5 py-3 transition-all duration-200 ease-out hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-[0_14px_30px_-18px_rgba(27,74,120,0.45)]'>
+      <div className='flex items-center gap-2.5'>
+        <span className='flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-slate-50 ring-1 ring-slate-100 transition-colors group-hover:ring-slate-200'>
+          <TechLogo
+            item={item}
+            className='h-[18px] w-[18px]'
+          />
+        </span>
 
-      <div className='min-w-0 flex-1'>
-        <p className='truncate font-display text-[15px] font-semibold leading-tight text-slate-800'>
+        <p className='truncate font-display text-sm font-semibold leading-tight text-slate-800'>
           {item.title}
         </p>
-        <p className='mt-1 text-[12.5px] text-slate-500'>
-          <SkillMetrics
-            item={item}
-            animate
-          />
+      </div>
+
+      <div className='mt-3'>
+        <YearGauge years={item.years} />
+        <p className='mt-1.5 text-[11.5px] text-slate-500'>
+          <SkillMetrics item={item} />
         </p>
       </div>
     </div>
@@ -214,13 +222,13 @@ const SkillBox = ({ item, index }) => {
 
   return (
     <motion.div
-      className='h-full'
-      initial={{ opacity: 0, y: 14 }}
+      className='h-full w-full'
+      initial={{ opacity: 0, y: 12 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.4 }}
       transition={{
-        duration: 0.4,
-        delay: Math.min(index, 10) * 0.035,
+        duration: 0.35,
+        delay: Math.min(index, 12) * 0.03,
         ease: easeOutStrong,
       }}>
       {item.description ? (

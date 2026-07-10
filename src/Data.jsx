@@ -318,7 +318,7 @@ const techSkills = [
     kind: "Backend",
     description: "skillDesc.php",
     years: 5,
-    projects: 10,
+    projects: 8,
     color: "bg-emerald-400",
   },
   {
@@ -326,7 +326,7 @@ const techSkills = [
     kind: "Backend",
     description: "skillDesc.symfony",
     years: 3,
-    projects: 5,
+    projects: 3,
     color: "bg-green-400",
   },
   {
@@ -342,7 +342,7 @@ const techSkills = [
     kind: "Backend",
     description: "skillDesc.nextjs",
     years: 3,
-    projects: 7,
+    projects: 4,
     color: "bg-lime-300",
   },
   {
@@ -350,7 +350,7 @@ const techSkills = [
     kind: "Backend",
     description: "skillDesc.nodejs",
     years: 1,
-    projects: 3,
+    projects: 1,
     color: "bg-green-400",
   },
   {
@@ -358,7 +358,7 @@ const techSkills = [
     kind: "Database",
     description: "skillDesc.mysql",
     years: 5,
-    projects: 12,
+    projects: 5,
     color: "bg-red-400",
   },
   {
@@ -366,7 +366,7 @@ const techSkills = [
     kind: "Database",
     description: "skillDesc.sql",
     years: 5,
-    projects: 12,
+    projects: 10,
     color: "bg-pink-400",
   },
   {
@@ -374,7 +374,7 @@ const techSkills = [
     kind: "Database",
     description: "skillDesc.mongodb",
     years: 1,
-    projects: 5,
+    projects: 2,
     color: "bg-pink-400",
   },
   {
@@ -382,7 +382,7 @@ const techSkills = [
     kind: "Database",
     description: "skillDesc.postgresql",
     years: 1,
-    projects: 3,
+    projects: 1,
     color: "bg-sky-400",
   },
   {
@@ -432,8 +432,8 @@ const techSkills = [
     title: "Testing",
     kind: "Other",
     description: "skillDesc.testing",
-    years: 4,
-    projects: 8,
+    years: 3,
+    projects: 6,
     items: ["skillItem.unitTests", "skillItem.integrationTests", "skillItem.e2eTests"],
     color: "bg-amber-400",
   },
@@ -441,8 +441,8 @@ const techSkills = [
     title: "CI/CD",
     kind: "Other",
     description: "skillDesc.cicd",
-    years: 3,
-    projects: 6,
+    years: 1,
+    projects: 3,
     color: "bg-indigo-400",
   },
 ];
@@ -652,10 +652,6 @@ const certifications = [
     link: "https://drive.google.com/file/d/1nDOgwq-P4clUqj1Do4z7geZeRlp3ydts/view?usp=drive_link",
   },
   {
-    kind: "Certificate",
-    description: "cert.computerLiteracy.description",
-  },
-  {
     kind: "Sport achievements",
     description: "cert.sportAchievements.description",
   },
@@ -682,6 +678,10 @@ const certifications = [
     kind: "Certificate",
     description: "cert.safeCourse.description",
     link: "https://drive.google.com/file/d/1mJdWkQU58tuGvJj2yO5DRz5qD0dlZqnj/view?usp=sharing",
+  },
+  {
+    kind: "Certificate",
+    description: "cert.computerLiteracy.description",
   },
 ];
 

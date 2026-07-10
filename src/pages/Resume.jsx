@@ -22,10 +22,13 @@ const Resume = () => {
   const { t } = useLanguage();
   const [selectedKind, setSelectedKind] = useState("All");
 
-  const filteredSkills =
+  const filteredSkills = (
     selectedKind !== "All"
       ? techSkills.filter((item) => item.kind === selectedKind)
-      : techSkills;
+      : techSkills
+  )
+    .slice()
+    .sort((a, b) => b.years - a.years || b.projects - a.projects);
 
   return (
     <Layout
@@ -104,7 +107,7 @@ const Resume = () => {
             ))}
           </div>
 
-          <div className='mt-7 grid grid-cols-1 gap-3.5 sm:grid-cols-2'>
+          <div className='mt-6 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3'>
             {filteredSkills.map((item, index) => (
               <SkillBox
                 key={item.title}
