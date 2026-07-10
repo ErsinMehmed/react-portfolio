@@ -32,8 +32,8 @@ export const bg = {
     "© 2026 Всички права запазени, Ерсин Хюсеин",
 
   // --- About page intro ---
-  "Hi, my name is Ersin, and I am a software developer. I have been programming for 6 years, combining my passion for technology with professional experience. Over the years, I’ve honed my skills by working on various projects, both at work and in my spare time, constantly striving to deliver high-quality solutions.":
-    "Здравейте, казвам се Ерсин и съм софтуерен разработчик. Програмирам от 6 години, съчетавайки страстта си към технологиите с професионален опит. През годините усъвършенствах уменията си, работейки по различни проекти, както в работата, така и в свободното си време, като постоянно се стремя да предоставям висококачествени решения.",
+  "Hi, my name is Ersin, and I am a software developer. I have over 6 years of experience in programming, including more than 4 years of professional experience, combining my passion for technology with real-world practice. Over the years, I’ve honed my skills by working on various projects, both at work and in my spare time, constantly striving to deliver high-quality solutions.":
+    "Здравейте, казвам се Ерсин и съм софтуерен разработчик. Имам над 6 години опит в програмирането, от които над 4 години професионален опит, съчетавайки страстта си към технологиите с практическа работа. През годините усъвършенствах уменията си, работейки по различни проекти, както в работата, така и в свободното си време, като постоянно се стремя да предоставям висококачествени решения.",
   "I have both theoretical and practical expertise in back-end and front-end programming, with a strong focus on web development. Web programming is my greatest strength, and I continuously work on refining my skills in this area. On this site, you can explore more details about my work, including the developments and projects I am currently involved in.":
     "Имам както теоретични, така и практически познания в back-end и front-end програмирането, със силен фокус върху уеб разработката. Уеб програмирането е най-силната ми страна и непрекъснато работя върху усъвършенстването на уменията си в тази област. На този сайт можете да разгледате повече детайли за работата ми, включително разработките и проектите, по които работя в момента.",
 
@@ -44,18 +44,24 @@ export const bg = {
 
   // --- What I do ---
   "What I do": "Какво правя",
-  Design: "Дизайн",
-  "I specialize in creating visually captivating and user-friendly designs that leave a lasting impression. Each design is meticulously crafted to align with every brand identity and meet specific goals.":
-    "Специализирам в създаването на визуално впечатляващи и удобни за потребителя дизайни, които оставят трайно впечатление. Всеки дизайн е прецизно изработен, за да съответства на идентичността на марката и да постигне конкретни цели.",
-  "App Development": "Разработка на приложения",
-  "With a passion for innovation and a keen eye for every detail, I specialize in creating exceptional applications that captivate. Through a collaborative and client-focused approach.":
-    "Със страст към иновациите и внимание към всеки детайл, специализирам в създаването на изключителни приложения, които завладяват, чрез съвместен и ориентиран към клиента подход.",
-  Management: "Мениджмънт",
-  "As an innovator, I bring a strategic mindset and hands-on approach to every project. I have experience leading small initiatives, ensuring seamless coordination and alignment with organizational goals.":
-    "Като иноватор, подхождам стратегически и практически към всеки проект. Имам опит в ръководенето на малки инициативи, осигурявайки безпроблемна координация и съответствие с целите на организацията.",
-  "Web Development": "Уеб разработка",
-  "In today's, a strong online presence is essential businesses. As a developer, I specialize in creating user-centric web apps/systems/websites that not only attract attention but also deliver exceptional functionality.":
-    "В днешно време силното онлайн присъствие е от съществено значение за бизнеса. Като разработчик специализирам в създаването на ориентирани към потребителя уеб приложения/системи/сайтове, които не само привличат внимание, но и предоставят изключителна функционалност.",
+  "Full-Stack Web Development": "Full-Stack уеб разработка",
+  "I build complete web applications end to end — from the database and business logic to the interface users interact with — focused on scalable, high-performance solutions that hold up in production.":
+    "Изграждам цялостни уеб приложения от начало до край — от базата данни и бизнес логиката до интерфейса, с който потребителите взаимодействат — с фокус върху скалируеми и високопроизводителни решения, които издържат в реална среда.",
+  "Backend Development & APIs": "Back-end разработка и API",
+  "My core strength: designing robust back ends with PHP (Symfony, Laravel), building RESTful APIs, modelling data in MySQL and MongoDB, and integrating third-party services reliably and securely.":
+    "Основната ми сила: проектиране на надеждни back-end системи с PHP (Symfony, Laravel), изграждане на RESTful API, моделиране на данни в MySQL и MongoDB и надеждна и сигурна интеграция на услуги на трети страни.",
+  "Frontend Development": "Front-end разработка",
+  "I craft responsive, user-centric interfaces with React, Vue.js and Next.js — clean, accessible and consistent, with attention to the small interactions that make a product feel polished.":
+    "Създавам responsive, ориентирани към потребителя интерфейси с React, Vue.js и Next.js — чисти, достъпни и консистентни, с внимание към малките детайли, които правят продукта завършен.",
+  "AI Development & Automation": "AI разработка и автоматизация",
+  "I use AI to automate real developer workflows and remove repetitive work. My end-to-end automation project won first place among 24 company-wide entries in an internal AI innovation contest.":
+    "Използвам AI за автоматизиране на реални работни процеси и премахване на повтарящата се работа. Проектът ми за end-to-end автоматизация спечели първо място сред 24 проекта във вътрешен конкурс за AI иновации.",
+  "Technical Leadership": "Техническо лидерство",
+  "I lead technical and architectural decisions, mentor junior and mid-level developers, and run code reviews that raise the bar — keeping teams aligned, unblocked and moving toward shared goals.":
+    "Водя технически и архитектурни решения, менторствам junior и mid-level разработчици и провеждам code review-та, които вдигат нивото — държейки екипите съгласувани, отблокирани и насочени към общи цели.",
+  "Quality & Delivery": "Качество и доставка",
+  "I care about clean, testable code. I back features with unit and integration tests, ship through CI/CD pipelines, and work in Agile teams with sprint planning, standups and continuous delivery.":
+    "Държа на чист и тестваем код. Подсигурявам функционалностите с unit и интеграционни тестове, доставям през CI/CD pipeline-и и работя в Agile екипи със sprint planning, standup-и и непрекъсната доставка.",
 
   // --- Resume sections ---
   Education: "Образование",

@@ -27,7 +27,7 @@ const Home = () => {
         <div className='space-y-4 pt-6'>
           <p className='text-lg leading-8 text-slate-600'>
             {t(
-              "Hi, my name is Ersin, and I am a software developer. I have been programming for 6 years, combining my passion for technology with professional experience. Over the years, I’ve honed my skills by working on various projects, both at work and in my spare time, constantly striving to deliver high-quality solutions."
+              "Hi, my name is Ersin, and I am a software developer. I have over 6 years of experience in programming, including more than 4 years of professional experience, combining my passion for technology with real-world practice. Over the years, I’ve honed my skills by working on various projects, both at work and in my spare time, constantly striving to deliver high-quality solutions."
             )}
           </p>
 

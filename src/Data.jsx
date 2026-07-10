@@ -11,9 +11,11 @@ import IconRocket from "./icons/Rocket";
 import IconStar from "./icons/Star";
 import IconDocument from "./icons/Document";
 import IconUIdesign from "./icons/UIdesign";
-import IconAppDev from "./icons/AppDev";
 import IconManagement from "./icons/Management";
 import IconWebDev from "./icons/WebDev";
+import IconBackend from "./icons/Backend";
+import IconAI from "./icons/AI";
+import IconQuality from "./icons/Quality";
 
 const headerLinks = [
   {
@@ -178,27 +180,39 @@ const experiences = [
 
 const mainSkills = [
   {
-    title: "Design",
-    text: "I specialize in creating visually captivating and user-friendly designs that leave a lasting impression. Each design is meticulously crafted to align with every brand identity and meet specific goals.",
-    icon: IconUIdesign,
-    color: "bg-[#fff4f4]",
-  },
-  {
-    title: "App Development",
-    text: "With a passion for innovation and a keen eye for every detail, I specialize in creating exceptional applications that captivate. Through a collaborative and client-focused approach.",
-    icon: IconAppDev,
+    title: "Full-Stack Web Development",
+    text: "I build complete web applications end to end — from the database and business logic to the interface users interact with — focused on scalable, high-performance solutions that hold up in production.",
+    icon: IconWebDev,
     color: "bg-[#eef5fa]",
   },
   {
-    title: "Management",
-    text: "As an innovator, I bring a strategic mindset and hands-on approach to every project. I have experience leading small initiatives, ensuring seamless coordination and alignment with organizational goals.",
+    title: "Backend Development & APIs",
+    text: "My core strength: designing robust back ends with PHP (Symfony, Laravel), building RESTful APIs, modelling data in MySQL and MongoDB, and integrating third-party services reliably and securely.",
+    icon: IconBackend,
+    color: "bg-[#fff4f4]",
+  },
+  {
+    title: "Frontend Development",
+    text: "I craft responsive, user-centric interfaces with React, Vue.js and Next.js — clean, accessible and consistent, with attention to the small interactions that make a product feel polished.",
+    icon: IconUIdesign,
+    color: "bg-[#eef5fa]",
+  },
+  {
+    title: "AI Development & Automation",
+    text: "I use AI to automate real developer workflows and remove repetitive work. My end-to-end automation project won first place among 24 company-wide entries in an internal AI innovation contest.",
+    icon: IconAI,
+    color: "bg-[#fff4f4]",
+  },
+  {
+    title: "Technical Leadership",
+    text: "I lead technical and architectural decisions, mentor junior and mid-level developers, and run code reviews that raise the bar — keeping teams aligned, unblocked and moving toward shared goals.",
     icon: IconManagement,
     color: "bg-[#eef5fa]",
   },
   {
-    title: "Web Development",
-    text: "In today's, a strong online presence is essential businesses. As a developer, I specialize in creating user-centric web apps/systems/websites that not only attract attention but also deliver exceptional functionality.",
-    icon: IconWebDev,
+    title: "Quality & Delivery",
+    text: "I care about clean, testable code. I back features with unit and integration tests, ship through CI/CD pipelines, and work in Agile teams with sprint planning, standups and continuous delivery.",
+    icon: IconQuality,
     color: "bg-[#fff4f4]",
   },
 ];
