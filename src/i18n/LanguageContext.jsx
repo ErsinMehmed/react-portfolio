@@ -7,10 +7,22 @@ const LanguageContext = createContext({
   t: (text) => text,
 });
 
+// A returning visitor's saved choice wins; a first-time visitor gets Bulgarian
+// only if their browser is set to it, otherwise English.
+const getInitialLang = () => {
+  const saved = localStorage.getItem("lang");
+  if (saved === "en" || saved === "bg") return saved;
+
+  const browser = (
+    navigator.language ||
+    (navigator.languages && navigator.languages[0]) ||
+    ""
+  ).toLowerCase();
+  return browser.startsWith("bg") ? "bg" : "en";
+};
+
 export const LanguageProvider = ({ children }) => {
-  const [lang, setLang] = useState(
-    () => localStorage.getItem("lang") || "en"
-  );
+  const [lang, setLang] = useState(getInitialLang);
 
   useEffect(() => {
     localStorage.setItem("lang", lang);
