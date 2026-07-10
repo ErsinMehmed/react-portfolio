@@ -477,6 +477,10 @@ export const translations = {
   },
 
   // --- Certification descriptions ---
+  "cert.myposAutopilotAward.description": {
+    en: "First place among 24 company-wide submissions in myPOS's internal AI innovation contest in 2026, for AutoPilot: an end-to-end automation project built with Claude Code.",
+    bg: "Първо място сред 24 проекта на вътрешния конкурс за AI иновации в myPOS през 2026 г. с AutoPilot - проект за end-to-end автоматизация, разработен с Claude Code.",
+  },
   "cert.craictAward.description": {
     en: "The recipient of the CRAICT Award at UE Varna in 2023, honored as a Laureate, signifies an individual recognized for talent and achievements. This award, part of a fund supporting talented students, highlights their outstanding contributions and dedication to their field of study or area of expertise within the university community.",
     bg: "Носител на наградата CRAICT в ИУ - Варна през 2023 г., отличен като лауреат, което означава човек, признат за талант и постижения. Наградата, част от фонд за подкрепа на талантливи студенти, подчертава изключителния принос и отдаденост към областта на обучение в рамките на университетската общност.",

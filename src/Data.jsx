@@ -611,6 +611,10 @@ const projects = {
 const certifications = [
   {
     kind: "Award",
+    description: "cert.myposAutopilotAward.description",
+  },
+  {
+    kind: "Award",
     description: "cert.craictAward.description",
   },
   {

@@ -8,9 +8,9 @@ import { useLanguage } from "../i18n/LanguageContext";
 const normalizeKind = (item) => item.kind || item.kindEn || "Certificate";
 
 const categoryOrder = [
+  { kind: "Award", title: "cert.categoryAwards" },
   { kind: "Certificate", title: "cert.categoryCertificates" },
   { kind: "Course", title: "cert.categoryCourses" },
-  { kind: "Award", title: "cert.categoryAwards" },
   { kind: "Scientific publication", title: "cert.categoryPublications" },
   { kind: "Sport achievements", title: "cert.categorySportAchievements" },
 ];
