@@ -137,6 +137,7 @@ export const translations = {
   // --- Duration units ---
   "duration.yr": { en: "yr", bg: "г." },
   "duration.mo": { en: "mo", bg: "мес." },
+  "duration.present": { en: "Present", bg: "Настояще" },
 
   // --- Education content ---
   "education.master.title": { en: "Master", bg: "Магистър" },

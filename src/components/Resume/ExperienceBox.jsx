@@ -47,7 +47,7 @@ const ExperienceBox = (props) => {
       <div className={isLast ? "pb-0" : "pb-7"}>
         <div className='flex flex-wrap items-center gap-2'>
           <span className='inline-block rounded-full bg-blue-50 px-2.5 py-0.5 text-xs font-semibold text-[#1b74e4]'>
-            {item.period}
+            {item.period.replace("Present", t("duration.present"))}
           </span>
 
           <span className='text-xs font-medium text-slate-500'>{duration}</span>

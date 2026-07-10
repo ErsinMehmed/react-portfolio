@@ -140,7 +140,7 @@ const educations = [
 const experiences = [
   {
     title: "experience.backendDev.title",
-    period: "07.2023 - 07.2026",
+    period: "07.2023 - Present",
     location: "location.varna",
     company: "company.mypos",
     color: "bg-[#fff4f4]",

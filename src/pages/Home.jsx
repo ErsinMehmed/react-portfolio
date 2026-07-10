@@ -5,7 +5,7 @@ import { mainSkills, techSkills, projects, certifications } from "../Data";
 import { useLanguage } from "../i18n/LanguageContext";
 
 const stats = [
-  { value: 5, suffix: "+", label: "stats.yearsOfExperience" },
+  { value: 6, suffix: "+", label: "stats.yearsOfExperience" },
   {
     value: projects.professional.length + projects.personal.length,
     suffix: "+",
