@@ -2,6 +2,11 @@
   command = "npm run build"
   publish = "build"
 
+# Match CI and the npm-11 lockfile generator, so Netlify's `npm ci` reads the
+# lockfile the same way and Vite has a supported Node runtime.
+[build.environment]
+  NODE_VERSION = "24"
+
 # React Router is client-side; every deep link must fall back to index.html
 # so refreshing /resume or /projects doesn't 404 on Netlify's CDN.
 [[redirects]]
