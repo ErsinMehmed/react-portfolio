@@ -614,12 +614,12 @@ const certifications = [
     description: "cert.craictAward.description",
   },
   {
-    kind: "Certificatе",
+    kind: "Certificate",
     description: "cert.studentActivityAward.description",
     link: "https://drive.google.com/file/d/1nDOgwq-P4clUqj1Do4z7geZeRlp3ydts/view?usp=drive_link",
   },
   {
-    kind: "Certificatе",
+    kind: "Certificate",
     description: "cert.computerLiteracy.description",
   },
   {
@@ -641,12 +641,12 @@ const certifications = [
     link: "https://ue-varna.bg/uploads/filemanager/303/publishing-complex/2022/Studentska-nauchna-konferencia-2022.pdf#page=100",
   },
   {
-    kind: "Certificatе",
+    kind: "Certificate",
     description: "cert.azureCourse.description",
     link: "https://drive.google.com/file/d/1I9w_0YEFwDuOgDsLr3Vpf1MgFiGLaB9v/view?usp=sharing",
   },
   {
-    kind: "Certificatе",
+    kind: "Certificate",
     description: "cert.safeCourse.description",
     link: "https://drive.google.com/file/d/1mJdWkQU58tuGvJj2yO5DRz5qD0dlZqnj/view?usp=sharing",
   },

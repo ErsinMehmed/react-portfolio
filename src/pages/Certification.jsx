@@ -5,10 +5,7 @@ import CertificationCard from "../components/Certifications/CertificationCard";
 import { certifications } from "../Data";
 import { useLanguage } from "../i18n/LanguageContext";
 
-const normalizeKind = (item) => {
-  const raw = item.kind || item.kindEn || "Certificate";
-  return raw.startsWith("Certificat") ? "Certificate" : raw;
-};
+const normalizeKind = (item) => item.kind || item.kindEn || "Certificate";
 
 const categoryOrder = [
   { kind: "Certificate", title: "cert.categoryCertificates" },

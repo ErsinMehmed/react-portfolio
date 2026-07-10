@@ -20,7 +20,8 @@ const Layout = (props) => {
     };
 
     window.addEventListener("scroll", handleScroll);
-  });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const scrollToTop = () => {
     window.scrollTo({

@@ -6,6 +6,7 @@ const Home = lazy(() => import("./pages/Home"));
 const Resume = lazy(() => import("./pages/Resume"));
 const Project = lazy(() => import("./pages/Project"));
 const Certification = lazy(() => import("./pages/Certification"));
+const NotFound = lazy(() => import("./pages/NotFound"));
 
 function App() {
   return (
@@ -29,6 +30,11 @@ function App() {
         <Route
           path='/certifications'
           element={<Certification />}
+        />
+
+        <Route
+          path='*'
+          element={<NotFound />}
         />
       </Routes>
     </Suspense>

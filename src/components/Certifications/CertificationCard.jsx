@@ -26,8 +26,7 @@ const kinds = {
 
 const CertificationCard = ({ item }) => {
   const { t } = useLanguage();
-  const raw = item.kind || item.kindEn || "Certificate";
-  const kind = raw.startsWith("Certificat") ? "Certificate" : raw;
+  const kind = item.kind || item.kindEn || "Certificate";
   const cfg = kinds[kind] || kinds.Certificate;
   const hasLink = Boolean(item.link);
 

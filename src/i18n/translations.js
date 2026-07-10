@@ -9,6 +9,14 @@ export const translations = {
   "nav.certifications": { en: "Certifications", bg: "Сертификати" },
   "page.aboutMe": { en: "About Me", bg: "За мен" },
 
+  // --- 404 page ---
+  "notFound.title": { en: "Page not found", bg: "Страницата не е намерена" },
+  "notFound.message": {
+    en: "The page you're looking for doesn't exist or may have been moved.",
+    bg: "Търсената страница не съществува или е била преместена.",
+  },
+  "notFound.backHome": { en: "Back to home", bg: "Обратно към началото" },
+
   // --- Profile card ---
   "profile.name": { en: "Ersin Hyusein", bg: "Ерсин Хюсеин" },
   "profile.jobTitle": {
@@ -41,8 +49,8 @@ export const translations = {
 
   // --- Footer ---
   "footer.copyright": {
-    en: "© 2026 All Rights Reserved by Ersin Hyusein",
-    bg: "© 2026 Всички права запазени, Ерсин Хюсеин",
+    en: "All Rights Reserved by Ersin Hyusein",
+    bg: "Всички права запазени, Ерсин Хюсеин",
   },
 
   // --- About page intro ---
@@ -385,7 +393,7 @@ export const translations = {
     bg: "Уеб система за оценка на имоти",
   },
   "project.propertyValuation.description": {
-    en: "The purpose of the trial is to allow residents to create appraisals that will be predicted by all interested parties and select the most appropriate appraiser to perform the task on the property. The selection of an evaluator is done anonymously, through a dynamic interface. The appraisal process begins with creating an appraisal, linking interested pages, inserting property data, and displaying appraisers through the interface. Once the appraiser is selected and the appraisals paid for, the process is complete. All communication about the process is done automatically through the platform, and the communication is visible to users. The platform supports multiple languages.",
+    en: "A marketplace where property owners request an appraisal and licensed appraisers bid for the job anonymously through a dynamic interface. Once an appraiser is selected and paid, the platform handles all further communication automatically, with the full history visible to both sides. Built with multi-language support from the ground up.",
     bg: "Целта на системата е да позволи на потребителите да създават оценки, за които всички заинтересовани страни наддават, и да изберат най-подходящия оценител за задачата върху имота. Изборът на оценител се извършва анонимно чрез динамичен интерфейс. Процесът започва със създаване на оценка, свързване на заинтересовани страни, въвеждане на данни за имота и показване на оценителите чрез интерфейса. След като оценителят е избран и оценките са платени, процесът е завършен. Цялата комуникация се извършва автоматично през платформата и е видима за потребителите. Платформата поддържа множество езици.",
   },
 
@@ -403,7 +411,7 @@ export const translations = {
     bg: "Система за търсене и предлагане на работа - Job Portal",
   },
   "project.jobPortal.description": {
-    en: "The platform designed to connect employers with job seekers, providing functionalities for job searching and offering. Users can create accounts, distinguishing between employers and job seekers, to access the platform's features. Job seekers can browse through job listings, filtering by criteria such as location, salary, and industry, while employers can post job openings, specifying requirements and offered salary. The platform facilitates online job applications, allowing job seekers to submit their CVs and cover letters directly. Additionally, it may incorporate messaging features for communication between employers and job seekers and include a rating and review system for users to evaluate each other's experiences.",
+    en: "A platform connecting employers with job seekers. Job seekers browse listings filtered by location, salary, and industry, and apply directly with a CV and cover letter; employers post openings and review incoming applications. Built-in messaging and a rating system let both sides communicate and share feedback after the process.",
     bg: "Платформа, създадена да свързва работодатели с търсещи работа, предоставяйки функционалности за търсене и предлагане на работа. Потребителите могат да създават акаунти, разделени на работодатели и търсещи работа, за достъп до функциите на платформата. Търсещите работа могат да разглеждат обяви, филтрирайки по критерии като локация, заплата и индустрия, докато работодателите могат да публикуват свободни позиции, посочвайки изисквания и предлагана заплата. Платформата улеснява онлайн кандидатстването, като позволява директно подаване на CV и мотивационни писма. Освен това може да включва съобщения за комуникация между страните и система за оценки и отзиви.",
   },
 

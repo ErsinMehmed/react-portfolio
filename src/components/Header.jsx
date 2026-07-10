@@ -13,9 +13,11 @@ const Header = () => {
       (item) => item.href === location.pathname
     );
 
-    document.title = `${t("profile.name")}${
-      currentRoute.title !== "nav.about" ? " | " + t(currentRoute.title) : ""
-    }`;
+    document.title = currentRoute
+      ? `${t("profile.name")}${
+          currentRoute.title !== "nav.about" ? " | " + t(currentRoute.title) : ""
+        }`
+      : `${t("profile.name")} | ${t("notFound.title")}`;
   });
 
   return (
