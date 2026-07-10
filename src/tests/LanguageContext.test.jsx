@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import { LanguageProvider, useLanguage } from "./LanguageContext";
+import { LanguageProvider, useLanguage } from "../i18n/LanguageContext";
 
 const Probe = ({ testKey }) => {
   const { t, lang, setLang } = useLanguage();

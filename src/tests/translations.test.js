@@ -1,4 +1,4 @@
-import { translations } from "./translations";
+import { translations } from "../i18n/translations";
 
 const entries = Object.entries(translations);
 

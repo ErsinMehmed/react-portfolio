@@ -4,8 +4,8 @@ import {
   certifications,
   experiences,
   educations,
-} from "./Data";
-import { translations } from "./i18n/translations";
+} from "../Data";
+import { translations } from "../i18n/translations";
 
 // Every string a component feeds into t() must resolve to a real entry that
 // carries BOTH languages. A missing entry silently renders the raw key on the

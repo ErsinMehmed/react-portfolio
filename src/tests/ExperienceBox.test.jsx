@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
-import { LanguageProvider } from "../../i18n/LanguageContext";
-import ExperienceBox from "./ExperienceBox";
+import { LanguageProvider } from "../i18n/LanguageContext";
+import ExperienceBox from "../components/Resume/ExperienceBox";
 
 const renderExperience = (period) =>
   render(
