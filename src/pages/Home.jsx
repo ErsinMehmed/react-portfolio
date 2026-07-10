@@ -38,17 +38,18 @@ const Home = () => {
       <InViewAnimation>
         <dl className='mt-8 grid grid-cols-2 gap-x-6 gap-y-6 border-y border-slate-200/70 py-6 sm:grid-cols-4'>
           {stats.map((stat) => (
-            <div key={stat.label}>
-              <dt className='sr-only'>{t(stat.label)}</dt>
-              <dd className='font-display text-[28px] font-bold leading-none tracking-tight text-slate-800 sm:text-[32px]'>
+            <div
+              key={stat.label}
+              className='flex flex-col'>
+              <dt className='order-2 mt-2 text-xs font-medium text-slate-500'>
+                {t(stat.label)}
+              </dt>
+              <dd className='order-1 font-display text-[28px] font-bold leading-none tracking-tight text-slate-800 sm:text-[32px]'>
                 <NumberTicker
                   value={stat.value}
                   suffix={stat.suffix}
                 />
               </dd>
-              <p className='mt-2 text-xs font-medium text-slate-500'>
-                {t(stat.label)}
-              </p>
             </div>
           ))}
         </dl>
