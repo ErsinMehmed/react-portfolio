@@ -53,12 +53,12 @@ const ProfileCard = () => {
 
           <div className='pt-[104px]'>
             <h2 className='font-display text-[24px] font-bold tracking-tight text-slate-800'>
-              {t("Ersin Hysein")}
+              {t("profile.name")}
             </h2>
 
             <p className='mt-1 inline-flex items-center gap-2 text-sm font-medium text-slate-500'>
               <span className='h-1.5 w-1.5 rounded-full bg-[#1b74e4]' />
-              {t("Senior Full Stack Web Developer")}
+              {t("profile.jobTitle")}
             </p>
 
             <div className='mt-4 flex justify-center gap-2.5'>
@@ -127,7 +127,7 @@ const ProfileCard = () => {
               className='group mt-5 inline-flex w-full items-center justify-center gap-2.5 rounded-2xl bg-[#1b74e4] px-8 py-3 text-base font-semibold text-white shadow-[0_14px_30px_-12px_rgba(27,116,228,0.7)] transition-all duration-200 ease-out hover:bg-[#1667cf] active:scale-[0.98]'
               onClick={handleDownload}>
               <IconDownload className='h-5 w-5 transition-transform duration-200 ease-out group-hover:-translate-y-0.5' />
-              {t("Download CV")}
+              {t("profile.downloadCv")}
             </button>
           </div>
         </div>
@@ -143,7 +143,7 @@ const ProfileCard = () => {
         <ModalBody>
           <div className="text-center">
             <p className="mb-4 text-sm text-gray-500 dark:text-gray-400">
-              {t("Scan the QR code with your phone to call")}
+              {t("qr.scanPrompt")}
             </p>
             
             <div className="flex justify-center mb-4">
@@ -173,19 +173,19 @@ const ProfileCard = () => {
                 onClick={() => navigator.clipboard?.writeText(phoneNumber)}
                 className="!text-[#1b74e4] hover:!text-[#1667cf]"
               >
-                {t("Copy")}
+                {t("qr.copy")}
               </Button>
             </div>
 
             <p className="mt-3 text-xs text-gray-400 dark:text-gray-500">
-              {t("Open camera app and scan the QR code")}
+              {t("qr.openCamera")}
             </p>
 
             <button
               onClick={() => setIsQrModalOpen(false)}
               className="mt-6 px-6 py-2.5 bg-[#1b74e4] hover:bg-[#1667cf] text-white text-sm font-semibold rounded-xl transition-colors shadow-[0_8px_20px_-8px_rgba(27,116,228,0.5)]"
             >
-              {t("Close")}
+              {t("qr.close")}
             </button>
           </div>
         </ModalBody>

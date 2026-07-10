@@ -88,7 +88,7 @@ const ProjectModal = ({ data, onClose }) => {
               }`}>
               {type === "professional"
                 ? t(project.company)
-                : t("Personal project")}
+                : t("projects.personalProject")}
             </span>
 
             <h3 className='mt-3 pr-8 font-display text-2xl font-bold leading-tight tracking-tight text-slate-800'>
@@ -101,7 +101,7 @@ const ProjectModal = ({ data, onClose }) => {
 
             <div className='mt-6'>
               <p className='mb-2 text-[11px] font-semibold uppercase tracking-wider text-slate-400'>
-                {t("Tech stack")}
+                {t("projects.techStack")}
               </p>
               <div className='flex flex-wrap gap-2'>
                 {(project.technologies || []).map((tech, i) => (
@@ -123,7 +123,7 @@ const ProjectModal = ({ data, onClose }) => {
                     rel='noreferrer'
                     className='inline-flex items-center gap-2 rounded-xl bg-[#1b74e4] px-5 py-2.5 text-sm font-semibold text-white shadow-[0_12px_26px_-12px_rgba(27,116,228,0.7)] transition-colors hover:bg-[#1667cf]'>
                     <ExternalIcon className='h-4 w-4' />
-                    {t("Live demo")}
+                    {t("projects.liveDemo")}
                   </a>
                 )}
 
@@ -134,7 +134,7 @@ const ProjectModal = ({ data, onClose }) => {
                     rel='noreferrer'
                     className='inline-flex items-center gap-2 rounded-xl border border-slate-200 px-5 py-2.5 text-sm font-semibold text-slate-700 transition-colors hover:border-slate-300 hover:bg-slate-50'>
                     <GitHubMark className='h-4 w-4' />
-                    {t("View code")}
+                    {t("projects.viewCode")}
                   </a>
                 )}
               </div>
@@ -142,9 +142,7 @@ const ProjectModal = ({ data, onClose }) => {
 
             {type === "professional" && !project.live && !project.github && (
               <p className='mt-7 rounded-xl bg-slate-50 px-4 py-3 text-sm text-slate-500'>
-                {t(
-                  "Proprietary company project, source code is not publicly available."
-                )}
+                {t("projects.proprietaryNotice")}
               </p>
             )}
           </motion.div>

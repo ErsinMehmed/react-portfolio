@@ -34,8 +34,8 @@ const ExperienceBox = (props) => {
   const { t } = useLanguage();
 
   const duration = getDuration(item.period)
-    .replace(/yr/g, t("yr"))
-    .replace(/mo/g, t("mo"));
+    .replace(/yr/g, t("duration.yr"))
+    .replace(/mo/g, t("duration.mo"));
 
   return (
     <div className='grid grid-cols-[auto_1fr] gap-x-4 sm:gap-x-5'>

@@ -14,7 +14,7 @@ const Header = () => {
     );
 
     document.title = `Ersin Hyusein ${
-      currentRoute.title !== "About" ? " | " + currentRoute.title : ""
+      currentRoute.title !== "nav.about" ? " | " + t(currentRoute.title) : ""
     }`;
   });
 

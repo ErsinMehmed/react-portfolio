@@ -19,22 +19,22 @@ import IconQuality from "./icons/Quality";
 
 const headerLinks = [
   {
-    title: "About",
+    title: "nav.about",
     href: "/",
     icon: IconUser,
   },
   {
-    title: "Resume",
+    title: "nav.resume",
     href: "/resume",
     icon: IconDocument,
   },
   {
-    title: "Projects",
+    title: "nav.projects",
     href: "/projects",
     icon: IconRocket,
   },
   {
-    title: "Certifications",
+    title: "nav.certifications",
     href: "/certifications",
     icon: IconStar,
   },
@@ -78,32 +78,32 @@ const calculateAge = (day, month, year) => {
 
 const personalInfo = [
   {
-    title: "Age",
+    title: "profile.age",
     text: String(calculateAge(13, 7, 1999)),
     icon: IconUser,
     iconColor: "text-red-400",
   },
   {
-    title: "Location",
-    text: "Varna, Bulgaria",
+    title: "profile.location",
+    text: "profile.locationValue",
     icon: IconLocation,
     iconColor: "text-pink-400",
   },
   {
-    title: "Phone",
+    title: "profile.phone",
     text: "+359 899 626273",
     icon: IconPhone,
     iconColor: "text-emerald-400",
   },
   {
-    title: "Email",
+    title: "profile.email",
     text: "ersin99mehmed@gmail.com",
     icon: IconEmail,
     iconColor: "text-blue-400",
   },
   {
-    title: "Languages",
-    text: "Bulgarian, English, Turkish",
+    title: "profile.languages",
+    text: "profile.languagesValue",
     icon: IconSpeaker,
     iconColor: "text-purple-400",
   },
@@ -111,107 +111,107 @@ const personalInfo = [
 
 const educations = [
   {
-    title: "Master",
+    title: "education.master.title",
     period: "02.2023 - 06.2024",
-    degree: "Mobile and Web Technologies",
-    institution: "University of Economics - Varna",
+    degree: "education.master.degree",
+    institution: "education.uniVarna",
     color: "bg-[#fff4f4]",
   },
   {
-    title: "Bachelor",
+    title: "education.bachelor.title",
     period: "09.2018 - 06.2022",
-    degree: "Business Information System",
-    institution: "University of Economics - Varna",
+    degree: "education.bachelor.degree",
+    institution: "education.uniVarna",
     color: "bg-[#eef5fa]",
   },
   {
-    title: "High School",
+    title: "education.highSchool.title",
     period: "09.2013 - 05.2018",
-    degree: "Sport Coach",
-    institution: `Sport School "Georgi Benkovski" - Varna`,
+    degree: "education.highSchool.degree",
+    institution: "education.sportSchool",
     color: "bg-[#eef5fa]",
   },
 ];
 
 const experiences = [
   {
-    title: "Backend web developer",
+    title: "experience.backendDev.title",
     period: "07.2023 - 07.2026",
-    location: "Varna",
-    company: "MyPOS Technologies",
+    location: "location.varna",
+    company: "company.mypos",
     color: "bg-[#fff4f4]",
   },
   {
-    title: "Full stack web developer",
+    title: "experience.fullstackDev.title",
     period: "10.2022 - 06.2023",
-    location: "Varna",
-    company: "James IT Services",
+    location: "location.varna",
+    company: "company.jamesIt",
     color: "bg-[#eef5fa]",
   },
   {
-    title: "IT support & consultant",
+    title: "experience.itSupport.title",
     period: "04.2022 - 09.2022",
-    location: "Varna",
-    company: "ENERGO PRO",
+    location: "location.varna",
+    company: "company.energoPro",
     color: "bg-[#eef5fa]",
   },
   {
-    title: "Manager in a small company",
+    title: "experience.managerSmallCompany.title",
     period: "04.2021 - 10.2021",
-    location: "Varna",
-    company: "Briella Ltd",
+    location: "location.varna",
+    company: "company.briella",
     color: "bg-[#fff4f4]",
   },
   {
-    title: "Currency cashier",
+    title: "experience.currencyCashier.title",
     period: "04.2019 - 09.2019",
-    location: "Golden Sands",
-    company: "Edives Ltd",
+    location: "location.goldenSands",
+    company: "company.edives",
     color: "bg-[#fff4f4]",
   },
   {
-    title: "Tourism",
+    title: "experience.tourism.title",
     period: "04.2018 - 09.2018",
-    location: "Golden Sands",
-    company: "Tourism",
+    location: "location.goldenSands",
+    company: "experience.tourism.title",
     color: "bg-[#eef5fa]",
   },
 ];
 
 const mainSkills = [
   {
-    title: "Full-Stack Web Development",
-    text: "I build complete web applications end to end — from the database and business logic to the interface users interact with — focused on scalable, high-performance solutions that hold up in production.",
+    title: "skills.fullstack.title",
+    text: "skills.fullstack.text",
     icon: IconWebDev,
     color: "bg-[#eef5fa]",
   },
   {
-    title: "Backend Development & APIs",
-    text: "My core strength: designing robust back ends with PHP (Symfony, Laravel), building RESTful APIs, modelling data in MySQL and MongoDB, and integrating third-party services reliably and securely.",
+    title: "skills.backend.title",
+    text: "skills.backend.text",
     icon: IconBackend,
     color: "bg-[#fff4f4]",
   },
   {
-    title: "Frontend Development",
-    text: "I craft responsive, user-centric interfaces with React, Vue.js and Next.js — clean, accessible and consistent, with attention to the small interactions that make a product feel polished.",
+    title: "skills.frontend.title",
+    text: "skills.frontend.text",
     icon: IconUIdesign,
     color: "bg-[#eef5fa]",
   },
   {
-    title: "AI Development & Automation",
-    text: "I use AI to automate real developer workflows and remove repetitive work. My end-to-end automation project won first place among 24 company-wide entries in an internal AI innovation contest.",
+    title: "skills.ai.title",
+    text: "skills.ai.text",
     icon: IconAI,
     color: "bg-[#fff4f4]",
   },
   {
-    title: "Technical Leadership",
-    text: "I lead technical and architectural decisions, mentor junior and mid-level developers, and run code reviews that raise the bar — keeping teams aligned, unblocked and moving toward shared goals.",
+    title: "skills.leadership.title",
+    text: "skills.leadership.text",
     icon: IconManagement,
     color: "bg-[#eef5fa]",
   },
   {
-    title: "Quality & Delivery",
-    text: "I care about clean, testable code. I back features with unit and integration tests, ship through CI/CD pipelines, and work in Agile teams with sprint planning, standups and continuous delivery.",
+    title: "skills.quality.title",
+    text: "skills.quality.text",
     icon: IconQuality,
     color: "bg-[#fff4f4]",
   },
@@ -222,39 +222,34 @@ const techSkills = [
     title: "HTML",
     percentage: "100",
     kind: "Frontend",
-    description:
-      "Semantic, accessible markup is second nature to me and forms the backbone of every interface I build.",
+    description: "skillDesc.html",
     color: "bg-red-400",
   },
   {
     title: "CSS",
     kind: "Frontend",
-    description:
-      "Comfortable crafting responsive layouts with grid and flexbox, along with smooth animations and polished micro-interactions.",
+    description: "skillDesc.css",
     percentage: "90",
     color: "bg-rose-400",
   },
   {
     title: "Tailwind",
     kind: "Frontend",
-    description:
-      "My go-to for styling, letting me ship clean, consistent interfaces fast with utility classes and shared design tokens.",
+    description: "skillDesc.tailwind",
     percentage: "90",
     color: "bg-pink-400",
   },
   {
     title: "Bootstrap",
     kind: "Frontend",
-    description:
-      "Applied across several projects for quick, responsive layouts built on reliable prebuilt components.",
+    description: "skillDesc.bootstrap",
     percentage: "70",
     color: "bg-fuchsia-400",
   },
   {
     title: "JavaScript",
     kind: "Frontend",
-    description:
-      "The core of my front-end work: dynamic UI logic, form validation, async requests, and rich DOM interactions.",
+    description: "skillDesc.javascript",
     percentage: "90",
     color: "bg-purple-400",
   },
@@ -262,133 +257,117 @@ const techSkills = [
     title: "Vue.js",
     kind: "Frontend",
     percentage: "70",
-    description:
-      "Built production front-ends with Vue, using its reactivity and component model to keep code clean and maintainable.",
+    description: "skillDesc.vue",
     color: "bg-violet-400",
   },
   {
     title: "Inertia.js",
     kind: "Frontend",
     percentage: "50",
-    description:
-      "Used to connect a Laravel back-end with a modern SPA front-end without maintaining a separate API layer.",
+    description: "skillDesc.inertia",
     color: "bg-indigo-400",
   },
   {
     title: "React.js",
     kind: "Frontend",
     percentage: "90",
-    description:
-      "My main library for building scalable, component-driven interfaces with hooks and reusable state.",
+    description: "skillDesc.react",
     color: "bg-blue-400",
   },
   {
     title: "Mobx",
     kind: "Frontend",
     percentage: "90",
-    description:
-      "My preferred state manager in React, keeping complex application state predictable and reactive.",
+    description: "skillDesc.mobx",
     color: "bg-sky-400",
   },
   {
     title: "jQuery",
     kind: "Frontend",
     percentage: "80",
-    description:
-      "Handled DOM manipulation, events, and AJAX-driven interactions across legacy and hybrid projects.",
+    description: "skillDesc.jquery",
     color: "bg-cyan-400",
   },
   {
     title: "AJAX",
     kind: "Frontend",
     percentage: "85",
-    description:
-      "Used throughout my projects to fetch and save data asynchronously without full page reloads.",
+    description: "skillDesc.ajax",
     color: "bg-teal-400",
   },
   {
     title: "PHP",
     kind: "Backend",
     percentage: "85",
-    description:
-      "My primary back-end language for building APIs, CRUD logic, and server-side application features.",
+    description: "skillDesc.php",
     color: "bg-emerald-400",
   },
   {
     title: "Symfony",
     kind: "Backend",
     percentage: "80",
-    description:
-      "Build structured, maintainable back-ends with Symfony's services, components, and Doctrine ORM.",
+    description: "skillDesc.symfony",
     color: "bg-green-400",
   },
   {
     title: "Laravel",
     kind: "Backend",
     percentage: "70",
-    description:
-      "Used professionally for scalable back-ends: routing, Eloquent models, queues, and authentication.",
+    description: "skillDesc.laravel",
     color: "bg-lime-400",
   },
   {
     title: "Next.js",
     kind: "Backend",
     percentage: "80",
-    description:
-      "Build modern React applications with server-side rendering, file-based routing, and API routes.",
+    description: "skillDesc.nextjs",
     color: "bg-lime-300",
   },
   {
     title: "Node.js",
     kind: "Backend",
     percentage: "50",
-    description:
-      "Used Node.js to build lightweight back-end services, tooling, and JavaScript-based APIs.",
+    description: "skillDesc.nodejs",
     color: "bg-green-400",
   },
   {
     title: "MySQL",
     kind: "Database",
     percentage: "80",
-    description:
-      "Comfortable designing schemas, writing CRUD queries, and tuning them for better performance.",
+    description: "skillDesc.mysql",
     color: "bg-red-400",
   },
   {
     title: "SQL",
     kind: "Database",
     percentage: "75",
-    description:
-      "Solid with relational queries, joins, and aggregations for everyday data operations and reporting.",
+    description: "skillDesc.sql",
     color: "bg-pink-400",
   },
   {
     title: "MongoDB",
     kind: "Database",
     percentage: "70",
-    description:
-      "Used for flexible, document-based storage and aggregation pipelines over dynamic data.",
+    description: "skillDesc.mongodb",
     color: "bg-pink-400",
   },
   {
     title: "PostgreSQL",
     kind: "Database",
     percentage: "75",
-    description:
-      "I work confidently with PostgreSQL, from schema design to writing and optimizing complex relational queries.",
+    description: "skillDesc.postgresql",
     color: "bg-sky-400",
   },
   {
     title: "Claude Code",
     kind: "AI",
     percentage: "90",
-    description:
-      "My primary agentic coding partner in the terminal and IDE. I've used it to build:",
+    description: "skillDesc.claudeCode",
     items: [
-      "Custom AI agents",
-      "Reusable AI skills",
-      "MCP servers",
-      "Automated multi-step workflows",
+      "skillItem.customAiAgents",
+      "skillItem.reusableAiSkills",
+      "skillItem.mcpServers",
+      "skillItem.automatedWorkflows",
     ],
     color: "bg-orange-400",
   },
@@ -396,11 +375,11 @@ const techSkills = [
     title: "Codex",
     kind: "AI",
     percentage: "75",
-    description: "OpenAI Codex is part of my daily workflow. I've used it for:",
+    description: "skillDesc.codex",
     items: [
-      "Generating features and boilerplate",
-      "Refactoring and debugging code",
-      "Rapid prototyping of ideas",
+      "skillItem.generatingFeatures",
+      "skillItem.refactoringDebugging",
+      "skillItem.rapidPrototyping",
     ],
     color: "bg-emerald-400",
   },
@@ -408,33 +387,29 @@ const techSkills = [
     title: "GitHub",
     kind: "Other",
     percentage: "100",
-    description:
-      "My daily tool for version control, pull requests, and collaborating smoothly across a team.",
+    description: "skillDesc.github",
     color: "bg-rose-400",
   },
   {
     title: "Jira",
     kind: "Other",
     percentage: "90",
-    description:
-      "Run agile workflows in Jira, from sprint planning and issue tracking to managing boards.",
+    description: "skillDesc.jira",
     color: "bg-rose-400",
   },
   {
     title: "Testing",
     kind: "Other",
     percentage: "80",
-    description:
-      "Cover the full testing spectrum to keep code reliable and catch regressions early:",
-    items: ["Unit tests", "Integration tests", "End-to-end (E2E) tests"],
+    description: "skillDesc.testing",
+    items: ["skillItem.unitTests", "skillItem.integrationTests", "skillItem.e2eTests"],
     color: "bg-amber-400",
   },
   {
     title: "CI/CD",
     kind: "Other",
     percentage: "75",
-    description:
-      "Set up and maintain CI/CD pipelines that automate builds, tests, and deployments for faster, safer releases.",
+    description: "skillDesc.cicd",
     color: "bg-indigo-400",
   },
 ];
@@ -442,8 +417,8 @@ const techSkills = [
 const projects = {
   professional: [
      {
-      name: "Soko Beauty online store",
-      company: "Freelance",
+      name: "project.sokoBeauty.name",
+      company: "company.freelance",
       live: "https://sokobeauty.bg",
       technologies: [
         "JavaScript",
@@ -455,11 +430,10 @@ const projects = {
         "Redis",
         "Stripe",
       ],
-      description:
-        "A freelance e-commerce store for Soko Beauty, a shop specialising in authentic Korean skincare and cosmetics. Customers browse curated products, manage a cart, and check out securely with Stripe, using card or cash-on-delivery payment.",
+      description: "project.sokoBeauty.description",
     },
     {
-      name: "myPOS Partner Portal",
+      name: "project.myposPartnerPortal.name",
       company: "myPOS",
       live: "https://partners.mypos.com/en",
       technologies: [
@@ -473,11 +447,10 @@ const projects = {
         "Jira",
         "CI/CD",
       ],
-      description:
-        "A partner portal for companies building payment solutions on myPOS. Partners can create and monitor integrations, manage connected merchants, online stores, and POS devices across multiple countries, and explore analytics on transaction trends and multi-currency volumes, alongside a sandbox environment and API documentation.",
+      description: "project.myposPartnerPortal.description",
     },
     {
-      name: "Web-based system for managing business processes related to payments.",
+      name: "project.paymentsSystem.name",
       company: "myPOS",
       live: "https://www.mypos.com",
       technologies: [
@@ -498,12 +471,11 @@ const projects = {
         "CI/CD",
         "Claude Code",
       ],
-      description:
-        "This project consists of two components: a website and a user account system. Users can manage all processes related to payments received from their terminals through the account section, along with additional functionalities such as creating online stores with various products, issuing invoices to their clients through an innovative interface, and tracking all incoming funds in their account.",
+      description: "project.paymentsSystem.description",
     },
     {
-      name: "Web-based system for buying and selling cars.",
-      company: "James IT Services",
+      name: "project.carMarketplace.name",
+      company: "company.jamesIt",
       technologies: [
         "HTML",
         "CSS",
@@ -516,12 +488,11 @@ const projects = {
         "Laravel",
         "MySQL",
       ],
-      description:
-        "web-based platform designed to facilitate the process of buying and selling cars. It allows users to browse listings, post their vehicles for sale, and conduct secure transactions through the platform.",
+      description: "project.carMarketplace.description",
     },
     {
-      name: "Web based system for property valuation",
-      company: "James IT Services",
+      name: "project.propertyValuation.name",
+      company: "company.jamesIt",
       technologies: [
         "HTML",
         "CSS",
@@ -534,13 +505,12 @@ const projects = {
         "Laravel",
         "MySQL",
       ],
-      description:
-        "The purpose of the trial is to allow residents to create appraisals that will be predicted by all interested parties and select the most appropriate appraiser to perform the task on the property. The selection of an evaluator is done anonymously, through a dynamic interface. The appraisal process begins with creating an appraisal, linking interested pages, inserting property data, and displaying appraisers through the interface. Once the appraiser is selected and the appraisals paid for, the process is complete. All communication about the process is done automatically through the platform, and the communication is visible to users. The platform supports multiple languages.",
+      description: "project.propertyValuation.description",
     },
   ],
   personal: [
     {
-      name: "Web based management system",
+      name: "project.managementSystem.name",
       github: "https://github.com/ErsinMehmed/management-system-next",
       technologies: [
         "HTML",
@@ -552,11 +522,10 @@ const projects = {
         "Next.js",
         "MongoDB",
       ],
-      description:
-        "The Web-based management system is a comprehensive platform that allows users to place orders, monitor product availability, and manage their inventory effectively. Users can specify unique properties for each product, such as images, prices and etc. Additionally, the system includes features for adding sales and provides an innovative dashboard for tracking various statistics related to sales, turnovers, profits, expenses, and product inventory through insightful diagrams.",
+      description: "project.managementSystem.description",
     },
     {
-      name: "System for job searching and offering - Job Portal",
+      name: "project.jobPortal.name",
       github: "https://github.com/ErsinMehmed/job-portal",
       technologies: [
         "HTML",
@@ -568,11 +537,10 @@ const projects = {
         "Next.js",
         "MongoDB",
       ],
-      description:
-        "The platform designed to connect employers with job seekers, providing functionalities for job searching and offering. Users can create accounts, distinguishing between employers and job seekers, to access the platform's features. Job seekers can browse through job listings, filtering by criteria such as location, salary, and industry, while employers can post job openings, specifying requirements and offered salary. The platform facilitates online job applications, allowing job seekers to submit their CVs and cover letters directly. Additionally, it may incorporate messaging features for communication between employers and job seekers and include a rating and review system for users to evaluate each other's experiences.",
+      description: "project.jobPortal.description",
     },
     {
-      name: "Appointment system",
+      name: "project.appointmentSystem.name",
       github: "https://github.com/ErsinMehmed/appointmet-system",
       technologies: [
         "HTML",
@@ -584,18 +552,16 @@ const projects = {
         "Symfony",
         "MySQL",
       ],
-      description:
-        "The Appointment System is a web-based application designed to facilitate the scheduling and management of appointments and meetings. Users can effortlessly add appointments, while also being able to filter through the data based on various criteria. With its intuitive interface and robust backend, the system ensures efficient organization and coordination of schedules for individuals or teams.",
+      description: "project.appointmentSystem.description",
     },
     {
-      name: "Laravel Blog",
+      name: "project.laravelBlog.name",
       github: "https://github.com/ErsinMehmed/laravel-blog",
       technologies: ["HTML", "CSS", "Bootstrap", "PHP", "Laravel", "MySQL"],
-      description:
-        "The Laravel Blog project is a dynamic web application built using HTML, CSS, Bootstrap, PHP, Laravel, and MySQL. It serves as a versatile platform for creating, updating, reading, and deleting (CRUD) blog posts, providing users with the ability to manage their content seamlessly. Additionally, the system supports user profiles, allowing individuals to create and personalize their accounts. Through its intuitive interface and robust backend powered by Laravel, users can easily compose, edit, and publish blog posts while maintaining full control over their profiles. With features for both content creation and user management, the blog offers a comprehensive solution for blogging enthusiasts and content creators alike.",
+      description: "project.laravelBlog.description",
     },
     {
-      name: "Work flow management system",
+      name: "project.workflowSystem.name",
       github: "https://github.com/ErsinMehmed/workflow-system",
       technologies: [
         "HTML",
@@ -607,11 +573,10 @@ const projects = {
         "PHP",
         "MySQL",
       ],
-      description:
-        "Web-based workflow management system. I have envisioned a site from where every user will be able to make a request/order for the type of service. An administrator will then process their order, via an admin panel/window where a task will begin for a specific team. Employees from the team will access the tasks from a mobile device (tablet).",
+      description: "project.workflowSystem.description",
     },
     {
-      name: "Web platform for price comparing and products",
+      name: "project.priceComparison.name",
       github: "https://github.com/ErsinMehmed/price-comparing-platform",
       technologies: [
         "HTML",
@@ -622,22 +587,19 @@ const projects = {
         "PHP",
         "MySQL",
       ],
-      description:
-        "Web platform for comparing prices and products from various sites. With the development of e-commerce, the online space is crowded with a lot of information. There comes the need for such platforms for comparing products and services. The idea is for consumers to easily make their choice when purchasing a product. ",
+      description: "project.priceComparison.description",
     },
     {
-      name: "System for work process management",
+      name: "project.workProcessManagement.name",
       github: "https://github.com/ErsinMehmed/management-system",
       technologies: ["C#", "SQL"],
-      description:
-        "The system allows users after logging into the system and many functional options. The main functionalities are: adding new products and employees, screen with employees and products, editing employees and products, exporting data from the system.",
+      description: "project.workProcessManagement.description",
     },
     {
-      name: "System for work process management in a pizzeria",
+      name: "project.pizzeriaManagement.name",
       github: "https://github.com/ErsinMehmed/managament-system",
       technologies: ["Java", "SQL", "SQLite"],
-      description:
-        "The system allows users, after logging into the system, many functional options. The main functionalities are: adding new products according to different criteria, viewing products and filtering according to different criteria, entering stocks, reporting used products.",
+      description: "project.pizzeriaManagement.description",
     },
   ],
 };
@@ -646,58 +608,51 @@ const certifications = [
   {
     kind: "Award",
     image: "uni_logo.png",
-    description:
-      "The recipient of the CRAICT Award at UE Varna in 2023, honored as a Laureate, signifies an individual recognized for talent and achievements. This award, part of a fund supporting talented students, highlights their outstanding contributions and dedication to their field of study or area of expertise within the university community.",
+    description: "cert.craictAward.description",
   },
   {
     kind: "Certificatе",
     image: "uni_logo.png",
-    description: `Certificate for first place in 2022, "Review of student activities" at the Department of Informatics with development (Platform for comparison of prices and products from various websites).`,
+    description: "cert.studentActivityAward.description",
     link: "https://drive.google.com/file/d/1nDOgwq-P4clUqj1Do4z7geZeRlp3ydts/view?usp=drive_link",
   },
   {
     kind: "Certificatе",
     image: "mon-logo.png",
-    description:
-      "Computer Literacy Certificate. Released in 2018. The certificate covers an MS Office suite and work with the Internet and applications.",
+    description: "cert.computerLiteracy.description",
   },
   {
     kind: "Sport achievements",
     image: "handball.png",
-    description:
-      "One time sportsman of the year at Varna sports school 2017. 5 times team of the year. 3rd place at the European handball championship. Many individual awards and medals from state finals.",
+    description: "cert.sportAchievements.description",
   },
   {
     kindEn: "Course",
     image: "uni_logo.png",
-    description:
-      "Part of the IT Master Class 9. The university provides us to become a part of the companies in the IT field and gain some of their experience. ",
+    description: "cert.itMasterClass9.description",
     link: "https://drive.google.com/file/d/17jWjvh_H5fHYULY8PMjKXbe8h5MlxwNa/view?usp=sharing",
   },
   {
     kindEn: "Course",
     image: "uni_logo.png",
-    description:
-      "Part of the IT Master Class 10. The university provides us to become a part of the companies in the IT field and gain some of their experience. ",
+    description: "cert.itMasterClass10.description",
   },
   {
     kindEn: "Scientific publication",
     image: "uni_logo.png",
-    description: `Report in the collection "STUDENT SCIENTIFIC CONFERENCE" on the topic "Development of web platforms", Publishing House "Science and Economics" University of Economics - Varna 2022.`,
+    description: "cert.scientificPublication.description",
     link: "https://ue-varna.bg/uploads/filemanager/303/publishing-complex/2022/Studentska-nauchna-konferencia-2022.pdf#page=100",
   },
   {
     kind: "Certificatе",
     image: "Microsoft_Azure.svg.png",
-    description:
-      "Certificate of successfully completed course on Microsoft Azure Cloud (fundamental). The course includes working with Databricks, Data Factory, Key Vault, Containers.",
+    description: "cert.azureCourse.description",
     link: "https://drive.google.com/file/d/1I9w_0YEFwDuOgDsLr3Vpf1MgFiGLaB9v/view?usp=sharing",
   },
   {
     kind: "Certificatе",
     image: "SAFe-cert.png",
-    description:
-      "Certificate of successfully completed course on Scaled Agile (SAFe methodology). The course topics includes Benefits of SAFe, SAFe Principles, SAFe and Agile, Why SAFe.",
+    description: "cert.safeCourse.description",
     link: "https://drive.google.com/file/d/1mJdWkQU58tuGvJj2yO5DRz5qD0dlZqnj/view?usp=sharing",
   },
 ];

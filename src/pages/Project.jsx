@@ -7,8 +7,8 @@ import { projects } from "../Data";
 import { useLanguage } from "../i18n/LanguageContext";
 
 const sections = [
-  { key: "professional", title: "Professional", items: projects.professional },
-  { key: "personal", title: "Personal", items: projects.personal },
+  { key: "professional", title: "projects.professional", items: projects.professional },
+  { key: "personal", title: "projects.personal", items: projects.personal },
 ];
 
 const Project = () => {
@@ -19,7 +19,7 @@ const Project = () => {
     <Layout
       classes='px-6 md:px-10 lg:px-14'
       contentClasses='2xl:max-w-[820px]'
-      header='Projects'>
+      header='nav.projects'>
       <div className='mt-8 space-y-14'>
         {sections.map((section) => (
           <InViewAnimation key={section.key}>

@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkportfolio_react=self.webpackChunkportfolio_react||[]).push([[967],{967:(e,t,s)=>{s.r(t),s.d(t,{default:()=>a});var l=s(60),o=s(579);const a=()=>(0,o.jsx)(l.A,{classes:"px-6 md:px-10 lg:px-14",header:"Certifications",children:(0,o.jsx)("div",{className:"w-full text-center text-slate-700 text-2xl py-16 font-semibold",children:"Coming Soon"})})}}]);
-//# sourceMappingURL=967.c83db98a.chunk.js.map

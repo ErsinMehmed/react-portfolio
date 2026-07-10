@@ -5,14 +5,14 @@ import { mainSkills, techSkills, projects, certifications } from "../Data";
 import { useLanguage } from "../i18n/LanguageContext";
 
 const stats = [
-  { value: 5, suffix: "+", label: "Years of experience" },
+  { value: 5, suffix: "+", label: "stats.yearsOfExperience" },
   {
     value: projects.professional.length + projects.personal.length,
     suffix: "+",
-    label: "Projects built",
+    label: "stats.projectsBuilt",
   },
-  { value: techSkills.length, suffix: "+", label: "Technologies" },
-  { value: certifications.length, suffix: "", label: "Certifications" },
+  { value: techSkills.length, suffix: "+", label: "stats.technologies" },
+  { value: certifications.length, suffix: "", label: "nav.certifications" },
 ];
 
 const Home = () => {
@@ -22,19 +22,15 @@ const Home = () => {
     <Layout
       classes='px-6 md:px-10 lg:px-14'
       contentClasses='2xl:max-w-[820px]'
-      header='About Me'>
+      header='page.aboutMe'>
       <InViewAnimation>
         <div className='space-y-4 pt-6'>
           <p className='text-lg leading-8 text-slate-600'>
-            {t(
-              "Hi, my name is Ersin, and I am a software developer. I have over 6 years of experience in programming, including more than 4 years of professional experience, combining my passion for technology with real-world practice. Over the years, I’ve honed my skills by working on various projects, both at work and in my spare time, constantly striving to deliver high-quality solutions."
-            )}
+            {t("about.intro1")}
           </p>
 
           <p className='leading-7 text-slate-500'>
-            {t(
-              "I have both theoretical and practical expertise in back-end and front-end programming, with a strong focus on web development. Web programming is my greatest strength, and I continuously work on refining my skills in this area. On this site, you can explore more details about my work, including the developments and projects I am currently involved in."
-            )}
+            {t("about.intro2")}
           </p>
         </div>
       </InViewAnimation>
@@ -60,7 +56,7 @@ const Home = () => {
 
       <InViewAnimation>
         <h3 className='mb-1 mt-14 font-display text-2xl font-bold tracking-tight text-slate-800 sm:text-3xl'>
-          {t("What I do")}
+          {t("whatIDo.heading")}
         </h3>
       </InViewAnimation>
 

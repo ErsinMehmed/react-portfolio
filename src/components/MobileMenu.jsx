@@ -1,9 +1,11 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { headerLinks } from "../Data";
+import { useLanguage } from "../i18n/LanguageContext";
 
 const MobileMenu = () => {
   const location = useLocation();
+  const { t } = useLanguage();
 
   return (
     <div className='lg:hidden fixed z-50 w-full h-14 max-w-sm sm:max-w-lg -translate-x-1/2 bg-white border border-gray-200 rounded-full bottom-3.5 left-1/2'>
@@ -21,7 +23,7 @@ const MobileMenu = () => {
             }`}
             to={item.href}>
             <item.icon />
-            <span className='sr-only'>{item.title}</span>
+            <span className='sr-only'>{t(item.title)}</span>
           </Link>
         ))}
       </div>

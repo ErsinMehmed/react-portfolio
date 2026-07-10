@@ -22,7 +22,7 @@ const ProjectCard = ({ project, type, onClick }) => {
           </span>
         ) : (
           <span className='rounded-full bg-slate-100 px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-slate-500'>
-            {t("Personal")}
+            {t("projects.personal")}
           </span>
         )}
       </div>
@@ -52,7 +52,7 @@ const ProjectCard = ({ project, type, onClick }) => {
 
       <div className='mt-4 flex items-center justify-between border-t border-slate-100 pt-3'>
         <span className='text-[13px] font-semibold text-[#1b74e4]'>
-          {t("View details")}
+          {t("projects.viewDetails")}
         </span>
         <span className='text-[#1b74e4] transition-transform duration-200 ease-out group-hover:translate-x-1'>
           &rarr;

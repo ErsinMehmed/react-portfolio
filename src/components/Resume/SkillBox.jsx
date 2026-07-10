@@ -103,10 +103,10 @@ const TechLogo = ({ item, className }) => {
 
 const levelFromPercentage = (value) => {
   const n = Number(value);
-  if (n >= 90) return "Expert";
-  if (n >= 75) return "Advanced";
-  if (n >= 50) return "Intermediate";
-  return "Familiar";
+  if (n >= 90) return "level.expert";
+  if (n >= 75) return "level.advanced";
+  if (n >= 50) return "level.intermediate";
+  return "level.familiar";
 };
 
 const SkillCard = ({ item }) => {

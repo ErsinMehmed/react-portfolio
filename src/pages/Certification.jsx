@@ -11,11 +11,11 @@ const normalizeKind = (item) => {
 };
 
 const categoryOrder = [
-  { kind: "Certificate", title: "Certificates" },
-  { kind: "Course", title: "Courses" },
-  { kind: "Award", title: "Awards" },
-  { kind: "Scientific publication", title: "Publications" },
-  { kind: "Sport achievements", title: "Sport achievements" },
+  { kind: "Certificate", title: "cert.categoryCertificates" },
+  { kind: "Course", title: "cert.categoryCourses" },
+  { kind: "Award", title: "cert.categoryAwards" },
+  { kind: "Scientific publication", title: "cert.categoryPublications" },
+  { kind: "Sport achievements", title: "cert.categorySportAchievements" },
 ];
 
 const Certification = () => {
@@ -33,7 +33,7 @@ const Certification = () => {
     <Layout
       classes='px-6 md:px-10 lg:px-14'
       contentClasses='2xl:max-w-[820px]'
-      header='Certifications'>
+      header='nav.certifications'>
       <div className='mt-8 space-y-12'>
         {groups.map((group) => (
           <InViewAnimation key={group.kind}>

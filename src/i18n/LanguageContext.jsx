@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState, useCallback, useMemo } from "react";
-import { bg } from "./translations";
+import { translations } from "./translations";
 
 const LanguageContext = createContext({
   lang: "en",
@@ -22,7 +22,11 @@ export const LanguageProvider = ({ children }) => {
   }, []);
 
   const t = useCallback(
-    (text) => (lang === "bg" ? bg[text] ?? text : text),
+    (key) => {
+      const entry = translations[key];
+      if (!entry) return key;
+      return entry[lang] ?? entry.en ?? key;
+    },
     [lang]
   );
 
