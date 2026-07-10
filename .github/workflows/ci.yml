@@ -17,7 +17,10 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          # Match the local dev toolchain (Node 24 ships npm 11). npm 10 (Node
+          # 20) reads this npm-11-generated lockfile more strictly and fails
+          # `npm ci` on a floating peer dep, so we pin to the same major.
+          node-version: 24
           cache: npm
 
       - name: Install dependencies
