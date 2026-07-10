@@ -42,6 +42,7 @@ export const translations = {
     bg: "Сканирайте QR кода с телефона си, за да се обадите",
   },
   "qr.copy": { en: "Copy", bg: "Копирай" },
+  "qr.copied": { en: "Copied!", bg: "Копирано!" },
   "qr.openCamera": {
     en: "Open camera app and scan the QR code",
     bg: "Отворете камерата и сканирайте QR кода",

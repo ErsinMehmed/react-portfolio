@@ -1,5 +1,4 @@
 import React from "react";
-import { Tooltip } from "flowbite-react";
 import { motion } from "framer-motion";
 import { useLanguage } from "../../i18n/LanguageContext";
 import { techSkills } from "../../Data";
@@ -187,16 +186,6 @@ const SkillCard = ({ item }) => {
   );
 };
 
-const tooltipTheme = {
-  // Flowbite's trigger wrapper defaults to w-fit, which would collapse the
-  // card to its content width inside the grid cell. Stretch it to fill.
-  target: "h-full w-full",
-  base: "absolute z-10 inline-block max-w-[280px] rounded-2xl shadow-[0_16px_40px_-12px_rgba(27,74,120,0.35)]",
-  style: {
-    dark: "border border-slate-200/80 bg-white",
-  },
-};
-
 const SkillBox = ({ item, index }) => {
   const card = (
     <div className='group flex h-full flex-col rounded-xl border border-slate-200/70 bg-white px-3.5 py-3 transition-all duration-200 ease-out hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-[0_14px_30px_-18px_rgba(27,74,120,0.45)]'>
@@ -234,17 +223,21 @@ const SkillBox = ({ item, index }) => {
         ease: easeOutStrong,
       }}>
       {item.description ? (
-        <Tooltip
-          content={<SkillCard item={item} />}
-          placement='top'
-          arrow={false}
-          theme={tooltipTheme}>
+        <div className='group/skill relative h-full'>
           <div
             tabIndex={0}
             className='h-full cursor-pointer rounded-xl outline-none focus-visible:ring-2 focus-visible:ring-[#1b74e4] focus-visible:ring-offset-2'>
             {card}
           </div>
-        </Tooltip>
+
+          {/* Custom hover/focus tooltip (replaces flowbite). A named group keeps
+              it independent of the card's own internal `group` hover. */}
+          <div
+            role='tooltip'
+            className='pointer-events-none absolute left-1/2 top-full z-20 mt-2 w-[248px] -translate-x-1/2 rounded-2xl border border-slate-200/80 bg-white opacity-0 shadow-[0_16px_40px_-12px_rgba(27,74,120,0.35)] transition-opacity duration-150 group-hover/skill:opacity-100 group-focus-within/skill:opacity-100'>
+            <SkillCard item={item} />
+          </div>
+        </div>
       ) : (
         <div className='h-full'>{card}</div>
       )}

@@ -7,7 +7,7 @@ full English/Bulgarian localisation.
 
 - **React 18** + **React Router 6** (lazy-loaded routes)
 - **Vite 5** build tooling, **Vitest** for tests
-- **Tailwind CSS** + **flowbite-react**
+- **Tailwind CSS** (custom components, no UI library)
 - **Framer Motion** for animation
 - Custom lightweight i18n via React Context (`src/i18n`)
 

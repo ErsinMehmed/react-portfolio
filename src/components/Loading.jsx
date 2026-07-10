@@ -1,4 +1,3 @@
-import React from "react";
 import IconSpinner from "../icons/Spinner";
 import { useLanguage } from "../i18n/LanguageContext";
 

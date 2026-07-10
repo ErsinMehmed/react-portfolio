@@ -2,24 +2,53 @@ import IconDownload from "../icons/Download";
 import { socialLinks, personalInfo } from "../Data";
 import { useLanguage } from "../i18n/LanguageContext";
 import { useState, useEffect } from "react";
-import { Modal, ModalBody, Button } from "flowbite-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { QRCodeSVG } from "qrcode.react";
+
+const CheckIcon = ({ className }) => (
+  <svg
+    viewBox='0 0 24 24'
+    fill='none'
+    stroke='currentColor'
+    strokeWidth='3'
+    strokeLinecap='round'
+    strokeLinejoin='round'
+    className={className}>
+    <path d='M20 6 9 17l-5-5' />
+  </svg>
+);
 
 const ProfileCard = () => {
   const { t, lang } = useLanguage();
   const [isQrModalOpen, setIsQrModalOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [isCopied, setIsCopied] = useState(false);
 
   useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+
     checkMobile();
-    window.addEventListener('resize', checkMobile);
-    
-    return () => window.removeEventListener('resize', checkMobile);
+    window.addEventListener("resize", checkMobile);
+
+    return () => window.removeEventListener("resize", checkMobile);
   }, []);
+
+  // Lock body scroll and close on Escape while the QR modal is open.
+  useEffect(() => {
+    if (!isQrModalOpen) return undefined;
+
+    const onKey = (e) => {
+      if (e.key === "Escape") setIsQrModalOpen(false);
+    };
+
+    document.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [isQrModalOpen]);
 
   const handleDownload = () => {
     const file =
@@ -33,6 +62,16 @@ const ProfileCard = () => {
     if (!isMobile) {
       e.preventDefault();
       setIsQrModalOpen(true);
+    }
+  };
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard?.writeText(phoneNumber);
+      setIsCopied(true);
+      setTimeout(() => setIsCopied(false), 2000);
+    } catch {
+      /* clipboard unavailable; leave the number visible to copy manually */
     }
   };
 
@@ -99,15 +138,13 @@ const ProfileCard = () => {
                           <a
                             className='transition-colors hover:text-[#1b74e4] cursor-pointer'
                             onClick={handlePhoneClick}
-                            href={telLink}
-                          >
+                            href={telLink}>
                             {item.text}
                           </a>
                         ) : isEmail ? (
                           <a
                             className='transition-colors hover:text-[#1b74e4]'
-                            href="mailto:ersin99mehmed@gmail.com"
-                          >
+                            href='mailto:ersin99mehmed@gmail.com'>
                             {item.text}
                           </a>
                         ) : (
@@ -131,63 +168,89 @@ const ProfileCard = () => {
         </div>
       </div>
 
-      <Modal 
-        show={isQrModalOpen} 
-        onClose={() => setIsQrModalOpen(false)}
-        size="lg"
-        dismissible={true}
-      >
-        
-        <ModalBody>
-          <div className="text-center">
-            <p className="mb-4 text-sm text-gray-500 dark:text-gray-400">
-              {t("qr.scanPrompt")}
-            </p>
-            
-            <div className="flex justify-center mb-4">
-              <div className="p-4 bg-white rounded-xl shadow-lg border border-gray-200 dark:border-gray-700">
-                <QRCodeSVG
-                  value={telLink}
-                  size={200}
-                  level="H"
-                  includeMargin={true}
-                  bgColor="#ffffff"
-                  fgColor="#1b74e4"
-                />
-              </div>
-            </div>
-
-            {/* Телефонен номер като линк за звънене */}
-            <div className="flex items-center justify-center gap-3 text-gray-600 dark:text-gray-300">
-              <a
-                href={telLink}
-                className="text-base font-semibold text-[#1b74e4] hover:text-[#1667cf] hover:underline transition-colors"
-              >
-                {phoneNumber}
-              </a>
-              <Button 
-                size="xs" 
-                color="light" 
-                onClick={() => navigator.clipboard?.writeText(phoneNumber)}
-                className="!text-[#1b74e4] hover:!text-[#1667cf]"
-              >
-                {t("qr.copy")}
-              </Button>
-            </div>
-
-            <p className="mt-3 text-xs text-gray-400 dark:text-gray-500">
-              {t("qr.openCamera")}
-            </p>
-
-            <button
+      <AnimatePresence>
+        {isQrModalOpen && (
+          <motion.div
+            className='fixed inset-0 z-50 flex items-center justify-center p-4'
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}>
+            <div
+              className='absolute inset-0 bg-slate-900/50 backdrop-blur-sm'
               onClick={() => setIsQrModalOpen(false)}
-              className="mt-6 px-6 py-2.5 bg-[#1b74e4] hover:bg-[#1667cf] text-white text-sm font-semibold rounded-xl transition-colors shadow-[0_8px_20px_-8px_rgba(27,116,228,0.5)]"
-            >
-              {t("qr.close")}
-            </button>
-          </div>
-        </ModalBody>
-      </Modal>
+            />
+
+            <motion.div
+              role='dialog'
+              aria-modal='true'
+              className='relative z-10 w-full max-w-md rounded-3xl bg-white p-6 text-center shadow-2xl sm:p-8'
+              initial={{ opacity: 0, scale: 0.96, y: 24 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.97, y: 12 }}
+              transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}>
+              <p className='mb-4 text-sm text-slate-500'>{t("qr.scanPrompt")}</p>
+
+              <div className='mb-4 flex justify-center'>
+                <div className='rounded-xl border border-slate-200 bg-white p-4 shadow-lg'>
+                  <QRCodeSVG
+                    value={telLink}
+                    size={200}
+                    level='H'
+                    includeMargin={true}
+                    bgColor='#ffffff'
+                    fgColor='#1b74e4'
+                  />
+                </div>
+              </div>
+
+              <div className='flex items-center justify-center gap-3'>
+                <a
+                  href={telLink}
+                  className='text-base font-semibold text-[#1b74e4] transition-colors hover:text-[#1667cf] hover:underline'>
+                  {phoneNumber}
+                </a>
+
+                <div className='relative'>
+                  <button
+                    type='button'
+                    onClick={handleCopy}
+                    className={`inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1 text-xs font-semibold transition-colors ${
+                      isCopied
+                        ? "border-emerald-200 bg-emerald-50 text-emerald-600"
+                        : "border-slate-200 text-[#1b74e4] hover:border-slate-300 hover:bg-slate-50"
+                    }`}>
+                    {isCopied ? t("qr.copied") : t("qr.copy")}
+                  </button>
+
+                  <AnimatePresence>
+                    {isCopied && (
+                      <motion.span
+                        className='pointer-events-none absolute bottom-full left-1/2 mb-2 flex items-center gap-1 whitespace-nowrap rounded-lg bg-emerald-600 px-2.5 py-1 text-xs font-semibold text-white shadow-lg'
+                        initial={{ opacity: 0, x: "-50%", y: 4 }}
+                        animate={{ opacity: 1, x: "-50%", y: 0 }}
+                        exit={{ opacity: 0, x: "-50%", y: 4 }}
+                        transition={{ duration: 0.15 }}>
+                        <CheckIcon className='h-3.5 w-3.5' />
+                        {t("qr.copied")}
+                      </motion.span>
+                    )}
+                  </AnimatePresence>
+                </div>
+              </div>
+
+              <p className='mt-3 text-xs text-slate-400'>{t("qr.openCamera")}</p>
+
+              <button
+                type='button'
+                onClick={() => setIsQrModalOpen(false)}
+                className='mt-6 rounded-xl bg-[#1b74e4] px-6 py-2.5 text-sm font-semibold text-white shadow-[0_8px_20px_-8px_rgba(27,116,228,0.5)] transition-colors hover:bg-[#1667cf]'>
+                {t("qr.close")}
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 };
