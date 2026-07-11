@@ -15,6 +15,15 @@ const Project = () => {
   const { t } = useLanguage();
   const [selected, setSelected] = useState(null);
 
+  const handleNavigate = (dir) => {
+    setSelected((cur) => {
+      if (!cur) return cur;
+      const count = cur.items.length;
+      const index = (cur.index + dir + count) % count;
+      return { ...cur, index, project: cur.items[index] };
+    });
+  };
+
   return (
     <Layout
       classes='px-6 md:px-10 lg:px-14'
@@ -39,7 +48,14 @@ const Project = () => {
                   key={index}
                   project={project}
                   type={section.key}
-                  onClick={() => setSelected({ project, type: section.key })}
+                  onClick={() =>
+                    setSelected({
+                      project,
+                      type: section.key,
+                      items: section.items,
+                      index,
+                    })
+                  }
                 />
               ))}
             </div>
@@ -50,6 +66,7 @@ const Project = () => {
       <ProjectModal
         data={selected}
         onClose={() => setSelected(null)}
+        onNavigate={handleNavigate}
       />
     </Layout>
   );

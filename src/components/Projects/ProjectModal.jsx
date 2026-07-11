@@ -1,6 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "../../i18n/LanguageContext";
+
+const FOCUSABLE =
+  'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
 
 const GitHubMark = ({ className }) => (
   <svg
@@ -29,12 +32,64 @@ const CloseIcon = ({ className }) => (
   </svg>
 );
 
-const ProjectModal = ({ data, onClose }) => {
+const ChevronIcon = ({ className }) => (
+  <svg
+    viewBox='0 0 24 24'
+    fill='currentColor'
+    className={className}>
+    <path d='M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z' />
+  </svg>
+);
+
+const ProjectModal = ({ data, onClose, onNavigate }) => {
+  const dialogRef = useRef(null);
+  const open = !!data;
+  const canNavigate = (data?.items?.length || 0) > 1;
+
+  // Body scroll lock + Escape / arrow nav / focus trap.
   useEffect(() => {
     if (!data) return undefined;
 
     const onKey = (e) => {
-      if (e.key === "Escape") onClose();
+      if (e.key === "Escape") {
+        onClose();
+        return;
+      }
+
+      if (e.key === "ArrowRight" && onNavigate) {
+        onNavigate(1);
+        return;
+      }
+
+      if (e.key === "ArrowLeft" && onNavigate) {
+        onNavigate(-1);
+        return;
+      }
+
+      if (e.key === "Tab" && dialogRef.current) {
+        const nodes = dialogRef.current.querySelectorAll(FOCUSABLE);
+        if (nodes.length === 0) {
+          e.preventDefault();
+          dialogRef.current.focus();
+          return;
+        }
+
+        const first = nodes[0];
+        const last = nodes[nodes.length - 1];
+        const active = document.activeElement;
+        const atStart =
+          active === first ||
+          active === dialogRef.current ||
+          !dialogRef.current.contains(active);
+
+        if (e.shiftKey && atStart) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && active === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
     };
 
     document.addEventListener("keydown", onKey);
@@ -44,7 +99,19 @@ const ProjectModal = ({ data, onClose }) => {
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = "";
     };
-  }, [data, onClose]);
+  }, [data, onClose, onNavigate]);
+
+  // Move focus into dialog on open, restore to trigger on close.
+  useEffect(() => {
+    if (!open) return undefined;
+
+    const trigger = document.activeElement;
+    dialogRef.current?.focus();
+
+    return () => {
+      if (trigger instanceof HTMLElement) trigger.focus();
+    };
+  }, [open]);
 
   const { t } = useLanguage();
   const project = data?.project;
@@ -65,20 +132,43 @@ const ProjectModal = ({ data, onClose }) => {
           />
 
           <motion.div
+            ref={dialogRef}
             role='dialog'
             aria-modal='true'
-            className='relative z-10 max-h-[85vh] w-full max-w-2xl overflow-y-auto rounded-3xl bg-white p-6 shadow-2xl sm:p-8'
+            aria-label={project ? t(project.name) : undefined}
+            tabIndex={-1}
+            className='relative z-10 max-h-[85vh] w-full max-w-2xl overflow-y-auto rounded-3xl bg-white p-6 shadow-2xl outline-none sm:p-8'
             initial={{ opacity: 0, scale: 0.96, y: 24 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.97, y: 12 }}
             transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}>
-            <button
-              type='button'
-              onClick={onClose}
-              aria-label='Close'
-              className='absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-700'>
-              <CloseIcon className='h-5 w-5' />
-            </button>
+            <div className='absolute right-4 top-4 flex items-center gap-1'>
+              {canNavigate && (
+                <>
+                  <button
+                    type='button'
+                    onClick={() => onNavigate?.(-1)}
+                    aria-label={t("projects.prevProject")}
+                    className='flex h-9 w-9 items-center justify-center rounded-full text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-700'>
+                    <ChevronIcon className='h-5 w-5' />
+                  </button>
+                  <button
+                    type='button'
+                    onClick={() => onNavigate?.(1)}
+                    aria-label={t("projects.nextProject")}
+                    className='flex h-9 w-9 items-center justify-center rounded-full text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-700'>
+                    <ChevronIcon className='h-5 w-5 rotate-180' />
+                  </button>
+                </>
+              )}
+              <button
+                type='button'
+                onClick={onClose}
+                aria-label='Close'
+                className='flex h-9 w-9 items-center justify-center rounded-full text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-700'>
+                <CloseIcon className='h-5 w-5' />
+              </button>
+            </div>
 
             <span
               className={`inline-block rounded-full px-2.5 py-0.5 text-[11px] font-semibold ${
@@ -91,7 +181,7 @@ const ProjectModal = ({ data, onClose }) => {
                 : t("projects.personalProject")}
             </span>
 
-            <h3 className='mt-3 pr-8 font-display text-2xl font-bold leading-tight tracking-tight text-slate-800'>
+            <h3 className='mt-3 pr-28 font-display text-2xl font-bold leading-tight tracking-tight text-slate-800'>
               {t(project.name)}
             </h3>
 

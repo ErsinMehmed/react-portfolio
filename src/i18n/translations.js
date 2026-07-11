@@ -347,6 +347,8 @@ export const translations = {
   "projects.techStack": { en: "Tech stack", bg: "Технологии" },
   "projects.liveDemo": { en: "Live demo", bg: "Демо на живо" },
   "projects.viewCode": { en: "View code", bg: "Виж кода" },
+  "projects.prevProject": { en: "Previous project", bg: "Предишен проект" },
+  "projects.nextProject": { en: "Next project", bg: "Следващ проект" },
   "projects.proprietaryNotice": {
     en: "Proprietary company project, source code is not publicly available.",
     bg: "Фирмен проект, изходният код не е публично достъпен.",
