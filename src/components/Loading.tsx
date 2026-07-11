@@ -1,0 +1,390 @@
+import type { ComponentType } from "react";
+import { useLocation } from "react-router-dom";
+
+// Route-level Suspense fallback. A full skeleton of the whole shell — nav
+// tiles, language toggle, ProfileCard, page title, footer — plus a body that
+// mirrors each page's real sections and card counts 1:1, so nothing shifts
+// when the real content lands. Class names are copied from the real Layout /
+// ProfileCard so the geometry matches exactly.
+
+const Bar = ({ className = "" }: { className?: string }) => (
+  <div className={`rounded-md bg-slate-200/70 ${className}`} />
+);
+
+const Pill = ({ className = "" }: { className?: string }) => (
+  <div className={`rounded-full bg-slate-200/70 ${className}`} />
+);
+
+/* ---- Shell pieces ---- */
+
+const ProfileSkeleton = () => (
+  <div className='lg:sticky lg:top-[158px]'>
+    <div className='relative mx-auto mb-6 mt-32 w-full bg-white px-7 pb-6 shadow-[0_24px_70px_-30px_rgba(27,74,120,0.45)] ring-1 ring-slate-900/[0.04] sm:mt-36 md:mt-40 lg:mb-0 lg:mt-0 lg:rounded-[28px]'>
+      <div className='absolute left-1/2 -mt-[120px] h-52 w-52 -translate-x-1/2 rounded-[22px] bg-slate-200/70 ring-4 ring-white lg:h-48 lg:w-48 xl:h-52 xl:w-52' />
+
+      <div className='pt-[104px]'>
+        <Bar className='mx-auto h-7 w-40' />
+        <Bar className='mx-auto mt-2 h-4 w-36' />
+
+        <div className='mt-4 flex justify-center gap-2.5'>
+          {Array.from({ length: 4 }).map((_, i) => (
+            <div
+              key={i}
+              className='h-10 w-10 rounded-xl bg-slate-200/70'
+            />
+          ))}
+        </div>
+
+        <div className='mt-5 divide-y divide-slate-200/50 rounded-2xl bg-[#f7f9fb] px-5'>
+          {Array.from({ length: 5 }).map((_, i) => (
+            <div
+              key={i}
+              className='flex items-center gap-3.5 py-2.5'>
+              <div className='h-[18px] w-[18px] shrink-0 rounded bg-slate-200/70' />
+              <div className='flex-1'>
+                <Bar className='h-2.5 w-16' />
+                <Bar className='mt-1.5 h-3.5 w-32' />
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <Bar className='mt-5 h-12 w-full rounded-2xl' />
+      </div>
+    </div>
+  </div>
+);
+
+// Desktop nav (language toggle + the four tiles), matching Header.
+const NavSkeleton = () => (
+  <div className='mb-8 hidden lg:flex lg:flex-col lg:items-end'>
+    <div className='mb-3 inline-flex items-center rounded-full border border-slate-200 bg-white p-0.5 shadow-sm'>
+      <Pill className='h-6 w-9' />
+      <div className='h-6 w-9' />
+    </div>
+
+    <div className='h-fit w-fit rounded-2xl bg-white p-4 shadow'>
+      <div className='flex'>
+        {Array.from({ length: 4 }).map((_, i) => (
+          <div
+            key={i}
+            className='mx-2.5 h-[87px] w-[87px] rounded-lg bg-slate-100'
+          />
+        ))}
+      </div>
+    </div>
+  </div>
+);
+
+const TitleSkeleton = () => (
+  <div className='flex items-center'>
+    <Bar className='h-9 w-48 sm:h-10 sm:w-56' />
+    <div className='ml-8 mt-1.5 h-0.5 w-32 rounded bg-slate-200/70 sm:w-44' />
+  </div>
+);
+
+const FooterSkeleton = () => (
+  <div className='pt-8'>
+    <Bar className='mx-auto h-4 w-48' />
+  </div>
+);
+
+/* ---- Reusable body cards ---- */
+
+const TickHeader = () => (
+  <div className='mb-6 flex items-center gap-3'>
+    <span className='h-5 w-1.5 rounded-full bg-slate-200/70' />
+    <Bar className='h-6 w-40' />
+    <Bar className='h-4 w-5' />
+  </div>
+);
+
+// Mirrors ProjectCard.
+const ProjectCardSkeleton = () => (
+  <div className='flex h-full flex-col rounded-2xl border border-slate-200/80 bg-white p-5 shadow-sm'>
+    <div className='mb-3'>
+      <Pill className='h-[18px] w-24' />
+    </div>
+    <Bar className='h-5 w-3/4' />
+    <div className='mt-2 flex-1 space-y-2'>
+      <Bar className='h-3.5 w-full' />
+      <Bar className='h-3.5 w-11/12' />
+      <Bar className='h-3.5 w-2/3' />
+    </div>
+    <div className='mt-4 flex gap-1.5'>
+      <Pill className='h-6 w-14' />
+      <Pill className='h-6 w-14' />
+      <Pill className='h-6 w-12' />
+      <Pill className='h-6 w-10' />
+    </div>
+    <div className='mt-4 flex items-center justify-between border-t border-slate-100 pt-3'>
+      <Bar className='h-3.5 w-24' />
+      <Bar className='h-3.5 w-4' />
+    </div>
+  </div>
+);
+
+// Mirrors CertificationCard.
+const CertCardSkeleton = () => (
+  <div className='flex h-full flex-col rounded-2xl border border-slate-200/80 bg-white p-5 shadow-sm'>
+    <div className='mb-4 flex items-start justify-between'>
+      <div className='h-11 w-11 rounded-xl bg-slate-200/70' />
+      <Bar className='h-4 w-4' />
+    </div>
+    <div className='space-y-2'>
+      <Bar className='h-3.5 w-full' />
+      <Bar className='h-3.5 w-5/6' />
+    </div>
+  </div>
+);
+
+// Mirrors SkillBox (collapsed state).
+const SkillSkeleton = () => (
+  <div className='rounded-xl border border-slate-200/70 bg-white px-3.5 py-3'>
+    <div className='flex items-center gap-2.5'>
+      <div className='h-8 w-8 rounded-lg bg-slate-200/70' />
+      <Bar className='h-4 w-20' />
+    </div>
+    <div className='mt-3'>
+      <Bar className='h-1 w-full' />
+      <Bar className='mt-1.5 h-3 w-24' />
+    </div>
+  </div>
+);
+
+// Mirrors EducationBox / ExperienceBox timeline entry.
+const TimelineItem = ({ last }: { last: boolean }) => (
+  <div className='grid grid-cols-[auto_1fr] gap-x-4 sm:gap-x-5'>
+    <div className='flex flex-col items-center'>
+      <span className='mt-1.5 h-3 w-3 shrink-0 rounded-full bg-slate-200/70' />
+      {!last && <span className='mt-1 w-px flex-1 bg-slate-200' />}
+    </div>
+    <div className={last ? "pb-0" : "pb-7"}>
+      <Pill className='h-5 w-24' />
+      <Bar className='mt-2 h-6 w-2/3' />
+      <Bar className='mt-1.5 h-4 w-1/3' />
+    </div>
+  </div>
+);
+
+const grid2 = "grid grid-cols-1 gap-5 sm:grid-cols-2";
+
+const CardSection = ({
+  count,
+  Card,
+}: {
+  count: number;
+  Card: ComponentType;
+}) => (
+  <div>
+    <TickHeader />
+    <div className={grid2}>
+      {Array.from({ length: count }).map((_, i) => (
+        <Card key={i} />
+      ))}
+    </div>
+  </div>
+);
+
+/* ---- Per-route bodies ---- */
+
+const HomeBody = () => (
+  <>
+    <div className='space-y-4 pt-6'>
+      <div className='space-y-2'>
+        <Bar className='h-5 w-full' />
+        <Bar className='h-5 w-11/12' />
+      </div>
+      <div className='space-y-2'>
+        <Bar className='h-4 w-full' />
+        <Bar className='h-4 w-5/6' />
+      </div>
+    </div>
+
+    <dl className='mt-8 grid grid-cols-2 gap-x-6 gap-y-6 border-y border-slate-200/70 py-6 sm:grid-cols-4'>
+      {Array.from({ length: 4 }).map((_, i) => (
+        <div key={i}>
+          <Bar className='h-8 w-16' />
+          <Bar className='mt-2 h-3 w-20' />
+        </div>
+      ))}
+    </dl>
+
+    <Bar className='mb-1 mt-14 h-8 w-64' />
+
+    <div className='mt-6 border-t border-slate-200/70'>
+      {Array.from({ length: 6 }).map((_, i) => (
+        <div
+          key={i}
+          className='grid grid-cols-[2rem_1fr] gap-x-4 border-b border-slate-200/70 py-6 sm:grid-cols-[2.75rem_1fr] sm:gap-x-6'>
+          <Bar className='mt-1 h-4 w-6' />
+          <div>
+            <div className='flex items-center gap-2.5'>
+              <div className='h-5 w-5 rounded bg-slate-200/70' />
+              <Bar className='h-6 w-48' />
+            </div>
+            <div className='mt-2 space-y-2'>
+              <Bar className='h-4 w-full' />
+              <Bar className='h-4 w-11/12' />
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </>
+);
+
+const ResumeBody = () => (
+  <div className='mt-8'>
+    <div>
+      <div className='mb-6 flex items-center gap-2.5'>
+        <div className='h-5 w-5 rounded bg-slate-200/70' />
+        <Bar className='h-6 w-40' />
+      </div>
+      <div>
+        {Array.from({ length: 3 }).map((_, i) => (
+          <TimelineItem
+            key={i}
+            last={i === 2}
+          />
+        ))}
+      </div>
+    </div>
+
+    <div className='mt-12'>
+      <div className='mb-6 flex items-center gap-2.5'>
+        <div className='h-5 w-5 rounded bg-slate-200/70' />
+        <Bar className='h-6 w-40' />
+      </div>
+      <div>
+        {Array.from({ length: 6 }).map((_, i) => (
+          <TimelineItem
+            key={i}
+            last={i === 5}
+          />
+        ))}
+      </div>
+    </div>
+
+    <div className='mt-14'>
+      <Bar className='h-6 w-52' />
+      <Bar className='mt-2 h-3.5 w-80 max-w-full' />
+
+      <div className='mt-5 flex flex-wrap gap-2'>
+        {["w-16", "w-24", "w-20", "w-24", "w-14", "w-20"].map((w, i) => (
+          <Pill
+            key={i}
+            className={`h-8 ${w}`}
+          />
+        ))}
+      </div>
+
+      <div className='mt-6 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3'>
+        {Array.from({ length: 27 }).map((_, i) => (
+          <SkillSkeleton key={i} />
+        ))}
+      </div>
+    </div>
+  </div>
+);
+
+const ProjectsBody = () => (
+  <div className='mt-8 space-y-14'>
+    <CardSection
+      count={5}
+      Card={ProjectCardSkeleton}
+    />
+    <CardSection
+      count={8}
+      Card={ProjectCardSkeleton}
+    />
+  </div>
+);
+
+const CertBody = () => (
+  <div className='mt-8 space-y-12'>
+    {[2, 4, 2, 1, 1].map((count, i) => (
+      <CardSection
+        key={i}
+        count={count}
+        Card={CertCardSkeleton}
+      />
+    ))}
+  </div>
+);
+
+const DefaultBody = () => (
+  <div className='mt-8 flex flex-col items-center gap-3 py-12'>
+    <Bar className='h-20 w-40' />
+    <Bar className='h-4 w-72 max-w-full' />
+    <Bar className='mt-4 h-11 w-32 rounded-2xl' />
+  </div>
+);
+
+const ROUTES: Record<string, ComponentType> = {
+  "/resume": ResumeBody,
+  "/projects": ProjectsBody,
+  "/certifications": CertBody,
+};
+
+const resolveBody = (pathname: string): ComponentType => {
+  if (pathname === "/") return HomeBody;
+  const key = Object.keys(ROUTES).find((r) => pathname.startsWith(r));
+  return key ? ROUTES[key] : DefaultBody;
+};
+
+const Loading = () => {
+  const { pathname } = useLocation();
+  const Body = resolveBody(pathname);
+
+  return (
+    <div
+      className='w-full min-h-screen pb-12 lg:pb-8 bg-gradient-to-r from-sky-100 via-blue-50 to-indigo-100'
+      role='status'
+      aria-busy='true'
+      aria-label='Loading'>
+      {/* Mobile language toggle (fixed top-right) */}
+      <div className='fixed right-4 top-4 z-40 lg:hidden'>
+        <div className='inline-flex items-center rounded-full border border-slate-200 bg-white p-0.5 shadow-sm'>
+          <Pill className='h-6 w-9' />
+          <div className='h-6 w-9' />
+        </div>
+      </div>
+
+      <div className='mx-auto h-full min-h-screen w-full max-w-[2000px]'>
+        <div className='relative h-full animate-pulse gap-10 pt-0.5 lg:flex lg:px-4 lg:pt-[158px] xl:px-32 2xl:justify-center 2xl:px-40'>
+          <span className='w-fit lg:block lg:w-[350px] lg:shrink-0 xl:w-[400px]'>
+            <ProfileSkeleton />
+          </span>
+
+          <div className='w-full 2xl:max-w-[820px]'>
+            <div className='flex justify-end'>
+              <NavSkeleton />
+            </div>
+
+            <div className='px-6 py-8 shadow lg:rounded-2xl lg:px-14 lg:py-10 md:px-10 bg-white'>
+              <TitleSkeleton />
+              <Body />
+              <FooterSkeleton />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile bottom nav bar */}
+      <div className='fixed bottom-3.5 left-1/2 z-50 h-14 w-full max-w-sm -translate-x-1/2 rounded-full border border-gray-200 bg-white sm:max-w-lg lg:hidden'>
+        <div className='mx-auto grid h-full max-w-lg grid-cols-4'>
+          {Array.from({ length: 4 }).map((_, i) => (
+            <div
+              key={i}
+              className='flex items-center justify-center'>
+              <div className='h-6 w-6 rounded bg-slate-200/70' />
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Loading;
