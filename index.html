@@ -3,11 +3,21 @@
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="/images/site-logo.png" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Self-hosted (see src/index.css @font-face); preload the two "latin"
+         subset files actually used by an EN/BG audience so the browser
+         starts fetching them before it discovers the CSS reference. -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Hanken+Grotesk:wght@400..700&display=swap"
-      rel="stylesheet" />
+      rel="preload"
+      href="/fonts/bricolage-grotesque-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin />
+    <link
+      rel="preload"
+      href="/fonts/hanken-grotesk-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="Portfolio website" />
     <link rel="manifest" href="/manifest.json" />
