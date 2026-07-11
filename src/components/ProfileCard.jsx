@@ -1,9 +1,14 @@
 import IconDownload from "../icons/Download";
 import { socialLinks, personalInfo } from "../Data";
 import { useLanguage } from "../i18n/LanguageContext";
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { QRCodeSVG } from "qrcode.react";
+
+// Only needed once the QR modal opens, so keep it out of the main bundle
+// (this component is pulled into the initial chunk by the Loading skeleton).
+const QRCodeSVG = lazy(() =>
+  import("qrcode.react").then((m) => ({ default: m.QRCodeSVG }))
+);
 
 const CheckIcon = ({ className }) => (
   <svg
@@ -192,15 +197,20 @@ const ProfileCard = () => {
               <p className='mb-4 text-sm text-slate-500'>{t("qr.scanPrompt")}</p>
 
               <div className='mb-4 flex justify-center'>
-                <div className='rounded-xl border border-slate-200 bg-white p-4 shadow-lg'>
-                  <QRCodeSVG
-                    value={telLink}
-                    size={200}
-                    level='H'
-                    includeMargin={true}
-                    bgColor='#ffffff'
-                    fgColor='#1b74e4'
-                  />
+                <div className='flex h-[232px] w-[232px] items-center justify-center rounded-xl border border-slate-200 bg-white p-4 shadow-lg'>
+                  <Suspense
+                    fallback={
+                      <div className='h-[200px] w-[200px] animate-pulse rounded bg-slate-100' />
+                    }>
+                    <QRCodeSVG
+                      value={telLink}
+                      size={200}
+                      level='H'
+                      includeMargin={true}
+                      bgColor='#ffffff'
+                      fgColor='#1b74e4'
+                    />
+                  </Suspense>
                 </div>
               </div>
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import Header from "./Header";
 import Footer from "./Footer";
 import MobileMenu from "./MobileMenu";
@@ -8,8 +8,11 @@ import ChevronUp from "./../icons/ChevronUp";
 import LanguageToggle from "./LanguageToggle";
 import { useLanguage } from "../i18n/LanguageContext";
 
+const EASE_OUT = [0.16, 1, 0.3, 1];
+
 const Layout = (props) => {
   const { t } = useLanguage();
+  const reduce = useReducedMotion();
   const [showScrollButton, setShowScrollButton] = useState(false);
 
   useEffect(() => {
@@ -48,21 +51,22 @@ const Layout = (props) => {
               <MobileMenu />
             </div>
 
-            <motion.div
-              className={`lg:rounded-2xl bg-white py-8 lg:py-10 ${props.classes} shadow`}
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6 }}>
+            <div
+              className={`lg:rounded-2xl bg-white py-8 lg:py-10 ${props.classes} shadow`}>
               <main>
-                <h2 className='font-display font-bold tracking-tight text-3xl sm:text-4xl text-slate-800 flex items-center'>
+                <motion.h2
+                  className='font-display font-bold tracking-tight text-3xl sm:text-4xl text-slate-800 flex items-center'
+                  initial={reduce ? { opacity: 0 } : { opacity: 0, y: 18 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, ease: EASE_OUT }}>
                   {t(props.header)}
                   <div className='h-0.5 w-32 sm:w-44 ml-8 bg-[#1b74e4] mt-1.5 rounded' />
-                </h2>
+                </motion.h2>
 
                 {props.children}
               </main>
               <Footer />
-            </motion.div>
+            </div>
           </div>
         </div>
 

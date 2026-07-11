@@ -31,6 +31,21 @@
   .animate-float-x {
     animation: float-x 6s ease-in-out infinite;
   }
+
+  /* Terminal-style blinking caret for the 404 route line */
+  @keyframes caret-blink {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+  }
+
+  .animate-caret {
+    animation: caret-blink 1.05s steps(1, end) infinite;
+  }
 }
 
 /* Respect reduced-motion: drop continuous/ambient motion */

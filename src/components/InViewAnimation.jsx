@@ -1,17 +1,27 @@
 import { useInView } from "react-intersection-observer";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
+
+// Expo-out curve — the reveal decelerates hard at the end, matching the
+// sokobeauty.bg feel: content glides up into place, never a hard cross-fade.
+const EASE_OUT = [0.16, 1, 0.3, 1];
 
 const InViewAnimation = (props) => {
+  const reduce = useReducedMotion();
   const [ref, inView] = useInView({
     triggerOnce: true,
+    rootMargin: "-80px 0px",
   });
+
+  const hidden = reduce
+    ? { opacity: 0 }
+    : { opacity: 0, y: 24, scale: 0.985 };
 
   return (
     <motion.div
       ref={ref}
-      initial={{ y: 50, opacity: 0 }}
-      animate={inView ? { y: 0, opacity: 1 } : {}}
-      transition={{ duration: 1.3, delay: props.delay ?? 0 }}>
+      initial={hidden}
+      animate={inView ? { opacity: 1, y: 0, scale: 1 } : hidden}
+      transition={{ duration: 0.6, ease: EASE_OUT, delay: props.delay ?? 0 }}>
       {props.children}
     </motion.div>
   );

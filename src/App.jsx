@@ -1,6 +1,5 @@
 import React, { lazy, Suspense, useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
 import Loading from "./components/Loading";
 
 const Home = lazy(() => import("./pages/Home"));
@@ -19,72 +18,43 @@ const ScrollToTop = ({ pathname }) => {
   return null;
 };
 
-const PageTransition = ({ children }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 10 }}
-    animate={{ opacity: 1, y: 0 }}
-    exit={{ opacity: 0, y: -8 }}
-    transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}>
-    {children}
-  </motion.div>
-);
-
 function App() {
   const location = useLocation();
 
+  // Key the route subtree by path so each navigation remounts the page and its
+  // in-view reveals replay — the transition lives entirely in those section
+  // reveals (like sokobeauty.bg), with no page-level cross-fade to flicker.
   return (
     <Suspense fallback={<Loading />}>
       <ScrollToTop pathname={location.pathname} />
-      <AnimatePresence mode='wait'>
-        <Routes
-          location={location}
-          key={location.pathname}>
-          <Route
-            path='/'
-            element={
-              <PageTransition>
-                <Home />
-              </PageTransition>
-            }
-          />
+      <Routes
+        location={location}
+        key={location.pathname}>
+        <Route
+          path='/'
+          element={<Home />}
+        />
 
-          <Route
-            path='/resume'
-            element={
-              <PageTransition>
-                <Resume />
-              </PageTransition>
-            }
-          />
+        <Route
+          path='/resume'
+          element={<Resume />}
+        />
 
-          <Route
-            path='/projects'
-            element={
-              <PageTransition>
-                <Project />
-              </PageTransition>
-            }
-          />
+        <Route
+          path='/projects'
+          element={<Project />}
+        />
 
-          <Route
-            path='/certifications'
-            element={
-              <PageTransition>
-                <Certification />
-              </PageTransition>
-            }
-          />
+        <Route
+          path='/certifications'
+          element={<Certification />}
+        />
 
-          <Route
-            path='*'
-            element={
-              <PageTransition>
-                <NotFound />
-              </PageTransition>
-            }
-          />
-        </Routes>
-      </AnimatePresence>
+        <Route
+          path='*'
+          element={<NotFound />}
+        />
+      </Routes>
     </Suspense>
   );
 }
