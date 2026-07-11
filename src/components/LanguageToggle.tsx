@@ -11,7 +11,7 @@ const LanguageToggle = ({ className = "" }: LanguageToggleProps) => {
 
   return (
     <div
-      className={`inline-flex items-center rounded-full border border-slate-200 bg-white p-0.5 ${className}`}>
+      className={`inline-flex items-center rounded-full border border-slate-200 bg-white p-0.5 dark:border-slate-700 dark:bg-slate-900 ${className}`}>
       {LANGS.map((code) => (
         <button
           key={code}
@@ -21,7 +21,7 @@ const LanguageToggle = ({ className = "" }: LanguageToggleProps) => {
           className={`cursor-pointer rounded-full px-2.5 py-1 text-xs font-bold uppercase transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1b74e4] ${
             lang === code
               ? "bg-[#1b74e4] text-white"
-              : "text-slate-500 hover:text-slate-700"
+              : "text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200"
           }`}>
           {code}
         </button>

@@ -49,28 +49,28 @@ const ExperienceBox = ({ item, isLast }: ExperienceBoxProps) => {
   return (
     <div className='grid grid-cols-[auto_1fr] gap-x-4 sm:gap-x-5'>
       <div className='flex flex-col items-center'>
-        <span className='mt-1.5 h-3 w-3 shrink-0 rounded-full border-[2.5px] border-[#1b74e4] bg-white' />
-        {!isLast && <span className='mt-1 w-px flex-1 bg-slate-200' />}
+        <span className='mt-1.5 h-3 w-3 shrink-0 rounded-full border-[2.5px] border-[#1b74e4] bg-white dark:bg-slate-900' />
+        {!isLast && <span className='mt-1 w-px flex-1 bg-slate-200 dark:bg-slate-800' />}
       </div>
 
       <div className={isLast ? "pb-0" : "pb-7"}>
         <div className='flex flex-wrap items-center gap-2'>
-          <span className='inline-block rounded-full bg-blue-50 px-2.5 py-0.5 text-xs font-semibold text-[#1b74e4]'>
+          <span className='inline-block rounded-full bg-blue-50 px-2.5 py-0.5 text-xs font-semibold text-[#1b74e4] dark:bg-blue-500/10 dark:text-blue-400'>
             {item.period.replace("Present", t("duration.present"))}
           </span>
 
-          <span className='text-xs font-medium text-slate-500'>{duration}</span>
+          <span className='text-xs font-medium text-slate-500 dark:text-slate-400'>{duration}</span>
         </div>
 
-        <h3 className='mt-2 font-display text-lg font-semibold text-slate-800'>
+        <h3 className='mt-2 font-display text-lg font-semibold text-slate-800 dark:text-slate-100'>
           {t(item.title)}
-          <span className='font-medium text-slate-500'>
+          <span className='font-medium text-slate-500 dark:text-slate-400'>
             {" "}
             · {t(item.location)}
           </span>
         </h3>
 
-        <p className='mt-0.5 text-sm text-slate-500'>{t(item.company)}</p>
+        <p className='mt-0.5 text-sm text-slate-500 dark:text-slate-400'>{t(item.company)}</p>
       </div>
     </div>
   );

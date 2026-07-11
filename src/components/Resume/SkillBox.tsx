@@ -123,7 +123,7 @@ const YearGauge = ({ years, className = "" }: { years: number; className?: strin
       <span
         key={i}
         className={`h-1 flex-1 rounded-full ${
-          i < years ? "bg-[#1b74e4]" : "bg-slate-200/80"
+          i < years ? "bg-[#1b74e4]" : "bg-slate-200/80 dark:bg-slate-700/60"
         }`}
       />
     ))}
@@ -135,10 +135,10 @@ const SkillMetrics = ({ item }: { item: TechSkill }) => {
 
   return (
     <span className='tabular-nums'>
-      <span className='font-bold text-slate-700'>{item.years}</span>{" "}
+      <span className='font-bold text-slate-700 dark:text-slate-200'>{item.years}</span>{" "}
       {t("duration.yr")}
-      <span className='mx-1 text-slate-300'>&middot;</span>
-      <span className='font-bold text-slate-700'>{item.projects}</span>{" "}
+      <span className='mx-1 text-slate-300 dark:text-slate-600'>&middot;</span>
+      <span className='font-bold text-slate-700 dark:text-slate-200'>{item.projects}</span>{" "}
       {t("skill.projects")}
     </span>
   );
@@ -150,7 +150,7 @@ const SkillCard = ({ item }: { item: TechSkill }) => {
   return (
     <div className='w-[248px] p-3.5 text-left'>
       <div className='flex items-center gap-3'>
-        <span className='flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-slate-50 ring-1 ring-slate-100'>
+        <span className='flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-slate-50 ring-1 ring-slate-100 dark:bg-slate-800 dark:ring-slate-700'>
           <TechLogo
             item={item}
             className='h-[18px] w-[18px]'
@@ -158,10 +158,10 @@ const SkillCard = ({ item }: { item: TechSkill }) => {
         </span>
 
         <div className='min-w-0 flex-1'>
-          <p className='font-display text-sm font-bold leading-tight text-slate-800'>
+          <p className='font-display text-sm font-bold leading-tight text-slate-800 dark:text-slate-100'>
             {item.title}
           </p>
-          <p className='mt-0.5 text-[12px] text-slate-500'>
+          <p className='mt-0.5 text-[12px] text-slate-500 dark:text-slate-400'>
             <SkillMetrics item={item} />
           </p>
         </div>
@@ -172,7 +172,7 @@ const SkillCard = ({ item }: { item: TechSkill }) => {
         className='mt-3'
       />
 
-      <p className='mt-3 text-[13px] leading-relaxed text-slate-500'>
+      <p className='mt-3 text-[13px] leading-relaxed text-slate-500 dark:text-slate-400'>
         {t(item.description)}
       </p>
 
@@ -181,7 +181,7 @@ const SkillCard = ({ item }: { item: TechSkill }) => {
           {item.items.map((entry, i) => (
             <li
               key={i}
-              className='flex items-center gap-2 text-[13px] text-slate-600'>
+              className='flex items-center gap-2 text-[13px] text-slate-600 dark:text-slate-300'>
               <span className='h-1.5 w-1.5 shrink-0 rounded-full bg-[#1b74e4]' />
               {t(entry)}
             </li>
@@ -199,23 +199,23 @@ interface SkillBoxProps {
 
 const SkillBox = ({ item, index }: SkillBoxProps) => {
   const card = (
-    <div className='group flex h-full flex-col rounded-xl border border-slate-200/70 bg-white px-3.5 py-3 transition-all duration-200 ease-out hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-[0_14px_30px_-18px_rgba(27,74,120,0.45)]'>
+    <div className='group flex h-full flex-col rounded-xl border border-slate-200/70 bg-white px-3.5 py-3 transition-all duration-200 ease-out hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-[0_14px_30px_-18px_rgba(27,74,120,0.45)] dark:border-slate-800 dark:bg-slate-900 dark:hover:border-slate-700 dark:hover:shadow-[0_14px_30px_-18px_rgba(0,0,0,0.5)]'>
       <div className='flex items-center gap-2.5'>
-        <span className='flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-slate-50 ring-1 ring-slate-100 transition-colors group-hover:ring-slate-200'>
+        <span className='flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-slate-50 ring-1 ring-slate-100 transition-colors group-hover:ring-slate-200 dark:bg-slate-800 dark:ring-slate-700 dark:group-hover:ring-slate-600'>
           <TechLogo
             item={item}
             className='h-[18px] w-[18px]'
           />
         </span>
 
-        <p className='truncate font-display text-sm font-semibold leading-tight text-slate-800'>
+        <p className='truncate font-display text-sm font-semibold leading-tight text-slate-800 dark:text-slate-100'>
           {item.title}
         </p>
       </div>
 
       <div className='mt-3'>
         <YearGauge years={item.years} />
-        <p className='mt-1.5 text-[11.5px] text-slate-500'>
+        <p className='mt-1.5 text-[11.5px] text-slate-500 dark:text-slate-400'>
           <SkillMetrics item={item} />
         </p>
       </div>
@@ -239,7 +239,7 @@ const SkillBox = ({ item, index }: SkillBoxProps) => {
         <div className='group/skill relative h-full'>
           <div
             tabIndex={0}
-            className='h-full cursor-pointer rounded-xl outline-none focus-visible:ring-2 focus-visible:ring-[#1b74e4] focus-visible:ring-offset-2'>
+            className='h-full cursor-pointer rounded-xl outline-none focus-visible:ring-2 focus-visible:ring-[#1b74e4] focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-950'>
             {card}
           </div>
 
@@ -247,7 +247,7 @@ const SkillBox = ({ item, index }: SkillBoxProps) => {
               it independent of the card's own internal `group` hover. */}
           <div
             role='tooltip'
-            className='pointer-events-none absolute left-1/2 top-full z-20 mt-2 w-[248px] -translate-x-1/2 rounded-2xl border border-slate-200/80 bg-white opacity-0 shadow-[0_16px_40px_-12px_rgba(27,74,120,0.35)] transition-opacity duration-150 group-hover/skill:opacity-100 group-focus-within/skill:opacity-100'>
+            className='pointer-events-none absolute left-1/2 top-full z-20 mt-2 w-[248px] -translate-x-1/2 rounded-2xl border border-slate-200/80 bg-white opacity-0 shadow-[0_16px_40px_-12px_rgba(27,74,120,0.35)] transition-opacity duration-150 group-hover/skill:opacity-100 group-focus-within/skill:opacity-100 dark:border-slate-700 dark:bg-slate-900 dark:shadow-[0_16px_40px_-12px_rgba(0,0,0,0.6)]'>
             <SkillCard item={item} />
           </div>
         </div>

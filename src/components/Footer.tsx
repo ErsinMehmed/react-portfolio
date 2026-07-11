@@ -5,7 +5,7 @@ const Footer = () => {
 
   return (
     <footer>
-      <div className='text-center pt-8 font-semibold text-sm sm:text-base text-slate-500'>
+      <div className='text-center pt-8 font-semibold text-sm sm:text-base text-slate-500 dark:text-slate-400'>
         &copy; {new Date().getFullYear()} {t("footer.copyright")}
       </div>
     </footer>

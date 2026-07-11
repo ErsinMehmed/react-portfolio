@@ -135,7 +135,7 @@ const ProjectModal = ({ data, onClose, onNavigate }: ProjectModalProps) => {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2 }}>
           <div
-            className='absolute inset-0 bg-slate-900/50 backdrop-blur-sm'
+            className='absolute inset-0 bg-slate-900/50 backdrop-blur-sm dark:bg-black/60'
             onClick={onClose}
           />
 
@@ -145,7 +145,7 @@ const ProjectModal = ({ data, onClose, onNavigate }: ProjectModalProps) => {
             aria-modal='true'
             aria-label={t(project.name)}
             tabIndex={-1}
-            className='relative z-10 max-h-[85vh] w-full max-w-2xl overflow-y-auto rounded-3xl bg-white p-6 shadow-2xl outline-none sm:p-8'
+            className='relative z-10 max-h-[85vh] w-full max-w-2xl overflow-y-auto rounded-3xl bg-white p-6 shadow-2xl outline-none dark:bg-slate-900 sm:p-8'
             initial={{ opacity: 0, scale: 0.96, y: 24 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.97, y: 12 }}
@@ -157,14 +157,14 @@ const ProjectModal = ({ data, onClose, onNavigate }: ProjectModalProps) => {
                     type='button'
                     onClick={() => onNavigate(-1)}
                     aria-label={t("projects.prevProject")}
-                    className='flex h-9 w-9 items-center justify-center rounded-full text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-700'>
+                    className='flex h-9 w-9 items-center justify-center rounded-full text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-700 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-200'>
                     <ChevronIcon className='h-5 w-5' />
                   </button>
                   <button
                     type='button'
                     onClick={() => onNavigate(1)}
                     aria-label={t("projects.nextProject")}
-                    className='flex h-9 w-9 items-center justify-center rounded-full text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-700'>
+                    className='flex h-9 w-9 items-center justify-center rounded-full text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-700 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-200'>
                     <ChevronIcon className='h-5 w-5 rotate-180' />
                   </button>
                 </>
@@ -173,7 +173,7 @@ const ProjectModal = ({ data, onClose, onNavigate }: ProjectModalProps) => {
                 type='button'
                 onClick={onClose}
                 aria-label='Close'
-                className='flex h-9 w-9 items-center justify-center rounded-full text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-700'>
+                className='flex h-9 w-9 items-center justify-center rounded-full text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-700 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-200'>
                 <CloseIcon className='h-5 w-5' />
               </button>
             </div>
@@ -181,31 +181,31 @@ const ProjectModal = ({ data, onClose, onNavigate }: ProjectModalProps) => {
             <span
               className={`inline-block rounded-full px-2.5 py-0.5 text-[11px] font-semibold ${
                 type === "professional"
-                  ? "bg-blue-50 text-[#1b74e4]"
-                  : "bg-slate-100 uppercase tracking-wide text-slate-500"
+                  ? "bg-blue-50 text-[#1b74e4] dark:bg-blue-500/10 dark:text-blue-400"
+                  : "bg-slate-100 uppercase tracking-wide text-slate-500 dark:bg-slate-800 dark:text-slate-400"
               }`}>
               {type === "professional" && project.company
                 ? t(project.company)
                 : t("projects.personalProject")}
             </span>
 
-            <h3 className='mt-3 pr-28 font-display text-2xl font-bold leading-tight tracking-tight text-slate-800'>
+            <h3 className='mt-3 pr-28 font-display text-2xl font-bold leading-tight tracking-tight text-slate-800 dark:text-slate-100'>
               {t(project.name)}
             </h3>
 
-            <p className='mt-4 leading-relaxed text-slate-600'>
+            <p className='mt-4 leading-relaxed text-slate-600 dark:text-slate-300'>
               {t(project.description)}
             </p>
 
             <div className='mt-6'>
-              <p className='mb-2 text-[11px] font-semibold uppercase tracking-wider text-slate-500'>
+              <p className='mb-2 text-[11px] font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400'>
                 {t("projects.techStack")}
               </p>
               <div className='flex flex-wrap gap-2'>
                 {(project.technologies || []).map((tech, i) => (
                   <span
                     key={i}
-                    className='rounded-md bg-slate-50 px-2.5 py-1 text-xs font-medium text-slate-600 ring-1 ring-slate-100'>
+                    className='rounded-md bg-slate-50 px-2.5 py-1 text-xs font-medium text-slate-600 ring-1 ring-slate-100 dark:bg-slate-800 dark:text-slate-300 dark:ring-slate-700'>
                     {tech}
                   </span>
                 ))}
@@ -230,7 +230,7 @@ const ProjectModal = ({ data, onClose, onNavigate }: ProjectModalProps) => {
                     href={project.github}
                     target='_blank'
                     rel='noreferrer'
-                    className='inline-flex items-center gap-2 rounded-xl border border-slate-200 px-5 py-2.5 text-sm font-semibold text-slate-700 transition-colors hover:border-slate-300 hover:bg-slate-50'>
+                    className='inline-flex items-center gap-2 rounded-xl border border-slate-200 px-5 py-2.5 text-sm font-semibold text-slate-700 transition-colors hover:border-slate-300 hover:bg-slate-50 dark:border-slate-700 dark:text-slate-300 dark:hover:border-slate-600 dark:hover:bg-slate-800'>
                     <GitHubMark className='h-4 w-4' />
                     {t("projects.viewCode")}
                   </a>
@@ -239,7 +239,7 @@ const ProjectModal = ({ data, onClose, onNavigate }: ProjectModalProps) => {
             )}
 
             {type === "professional" && !project.live && !project.github && (
-              <p className='mt-7 rounded-xl bg-slate-50 px-4 py-3 text-sm text-slate-500'>
+              <p className='mt-7 rounded-xl bg-slate-50 px-4 py-3 text-sm text-slate-500 dark:bg-slate-800 dark:text-slate-400'>
                 {t("projects.proprietaryNotice")}
               </p>
             )}

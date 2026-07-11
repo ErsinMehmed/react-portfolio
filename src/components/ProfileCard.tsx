@@ -87,19 +87,19 @@ const ProfileCard = () => {
   return (
     <>
       <div className='lg:sticky top-[158px]'>
-        <div className='relative mx-auto mb-6 mt-32 w-full bg-white px-7 pb-6 text-center shadow-[0_24px_70px_-30px_rgba(27,74,120,0.45)] ring-1 ring-slate-900/[0.04] sm:mt-36 md:mt-40 lg:mb-0 lg:mt-0 lg:rounded-[28px]'>
+        <div className='relative mx-auto mb-6 mt-32 w-full bg-white px-7 pb-6 text-center shadow-[0_24px_70px_-30px_rgba(27,74,120,0.45)] ring-1 ring-slate-900/[0.04] dark:bg-slate-900 dark:shadow-[0_24px_70px_-30px_rgba(0,0,0,0.6)] dark:ring-white/[0.06] sm:mt-36 md:mt-40 lg:mb-0 lg:mt-0 lg:rounded-[28px]'>
           <img
             src={"/images/profile.webp"}
-            className='absolute left-1/2 -mt-[120px] h-52 w-52 -translate-x-1/2 rounded-[22px] object-cover shadow-[0_18px_40px_-16px_rgba(27,74,120,0.55)] ring-4 ring-white lg:h-48 lg:w-48 xl:h-52 xl:w-52'
+            className='absolute left-1/2 -mt-[120px] h-52 w-52 -translate-x-1/2 rounded-[22px] object-cover shadow-[0_18px_40px_-16px_rgba(27,74,120,0.55)] ring-4 ring-white dark:ring-slate-900 lg:h-48 lg:w-48 xl:h-52 xl:w-52'
             alt='Ersin Hyusein, web developer'
           />
 
           <div className='pt-[104px]'>
-            <h2 className='font-display text-[24px] font-bold tracking-tight text-slate-800'>
+            <h2 className='font-display text-[24px] font-bold tracking-tight text-slate-800 dark:text-slate-100'>
               {t("profile.name")}
             </h2>
 
-            <p className='mt-1 inline-flex items-center gap-2 text-sm font-medium text-slate-500'>
+            <p className='mt-1 inline-flex items-center gap-2 text-sm font-medium text-slate-500 dark:text-slate-400'>
               <span className='h-1.5 w-1.5 rounded-full bg-[#1b74e4]' />
               {t("profile.jobTitle")}
             </p>
@@ -115,7 +115,7 @@ const ProfileCard = () => {
                     target='_blank'
                     rel='noreferrer'
                     aria-label={link.label}>
-                    <span className='flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 text-slate-500 transition-all duration-200 ease-out hover:-translate-y-0.5 hover:border-[#1b74e4] hover:bg-[#1b74e4] hover:text-white'>
+                    <span className='flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 text-slate-500 transition-all duration-200 ease-out hover:-translate-y-0.5 hover:border-[#1b74e4] hover:bg-[#1b74e4] hover:text-white dark:border-slate-700 dark:text-slate-400'>
                       <IconComponent className='h-[18px] w-[18px]' />
                     </span>
                   </a>
@@ -123,7 +123,7 @@ const ProfileCard = () => {
               })}
             </div>
 
-            <div className='mt-5 divide-y divide-slate-200/50 rounded-2xl bg-[#f7f9fb] px-5 text-left'>
+            <div className='mt-5 divide-y divide-slate-200/50 rounded-2xl bg-[#f7f9fb] px-5 text-left dark:divide-slate-700/50 dark:bg-slate-800/60'>
               {personalInfo.map((item, index) => {
                 const isPhone = index === 2;
                 const isEmail = index === 3;
@@ -132,14 +132,14 @@ const ProfileCard = () => {
                   <div
                     key={index}
                     className='flex items-center gap-3.5 py-2.5'>
-                    <item.icon className='h-[18px] w-[18px] shrink-0 text-slate-500' />
+                    <item.icon className='h-[18px] w-[18px] shrink-0 text-slate-500 dark:text-slate-400' />
 
                     <dl className='min-w-0 flex-1'>
-                      <dt className='text-[11px] font-semibold uppercase tracking-wider text-slate-500'>
+                      <dt className='text-[11px] font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400'>
                         {t(item.title)}
                       </dt>
 
-                      <dd className='text-[15px] font-semibold text-slate-700'>
+                      <dd className='text-[15px] font-semibold text-slate-700 dark:text-slate-200'>
                         {isPhone ? (
                           <a
                             className='transition-colors hover:text-[#1b74e4] cursor-pointer'
@@ -190,14 +190,17 @@ const ProfileCard = () => {
             <motion.div
               role='dialog'
               aria-modal='true'
-              className='relative z-10 w-full max-w-md rounded-3xl bg-white p-6 text-center shadow-2xl sm:p-8'
+              className='relative z-10 w-full max-w-md rounded-3xl bg-white p-6 text-center shadow-2xl dark:bg-slate-900 sm:p-8'
               initial={{ opacity: 0, scale: 0.96, y: 24 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.97, y: 12 }}
               transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}>
-              <p className='mb-4 text-sm text-slate-500'>{t("qr.scanPrompt")}</p>
+              <p className='mb-4 text-sm text-slate-500 dark:text-slate-400'>{t("qr.scanPrompt")}</p>
 
               <div className='mb-4 flex justify-center'>
+                {/* Always white/light, in both themes — a dark QR container
+                    would still need a white quiet zone around the code for
+                    scanners to reliably lock onto it. */}
                 <div className='flex h-[232px] w-[232px] items-center justify-center rounded-xl border border-slate-200 bg-white p-4 shadow-lg'>
                   <Suspense
                     fallback={
@@ -228,8 +231,8 @@ const ProfileCard = () => {
                     onClick={handleCopy}
                     className={`inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1 text-xs font-semibold transition-colors ${
                       isCopied
-                        ? "border-emerald-200 bg-emerald-50 text-emerald-600"
-                        : "border-slate-200 text-[#1b74e4] hover:border-slate-300 hover:bg-slate-50"
+                        ? "border-emerald-200 bg-emerald-50 text-emerald-600 dark:border-emerald-500/30 dark:bg-emerald-500/10 dark:text-emerald-400"
+                        : "border-slate-200 text-[#1b74e4] hover:border-slate-300 hover:bg-slate-50 dark:border-slate-700 dark:hover:border-slate-600 dark:hover:bg-slate-800"
                     }`}>
                     {isCopied ? t("qr.copied") : t("qr.copy")}
                   </button>
@@ -250,7 +253,7 @@ const ProfileCard = () => {
                 </div>
               </div>
 
-              <p className='mt-3 text-xs text-slate-400'>{t("qr.openCamera")}</p>
+              <p className='mt-3 text-xs text-slate-400 dark:text-slate-500'>{t("qr.openCamera")}</p>
 
               <button
                 type='button'

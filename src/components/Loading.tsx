@@ -2,25 +2,25 @@ import type { ComponentType } from "react";
 import { useLocation } from "react-router-dom";
 
 // Route-level Suspense fallback. A full skeleton of the whole shell — nav
-// tiles, language toggle, ProfileCard, page title, footer — plus a body that
-// mirrors each page's real sections and card counts 1:1, so nothing shifts
-// when the real content lands. Class names are copied from the real Layout /
-// ProfileCard so the geometry matches exactly.
+// tiles, language + theme toggles, ProfileCard, page title, footer — plus a
+// body that mirrors each page's real sections and card counts 1:1, so
+// nothing shifts when the real content lands. Class names are copied from
+// the real Layout / ProfileCard so the geometry matches exactly.
 
 const Bar = ({ className = "" }: { className?: string }) => (
-  <div className={`rounded-md bg-slate-200/70 ${className}`} />
+  <div className={`rounded-md bg-slate-200/70 dark:bg-slate-700/50 ${className}`} />
 );
 
 const Pill = ({ className = "" }: { className?: string }) => (
-  <div className={`rounded-full bg-slate-200/70 ${className}`} />
+  <div className={`rounded-full bg-slate-200/70 dark:bg-slate-700/50 ${className}`} />
 );
 
 /* ---- Shell pieces ---- */
 
 const ProfileSkeleton = () => (
   <div className='lg:sticky lg:top-[158px]'>
-    <div className='relative mx-auto mb-6 mt-32 w-full bg-white px-7 pb-6 shadow-[0_24px_70px_-30px_rgba(27,74,120,0.45)] ring-1 ring-slate-900/[0.04] sm:mt-36 md:mt-40 lg:mb-0 lg:mt-0 lg:rounded-[28px]'>
-      <div className='absolute left-1/2 -mt-[120px] h-52 w-52 -translate-x-1/2 rounded-[22px] bg-slate-200/70 ring-4 ring-white lg:h-48 lg:w-48 xl:h-52 xl:w-52' />
+    <div className='relative mx-auto mb-6 mt-32 w-full bg-white px-7 pb-6 shadow-[0_24px_70px_-30px_rgba(27,74,120,0.45)] ring-1 ring-slate-900/[0.04] dark:bg-slate-900 dark:ring-white/[0.06] sm:mt-36 md:mt-40 lg:mb-0 lg:mt-0 lg:rounded-[28px]'>
+      <div className='absolute left-1/2 -mt-[120px] h-52 w-52 -translate-x-1/2 rounded-[22px] bg-slate-200/70 ring-4 ring-white dark:bg-slate-700/50 dark:ring-slate-900 lg:h-48 lg:w-48 xl:h-52 xl:w-52' />
 
       <div className='pt-[104px]'>
         <Bar className='mx-auto h-7 w-40' />
@@ -30,17 +30,17 @@ const ProfileSkeleton = () => (
           {Array.from({ length: 4 }).map((_, i) => (
             <div
               key={i}
-              className='h-10 w-10 rounded-xl bg-slate-200/70'
+              className='h-10 w-10 rounded-xl bg-slate-200/70 dark:bg-slate-700/50'
             />
           ))}
         </div>
 
-        <div className='mt-5 divide-y divide-slate-200/50 rounded-2xl bg-[#f7f9fb] px-5'>
+        <div className='mt-5 divide-y divide-slate-200/50 rounded-2xl bg-[#f7f9fb] px-5 dark:divide-slate-700/50 dark:bg-slate-800/60'>
           {Array.from({ length: 5 }).map((_, i) => (
             <div
               key={i}
               className='flex items-center gap-3.5 py-2.5'>
-              <div className='h-[18px] w-[18px] shrink-0 rounded bg-slate-200/70' />
+              <div className='h-[18px] w-[18px] shrink-0 rounded bg-slate-200/70 dark:bg-slate-700/50' />
               <div className='flex-1'>
                 <Bar className='h-2.5 w-16' />
                 <Bar className='mt-1.5 h-3.5 w-32' />
@@ -55,20 +55,23 @@ const ProfileSkeleton = () => (
   </div>
 );
 
-// Desktop nav (language toggle + the four tiles), matching Header.
+// Desktop nav (language + theme toggles + the four tiles), matching Header.
 const NavSkeleton = () => (
   <div className='mb-8 hidden lg:flex lg:flex-col lg:items-end'>
-    <div className='mb-3 inline-flex items-center rounded-full border border-slate-200 bg-white p-0.5 shadow-sm'>
-      <Pill className='h-6 w-9' />
-      <div className='h-6 w-9' />
+    <div className='mb-3 flex items-center gap-2'>
+      <div className='inline-flex items-center rounded-full border border-slate-200 bg-white p-0.5 shadow-sm dark:border-slate-700 dark:bg-slate-900'>
+        <Pill className='h-6 w-9' />
+        <div className='h-6 w-9' />
+      </div>
+      <div className='h-8 w-8 rounded-full border border-slate-200 bg-white shadow-sm dark:border-slate-700 dark:bg-slate-900' />
     </div>
 
-    <div className='h-fit w-fit rounded-2xl bg-white p-4 shadow'>
+    <div className='h-fit w-fit rounded-2xl bg-white p-4 shadow dark:bg-slate-900'>
       <div className='flex'>
         {Array.from({ length: 4 }).map((_, i) => (
           <div
             key={i}
-            className='mx-2.5 h-[87px] w-[87px] rounded-lg bg-slate-100'
+            className='mx-2.5 h-[87px] w-[87px] rounded-lg bg-slate-100 dark:bg-slate-800'
           />
         ))}
       </div>
@@ -79,7 +82,7 @@ const NavSkeleton = () => (
 const TitleSkeleton = () => (
   <div className='flex items-center'>
     <Bar className='h-9 w-48 sm:h-10 sm:w-56' />
-    <div className='ml-8 mt-1.5 h-0.5 w-32 rounded bg-slate-200/70 sm:w-44' />
+    <div className='ml-8 mt-1.5 h-0.5 w-32 rounded bg-slate-200/70 dark:bg-slate-700/50 sm:w-44' />
   </div>
 );
 
@@ -93,7 +96,7 @@ const FooterSkeleton = () => (
 
 const TickHeader = () => (
   <div className='mb-6 flex items-center gap-3'>
-    <span className='h-5 w-1.5 rounded-full bg-slate-200/70' />
+    <span className='h-5 w-1.5 rounded-full bg-slate-200/70 dark:bg-slate-700/50' />
     <Bar className='h-6 w-40' />
     <Bar className='h-4 w-5' />
   </div>
@@ -101,7 +104,7 @@ const TickHeader = () => (
 
 // Mirrors ProjectCard.
 const ProjectCardSkeleton = () => (
-  <div className='flex h-full flex-col rounded-2xl border border-slate-200/80 bg-white p-5 shadow-sm'>
+  <div className='flex h-full flex-col rounded-2xl border border-slate-200/80 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900'>
     <div className='mb-3'>
       <Pill className='h-[18px] w-24' />
     </div>
@@ -117,7 +120,7 @@ const ProjectCardSkeleton = () => (
       <Pill className='h-6 w-12' />
       <Pill className='h-6 w-10' />
     </div>
-    <div className='mt-4 flex items-center justify-between border-t border-slate-100 pt-3'>
+    <div className='mt-4 flex items-center justify-between border-t border-slate-100 pt-3 dark:border-slate-800'>
       <Bar className='h-3.5 w-24' />
       <Bar className='h-3.5 w-4' />
     </div>
@@ -126,9 +129,9 @@ const ProjectCardSkeleton = () => (
 
 // Mirrors CertificationCard.
 const CertCardSkeleton = () => (
-  <div className='flex h-full flex-col rounded-2xl border border-slate-200/80 bg-white p-5 shadow-sm'>
+  <div className='flex h-full flex-col rounded-2xl border border-slate-200/80 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900'>
     <div className='mb-4 flex items-start justify-between'>
-      <div className='h-11 w-11 rounded-xl bg-slate-200/70' />
+      <div className='h-11 w-11 rounded-xl bg-slate-200/70 dark:bg-slate-700/50' />
       <Bar className='h-4 w-4' />
     </div>
     <div className='space-y-2'>
@@ -140,9 +143,9 @@ const CertCardSkeleton = () => (
 
 // Mirrors SkillBox (collapsed state).
 const SkillSkeleton = () => (
-  <div className='rounded-xl border border-slate-200/70 bg-white px-3.5 py-3'>
+  <div className='rounded-xl border border-slate-200/70 bg-white px-3.5 py-3 dark:border-slate-800 dark:bg-slate-900'>
     <div className='flex items-center gap-2.5'>
-      <div className='h-8 w-8 rounded-lg bg-slate-200/70' />
+      <div className='h-8 w-8 rounded-lg bg-slate-200/70 dark:bg-slate-700/50' />
       <Bar className='h-4 w-20' />
     </div>
     <div className='mt-3'>
@@ -156,8 +159,8 @@ const SkillSkeleton = () => (
 const TimelineItem = ({ last }: { last: boolean }) => (
   <div className='grid grid-cols-[auto_1fr] gap-x-4 sm:gap-x-5'>
     <div className='flex flex-col items-center'>
-      <span className='mt-1.5 h-3 w-3 shrink-0 rounded-full bg-slate-200/70' />
-      {!last && <span className='mt-1 w-px flex-1 bg-slate-200' />}
+      <span className='mt-1.5 h-3 w-3 shrink-0 rounded-full bg-slate-200/70 dark:bg-slate-700/50' />
+      {!last && <span className='mt-1 w-px flex-1 bg-slate-200 dark:bg-slate-800' />}
     </div>
     <div className={last ? "pb-0" : "pb-7"}>
       <Pill className='h-5 w-24' />
@@ -201,7 +204,7 @@ const HomeBody = () => (
       </div>
     </div>
 
-    <dl className='mt-8 grid grid-cols-2 gap-x-6 gap-y-6 border-y border-slate-200/70 py-6 sm:grid-cols-4'>
+    <dl className='mt-8 grid grid-cols-2 gap-x-6 gap-y-6 border-y border-slate-200/70 py-6 dark:border-slate-800 sm:grid-cols-4'>
       {Array.from({ length: 4 }).map((_, i) => (
         <div key={i}>
           <Bar className='h-8 w-16' />
@@ -212,15 +215,15 @@ const HomeBody = () => (
 
     <Bar className='mb-1 mt-14 h-8 w-64' />
 
-    <div className='mt-6 border-t border-slate-200/70'>
+    <div className='mt-6 border-t border-slate-200/70 dark:border-slate-800'>
       {Array.from({ length: 6 }).map((_, i) => (
         <div
           key={i}
-          className='grid grid-cols-[2rem_1fr] gap-x-4 border-b border-slate-200/70 py-6 sm:grid-cols-[2.75rem_1fr] sm:gap-x-6'>
+          className='grid grid-cols-[2rem_1fr] gap-x-4 border-b border-slate-200/70 py-6 dark:border-slate-800 sm:grid-cols-[2.75rem_1fr] sm:gap-x-6'>
           <Bar className='mt-1 h-4 w-6' />
           <div>
             <div className='flex items-center gap-2.5'>
-              <div className='h-5 w-5 rounded bg-slate-200/70' />
+              <div className='h-5 w-5 rounded bg-slate-200/70 dark:bg-slate-700/50' />
               <Bar className='h-6 w-48' />
             </div>
             <div className='mt-2 space-y-2'>
@@ -238,7 +241,7 @@ const ResumeBody = () => (
   <div className='mt-8'>
     <div>
       <div className='mb-6 flex items-center gap-2.5'>
-        <div className='h-5 w-5 rounded bg-slate-200/70' />
+        <div className='h-5 w-5 rounded bg-slate-200/70 dark:bg-slate-700/50' />
         <Bar className='h-6 w-40' />
       </div>
       <div>
@@ -253,7 +256,7 @@ const ResumeBody = () => (
 
     <div className='mt-12'>
       <div className='mb-6 flex items-center gap-2.5'>
-        <div className='h-5 w-5 rounded bg-slate-200/70' />
+        <div className='h-5 w-5 rounded bg-slate-200/70 dark:bg-slate-700/50' />
         <Bar className='h-6 w-40' />
       </div>
       <div>
@@ -339,16 +342,17 @@ const Loading = () => {
 
   return (
     <div
-      className='w-full min-h-screen pb-12 lg:pb-8 bg-gradient-to-r from-sky-100 via-blue-50 to-indigo-100'
+      className='w-full min-h-screen pb-12 lg:pb-8 bg-gradient-to-r from-sky-100 via-blue-50 to-indigo-100 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950'
       role='status'
       aria-busy='true'
       aria-label='Loading'>
-      {/* Mobile language toggle (fixed top-right) */}
-      <div className='fixed right-4 top-4 z-40 lg:hidden'>
-        <div className='inline-flex items-center rounded-full border border-slate-200 bg-white p-0.5 shadow-sm'>
+      {/* Mobile language + theme toggle (fixed top-right) */}
+      <div className='fixed right-4 top-4 z-40 flex items-center gap-2 lg:hidden'>
+        <div className='inline-flex items-center rounded-full border border-slate-200 bg-white p-0.5 shadow-sm dark:border-slate-700 dark:bg-slate-900'>
           <Pill className='h-6 w-9' />
           <div className='h-6 w-9' />
         </div>
+        <div className='h-8 w-8 rounded-full border border-slate-200 bg-white shadow-sm dark:border-slate-700 dark:bg-slate-900' />
       </div>
 
       <div className='mx-auto h-full min-h-screen w-full max-w-[2000px]'>
@@ -362,7 +366,7 @@ const Loading = () => {
               <NavSkeleton />
             </div>
 
-            <div className='px-6 py-8 shadow lg:rounded-2xl lg:px-14 lg:py-10 md:px-10 bg-white'>
+            <div className='px-6 py-8 shadow lg:rounded-2xl lg:px-14 lg:py-10 md:px-10 bg-white dark:bg-slate-900'>
               <TitleSkeleton />
               <Body />
               <FooterSkeleton />
@@ -372,13 +376,13 @@ const Loading = () => {
       </div>
 
       {/* Mobile bottom nav bar */}
-      <div className='fixed bottom-3.5 left-1/2 z-50 h-14 w-full max-w-sm -translate-x-1/2 rounded-full border border-gray-200 bg-white sm:max-w-lg lg:hidden'>
+      <div className='fixed bottom-3.5 left-1/2 z-50 h-14 w-full max-w-sm -translate-x-1/2 rounded-full border border-gray-200 bg-white sm:max-w-lg lg:hidden dark:border-slate-700 dark:bg-slate-900'>
         <div className='mx-auto grid h-full max-w-lg grid-cols-4'>
           {Array.from({ length: 4 }).map((_, i) => (
             <div
               key={i}
               className='flex items-center justify-center'>
-              <div className='h-6 w-6 rounded bg-slate-200/70' />
+              <div className='h-6 w-6 rounded bg-slate-200/70 dark:bg-slate-700/50' />
             </div>
           ))}
         </div>

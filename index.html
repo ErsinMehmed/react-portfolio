@@ -2,6 +2,22 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <script>
+      // Blocking (no `defer`/`module`) and placed before any styling, so the
+      // `dark` class lands on <html> before the pre-hydration loader below —
+      // and before React mounts — even paints a single frame. Without this,
+      // a dark-mode visitor sees a flash of the light theme every load.
+      // Mirrors the saved-choice-wins-else-system-preference logic in
+      // src/theme/ThemeContext.tsx; keep the two in sync if either changes.
+      (function () {
+        var saved = localStorage.getItem("theme");
+        var dark =
+          saved === "dark" ||
+          (saved !== "light" &&
+            window.matchMedia("(prefers-color-scheme: dark)").matches);
+        if (dark) document.documentElement.classList.add("dark");
+      })();
+    </script>
     <link rel="icon" href="/images/site-logo.png" />
     <!-- Self-hosted (see src/index.css @font-face); preload the two "latin"
          subset files actually used by an EN/BG audience so the browser
@@ -177,6 +193,33 @@
         #app-preloader .pl-track span {
           animation: pl-slide 1.6s linear infinite;
         }
+      }
+
+      /* Dark theme (class set synchronously by the blocking script above,
+         before this stylesheet is even parsed — no flash). Tinted navy, not
+         pure black, so it reads as an intentional theme rather than an
+         inverted one; the brand blue shifts a shade lighter (blue-400-ish)
+         to keep the same visual weight against a dark backdrop. */
+      html.dark #app-preloader {
+        background: linear-gradient(115deg, #060a14, #0a0f1f 45%, #0d0a1f);
+      }
+      html.dark #app-preloader::before {
+        background: radial-gradient(circle, rgba(56, 138, 229, 0.35), transparent 65%);
+      }
+      html.dark #app-preloader::after {
+        background: radial-gradient(circle, rgba(129, 140, 248, 0.3), transparent 65%);
+      }
+      html.dark #app-preloader .pl-mark {
+        filter: drop-shadow(0 8px 18px rgba(96, 165, 250, 0.28));
+      }
+      html.dark #app-preloader .pl-stroke {
+        stroke: #60a5fa;
+      }
+      html.dark #app-preloader .pl-track {
+        background: rgba(96, 165, 250, 0.16);
+      }
+      html.dark #app-preloader .pl-track span {
+        background: linear-gradient(90deg, rgba(96, 165, 250, 0.2), #60a5fa);
       }
     </style>
     <div id="root">

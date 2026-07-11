@@ -4,10 +4,10 @@ import Layout from "../components/Layout";
 import { useLanguage } from "../i18n/LanguageContext";
 
 const primaryBtn =
-  "inline-flex items-center justify-center rounded-2xl bg-[#1b74e4] px-6 py-2.5 text-sm font-semibold text-white shadow-[0_14px_30px_-12px_rgba(27,116,228,0.7)] transition-all duration-200 ease-out hover:bg-[#1667cf] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1b74e4] focus-visible:ring-offset-2";
+  "inline-flex items-center justify-center rounded-2xl bg-[#1b74e4] px-6 py-2.5 text-sm font-semibold text-white shadow-[0_14px_30px_-12px_rgba(27,116,228,0.7)] transition-all duration-200 ease-out hover:bg-[#1667cf] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1b74e4] focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900";
 
 const ghostBtn =
-  "inline-flex items-center justify-center rounded-2xl border border-slate-200 bg-white px-6 py-2.5 text-sm font-semibold text-slate-700 transition-all duration-200 ease-out hover:border-slate-300 hover:bg-slate-50 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1b74e4] focus-visible:ring-offset-2";
+  "inline-flex items-center justify-center rounded-2xl border border-slate-200 bg-white px-6 py-2.5 text-sm font-semibold text-slate-700 transition-all duration-200 ease-out hover:border-slate-300 hover:bg-slate-50 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1b74e4] focus-visible:ring-offset-2 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300 dark:hover:border-slate-600 dark:hover:bg-slate-800 dark:focus-visible:ring-offset-slate-900";
 
 const REVEAL_EASE: [number, number, number, number] = [0.23, 1, 0.32, 1];
 
@@ -25,7 +25,7 @@ const NotFound = () => {
         {/* Dotted engineering grid, faded toward the edges for depth */}
         <div
           aria-hidden='true'
-          className='pointer-events-none absolute inset-0 [background-image:radial-gradient(rgba(27,116,228,0.11)_1px,transparent_1px)] [background-size:22px_22px] [mask-image:radial-gradient(ellipse_at_center,black,transparent_72%)]'
+          className='pointer-events-none absolute inset-0 [background-image:radial-gradient(rgba(27,116,228,0.11)_1px,transparent_1px)] [background-size:22px_22px] [mask-image:radial-gradient(ellipse_at_center,black,transparent_72%)] dark:[background-image:radial-gradient(rgba(96,165,250,0.16)_1px,transparent_1px)]'
         />
 
         <div className='relative flex flex-col items-center py-12 text-center sm:py-16'>
@@ -33,8 +33,7 @@ const NotFound = () => {
           <div className='relative select-none leading-none'>
             <span
               aria-hidden='true'
-              className='block font-display text-[6.5rem] font-extrabold leading-none tracking-tight text-transparent sm:text-[9.5rem]'
-              style={{ WebkitTextStroke: "2px rgba(27,116,228,0.3)" }}>
+              className='block font-display text-[6.5rem] font-extrabold leading-none tracking-tight text-transparent [-webkit-text-stroke:2px_rgba(27,116,228,0.3)] dark:[-webkit-text-stroke:2px_rgba(96,165,250,0.35)] sm:text-[9.5rem]'>
               404
             </span>
             <motion.span
@@ -48,19 +47,19 @@ const NotFound = () => {
           </div>
 
           {/* The route that missed, as a developer would read it in a shell */}
-          <div className='mt-7 inline-flex max-w-full items-center gap-2 overflow-hidden rounded-lg border border-slate-200 bg-slate-50/80 px-3 py-1.5 font-mono text-[12.5px]'>
+          <div className='mt-7 inline-flex max-w-full items-center gap-2 overflow-hidden rounded-lg border border-slate-200 bg-slate-50/80 px-3 py-1.5 font-mono text-[12.5px] dark:border-slate-700 dark:bg-slate-800/60'>
             <span className='h-2 w-2 shrink-0 rounded-full bg-[#1b74e4]' />
-            <span className='shrink-0 text-slate-400'>~</span>
-            <span className='truncate text-slate-600'>{location.pathname}</span>
-            <span className='shrink-0 text-slate-300'>&rarr;</span>
-            <span className='shrink-0 font-semibold text-[#1b74e4]'>404</span>
+            <span className='shrink-0 text-slate-400 dark:text-slate-500'>~</span>
+            <span className='truncate text-slate-600 dark:text-slate-300'>{location.pathname}</span>
+            <span className='shrink-0 text-slate-300 dark:text-slate-600'>&rarr;</span>
+            <span className='shrink-0 font-semibold text-[#1b74e4] dark:text-blue-400'>404</span>
             <span
               aria-hidden='true'
-              className='ml-0.5 inline-block h-[1.05em] w-[2px] shrink-0 translate-y-[1px] bg-[#1b74e4] animate-caret'
+              className='ml-0.5 inline-block h-[1.05em] w-[2px] shrink-0 translate-y-[1px] bg-[#1b74e4] animate-caret dark:bg-blue-400'
             />
           </div>
 
-          <p className='mt-7 max-w-[46ch] leading-relaxed text-slate-500'>
+          <p className='mt-7 max-w-[46ch] leading-relaxed text-slate-500 dark:text-slate-400'>
             {t("notFound.message")}
           </p>
 

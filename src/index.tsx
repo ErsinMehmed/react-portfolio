@@ -4,6 +4,7 @@ import "./index.css";
 import App from "./App";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { LanguageProvider } from "./i18n/LanguageContext";
+import { ThemeProvider } from "./theme/ThemeContext";
 
 const rootElement = document.getElementById("root");
 if (!rootElement) {
@@ -13,15 +14,17 @@ if (!rootElement) {
 const root = ReactDOM.createRoot(rootElement);
 root.render(
   <React.StrictMode>
-    <LanguageProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route
-            path='/*'
-            element={<App />}
-          />
-        </Routes>
-      </BrowserRouter>
-    </LanguageProvider>
+    <ThemeProvider>
+      <LanguageProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route
+              path='/*'
+              element={<App />}
+            />
+          </Routes>
+        </BrowserRouter>
+      </LanguageProvider>
+    </ThemeProvider>
   </React.StrictMode>
 );
