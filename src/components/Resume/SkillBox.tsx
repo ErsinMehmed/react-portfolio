@@ -224,6 +224,8 @@ const SkillBox = ({ item, index }: SkillBoxProps) => {
 
   return (
     <motion.div
+      data-testid='skill-card'
+      data-skill-title={item.title}
       className='h-full w-full'
       initial={{ opacity: 0, y: 12 }}
       whileInView={{ opacity: 1, y: 0 }}
