@@ -79,6 +79,7 @@ const SkillsFilterSection = () => {
             key={item.title}
             item={item}
             index={index}
+            total={filteredSkills.length}
           />
         ))}
       </div>

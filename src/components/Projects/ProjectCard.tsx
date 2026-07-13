@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useLanguage } from "../../i18n/LanguageContext";
+import { useTilt } from "../../hooks/useTilt";
 import type { Project, ProjectType } from "../../types";
 
 interface ProjectCardProps {
@@ -10,6 +11,7 @@ interface ProjectCardProps {
 
 const ProjectCard = ({ project, type, onClick }: ProjectCardProps) => {
   const { t } = useLanguage();
+  const tilt = useTilt();
   const techs = project.technologies || [];
   const shown = techs.slice(0, 4);
   const extra = techs.length - shown.length;
@@ -18,7 +20,13 @@ const ProjectCard = ({ project, type, onClick }: ProjectCardProps) => {
     <motion.button
       type='button'
       onClick={onClick}
-      whileHover={{ y: -4 }}
+      onPointerMove={tilt.onPointerMove}
+      onPointerLeave={tilt.onPointerLeave}
+      style={{
+        rotateX: tilt.rotateX,
+        rotateY: tilt.rotateY,
+        transformPerspective: 900,
+      }}
       transition={{ duration: 0.2, ease: "easeOut" }}
       className='group flex h-full flex-col rounded-2xl border border-slate-200/80 bg-white p-5 text-left shadow-sm transition-shadow duration-200 hover:shadow-[0_22px_50px_-24px_rgba(27,74,120,0.4)] dark:border-slate-800 dark:bg-slate-900 dark:hover:shadow-[0_22px_50px_-24px_rgba(0,0,0,0.5)]'>
       <div className='mb-3'>

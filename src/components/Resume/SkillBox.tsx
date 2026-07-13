@@ -195,9 +195,18 @@ const SkillCard = ({ item }: { item: TechSkill }) => {
 interface SkillBoxProps {
   item: TechSkill;
   index: number;
+  /** Total cards in the grid, so the bottom rows can open their tooltip
+   * upward instead of downward. */
+  total: number;
 }
 
-const SkillBox = ({ item, index }: SkillBoxProps) => {
+const SkillBox = ({ item, index, total }: SkillBoxProps) => {
+  // The last two rows (3-col desktop grid) would push their downward tooltip
+  // past the page bottom — which also stretches the document's scroll height
+  // beyond the app background, leaving a white strip. Flip those upward.
+  const flipUp = index >= total - 6;
+  const tooltipPosition = flipUp ? "bottom-full mb-2" : "top-full mt-2";
+
   const card = (
     <div className='group flex h-full flex-col rounded-xl border border-slate-200/70 bg-white px-3.5 py-3 transition-all duration-200 ease-out hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-[0_14px_30px_-18px_rgba(27,74,120,0.45)] dark:border-slate-800 dark:bg-slate-900 dark:hover:border-slate-700 dark:hover:shadow-[0_14px_30px_-18px_rgba(0,0,0,0.5)]'>
       <div className='flex items-center gap-2.5'>
@@ -247,7 +256,8 @@ const SkillBox = ({ item, index }: SkillBoxProps) => {
               it independent of the card's own internal `group` hover. */}
           <div
             role='tooltip'
-            className='pointer-events-none absolute left-1/2 top-full z-20 mt-2 w-[248px] -translate-x-1/2 rounded-2xl border border-slate-200/80 bg-white opacity-0 shadow-[0_16px_40px_-12px_rgba(27,74,120,0.35)] transition-opacity duration-150 group-hover/skill:opacity-100 group-focus-within/skill:opacity-100 dark:border-slate-700 dark:bg-slate-900 dark:shadow-[0_16px_40px_-12px_rgba(0,0,0,0.6)]'>
+            className={`pointer-events-none absolute left-1/2 ${tooltipPosition} z-20 w-[248px] -translate-x-1/2 rounded-2xl border border-slate-200/80 bg-white opacity-0 shadow-[0_16px_40px_-12px_rgba(27,74,120,0.35)] transition-opacity duration-150 group-hover/skill:opacity-100 group-focus-within/skill:opacity-100 dark:border-slate-700 dark:bg-slate-900 dark:shadow-[0_16px_40px_-12px_rgba(0,0,0,0.6)]`}>
+
             <SkillCard item={item} />
           </div>
         </div>

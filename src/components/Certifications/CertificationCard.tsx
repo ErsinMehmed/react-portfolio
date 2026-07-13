@@ -1,4 +1,6 @@
+import { motion } from "framer-motion";
 import { useLanguage } from "../../i18n/LanguageContext";
+import { useTilt } from "../../hooks/useTilt";
 import type { Certification, CertificationKind } from "../../types";
 
 interface KindConfig {
@@ -35,14 +37,25 @@ interface CertificationCardProps {
 
 const CertificationCard = ({ item }: CertificationCardProps) => {
   const { t } = useLanguage();
+  const tilt = useTilt();
   const kind = item.kind || item.kindEn || "Certificate";
   const cfg = kinds[kind];
   const hasLink = Boolean(item.link);
 
   const baseClasses =
-    "group flex h-full flex-col rounded-2xl border border-slate-200/80 bg-white p-5 shadow-sm transition-all duration-200 ease-out dark:border-slate-800 dark:bg-slate-900";
+    "group flex h-full flex-col rounded-2xl border border-slate-200/80 bg-white p-5 shadow-sm transition-shadow duration-200 ease-out dark:border-slate-800 dark:bg-slate-900";
   const linkClasses =
-    "cursor-pointer hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-[0_20px_45px_-24px_rgba(27,74,120,0.4)] dark:hover:border-slate-700 dark:hover:shadow-[0_20px_45px_-24px_rgba(0,0,0,0.5)]";
+    "cursor-pointer hover:border-slate-300 hover:shadow-[0_20px_45px_-24px_rgba(27,74,120,0.4)] dark:hover:border-slate-700 dark:hover:shadow-[0_20px_45px_-24px_rgba(0,0,0,0.5)]";
+
+  const tiltProps = {
+    onPointerMove: tilt.onPointerMove,
+    onPointerLeave: tilt.onPointerLeave,
+    style: {
+      rotateX: tilt.rotateX,
+      rotateY: tilt.rotateY,
+      transformPerspective: 900,
+    },
+  };
 
   const content = (
     <>
@@ -76,17 +89,24 @@ const CertificationCard = ({ item }: CertificationCardProps) => {
 
   if (hasLink) {
     return (
-      <a
+      <motion.a
+        {...tiltProps}
         href={item.link}
         target='_blank'
         rel='noreferrer'
         className={`${baseClasses} ${linkClasses}`}>
         {content}
-      </a>
+      </motion.a>
     );
   }
 
-  return <div className={baseClasses}>{content}</div>;
+  return (
+    <motion.div
+      {...tiltProps}
+      className={baseClasses}>
+      {content}
+    </motion.div>
+  );
 };
 
 export default CertificationCard;

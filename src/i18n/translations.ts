@@ -68,12 +68,12 @@ export const translations = {
 
   // --- About page intro ---
   "about.intro1": {
-    en: "Hi, my name is Ersin, and I am a software developer. I have over 6 years of experience in programming, including more than 4 years of professional experience, combining my passion for technology with real-world practice. Over the years, I’ve honed my skills by working on various projects, both at work and in my spare time, constantly striving to deliver high-quality solutions.",
-    bg: "Здравейте, казвам се Ерсин и съм софтуерен разработчик. Имам над 6 години опит в програмирането, от които над 4 години професионален опит, съчетавайки страстта си към технологиите с практическа работа. През годините усъвършенствах уменията си, работейки по различни проекти, както в работата, така и в свободното си време, като постоянно се стремя да предоставям висококачествени решения.",
+    en: "Hi, I'm Ersin, a software developer. I've been programming for over 6 years, more than 4 of them in professional software development. I've worked on a range of projects, building solutions both in a team and on my own. For me, code quality, good architecture, and attention to detail come first on every project.",
+    bg: "Здравейте, казвам се Ерсин и съм софтуерен разработчик. Занимавам се с програмиране от над 6 години, като повече от 4 от тях са свързани с професионална разработка на софтуер. Работил съм по различни проекти, изграждайки решения както в екипна среда, така и самостоятелно. За мен качеството на кода, добрата архитектура и вниманието към детайла са основни при всеки проект.",
   },
   "about.intro2": {
-    en: "I have both theoretical and practical expertise in back-end and front-end programming, with a strong focus on web development. Web programming is my greatest strength, and I continuously work on refining my skills in this area. On this site, you can explore more details about my work, including the developments and projects I am currently involved in.",
-    bg: "Имам както теоретични, така и практически познания в back-end и front-end програмирането, със силен фокус върху уеб разработката. Уеб програмирането е най-силната ми страна и непрекъснато работя върху усъвършенстването на уменията си в тази област. На този сайт можете да разгледате повече детайли за работата ми, включително разработките и проектите, по които работя в момента.",
+    en: "I develop both back-end and front-end applications, with web development as my main focus. I'm always sharpening my skills and keeping up with new technologies. On this site you can browse some of my projects and the technologies I work with.",
+    bg: "Разработвам както back-end, така и front-end приложения, като основният ми фокус е уеб разработката. Постоянно усъвършенствам уменията си и следя новите технологии. На този сайт можете да разгледате част от проектите ми и технологиите, с които работя.",
   },
 
   // --- Stats ---
@@ -88,42 +88,42 @@ export const translations = {
     bg: "Full-Stack уеб разработка",
   },
   "skills.fullstack.text": {
-    en: "I build complete web applications end to end - from the database and business logic to the interface users interact with - focused on scalable, high-performance solutions that hold up in production.",
-    bg: "Изграждам цялостни уеб приложения от начало до край - от базата данни и бизнес логиката до интерфейса, с който потребителите взаимодействат - с фокус върху скалируеми и високопроизводителни решения, които издържат в реална среда.",
+    en: "I build complete web applications - from database design and back-end logic to the user interface - with an emphasis on scalability, performance and code quality.",
+    bg: "Изграждам цялостни уеб приложения - от проектирането на базата данни и back-end логиката до разработката на потребителския интерфейс, като поставям акцент върху мащабируемостта, производителността и качеството на кода.",
   },
   "skills.backend.title": {
     en: "Backend Development & APIs",
     bg: "Back-end разработка и API",
   },
   "skills.backend.text": {
-    en: "My core strength: designing robust back ends with PHP (Symfony, Laravel), building RESTful APIs, modelling data in MySQL and MongoDB, and integrating third-party services reliably and securely.",
-    bg: "Основната ми сила: проектиране на надеждни back-end системи с PHP (Symfony, Laravel), изграждане на RESTful API, моделиране на данни в MySQL и MongoDB и надеждна и сигурна интеграция на услуги на трети страни.",
+    en: "I have extensive experience building back-end systems with PHP (Symfony and Laravel), designing RESTful APIs, working with MySQL and MongoDB, and integrating external services - aiming for secure, stable and maintainable solutions.",
+    bg: "Имам богат опит в разработката на back-end системи с PHP (Symfony и Laravel), изграждането на RESTful API, работата с MySQL и MongoDB и интеграцията на външни услуги, като се стремя към сигурни, стабилни и лесни за поддръжка решения.",
   },
   "skills.frontend.title": {
     en: "Frontend Development",
     bg: "Front-end разработка",
   },
   "skills.frontend.text": {
-    en: "I craft responsive, user-centric interfaces with React, Vue.js and Next.js - clean, accessible and consistent, with attention to the small interactions that make a product feel polished.",
-    bg: "Създавам responsive, ориентирани към потребителя интерфейси с React, Vue.js и Next.js - чисти, достъпни и консистентни, с внимание към малките детайли, които правят продукта завършен.",
+    en: "I build responsive user interfaces with React, Vue.js, Node.js and Next.js, following best practices for clean code, accessibility, consistent design and high performance.",
+    bg: "Създавам responsive потребителски интерфейси с React, Vue.js, Node.js и Next.js, като следвам добри практики за чист код, достъпност, консистентен дизайн и висока производителност.",
   },
   "skills.ai.title": {
     en: "AI Development & Automation",
     bg: "AI разработка и автоматизация",
   },
   "skills.ai.text": {
-    en: "I use AI to automate real developer workflows and remove repetitive work. My end-to-end automation project won first place among 24 company-wide entries in an internal AI innovation contest.",
-    bg: "Използвам AI за автоматизиране на реални работни процеси и премахване на повтарящата се работа. Проектът ми за end-to-end автоматизация спечели първо място сред 24 проекта във вътрешен конкурс за AI иновации.",
+    en: "I use AI to automate processes and streamline day-to-day work. My end-to-end automation project won first place among 24 entries in an internal AI innovation contest.",
+    bg: "Използвам AI за автоматизиране на процеси и оптимизиране на ежедневната работа. Разработеният от мен проект за end-to-end автоматизация спечели първо място сред 24 проекта във вътрешен конкурс за AI иновации.",
   },
   "skills.leadership.title": {
     en: "Technical Leadership",
     bg: "Техническо лидерство",
   },
   "skills.leadership.text": {
-    en: "I lead technical and architectural decisions, mentor junior and mid-level developers, and run code reviews that raise the bar - keeping teams aligned, unblocked and moving toward shared goals.",
-    bg: "Водя технически и архитектурни решения, менторствам junior и mid-level разработчици и провеждам code review-та, които вдигат нивото - държейки екипите съгласувани, отблокирани и насочени към общи цели.",
+    en: "I take part in the technical and architectural decisions on projects, support the growth of junior and mid-level developers, and perform code reviews - promoting good practices and knowledge sharing within the team.",
+    bg: "Участвам в техническите и архитектурните решения на проектите, подпомагам развитието на junior и mid-level разработчици и извършвам code review, като насърчавам добрите практики и споделянето на знания в екипа.",
   },
-  "skills.quality.title": { en: "Quality & Delivery", bg: "Качество и доставка" },
+  "skills.quality.title": { en: "Quality & Deployment", bg: "Качество и внедряване" },
   "skills.quality.text": {
     en: "I care about clean, testable code. I back features with unit and integration tests, ship through CI/CD pipelines, and work in Agile teams with sprint planning, standups and continuous delivery.",
     bg: "Държа на чист и тестваем код. Подсигурявам функционалностите с unit и интеграционни тестове, доставям през CI/CD pipeline-и и работя в Agile екипи със sprint planning, standup-и и непрекъсната доставка.",
@@ -229,20 +229,20 @@ export const translations = {
     bg: "Ядрото на front-end работата ми: динамична UI логика, валидация на форми, асинхронни заявки и богати DOM взаимодействия.",
   },
   "skillDesc.typescript": {
-    en: "Static typing on top of JavaScript: safer refactors, self-documenting APIs, and fewer runtime surprises across my React and Node code.",
-    bg: "Статична типизация върху JavaScript: по-сигурни рефакторинги, самодокументиращи се API-та и по-малко изненади по време на изпълнение в React и Node кода ми.",
+    en: "I use TypeScript to add static typing that improves the quality and maintainability of JavaScript applications - safer changes, a clear code structure, and fewer runtime errors across React and Node.js projects.",
+    bg: "Прилагам статична типизация чрез TypeScript за подобряване на качеството и поддръжката на JavaScript приложенията, осигурявайки по-сигурни промени, ясна структура на кода и по-малко runtime грешки в React и Node.js проекти.",
   },
   "skillDesc.vue": {
-    en: "Built production front-ends with Vue, using its reactivity and component model to keep code clean and maintainable.",
-    bg: "Изграждал съм продукшън front-end с Vue, използвайки реактивността и компонентния му модел, за да поддържам кода чист и лесен за поддръжка.",
+    en: "I build front-end applications with Vue.js, using a component-based approach and reactivity to create clean, maintainable solutions.",
+    bg: "Изграждам front-end приложения с Vue.js, като използвам компонентен подход и реактивност за създаване на чисти и поддържаеми решения.",
   },
   "skillDesc.inertia": {
     en: "Used to connect a Laravel back-end with a modern SPA front-end without maintaining a separate API layer.",
     bg: "Използван за свързване на Laravel back-end със модерен SPA front-end без поддържане на отделен API слой.",
   },
   "skillDesc.react": {
-    en: "My main library for building scalable, component-driven interfaces with hooks and reusable state.",
-    bg: "Основната ми библиотека за изграждане на мащабируеми, компонентно-ориентирани интерфейси с hooks и преизползваемо състояние.",
+    en: "My main library for building scalable, component-driven interfaces.",
+    bg: "Основната ми библиотека за изграждане на мащабируеми, компонентно-ориентирани интерфейси.",
   },
   "skillDesc.mobx": {
     en: "My preferred state manager in React, keeping complex application state predictable and reactive.",
@@ -380,8 +380,8 @@ export const translations = {
     bg: "Онлайн магазин Soko Beauty",
   },
   "project.sokoBeauty.description": {
-    en: "A freelance e-commerce store for Soko Beauty, a shop specialising in authentic Korean skincare and cosmetics. Customers browse curated products, manage a cart, and check out securely with Stripe, using card or cash-on-delivery payment.",
-    bg: "Фрийланс онлайн магазин за Soko Beauty, специализиран в автентична корейска козметика и грижа за кожата. Клиентите разглеждат подбрани продукти, управляват количка и плащат сигурно чрез Stripe, с карта или наложен платеж.",
+    en: "A e-commerce store for cosmetics - Soko Beauty, a shop specialising in authentic Korean skincare and cosmetics. Customers browse curated products, manage a cart, and check out securely with Stripe, using card or cash-on-delivery payment.",
+    bg: "Онлайн магазин за козметика - Soko Beauty, специализиран в автентична корейска козметика и грижа за кожата. Клиентите разглеждат подбрани продукти, управляват количка и плащат сигурно чрез Stripe, с карта или наложен платеж.",
   },
 
   "project.paymentsSystem.name": {
@@ -389,8 +389,8 @@ export const translations = {
     bg: "Уеб система за управление на бизнес процеси, свързани с плащания.",
   },
   "project.paymentsSystem.description": {
-    en: "This project consists of two components: a website and a user account system. Users can manage all processes related to payments received from their terminals through the account section, along with additional functionalities such as creating online stores with various products, issuing invoices to their clients through an innovative interface, and tracking all incoming funds in their account.",
-    bg: "Проектът се състои от два компонента: уебсайт и система за потребителски акаунти. Потребителите могат да управляват всички процеси, свързани с плащания, получени от техните терминали, чрез секцията за акаунт, заедно с допълнителни функционалности като създаване на онлайн магазини с различни продукти, издаване на фактури към клиентите чрез иновативен интерфейс и проследяване на всички входящи средства в акаунта им.",
+    en: "The project has two parts: a public website and a user account area. From their account, users manage everything around the payments they receive through their terminals - they can set up online stores with products, issue invoices to their clients, and track all incoming funds in one place.",
+    bg: "Проектът има две части: публичен уебсайт и потребителски акаунт. От акаунта си потребителите управляват всичко около плащанията, които получават през терминалите си - могат да създават онлайн магазини с продукти, да издават фактури на клиентите си и да следят всички входящи средства на едно място.",
   },
 
   "project.carMarketplace.name": {
@@ -398,8 +398,8 @@ export const translations = {
     bg: "Уеб система за купуване и продаване на автомобили.",
   },
   "project.carMarketplace.description": {
-    en: "web-based platform designed to facilitate the process of buying and selling cars. It allows users to browse listings, post their vehicles for sale, and conduct secure transactions through the platform.",
-    bg: "Уеб платформа, създадена да улесни процеса на купуване и продаване на автомобили. Позволява на потребителите да разглеждат обяви, да публикуват своите превозни средства за продажба и да извършват сигурни транзакции през платформата.",
+    en: "A platform for buying and selling cars. Users browse listings, post their own vehicles for sale, and complete transactions securely through the site.",
+    bg: "Платформа за купуване и продаване на автомобили. Потребителите разглеждат обяви, публикуват собствените си коли за продажба и извършват сигурни сделки през сайта.",
   },
 
   "project.propertyValuation.name": {
@@ -408,7 +408,7 @@ export const translations = {
   },
   "project.propertyValuation.description": {
     en: "A marketplace where property owners request an appraisal and licensed appraisers bid for the job anonymously through a dynamic interface. Once an appraiser is selected and paid, the platform handles all further communication automatically, with the full history visible to both sides. Built with multi-language support from the ground up.",
-    bg: "Целта на системата е да позволи на потребителите да създават оценки, за които всички заинтересовани страни наддават, и да изберат най-подходящия оценител за задачата върху имота. Изборът на оценител се извършва анонимно чрез динамичен интерфейс. Процесът започва със създаване на оценка, свързване на заинтересовани страни, въвеждане на данни за имота и показване на оценителите чрез интерфейса. След като оценителят е избран и оценките са платени, процесът е завършен. Цялата комуникация се извършва автоматично през платформата и е видима за потребителите. Платформата поддържа множество езици.",
+    bg: "Платформа, на която собственици на имоти заявяват оценка, а лицензирани оценители наддават за задачата анонимно чрез динамичен интерфейс. След като оценителят е избран и платен, платформата поема цялата по-нататъшна комуникация автоматично, а пълната история е видима и за двете страни. Изградена с поддръжка на множество езици от самото начало.",
   },
 
   "project.managementSystem.name": {
@@ -416,8 +416,8 @@ export const translations = {
     bg: "Уеб система за управление",
   },
   "project.managementSystem.description": {
-    en: "The Web-based management system is a comprehensive platform that allows users to place orders, monitor product availability, and manage their inventory effectively. Users can specify unique properties for each product, such as images, prices and etc. Additionally, the system includes features for adding sales and provides an innovative dashboard for tracking various statistics related to sales, turnovers, profits, expenses, and product inventory through insightful diagrams.",
-    bg: "Уеб системата за управление е цялостна платформа, която позволява на потребителите да правят поръчки, да следят наличността на продуктите и да управляват ефективно склада си. Потребителите могат да задават уникални свойства за всеки продукт, като изображения, цени и др. Освен това системата включва функции за добавяне на продажби и предоставя иновативен дашборд за проследяване на различни статистики, свързани с продажби, обороти, печалби, разходи и наличности чрез нагледни диаграми.",
+    en: "A management system for placing orders, tracking product availability, and handling inventory. Each product can have its own details like images and prices. The system also records sales and includes a dashboard that shows statistics on sales, turnover, profit, expenses, and stock through clear charts.",
+    bg: "Система за управление, с която можеш да правиш поръчки, да следиш наличността на продуктите и да управляваш склада. Всеки продукт може да има собствени данни като изображения и цени. Системата записва и продажби и включва дашборд със статистики за продажби, оборот, печалба, разходи и наличности, представени с ясни диаграми.",
   },
 
   "project.jobPortal.name": {
@@ -425,8 +425,8 @@ export const translations = {
     bg: "Система за търсене и предлагане на работа - Job Portal",
   },
   "project.jobPortal.description": {
-    en: "A platform connecting employers with job seekers. Job seekers browse listings filtered by location, salary, and industry, and apply directly with a CV and cover letter; employers post openings and review incoming applications. Built-in messaging and a rating system let both sides communicate and share feedback after the process.",
-    bg: "Платформа, създадена да свързва работодатели с търсещи работа, предоставяйки функционалности за търсене и предлагане на работа. Потребителите могат да създават акаунти, разделени на работодатели и търсещи работа, за достъп до функциите на платформата. Търсещите работа могат да разглеждат обяви, филтрирайки по критерии като локация, заплата и индустрия, докато работодателите могат да публикуват свободни позиции, посочвайки изисквания и предлагана заплата. Платформата улеснява онлайн кандидатстването, като позволява директно подаване на CV и мотивационни писма. Освен това може да включва съобщения за комуникация между страните и система за оценки и отзиви.",
+    en: "A platform connecting employers with job seekers. Job seekers browse listings filtered by location, salary, and industry, and apply directly with a CV and cover letter. Employers post openings and review incoming applications. Built-in messaging and a rating system let both sides communicate and share feedback after the process.",
+    bg: "Платформа, която свързва работодатели с търсещи работа. Търсещите разглеждат обяви, филтрирани по локация, заплата и индустрия, и кандидатстват директно с CV и мотивационно писмо. Работодателите публикуват позиции и преглеждат постъпилите кандидатури. Вградени съобщения и система за оценки позволяват на двете страни да общуват и да оставят обратна връзка след процеса.",
   },
 
   "project.appointmentSystem.name": {
@@ -434,14 +434,14 @@ export const translations = {
     bg: "Система за записване на часове",
   },
   "project.appointmentSystem.description": {
-    en: "The Appointment System is a web-based application designed to facilitate the scheduling and management of appointments and meetings. Users can effortlessly add appointments, while also being able to filter through the data based on various criteria. With its intuitive interface and robust backend, the system ensures efficient organization and coordination of schedules for individuals or teams.",
-    bg: "Системата за записване на часове е уеб приложение, създадено да улесни планирането и управлението на часове и срещи. Потребителите могат лесно да добавят записвания, както и да филтрират данните по различни критерии. С интуитивния си интерфейс и стабилен backend, системата осигурява ефективна организация и координация на графици за отделни хора или екипи.",
+    en: "A web app for scheduling and managing appointments and meetings. Users add appointments and filter them by different criteria, which keeps schedules organized for individuals and teams alike.",
+    bg: "Уеб приложение за записване и управление на часове и срещи. Потребителите добавят записвания и ги филтрират по различни критерии, което помага графиците да останат подредени - за отделни хора и за екипи.",
   },
 
   "project.laravelBlog.name": { en: "Laravel Blog", bg: "Laravel блог" },
   "project.laravelBlog.description": {
-    en: "The Laravel Blog project is a dynamic web application built using HTML, CSS, Bootstrap, PHP, Laravel, and MySQL. It serves as a versatile platform for creating, updating, reading, and deleting (CRUD) blog posts, providing users with the ability to manage their content seamlessly. Additionally, the system supports user profiles, allowing individuals to create and personalize their accounts. Through its intuitive interface and robust backend powered by Laravel, users can easily compose, edit, and publish blog posts while maintaining full control over their profiles. With features for both content creation and user management, the blog offers a comprehensive solution for blogging enthusiasts and content creators alike.",
-    bg: "Проектът Laravel блог е динамично уеб приложение, изградено с HTML, CSS, Bootstrap, PHP, Laravel и MySQL. Служи като гъвкава платформа за създаване, редактиране, четене и изтриване (CRUD) на публикации в блог, давайки на потребителите възможност да управляват съдържанието си безпроблемно. Освен това системата поддържа потребителски профили, позволявайки създаване и персонализиране на акаунти. Чрез интуитивния интерфейс и стабилния backend с Laravel, потребителите могат лесно да пишат, редактират и публикуват статии, запазвайки пълен контрол над профилите си.",
+    en: "A blog application built with HTML, CSS, Bootstrap, PHP, Laravel, and MySQL. It covers full CRUD for posts - create, edit, read, and delete - and supports user profiles, so each person manages their own account and content. Writing, editing, and publishing posts all happen through a simple interface backed by Laravel.",
+    bg: "Блог приложение, изградено с HTML, CSS, Bootstrap, PHP, Laravel и MySQL. Поддържа пълен CRUD за публикациите - създаване, редактиране, четене и изтриване - както и потребителски профили, така че всеки да управлява собствения си акаунт и съдържание. Писането, редактирането и публикуването минават през прост интерфейс с Laravel отзад.",
   },
 
   "project.workflowSystem.name": {
@@ -449,8 +449,8 @@ export const translations = {
     bg: "Система за управление на работния поток",
   },
   "project.workflowSystem.description": {
-    en: "Web-based workflow management system. I have envisioned a site from where every user will be able to make a request/order for the type of service. An administrator will then process their order, via an admin panel/window where a task will begin for a specific team. Employees from the team will access the tasks from a mobile device (tablet).",
-    bg: "Уеб система за управление на работния поток. Замислих сайт, от който всеки потребител може да направи заявка/поръчка за определен тип услуга. Администратор след това обработва поръчката през админ панел, където се създава задача за конкретен екип. Служителите от екипа достъпват задачите от мобилно устройство (таблет).",
+    en: "A web-based workflow management system. Any user can submit a request or order for a type of service. An administrator processes it from an admin panel, which creates a task for a specific team, and the team's employees pick up those tasks from a mobile device (tablet).",
+    bg: "Уеб система за управление на работния поток. Всеки потребител може да подаде заявка или поръчка за определен тип услуга. Администратор я обработва през админ панел, което създава задача за конкретен екип, а служителите от екипа поемат задачите от мобилно устройство (таблет).",
   },
 
   "project.priceComparison.name": {
@@ -458,8 +458,8 @@ export const translations = {
     bg: "Уеб платформа за сравнение на цени и продукти",
   },
   "project.priceComparison.description": {
-    en: "Web platform for comparing prices and products from various sites. With the development of e-commerce, the online space is crowded with a lot of information. There comes the need for such platforms for comparing products and services. The idea is for consumers to easily make their choice when purchasing a product. ",
-    bg: "Уеб платформа за сравнение на цени и продукти от различни сайтове. С развитието на електронната търговия онлайн пространството е претоварено с много информация. Оттам идва нуждата от такива платформи за сравнение на продукти и услуги. Идеята е потребителите лесно да направят своя избор при покупка на продукт. ",
+    en: "A platform for comparing prices and products across different sites. As online shopping grows, there's more information than anyone can sort through, so a tool like this helps consumers compare products and services and pick what's right for them.",
+    bg: "Платформа за сравнение на цени и продукти от различни сайтове. С разрастването на онлайн търговията информацията става твърде много, за да се обхване, затова такъв инструмент помага на потребителите да сравняват продукти и услуги и по-лесно да избират най-подходящото за тях.",
   },
 
   "project.workProcessManagement.name": {
@@ -467,8 +467,8 @@ export const translations = {
     bg: "Система за управление на работния процес",
   },
   "project.workProcessManagement.description": {
-    en: "The system allows users after logging into the system and many functional options. The main functionalities are: adding new products and employees, screen with employees and products, editing employees and products, exporting data from the system.",
-    bg: "Системата предоставя на потребителите след вход множество функционални опции. Основните функционалности са: добавяне на нови продукти и служители, екран със служители и продукти, редактиране на служители и продукти, експортиране на данни от системата.",
+    en: "After logging in, users get a set of tools for managing products and employees: adding new products and staff, viewing them on dedicated screens, editing their details, and exporting data from the system.",
+    bg: "След вход потребителите получават набор от инструменти за управление на продукти и служители: добавяне на нови продукти и служители, преглед на отделни екрани, редактиране на данните им и експортиране на данни от системата.",
   },
 
   "project.pizzeriaManagement.name": {
@@ -476,8 +476,8 @@ export const translations = {
     bg: "Система за управление на работния процес в пицария",
   },
   "project.pizzeriaManagement.description": {
-    en: "The system allows users, after logging into the system, many functional options. The main functionalities are: adding new products according to different criteria, viewing products and filtering according to different criteria, entering stocks, reporting used products.",
-    bg: "Системата предоставя на потребителите след вход множество функционални опции. Основните функционалности са: добавяне на нови продукти по различни критерии, преглед и филтриране на продукти по различни критерии, въвеждане на наличности, отчитане на използвани продукти.",
+    en: "After logging in, users get a set of tools for running a pizzeria: adding new products by different criteria, browsing and filtering products, entering stock, and reporting used products.",
+    bg: "След вход потребителите получават набор от инструменти за управление на пицария: добавяне на нови продукти по различни критерии, преглед и филтриране на продукти, въвеждане на наличности и отчитане на използвани продукти.",
   },
 
   // --- Certifications category titles ---
@@ -496,12 +496,12 @@ export const translations = {
     bg: "Първо място сред 24 проекта на вътрешния конкурс за AI иновации в MyPOS през 2026 г. с AutoPilot - end-to-end автоматизация на ежедневната работа на разработчиците, изградена с Claude Code.",
   },
   "cert.craictAward.description": {
-    en: "The recipient of the CRAICT Award at UE Varna in 2023, honored as a Laureate, signifies an individual recognized for talent and achievements. This award, part of a fund supporting talented students, highlights their outstanding contributions and dedication to their field of study or area of expertise within the university community.",
-    bg: "Носител на наградата CRAICT в ИУ - Варна през 2023 г., отличен като лауреат, което означава човек, признат за талант и постижения. Наградата, част от фонд за подкрепа на талантливи студенти, подчертава изключителния принос и отдаденост към областта на обучение в рамките на университетската общност.",
+    en: "Recipient of the CRAICT Award at the University of Economics - Varna for 2023. The award is part of the programme supporting talented students and is granted for high academic achievement and professional development.",
+    bg: "Носител на наградата CRAICT на Икономически университет – Варна за 2023 г. Отличието е част от програмата за подкрепа на талантливи студенти и се присъжда за високи академични постижения и професионално развитие.",
   },
   "cert.studentActivityAward.description": {
     en: `Certificate for first place in 2022, "Review of student activities" at the Department of Informatics with development (Platform for comparison of prices and products from various websites).`,
-    bg: 'Сертификат за първо място през 2022 г., "Преглед на студентската активност" в катедра Информатика с разработка (Платформа за сравнение на цени и продукти от различни сайтове).',
+    bg: 'Сертификат за първо място през 2022 г., "Преглед на студентската дейност" в катедра Информатика с разработка (Платформа за сравнение на цени и продукти от различни сайтове).',
   },
   "cert.computerLiteracy.description": {
     en: "Computer Literacy Certificate. Released in 2018. The certificate covers an MS Office suite and work with the Internet and applications.",
@@ -512,12 +512,12 @@ export const translations = {
     bg: "Веднъж спортист на годината в спортното училище във Варна през 2017 г. 5 пъти отбор на годината. 3-то място на Европейското първенство по хандбал. Много индивидуални награди и медали от държавни финали.",
   },
   "cert.itMasterClass9.description": {
-    en: "Part of the IT Master Class 9. The university provides us to become a part of the companies in the IT field and gain some of their experience. ",
-    bg: "Част от IT Master Class 9. Университетът ни дава възможност да станем част от компании в IT сферата и да придобием част от техния опит. ",
+    en: "Part of IT Master Class 9, a university programme that connects students with IT companies to get a taste of their day-to-day work and experience.",
+    bg: "Част от IT Master Class 9 - университетска програма, която среща студентите с IT компании, за да усетят ежедневната им работа и да натрупат опит.",
   },
   "cert.itMasterClass10.description": {
-    en: "Part of the IT Master Class 10. The university provides us to become a part of the companies in the IT field and gain some of their experience. ",
-    bg: "Част от IT Master Class 10. Университетът ни дава възможност да станем част от компании в IT сферата и да придобием част от техния опит. ",
+    en: "Part of IT Master Class 10, a university programme that connects students with IT companies to get a taste of their day-to-day work and experience.",
+    bg: "Част от IT Master Class 10 - университетска програма, която среща студентите с IT компании, за да усетят ежедневната им работа и да натрупат опит.",
   },
   "cert.scientificPublication.description": {
     en: `Report in the collection "STUDENT SCIENTIFIC CONFERENCE" on the topic "Development of web platforms", Publishing House "Science and Economics" University of Economics - Varna 2022.`,
