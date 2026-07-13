@@ -32,11 +32,11 @@ const Home = () => {
       header='page.aboutMe'>
       <InViewAnimation>
         <div className='space-y-4 pt-6'>
-          <p className='text-justify text-lg leading-8 text-slate-600 dark:text-slate-300'>
+          <p className='sm:text-justify text-lg leading-8 text-slate-600 dark:text-slate-300'>
             {t("about.intro1")}
           </p>
 
-          <p className='text-justify leading-7 text-slate-500 dark:text-slate-400'>
+          <p className='sm:text-justify leading-7 text-slate-500 dark:text-slate-400'>
             {t("about.intro2")}
           </p>
         </div>
@@ -84,7 +84,7 @@ const Home = () => {
                   {t(item.title)}
                 </h4>
 
-                <p className='mt-2 text-justify leading-7 text-slate-500 dark:text-slate-400'>{t(item.text)}</p>
+                <p className='mt-2 sm:text-justify leading-7 text-slate-500 dark:text-slate-400'>{t(item.text)}</p>
               </div>
             </div>
           </InViewAnimation>

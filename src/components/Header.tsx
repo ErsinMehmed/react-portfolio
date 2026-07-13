@@ -4,6 +4,7 @@ import { headerLinks } from "../Data";
 import { useLanguage } from "../i18n/LanguageContext";
 import LanguageToggle from "./LanguageToggle";
 import ThemeToggle from "./ThemeToggle";
+import { CommandMenuButton } from "./CommandPalette";
 
 const Header = () => {
   const location = useLocation();
@@ -24,6 +25,7 @@ const Header = () => {
   return (
     <div className='mb-8 hidden lg:flex lg:flex-col lg:items-end'>
       <div className='mb-3 flex items-center gap-2'>
+        <CommandMenuButton className='shadow-sm' />
         <LanguageToggle className='shadow-sm' />
         <ThemeToggle className='shadow-sm' />
       </div>

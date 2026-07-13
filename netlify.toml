@@ -2,6 +2,13 @@
   command = "npm run build"
   publish = "build"
 
+# "Ask my CV" endpoint. The GROQ_API_KEY env var must be set in the Netlify
+# site settings (and in a local .env for `netlify dev`); it is never bundled
+# into the client. Reachable at /.netlify/functions/ask-cv.
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
 # Match CI and the npm-11 lockfile generator, so Netlify's `npm ci` reads the
 # lockfile the same way and Vite has a supported Node runtime.
 [build.environment]

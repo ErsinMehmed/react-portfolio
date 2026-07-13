@@ -29,6 +29,67 @@ export const translations = {
   },
   "notFound.backHome": { en: "Back to home", bg: "Обратно към началото" },
 
+  // --- Command palette ---
+  "cmd.placeholder": {
+    en: "Search pages and actions…",
+    bg: "Търси страници и действия…",
+  },
+  "cmd.pages": { en: "Pages", bg: "Страници" },
+  "cmd.actions": { en: "Actions", bg: "Действия" },
+  "cmd.empty": { en: "No results", bg: "Няма резултати" },
+  "cmd.open": { en: "Open command palette", bg: "Отвори командния панел" },
+  "cmd.theme.toDark": { en: "Switch to dark theme", bg: "Тъмна тема" },
+  "cmd.theme.toLight": { en: "Switch to light theme", bg: "Светла тема" },
+  "cmd.lang.toBg": { en: "Switch to Bulgarian", bg: "Смени на български" },
+  "cmd.lang.toEn": { en: "Switch to English", bg: "Смени на английски" },
+
+  // --- Ask my CV (AI) ---
+  "askCv.open": { en: "Ask about me", bg: "Питай за мен" },
+  "askCv.title": { en: "Ask about me", bg: "Питай за мен" },
+  "askCv.subtitle": {
+    en: "AI answers, grounded only in my real CV.",
+    bg: "AI отговори, само от истинското ми CV.",
+  },
+  "askCv.placeholder": {
+    en: "e.g. Has he worked with payment systems?",
+    bg: "напр. Работил ли е с платежни системи?",
+  },
+  "askCv.send": { en: "Ask", bg: "Питай" },
+  "askCv.sources": { en: "Sources", bg: "Източници" },
+  "askCv.thinking": { en: "Thinking…", bg: "Мисля…" },
+  "askCv.hint": {
+    en: "Try one of these:",
+    bg: "Пробвай някой от тези:",
+  },
+  "askCv.disclaimer": {
+    en: "Answers are AI-generated from my CV and may be imperfect.",
+    bg: "Отговорите са AI-генерирани от CV-то ми и може да не са перфектни.",
+  },
+  "askCv.ex1": {
+    en: "Has he worked with payment systems?",
+    bg: "Работил ли е с платежни системи?",
+  },
+  "askCv.ex2": {
+    en: "What's his backend experience?",
+    bg: "Какъв е backend опитът му?",
+  },
+  "askCv.ex3": {
+    en: "Does he have AI experience?",
+    bg: "Има ли опит с AI?",
+  },
+  "askCv.error": {
+    en: "Something went wrong. Please try again in a moment.",
+    bg: "Нещо се обърка. Опитай пак след малко.",
+  },
+  "askCv.errorRate": {
+    en: "Too many questions right now — give it a few seconds.",
+    bg: "Твърде много въпроси в момента — изчакай няколко секунди.",
+  },
+  "askCv.errorConfig": {
+    en: "The assistant isn't configured on this deployment yet.",
+    bg: "Асистентът още не е конфигуриран на този сайт.",
+  },
+
   // --- Profile card ---
   "profile.name": { en: "Ersin Hyusein", bg: "Ерсин Хюсеин" },
   "profile.jobTitle": {
@@ -126,7 +187,7 @@ export const translations = {
   "skills.quality.title": { en: "Quality & Deployment", bg: "Качество и внедряване" },
   "skills.quality.text": {
     en: "I care about clean, testable code. I back features with unit and integration tests, ship through CI/CD pipelines, and work in Agile teams with sprint planning, standups and continuous delivery.",
-    bg: "Държа на чист и тестваем код. Подсигурявам функционалностите с unit и интеграционни тестове, доставям през CI/CD pipeline-и и работя в Agile екипи със sprint planning, standup-и и непрекъсната доставка.",
+    bg: "Държа на чист и тестваем код. Подсигурявам функционалностите с unit и интеграционни тестове, доставям през CI/CD pipeline-и и работя в Agile екипи със sprint planning и standup-и.",
   },
 
   // --- Resume sections ---

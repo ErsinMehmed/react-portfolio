@@ -3,6 +3,7 @@ import { socialLinks, personalInfo } from "../Data";
 import { useLanguage } from "../i18n/LanguageContext";
 import { useState, useEffect, lazy, Suspense, type MouseEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { openAskCv } from "./AskCvModal";
 import type { IconProps } from "../types/icon";
 
 // Only needed once the QR modal opens, so keep it out of the main bundle
@@ -87,15 +88,15 @@ const ProfileCard = () => {
   return (
     <>
       <div className='lg:sticky top-[158px]'>
-        <div className='relative mx-auto mb-6 mt-32 w-full bg-white px-7 pb-6 text-center shadow-[0_24px_70px_-30px_rgba(27,74,120,0.45)] ring-1 ring-slate-900/[0.04] dark:bg-slate-900 dark:shadow-[0_24px_70px_-30px_rgba(0,0,0,0.6)] dark:ring-white/[0.06] sm:mt-36 md:mt-40 lg:mb-0 lg:mt-0 lg:rounded-[28px]'>
+        <div className='relative mx-auto mb-6 mt-28 w-full bg-white px-7 pb-5 text-center shadow-[0_24px_70px_-30px_rgba(27,74,120,0.45)] ring-1 ring-slate-900/[0.04] dark:bg-slate-900 dark:shadow-[0_24px_70px_-30px_rgba(0,0,0,0.6)] dark:ring-white/[0.06] sm:mt-32 md:mt-36 lg:mb-0 lg:mt-0 lg:rounded-[28px]'>
           <img
             src={"/images/profile.webp"}
-            className='absolute left-1/2 -mt-[120px] h-52 w-52 -translate-x-1/2 rounded-[22px] object-cover shadow-[0_18px_40px_-16px_rgba(27,74,120,0.55)] ring-4 ring-white dark:ring-slate-900 lg:h-48 lg:w-48 xl:h-52 xl:w-52'
+            className='absolute left-1/2 -mt-[104px] h-48 w-48 -translate-x-1/2 rounded-[22px] object-cover shadow-[0_18px_40px_-16px_rgba(27,74,120,0.55)] ring-4 ring-white dark:ring-slate-900'
             alt='Ersin Hyusein, web developer'
           />
 
-          <div className='pt-[104px]'>
-            <h2 className='font-display text-[24px] font-bold tracking-tight text-slate-800 dark:text-slate-100'>
+          <div className='pt-[96px]'>
+            <h2 className='font-display text-[22px] font-bold tracking-tight text-slate-800 dark:text-slate-100'>
               {t("profile.name")}
             </h2>
 
@@ -104,7 +105,7 @@ const ProfileCard = () => {
               {t("profile.jobTitle")}
             </p>
 
-            <div className='mt-4 flex justify-center gap-2.5'>
+            <div className='mt-3.5 flex justify-center gap-2.5'>
               {socialLinks.map((link, index) => {
                 const IconComponent = link.icon;
 
@@ -123,7 +124,7 @@ const ProfileCard = () => {
               })}
             </div>
 
-            <div className='mt-5 divide-y divide-slate-200/50 rounded-2xl bg-[#f7f9fb] px-5 text-left dark:divide-slate-700/50 dark:bg-slate-800/60'>
+            <div className='mt-3.5 divide-y divide-slate-200/50 rounded-2xl bg-[#f7f9fb] px-5 text-left dark:divide-slate-700/50 dark:bg-slate-800/60'>
               {personalInfo.map((item, index) => {
                 const isPhone = index === 2;
                 const isEmail = index === 3;
@@ -165,7 +166,20 @@ const ProfileCard = () => {
 
             <button
               type='button'
-              className='group mt-5 inline-flex w-full items-center justify-center gap-2.5 rounded-2xl bg-[#1b74e4] px-8 py-3 text-base font-semibold text-white shadow-[0_14px_30px_-12px_rgba(27,116,228,0.7)] transition-all duration-200 ease-out hover:bg-[#1667cf] active:scale-[0.98]'
+              onClick={openAskCv}
+              className='mt-4 inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-slate-300 px-8 py-2.5 text-sm font-semibold text-slate-700 transition-all duration-200 ease-out hover:border-[#1b74e4] hover:text-[#1b74e4] active:scale-[0.98] dark:border-slate-600 dark:text-slate-200 dark:hover:border-blue-400 dark:hover:text-blue-400'>
+              <svg
+                viewBox='0 0 24 24'
+                fill='currentColor'
+                className='h-4 w-4'>
+                <path d='M12 2l1.9 5.1L19 9l-5.1 1.9L12 16l-1.9-5.1L5 9l5.1-1.9L12 2zm7 12l.9 2.4L22 17l-2.1.6L19 20l-.9-2.4L16 17l2.1-.6L19 14z' />
+              </svg>
+              {t("askCv.open")}
+            </button>
+
+            <button
+              type='button'
+              className='group mt-2 inline-flex w-full items-center justify-center gap-2.5 rounded-2xl bg-[#1b74e4] px-8 py-2.5 text-base font-semibold text-white shadow-[0_14px_30px_-12px_rgba(27,116,228,0.7)] transition-all duration-200 ease-out hover:bg-[#1667cf] active:scale-[0.98]'
               onClick={handleDownload}>
               <IconDownload className='h-5 w-5 transition-transform duration-200 ease-out group-hover:-translate-y-0.5' />
               {t("profile.downloadCv")}

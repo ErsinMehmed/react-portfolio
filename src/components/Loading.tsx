@@ -19,14 +19,14 @@ const Pill = ({ className = "" }: { className?: string }) => (
 
 const ProfileSkeleton = () => (
   <div className='lg:sticky lg:top-[158px]'>
-    <div className='relative mx-auto mb-6 mt-32 w-full bg-white px-7 pb-6 shadow-[0_24px_70px_-30px_rgba(27,74,120,0.45)] ring-1 ring-slate-900/[0.04] dark:bg-slate-900 dark:ring-white/[0.06] sm:mt-36 md:mt-40 lg:mb-0 lg:mt-0 lg:rounded-[28px]'>
-      <div className='absolute left-1/2 -mt-[120px] h-52 w-52 -translate-x-1/2 rounded-[22px] bg-slate-200/70 ring-4 ring-white dark:bg-slate-700/50 dark:ring-slate-900 lg:h-48 lg:w-48 xl:h-52 xl:w-52' />
+    <div className='relative mx-auto mb-6 mt-28 w-full bg-white px-7 pb-5 shadow-[0_24px_70px_-30px_rgba(27,74,120,0.45)] ring-1 ring-slate-900/[0.04] dark:bg-slate-900 dark:ring-white/[0.06] sm:mt-32 md:mt-36 lg:mb-0 lg:mt-0 lg:rounded-[28px]'>
+      <div className='absolute left-1/2 -mt-[104px] h-48 w-48 -translate-x-1/2 rounded-[22px] bg-slate-200/70 ring-4 ring-white dark:bg-slate-700/50 dark:ring-slate-900' />
 
-      <div className='pt-[104px]'>
-        <Bar className='mx-auto h-7 w-40' />
+      <div className='pt-[96px]'>
+        <Bar className='mx-auto h-6 w-40' />
         <Bar className='mx-auto mt-2 h-4 w-36' />
 
-        <div className='mt-4 flex justify-center gap-2.5'>
+        <div className='mt-3.5 flex justify-center gap-2.5'>
           {Array.from({ length: 4 }).map((_, i) => (
             <div
               key={i}
@@ -35,21 +35,23 @@ const ProfileSkeleton = () => (
           ))}
         </div>
 
-        <div className='mt-5 divide-y divide-slate-200/50 rounded-2xl bg-[#f7f9fb] px-5 dark:divide-slate-700/50 dark:bg-slate-800/60'>
+        <div className='mt-3.5 divide-y divide-slate-200/50 rounded-2xl bg-[#f7f9fb] px-5 dark:divide-slate-700/50 dark:bg-slate-800/60'>
           {Array.from({ length: 5 }).map((_, i) => (
             <div
               key={i}
               className='flex items-center gap-3.5 py-2.5'>
               <div className='h-[18px] w-[18px] shrink-0 rounded bg-slate-200/70 dark:bg-slate-700/50' />
               <div className='flex-1'>
-                <Bar className='h-2.5 w-16' />
-                <Bar className='mt-1.5 h-3.5 w-32' />
+                <Bar className='h-3 w-16' />
+                <Bar className='mt-3 h-4 w-32' />
               </div>
             </div>
           ))}
         </div>
 
-        <Bar className='mt-5 h-12 w-full rounded-2xl' />
+        {/* Ask about me (outline) + Download CV (primary) */}
+        <div className='mt-4 h-11 w-full rounded-2xl border border-slate-200 dark:border-slate-700' />
+        <Bar className='mt-2 h-11 w-full rounded-2xl' />
       </div>
     </div>
   </div>
@@ -59,6 +61,7 @@ const ProfileSkeleton = () => (
 const NavSkeleton = () => (
   <div className='mb-8 hidden lg:flex lg:flex-col lg:items-end'>
     <div className='mb-3 flex items-center gap-2'>
+      <div className='h-8 w-[76px] rounded-full border border-slate-200 bg-white shadow-sm dark:border-slate-700 dark:bg-slate-900' />
       <div className='inline-flex items-center rounded-full border border-slate-200 bg-white p-0.5 shadow-sm dark:border-slate-700 dark:bg-slate-900'>
         <Pill className='h-6 w-9' />
         <div className='h-6 w-9' />
