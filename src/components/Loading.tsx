@@ -339,8 +339,301 @@ const resolveBody = (pathname: string): ComponentType => {
   return key ? ROUTES[key] : DefaultBody;
 };
 
+// /projects/:slug (case study) breaks out of the ProfileCard shell entirely
+// (see CaseStudyShell), so it needs its own full-bleed skeleton below instead
+// of slotting a Body into the generic sidebar layout.
+const isCaseStudyRoute = (pathname: string) =>
+  pathname.startsWith("/projects/") && pathname.length > "/projects/".length;
+
+/* ---- Case study page (full-bleed shell, no ProfileCard) ---- */
+
+const CaseStudyHeaderSkeleton = () => (
+  <header className='sticky top-0 z-40 border-b border-transparent'>
+    <div className='mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8'>
+      <div className='flex items-center gap-2'>
+        <div className='h-7 w-7 rounded-full border border-slate-200 bg-white dark:border-slate-700 dark:bg-slate-900' />
+        <Bar className='hidden h-4 w-16 sm:block' />
+      </div>
+      <div className='flex items-center gap-2'>
+        <div className='inline-flex items-center rounded-full border border-slate-200 bg-white p-0.5 shadow-sm dark:border-slate-700 dark:bg-slate-900'>
+          <Pill className='h-6 w-9' />
+          <div className='h-6 w-9' />
+        </div>
+        <div className='h-8 w-8 rounded-full border border-slate-200 bg-white shadow-sm dark:border-slate-700 dark:bg-slate-900' />
+        <Pill className='ml-1 hidden h-7 w-24 sm:block' />
+      </div>
+    </div>
+  </header>
+);
+
+// Mirrors CaseStudyHero.
+const CaseStudyHeroSkeleton = () => (
+  <div className='pt-14 sm:pt-20'>
+    <Bar className='h-4 w-40' />
+    <Bar className='mt-4 h-10 w-3/4 max-w-2xl sm:h-14' />
+    <Bar className='mt-3 h-10 w-1/2 max-w-md sm:h-14' />
+    <div className='mt-6 max-w-2xl space-y-2.5'>
+      <Bar className='h-5 w-full' />
+      <Bar className='h-5 w-11/12' />
+    </div>
+    <div className='mt-4 max-w-2xl space-y-2'>
+      <Bar className='h-4 w-full' />
+      <Bar className='h-4 w-5/6' />
+    </div>
+    <div className='mt-9 flex flex-wrap gap-x-10 gap-y-4'>
+      {Array.from({ length: 2 }).map((_, i) => (
+        <div key={i}>
+          <Bar className='h-3 w-16' />
+          <Bar className='mt-2 h-4 w-24' />
+        </div>
+      ))}
+    </div>
+  </div>
+);
+
+// Mirrors MetricsBand.
+const CaseStudyMetricsSkeleton = () => (
+  <dl className='mt-14 grid grid-cols-2 gap-x-6 gap-y-8 border-y border-slate-200/70 py-8 dark:border-slate-800 lg:grid-cols-4'>
+    {Array.from({ length: 4 }).map((_, i) => (
+      <div
+        key={i}
+        className='flex flex-col'>
+        <Bar className='h-9 w-16' />
+        <Bar className='mt-3 h-4 w-24' />
+        <Bar className='mt-1 h-3 w-28' />
+      </div>
+    ))}
+  </dl>
+);
+
+// Mirrors SectionNav (desktop only).
+const CaseStudySectionNavSkeleton = () => (
+  <div className='sticky top-24 hidden self-start lg:block'>
+    <div className='space-y-1 border-l border-slate-200 dark:border-slate-800'>
+      {Array.from({ length: 6 }).map((_, i) => (
+        <div
+          key={i}
+          className='py-1.5 pl-4'>
+          <Bar className='h-3.5 w-20' />
+        </div>
+      ))}
+    </div>
+  </div>
+);
+
+// Mirrors SectionHeading.
+const CaseStudySectionHeadingSkeleton = () => (
+  <div className='flex items-baseline gap-4 sm:gap-5'>
+    <Bar className='h-4 w-5' />
+    <Bar className='h-7 w-40 sm:h-8' />
+  </div>
+);
+
+const CheckItemSkeleton = () => (
+  <div className='flex gap-3'>
+    <div className='mt-0.5 h-4 w-4 shrink-0 rounded-full bg-slate-200/70 dark:bg-slate-700/50' />
+    <Bar className='h-3.5 w-full' />
+  </div>
+);
+
+// Mirrors one ArchitectureDiagram layer card.
+const CaseStudyLayerSkeleton = () => (
+  <div className='relative pl-14 sm:pl-16'>
+    <div className='rounded-2xl border border-slate-200/80 bg-white/70 p-5 dark:border-slate-800 dark:bg-slate-900/60'>
+      <div className='flex items-baseline gap-3'>
+        <Bar className='h-3 w-5' />
+        <Bar className='h-5 w-32' />
+      </div>
+      <Bar className='mt-3 h-3.5 w-full max-w-xl' />
+      <Bar className='mt-1.5 h-3.5 w-2/3 max-w-xl' />
+      <div className='mt-4 flex flex-wrap gap-2'>
+        {Array.from({ length: 3 }).map((_, i) => (
+          <Pill
+            key={i}
+            className='h-6 w-16'
+          />
+        ))}
+      </div>
+    </div>
+  </div>
+);
+
+// Mirrors ArchitectureDiagram.
+const CaseStudyArchitectureSkeleton = () => (
+  <div className='mt-8'>
+    <div className='max-w-2xl space-y-2'>
+      <Bar className='h-4 w-full' />
+      <Bar className='h-4 w-4/5' />
+    </div>
+    <div className='mt-10 space-y-4'>
+      {Array.from({ length: 5 }).map((_, i) => (
+        <CaseStudyLayerSkeleton key={i} />
+      ))}
+    </div>
+    <div className='mt-6 h-14 rounded-xl border border-slate-200/70 bg-slate-50 dark:border-slate-800 dark:bg-slate-800/40' />
+  </div>
+);
+
+// Mirrors one DecisionsSection article.
+const CaseStudyDecisionSkeleton = () => (
+  <div className='border-t border-slate-200 pt-8 dark:border-slate-800'>
+    <div className='flex gap-5 sm:gap-7'>
+      <Bar className='hidden h-8 w-10 sm:block' />
+      <div className='min-w-0 flex-1'>
+        <Bar className='h-6 w-1/2 sm:h-7' />
+        <div className='mt-3 space-y-2'>
+          <Bar className='h-4 w-full' />
+          <Bar className='h-4 w-3/4' />
+        </div>
+        <div className='mt-4 rounded-xl border border-slate-200/70 bg-slate-50 p-4 dark:border-slate-800 dark:bg-slate-800/40'>
+          <Bar className='h-3 w-16' />
+          <Bar className='mt-2 h-4 w-2/3' />
+        </div>
+        <div className='mt-4 grid gap-4 sm:grid-cols-2'>
+          {Array.from({ length: 2 }).map((_, i) => (
+            <div key={i}>
+              <Bar className='h-3 w-10' />
+              <Bar className='mt-1.5 h-3.5 w-full' />
+              <Bar className='mt-1 h-3.5 w-2/3' />
+            </div>
+          ))}
+        </div>
+        <div className='mt-5 flex flex-wrap gap-1.5'>
+          {Array.from({ length: 3 }).map((_, i) => (
+            <Pill
+              key={i}
+              className='h-5 w-14'
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
+// Mirrors one stack group row.
+const CaseStudyStackRowSkeleton = () => (
+  <div className='flex flex-col gap-3 border-t border-slate-200 pt-5 dark:border-slate-800 sm:flex-row sm:items-center sm:gap-6'>
+    <Bar className='h-4 w-32 shrink-0 sm:w-40' />
+    <div className='flex flex-wrap gap-2'>
+      {Array.from({ length: 4 }).map((_, i) => (
+        <Pill
+          key={i}
+          className='h-7 w-16'
+        />
+      ))}
+    </div>
+  </div>
+);
+
+// Mirrors CaseStudyFooterNav.
+const CaseStudyFooterNavSkeleton = () => (
+  <div className='mt-20 rounded-3xl border border-slate-200/70 bg-slate-50 p-8 dark:border-slate-800 dark:bg-slate-800/40 sm:p-10'>
+    <div className='flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between'>
+      <div>
+        <Bar className='h-6 w-48' />
+        <Bar className='mt-2 h-4 w-64 max-w-full' />
+      </div>
+      <div className='flex flex-wrap items-center gap-3'>
+        <Bar className='h-10 w-32 rounded-xl' />
+        <Bar className='h-10 w-32 rounded-xl' />
+      </div>
+    </div>
+    <div className='mt-8 flex items-center justify-between border-t border-slate-200/70 pt-6 dark:border-slate-800'>
+      <Bar className='h-3 w-16' />
+      <Bar className='h-6 w-40' />
+    </div>
+  </div>
+);
+
+// Full page skeleton for /projects/:slug — matches CaseStudyShell 1:1: its own
+// sticky header (no ProfileCard sidebar, no mobile bottom nav), hero, metrics
+// band, sticky section nav and every section in reading order.
+const CaseStudySkeleton = () => (
+  <div className='min-h-screen bg-gradient-to-br from-sky-100 via-blue-50 to-indigo-100 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950'>
+    <CaseStudyHeaderSkeleton />
+    <div className='mx-auto max-w-6xl animate-pulse px-4 pb-28 sm:px-6 lg:px-8'>
+      <CaseStudyHeroSkeleton />
+      <CaseStudyMetricsSkeleton />
+
+      <div className='mt-20 lg:grid lg:grid-cols-[176px_minmax(0,1fr)] lg:gap-10 xl:gap-16'>
+        <CaseStudySectionNavSkeleton />
+
+        <div className='min-w-0 space-y-20'>
+          {/* Problem */}
+          <div>
+            <CaseStudySectionHeadingSkeleton />
+            <div className='mt-6 max-w-2xl space-y-4'>
+              <div className='space-y-2'>
+                <Bar className='h-4 w-full' />
+                <Bar className='h-4 w-11/12' />
+                <Bar className='h-4 w-4/5' />
+              </div>
+              <div className='space-y-2'>
+                <Bar className='h-4 w-full' />
+                <Bar className='h-4 w-3/4' />
+              </div>
+            </div>
+            <Bar className='mb-4 mt-10 h-3 w-24' />
+            <div className='grid gap-x-8 gap-y-3 sm:grid-cols-2'>
+              {Array.from({ length: 4 }).map((_, i) => (
+                <CheckItemSkeleton key={i} />
+              ))}
+            </div>
+          </div>
+
+          {/* Architecture */}
+          <div>
+            <CaseStudySectionHeadingSkeleton />
+            <CaseStudyArchitectureSkeleton />
+          </div>
+
+          {/* Decisions */}
+          <div>
+            <CaseStudySectionHeadingSkeleton />
+            <div className='mt-8 space-y-10'>
+              {Array.from({ length: 5 }).map((_, i) => (
+                <CaseStudyDecisionSkeleton key={i} />
+              ))}
+            </div>
+          </div>
+
+          {/* Results */}
+          <div>
+            <CaseStudySectionHeadingSkeleton />
+            <div className='mt-6 max-w-2xl space-y-2'>
+              <Bar className='h-4 w-full' />
+              <Bar className='h-4 w-5/6' />
+            </div>
+            <div className='mt-8 grid gap-x-8 gap-y-3 sm:grid-cols-2'>
+              {Array.from({ length: 4 }).map((_, i) => (
+                <CheckItemSkeleton key={i} />
+              ))}
+            </div>
+          </div>
+
+          {/* Stack */}
+          <div>
+            <CaseStudySectionHeadingSkeleton />
+            <div className='mt-6 space-y-6'>
+              {Array.from({ length: 3 }).map((_, i) => (
+                <CaseStudyStackRowSkeleton key={i} />
+              ))}
+            </div>
+          </div>
+
+          <CaseStudyFooterNavSkeleton />
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
 const Loading = () => {
   const { pathname } = useLocation();
+
+  if (isCaseStudyRoute(pathname)) return <CaseStudySkeleton />;
+
   const Body = resolveBody(pathname);
 
   return (

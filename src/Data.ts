@@ -151,7 +151,7 @@ const educations: Education[] = [
 const experiences: Experience[] = [
   {
     title: "experience.backendDev.title",
-    period: "07.2023 - Present",
+    period: "07.2023 - 07.2026",
     location: "location.varna",
     company: "company.mypos",
     color: "bg-[#fff4f4]",
@@ -471,6 +471,7 @@ const projects: ProjectsData = {
     {
       name: "project.sokoBeauty.name",
       company: "company.freelance",
+      caseStudySlug: "soko-beauty",
       live: "https://sokobeauty.bg",
       technologies: [
         "JavaScript",
@@ -479,7 +480,7 @@ const projects: ProjectsData = {
         "Next.js",
         "Tailwind",
         "Shadcn UI",
-        "MongoDB",
+        "PostgreSQL",
         "Redis",
         "Stripe",
       ],
@@ -488,6 +489,7 @@ const projects: ProjectsData = {
     {
       name: "project.myposPartnerPortal.name",
       company: "MyPOS",
+      caseStudySlug: "mypos-partner-portal",
       live: "https://partners.mypos.com/en",
       technologies: [
         "JavaScript",
@@ -506,6 +508,7 @@ const projects: ProjectsData = {
     {
       name: "project.paymentsSystem.name",
       company: "MyPOS",
+      caseStudySlug: "mypos-payments-system",
       live: "https://www.mypos.com",
       technologies: [
         "HTML",

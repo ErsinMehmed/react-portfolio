@@ -1,90 +1,116 @@
-# Handoff — "Ask my CV" AI feature (Groq + Netlify Function)
+# Handoff — react-portfolio (paused 2026-07-14)
+
+Repo: github.com/ErsinMehmed/react-portfolio. Last pushed commit is `b58c2e2`
+(command palette + AI assistant). **Everything from the 2026-07-14 session
+(case-study pages, see below) is UNCOMMITTED working-tree work** — verify with
+`git status`, then commit + push after review. All checks green as of writing:
+`npm run typecheck && npm run lint && npm test && npm run build` (29 tests).
 
 ## Goal
 
-Add an AI chatbot to the portfolio: a recruiter asks a natural-language
-question (e.g. "has he worked with payment systems?") and gets a concise,
-**grounded** answer with **source chips**, answered only from the real CV.
-It must run for **$0** (free LLM tier) and keep the API key **server-side**.
+Portfolio that proves seniority. Latest feature: **deep case-study pages** per
+flagship project (problem → architecture diagram → key technical decisions +
+why → results with numbers) — "the one thing that separates senior from
+junior". Bilingual EN/BG, dark mode, per-project brand accent.
 
-Provider chosen: **Groq** (free tier, no card, ~0.3s answers, OpenAI-compatible),
-model `llama-3.3-70b-versatile`.
+## Current Progress (2026-07-14 session — UNCOMMITTED)
 
-## Current Progress
+Three case-study pages live at `/projects/:slug`:
 
-Feature is **built, typechecks, lints, tests (29) and builds green**, and the
-serverless endpoint was **verified end-to-end** (real Groq calls returned correct
-grounded answers + clean source chips; out-of-scope questions correctly answered
-"I don't have that information").
+| Slug | Project | Accent (from the REAL site's CSS) | Timeline |
+|---|---|---|---|
+| `mypos-partner-portal` | MyPOS Partner Portal | blue `#0071f3` (partners.mypos.com) | 02.2025 - 06.2025 |
+| `mypos-payments-system` | Уеб система за бизнес процеси/плащания | green `#00b67a` (www.mypos.com) | 07.2023 - 07.2026 |
+| `soko-beauty` | Soko Beauty store | dusty rose `#c97a7e` (sokobeauty.bg `--color-rose`) | 05.2026 - Present |
 
-Files added/changed (all uncommitted on branch `main`):
+Architecture:
 
-- `netlify/functions/ask-cv.mjs` — the endpoint. POST `{ question }` →
-  `{ answer, sources[] }`. Reads `process.env.GROQ_API_KEY`, calls Groq with a
-  grounded system prompt, per-IP rate limit (8/min, best-effort in-memory),
-  input cap 500 chars, parses a trailing `SOURCES:` line into ≤3 chips.
-- `netlify/functions/cv-knowledge.mjs` — the grounding context: the whole CV as
-  plain English text, each block tagged with a short **comma-free**
-  `[Source: ...]` label (labels must stay comma-free — the client splits sources
-  on commas). Keep in sync with `src/Data.ts` + translations if the CV changes.
-- `src/components/AskCvModal.tsx` — chat modal UI (example questions, user/assistant
-  bubbles, source chips, loading dots, error states, dark mode, a11y dialog,
-  scroll-lock, focus restore). Opens via `openAskCv()` (window event). Calls
-  `/.netlify/functions/ask-cv`.
-- `src/components/CommandPalette.tsx` — added an "Ask my CV" action (opens the modal).
-- `src/components/ProfileCard.tsx` — added an outline "Ask my CV" button under Download CV.
-- `src/App.tsx` — mounts `<AskCvModal/>` (lazy, alongside CommandPalette) so framer
-  stays out of the entry chunk.
-- `src/i18n/translations.ts` — `askCv.*` keys (EN + BG). Model already replies in
-  the question's language automatically.
-- `netlify.toml` — added `[functions] directory = "netlify/functions"`.
-- `.gitignore` — added bare `.env` (for a local `netlify dev` key file).
-
-Bundle stayed lean: main entry ~209 KB gz 70 (unchanged); AskCvModal is a lazy chunk.
+- **Content**: `src/data/caseStudies.ts` — registry keyed by slug; long-form
+  prose is inline `{ en, bg }` (NOT in translations.ts, to keep the flat `t()`
+  map lean). BG was **hand-rewritten to sound human**, not translated (user
+  complained the first BG draft read like AI; rewrite approved-ish, unreviewed).
+- **Types**: `src/types/caseStudy.ts` (exported via `src/types/index.ts`).
+  Metric `suffix` is `string | Bilingual` (e.g. `{ en: "-in-1", bg: "-в-1" }`).
+- **Page**: `src/pages/CaseStudy.tsx` (lazy route in `App.tsx`; unknown slug →
+  NotFound). Sections: Hero → MetricsBand → 01 Problem+constraints →
+  02 Architecture (animated spine diagram) → 03 Decisions
+  (Problem/Approach/Why/Result rhythm) → 04 Results → 05 Stack → FooterNav.
+- **Components**: `src/components/CaseStudy/` — `CaseStudyShell` (accent as CSS
+  vars `--cs-*`, scroll-progress bar, sticky header), `CaseStudyHero`
+  (staggered entrance), `MetricsBand` (NumberTicker), `SectionNav` (sticky
+  rail, IntersectionObserver active tracking), `ArchitectureDiagram` (vertical
+  spine + travelling pulse, `animate-cs-flow` keyframe in `index.css`),
+  `DecisionsSection`, `CaseStudyFooterNav` (prev/next via `caseStudyOrder`),
+  `shared.tsx` (`useBilingual`, `SectionHeading`).
+- **Entry points**: `caseStudySlug` on 3 projects in `src/Data.ts` →
+  ProjectCard renders a Link + "Инфо за проекта" badge instead of the modal.
+- **i18n**: `cs.*` keys in translations.ts; BG for "case study" = "Инфо за
+  проекта"; `duration.present` bg changed "Настояще" → "Досега" (also affects
+  resume badges). Resume myPOS experience end-dated `07.2023 - 07.2026` (user
+  no longer works there).
 
 ## What Worked
 
-- **Context-stuffing, no vector DB.** The CV is a few KB, so the whole thing goes
-  in the system prompt. Groq answered accurately and fast.
-- Instructing the model to end with `SOURCES:` and splitting on that (not JSON mode)
-  is robust across models.
-- Making `[Source: ...]` labels short and **comma-free** fixed broken source chips.
-- Prompt rule "output SOURCES: none if you couldn't answer, max 3 relevant" fixed
-  the model dumping all sections on out-of-scope questions.
-- Testing the real function by importing `ask-cv.mjs` and calling it with a `Request`
-  object under Node (functions v2 use the Web fetch API) — no deploy needed.
-- `netlify dev --command "npm run dev" --target-port 5173 --port 8888 --offline`
-  serves Vite **and** the function together locally.
+- Flagship-first flow (user chose): built MyPOS Partner Portal fully, got
+  feedback, then cloned the shape for the other two.
+- Fetching the real sites' CSS to extract true brand accents (curl the HTML,
+  find `/_next/static/.../*.css`, grep hex/var definitions).
+- Headless Edge screenshots: old `--headless` mode works, `--headless=new`
+  produced NO_SHOT; tall viewports >~3400px also NO_SHOT; use separate
+  `--user-data-dir` per parallel capture; `--force-dark-mode` for dark shots.
+  In-view reveals don't fire in headless (no scroll) — screenshot artifact,
+  not a bug.
+- Per-study accent via CSS custom properties on the page root (`--cs-accent`,
+  `--cs-ink`, `--cs-on-dark`, `--cs-soft`, `--cs-glow`, `--cs-line`).
 
-## What Didn't Work / Gotchas
+## What Didn't Work
 
-- **A frontend `VITE_*` key is NOT an option** — Vite inlines it into the browser
-  bundle, so the Groq key would be public and abused. The key MUST live server-side
-  (the Netlify function). This was explicitly discussed and settled.
-- `netlify dev` flag is `--target-port` (not `--targetPort`).
-- Under the `netlify dev` proxy (:8888) the app hydrated slower than plain Vite
-  (:5173); Playwright screenshots against :5173 (raw Vite) were more reliable. The
-  modal empty state renders fine without the function (only sending needs it).
-- `netlify dev` created a stray `deno.lock` (edge runtime) — deleted; harmless.
-- **A live Groq key was pasted into the chat earlier — treat it as compromised.**
-  It must be **regenerated** in the Groq console before use; do not reuse the pasted one.
+- First BG copy draft = literal mirror of EN → user rejected ("звучи като АИ").
+  Human rewrite done. Lesson: write BG natively, short sentences, dev slang.
+- `AutoPilot` case study was planned but **dropped** — it's an award/cert, not
+  a project entry; user pivoted to paymentsSystem + sokoBeauty instead.
+- Anchor-hash screenshots (`#architecture`) don't scroll in the SPA capture.
+
+## ⚠️ Placeholder numbers (IMPORTANT before deploy)
+
+All case-study **metrics** (30+/60%/40%/10min; 30+/50%/3-in-1/100%;
+2/90+/100%/24-7) and quantified impact lines are **representative fakes I
+made up**, clearly flagged to the user, who has NOT yet supplied real ones.
+The one user-dictated string: "По-висока производителност / Redis кеширане за
+по-бърз достъп до данните" (keep verbatim). Don't ship fake numbers to
+recruiters — ask for real figures or soften to non-numeric claims.
 
 ## Next Steps
 
-1. **Regenerate the Groq key** (the previously shared one is burned). Groq console
-   → revoke old, create new.
-2. **Add it to Netlify**: Site settings → Environment variables → `GROQ_API_KEY` =
-   the new key. (Server-side only; never a `VITE_` var.)
-3. **Local testing (optional):** create a gitignored `.env` in the repo root with
-   `GROQ_API_KEY=...`, then `npx netlify dev` and open the site; click "Ask my CV".
-4. **Deploy**: `git push` — Netlify builds the site and the function together. The
-   endpoint lives at `/.netlify/functions/ask-cv`.
-5. **Verify on prod**: open the deployed site, "Ask my CV" → ask
-   "Has he worked with payment systems?" → expect an answer + source chips.
-   Without the env var set, the function returns 503 `not_configured` and the UI
-   shows a friendly "assistant isn't configured yet" message (graceful).
-6. **Commit** the feature (nothing here contains the key — it's only ever in Netlify's
-   env). Suggested scope: the `netlify/` dir, AskCvModal, CommandPalette action,
-   ProfileCard button, App wiring, translations, netlify.toml, .gitignore.
-7. Optional later polish: streaming responses (Netlify streaming / edge function),
-   and keeping `cv-knowledge.mjs` in sync when the CV data changes.
+1. User reviews the 3 pages (BG copy esp.) at `/projects/...` — dev server was
+   on port 5182 (many stale Vite instances occupy 5173-5181).
+2. Replace placeholder metrics with real numbers (or de-numerify).
+3. Commit + push (conventional message; run the 4 checks first).
+4. Maybe: shorter display title for `mypos-payments-system` (its full name
+   wraps to 3 hero lines); OG/meta for case-study routes is DECLINED territory
+   (see below) — don't propose.
+
+## Carried-forward items (from 2026-07-13 handoff — still pending)
+
+- **Groq key rotation + Netlify env** — the "Ask about me" AI is built but not
+  live: rotate the compromised Groq key, set `GROQ_API_KEY` in Netlify env
+  (server-side, never `VITE_`), redeploy, replace the local gitignored `.env`
+  key too.
+- Skills `years`/`projects` in `src/Data.ts` are estimates.
+- Some certifications lack Drive `link:`s.
+- Lighthouse perf ~0.87 (warning).
+
+## Explicitly DECLINED (do NOT re-propose)
+
+- Feedback widget (Netlify Forms).
+- OG/Twitter meta + JSON-LD + sitemap SEO.
+- 3D hero (react-three-fiber) — removed earlier; only CSS `useTilt` remains.
+
+## Workflow reminders
+
+- `build/` is gitignored — Netlify builds from source; don't commit it.
+- Before pushing: `npm run typecheck && npm run lint && npm test && npm run build`.
+- Never commit the Groq key.
+- `netlify/functions/cv-knowledge.mjs` `[Source: ...]` labels stay comma-free.
+- Long case-study prose goes in `caseStudies.ts` inline `{en,bg}`, NOT
+  translations.ts; short reused UI labels go in translations.ts as `cs.*`.

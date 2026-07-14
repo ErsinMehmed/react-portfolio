@@ -11,6 +11,7 @@ const AskCvModal = lazy(() => import("./components/AskCvModal"));
 const Home = lazy(() => import("./pages/Home"));
 const Resume = lazy(() => import("./pages/Resume"));
 const Project = lazy(() => import("./pages/Project"));
+const CaseStudy = lazy(() => import("./pages/CaseStudy"));
 const Certification = lazy(() => import("./pages/Certification"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
@@ -54,6 +55,11 @@ function App() {
           <Route
             path='/projects'
             element={<Project />}
+          />
+
+          <Route
+            path='/projects/:slug'
+            element={<CaseStudy />}
           />
 
           <Route

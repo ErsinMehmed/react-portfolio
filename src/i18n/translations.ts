@@ -214,7 +214,7 @@ export const translations = {
   // --- Duration units ---
   "duration.yr": { en: "yr", bg: "г." },
   "duration.mo": { en: "mo", bg: "мес." },
-  "duration.present": { en: "Present", bg: "Настояще" },
+  "duration.present": { en: "Present", bg: "Досега" },
 
   // --- Education content ---
   "education.master.title": { en: "Master", bg: "Магистър" },
@@ -425,6 +425,37 @@ export const translations = {
     en: "Proprietary company project, source code is not publicly available.",
     bg: "Фирмен проект, изходният код не е публично достъпен.",
   },
+  "projects.readCaseStudy": { en: "Read case study", bg: "Виж инфо за проекта" },
+  "projects.caseStudyBadge": { en: "Case study", bg: "Инфо за проекта" },
+
+  // --- Case study pages ---
+  "cs.viewLive": { en: "View live", bg: "Виж на живо" },
+  "cs.role": { en: "Role", bg: "Роля" },
+  "cs.timeline": { en: "Timeline", bg: "Период" },
+  "cs.nav.overview": { en: "Overview", bg: "Обзор" },
+  "cs.nav.problem": { en: "Problem", bg: "Проблем" },
+  "cs.nav.architecture": { en: "Architecture", bg: "Архитектура" },
+  "cs.nav.decisions": { en: "Decisions", bg: "Решения" },
+  "cs.nav.results": { en: "Results", bg: "Резултат" },
+  "cs.nav.stack": { en: "Stack", bg: "Стек" },
+  "cs.section.problem": { en: "The problem", bg: "Проблемът" },
+  "cs.section.constraints": { en: "Constraints", bg: "Ограничения" },
+  "cs.section.architecture": { en: "Architecture", bg: "Архитектура" },
+  "cs.section.decisions": { en: "Key technical decisions", bg: "Ключови технически решения" },
+  "cs.section.results": { en: "Outcome", bg: "Резултат" },
+  "cs.section.stack": { en: "Stack", bg: "Технологичен стек" },
+  "cs.decision.problem": { en: "Problem", bg: "Проблем" },
+  "cs.decision.choice": { en: "Approach", bg: "Подход" },
+  "cs.decision.why": { en: "Why", bg: "Защо" },
+  "cs.decision.impact": { en: "Result", bg: "Резултат" },
+  "cs.cta.title": { en: "See the rest of the work", bg: "Виж останалата работа" },
+  "cs.cta.subtitle": {
+    en: "Every project on the list, from production platforms to side experiments.",
+    bg: "Всички проекти в списъка, от продукционни платформи до странични експерименти.",
+  },
+  "cs.cta.allProjects": { en: "All projects", bg: "Всички проекти" },
+  "cs.cta.next": { en: "Next case study", bg: "Следващ проект" },
+
   "company.freelance": { en: "Freelance", bg: "Фрийланс" },
 
   "project.myposPartnerPortal.name": {
@@ -447,7 +478,7 @@ export const translations = {
 
   "project.paymentsSystem.name": {
     en: "Web-based system for managing business processes related to payments.",
-    bg: "Уеб система за управление на бизнес процеси, свързани с плащания.",
+    bg: "Уеб платформа за управление на търговски акаунти, плащания и финансови операции.",
   },
   "project.paymentsSystem.description": {
     en: "The project has two parts: a public website and a user account area. From their account, users manage everything around the payments they receive through their terminals - they can set up online stores with products, issue invoices to their clients, and track all incoming funds in one place.",

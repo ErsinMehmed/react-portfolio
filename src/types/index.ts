@@ -11,3 +11,12 @@ export type {
 } from "./resume";
 export type { ProjectType, Project, ProjectsData, SelectedProject } from "./projects";
 export type { CertificationKind, Certification } from "./certifications";
+export type {
+  Bilingual,
+  CaseStudyAccent,
+  CaseStudyMetric,
+  CaseStudyDecision,
+  ArchLayer,
+  CaseStudyStackGroup,
+  CaseStudy,
+} from "./caseStudy";

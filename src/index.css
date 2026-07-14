@@ -127,6 +127,30 @@
   .animate-caret {
     animation: caret-blink 1.05s steps(1, end) infinite;
   }
+
+  /* Data-flow pulse travelling down the architecture-diagram spine. Animates a
+     tiny decorative dot, so the paint area is negligible; global reduced-motion
+     rules below stop it. */
+  @keyframes cs-flow {
+    0% {
+      top: 0%;
+      opacity: 0;
+    }
+    12% {
+      opacity: 1;
+    }
+    88% {
+      opacity: 1;
+    }
+    100% {
+      top: 100%;
+      opacity: 0;
+    }
+  }
+
+  .animate-cs-flow {
+    animation: cs-flow 3.4s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  }
 }
 
 /* Respect reduced-motion: drop continuous/ambient motion */

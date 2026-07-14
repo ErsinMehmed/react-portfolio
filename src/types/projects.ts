@@ -5,6 +5,11 @@ export type ProjectType = "professional" | "personal";
 export interface Project {
   name: TranslationKey;
   /**
+   * Present only on projects that have a full case-study page. When set, the
+   * project card links to /projects/:slug instead of opening the modal.
+   */
+  caseStudySlug?: string;
+  /**
    * Either a translation key (e.g. "company.freelance") or a raw company
    * name (e.g. "MyPOS") that isn't in the dictionary and is displayed as-is.
    * Professional-only; personal projects have no employer to credit.
