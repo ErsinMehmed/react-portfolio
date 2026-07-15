@@ -1,15 +1,17 @@
 # Handoff — react-portfolio (paused 2026-07-15)
 
-Repo: github.com/ErsinMehmed/react-portfolio. Last commit `93c281c`
-("Fix skill-tooltip flip math and a reused translation key").
+Repo: github.com/ErsinMehmed/react-portfolio. Last commit `bb120c8`
+("Add case-study breadcrumb, root error boundary, dark-mode icon and tooltip fixes").
 
-**Working tree is DIRTY and UNCOMMITTED** — this session's a11y/font/cache/nav
-work is not committed yet. `git status`: ~27 modified files + 1 untracked
-(`public/fonts/onest-cyrillic.woff2` — must `git add` it, it's a real asset).
-All checks were green at pause: `npm run typecheck && npm run lint && npm test
-&& npm run build` (37 tests). **Next agent: run the 4 checks, then commit +
-push** (small logical commits, or one "a11y + BG fonts + cache headers + nav
-redesign" commit).
+**Working tree is CLEAN, everything pushed to `main`.** Two chats ran against
+this repo in parallel on 2026-07-15 — one doing the a11y/font/nav/cache pass
+below, one (caveman-mode) working a separate senior-review list (DRY/dead-code
++ JS/TS + UI/UX findings, new subsection further down). Landed across commits
+`563d379` → `9d3e55c` → `93c281c` → `9deeefa` → `12bb2c5` (ask-cv origin
+check + CSP/security headers + rate-limit pruning) → `bb120c8` (case-study
+breadcrumb, root ErrorBoundary, dark-mode icon fix, tooltip edge-clamp); some
+files were edited by both. All checks green at pause: `npm run typecheck &&
+npm run lint && npm test && npm run build` (37 tests).
 
 ## Goal
 
@@ -87,6 +89,47 @@ path — defeats the point of a light skeleton. Instead: constants
 `src/tests/Loading.test.ts` (asserts they equal `techSkills.length` /
 `projects.*.length`). Skeleton can't silently lie; entry stays light.
 
+## Done in the caveman-mode chat (2026-07-15, separate senior-review pass)
+
+Four review rounds, applied and verified (typecheck/lint/test/build +
+Playwright browser checks) after each:
+
+**DRY / dead code:**
+- Brand blue (`#1b74e4`, ~50 hardcoded occurrences) → `colors.brand`/
+  `brand-dark` in `tailwind.config.js`. Two spots that need a raw hex (QR
+  code `fgColor`, `index.html`'s pre-hydration loader — runs before the JS
+  bundle) get it from `src/theme/colors.ts` / CSS vars, commented "keep in
+  sync with tailwind.config.js".
+- Deleted `src/App.css` (react-transition-group leftover, never imported).
+- Removed unused `color` (Education/Experience/MainSkill) and `iconColor`
+  (PersonalInfoItem) fields from types + `Data.ts`. **Kept** `TechSkill.color`
+  — it's a live fallback in `SkillBox.tsx`'s `TechLogo` (renders when a title
+  has no simple-icons/custom-icon match), just unreachable today since every
+  current skill has a logo.
+- `src/components/ui/Button.tsx` + `Chip.tsx`: documented primitives
+  (Button: primary/secondary/accent × sm/md/lg, polymorphic on `to`/`href`;
+  Chip: brand/neutral/solid/muted/outline × xs/sm). Migrated NotFound,
+  ProfileCard, CaseStudyFooterNav, ProjectCard, ProjectModal, EducationBox,
+  ExperienceBox, SkillsFilterSection off their bespoke class strings.
+- `src/routes.ts`: single source for route paths (this file may show as
+  "user-added" above — it was actually added in this chat, then the other
+  session also adopted it for Header/Loading/MobileMenu/CaseStudyShell).
+
+**JS/TS smells:**
+- `Data.ts`'s tourism job had `company: "experience.tourism.title"` (reused
+  the title key as its own company — a smell, not literally wrong data).
+  Added a separate `company.tourism` key with the same text, per the user
+  ("keep it as Tourism").
+- `SkillBox.tsx`'s tooltip flip math was `index >= total - 6`, hardcoding the
+  desktop 3-col grid — wrong on the 2-col mobile grid (flipped one row too
+  many). `SkillsFilterSection` now tracks real column count via new
+  `src/hooks/useMediaQuery.ts` (stubbed in `setupTests.ts`, jsdom has no
+  `matchMedia`) and passes it down; math is `total - columns * 2`.
+
+**UI/UX:** see the "done"/strikethrough items folded into "Remaining plan
+items" above (scroll restoration, cert card titles, paymentsSystem rename,
+skill-tooltip touch fix, text-justify, LanguageToggle touch target).
+
 ## DEFERRED epic — Prerender / SSG (review §17, user paused it 2026-07-15)
 
 Root cause of the ~0.87 Lighthouse Performance: pure CSR. `index.tsx` does
@@ -129,39 +172,64 @@ Synergises with the immutable cache headers above.
 ### Critical (still open)
 1. **Rotate the compromised Groq key** + set `GROQ_API_KEY` in Netlify env
    (pending since 07-13; AI assistant not live in prod). `.env` is gitignored.
-2. **Resume mobile overflow** (320/375px) from the hidden skill tooltip —
-   likely addressed by commit `93c281c` (tooltip flip math) + the new
-   responsive `useMediaQuery` columns, but **re-verify at 320/375 that
-   scrollWidth == clientWidth** (`src/components/Resume/SkillBox.tsx`).
+2. **Resume mobile horizontal overflow** (320/375px) — the skill tooltip is a
+   fixed `w-[248px]`; on a narrow 2-col grid it can still stretch
+   `scrollWidth` past `clientWidth` even after this session's flip-math +
+   z-index fixes (those fixed *which way it opens* and *stacking*, not its
+   width). **Still needs a real device/DevTools check at 320/375px.**
 3. **Fake case-study metrics** (30+/60%/40%/10min) — replace with real numbers
    or de-numerify. Interview-integrity risk. `src/data/caseStudies.ts`.
-4. **Dark-mode invisible icons** (TechLogo brand-hex: Codex #000, GitHub
-   #181717, Next.js black on slate-900). SkillBox was edited this session —
-   **verify** whether this got fixed; if not, add dark variants / fill-current.
+4. ~~**Dark-mode invisible icons**~~ **done** — `SkillBox.tsx`'s `TechLogo`
+   computes perceived brightness of each simple-icons hex and flips
+   near-black marks (Codex, GitHub, Next.js, Symfony) to a light fill in dark
+   mode via a `--logo-fill` CSS var + `dark:[fill:...]` override.
 
 ### High (still open)
-- §10 **Security headers** in netlify.toml (cache is done): X-Frame-Options,
-  X-Content-Type-Options: nosniff, Referrer-Policy.
-- §11 `project.paymentsSystem.name` → a SHORT product name in both langs
-  (sentence belongs in description).
+- ~~§10 **Security headers**~~ **done** — `netlify.toml`: X-Frame-Options,
+  X-Content-Type-Options, Referrer-Policy, and a CSP (script-src allowlists
+  index.html's two inline scripts by sha256 hash).
+- ~~§11 `project.paymentsSystem.name` → a SHORT product name~~ **done** —
+  renamed to "MyPOS Merchant Platform" / "MyPOS Търговска платформа"
+  (`translations.ts`); the old sentence was dropped, not moved (confirmed
+  with the user — the existing `.description` was already better copy).
 
 ### Medium (still open)
-- §12 Case-study pages have no mobile bottom nav (dead end) + ScrollToTop kills
-  back-scroll position on /projects.
+- Case-study pages have no mobile bottom nav (dead end).
+  ~~ScrollToTop kills back-scroll position on /projects~~ **done** —
+  `App.tsx`'s `ScrollToTop` now saves/restores per-path scroll offset via
+  `sessionStorage` (two ordered `useLayoutEffect`s; see inline comments).
 - §13 framer-motion on the critical path (~40kB gzip via the AskCvModal chunk);
   move Layout h1 + ThemeToggle animations to CSS to keep framer lazy.
-- §14 No ErrorBoundary. (Header deps + hardcoded-hex tokens already done.)
-- §15 Certification cards — `CertificationCard.tsx` was edited this session;
-  verify cards now have titles (were icon+paragraph only).
+- ~~§14 No ErrorBoundary~~ **done** — `src/components/ErrorBoundary.tsx`
+  wraps the router in `index.tsx`; shows a recoverable message + reload
+  button instead of a blank page on a render crash.
+- ~~§15 Certification cards lack titles~~ **done** — `Certification.title`
+  (type + 10 new translation keys, one per cert, derived from each entry's
+  own description) now renders as an `<h4>` above the paragraph.
 - §16 Playwright smoke in CI (routes open + no-overflow assert).
 - §17 SEO pack beyond prerender: per-route meta descriptions, OG cards,
   sitemap, JSON-LD. (Was "declined" 07-13 but re-opened in the review prompt —
   confirm scope with user.)
+- **New from today's UI/UX pass**:
+  - ~~Skill tooltip on touch: no close affordance, overlapped/blocked
+    neighboring cards~~ **done** — root cause was framer-motion's `transform`
+    giving each grid card its own stacking context, so a card's tooltip could
+    never out-rank a *later* sibling card (that sibling silently ate the
+    tap/click). Fixed with `hover:z-30 focus-within:z-30` on the card, plus an
+    explicit close (×) button shown only on `(hover: none)` devices.
+    `src/components/Resume/SkillBox.tsx`.
+  - ~~`sm:text-justify` on About intro paragraphs (rivers on narrow
+    columns)~~ **done** — removed, left-aligned. `src/pages/Home.tsx`.
+  - **New**: case-study pages had no breadcrumb trail — added `Home /
+    Projects / <title>` nav in `CaseStudyShell` (new
+    `CaseStudyBreadcrumb.tsx`, `breadcrumb.home` translation key).
 
 ### Low (still open)
 - §21 `cs-flow` keyframe animates `top` → use translateY (index.css).
-- §22 Rate-limit Map in `netlify/functions/ask-cv.mjs` never pruned.
-- §23 Origin check in ask-cv.mjs (any site can burn the Groq quota).
+- ~~§22 Rate-limit Map in `netlify/functions/ask-cv.mjs` never pruned~~
+  **done** — sweeps stale entries once the map exceeds 5000 tracked IPs.
+- ~~§23 Origin check in ask-cv.mjs~~ **done** — allowlists
+  `ersin-mehmed.netlify.app` + local dev origins, 403s everything else.
 - §24 Feature backlog (50+ ideas in the review: blog/MDX, terminal easter egg,
   live GitHub, streaming AskCv, accent picker...).
 
