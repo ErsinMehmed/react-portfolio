@@ -38,8 +38,52 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Bundle-size guard (size-limit)
+        run: npm run size
+
+      - name: Upload bundle stats
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: bundle-stats
+          path: bundle-stats.html
+          retention-days: 14
+
       - name: Lighthouse CI (budget)
         uses: treosh/lighthouse-ci-action@v12
         with:
           configPath: ./lighthouserc.json
           temporaryPublicStorage: true
+
+  e2e:
+    name: Playwright e2e
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browser
+        run: npx playwright install --with-deps chromium
+
+      - name: Build
+        run: npm run build
+
+      - name: Run e2e tests
+        run: npm run test:e2e
+
+      - name: Upload Playwright report
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 7

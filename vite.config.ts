@@ -69,12 +69,28 @@ const askCvDevServer = (env: Record<string, string>): Plugin => ({
 });
 
 // https://vitejs.dev/config/
-export default defineConfig(({ mode }) => {
+export default defineConfig(async ({ mode }) => {
   // "" prefix loads every var (incl. the non-VITE_ GROQ_API_KEY) for server use.
   const env = loadEnv(mode, process.cwd(), "");
 
+  // rollup-plugin-visualizer is ESM-only; a static import makes Vite's CJS
+  // config loader try to `require` it and fail, so pull it in dynamically.
+  const { visualizer } = await import("rollup-plugin-visualizer");
+
   return {
-    plugins: [react(), askCvDevServer(env)],
+    plugins: [
+      react(),
+      askCvDevServer(env),
+      // Emits a treemap of the bundle after each build. Written outside
+      // `build/` so it is never deployed; CI keeps it as a downloadable
+      // artifact. Inert during dev/test (only hooks build output).
+      visualizer({
+        filename: "bundle-stats.html",
+        gzipSize: true,
+        brotliSize: true,
+        template: "treemap",
+      }) as Plugin,
+    ],
     build: {
       // Keep the CRA-era output dir so netlify.toml, the CI Lighthouse budget
       // and .gitignore all keep working unchanged.
@@ -85,6 +101,10 @@ export default defineConfig(({ mode }) => {
       environment: "jsdom",
       setupFiles: "./src/setupTests.ts",
       css: false,
+      // Unit tests only. The Playwright specs in e2e/ are `*.spec.ts` too, so
+      // scope Vitest to src and keep it from trying to run browser tests.
+      include: ["src/**/*.test.{ts,tsx}"],
+      exclude: ["e2e/**", "node_modules/**"],
     },
   };
 });

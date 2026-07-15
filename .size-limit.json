@@ -1,0 +1,12 @@
+[
+  {
+    "name": "Initial entry JS (brotli)",
+    "path": "build/assets/index-*.js",
+    "limit": "125 kB"
+  },
+  {
+    "name": "App CSS (brotli)",
+    "path": "build/assets/index-*.css",
+    "limit": "11 kB"
+  }
+]
