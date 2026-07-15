@@ -176,7 +176,7 @@ const experiences: Experience[] = [
     title: "experience.tourism.title",
     period: "04.2018 - 09.2018",
     location: "location.goldenSands",
-    company: "experience.tourism.title",
+    company: "company.tourism",
   },
 ];
 

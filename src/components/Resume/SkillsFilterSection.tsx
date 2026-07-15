@@ -3,8 +3,13 @@ import SkillBox from "./SkillBox";
 import Chip from "../ui/Chip";
 import { techSkills } from "../../Data";
 import { useLanguage } from "../../i18n/LanguageContext";
+import { useMediaQuery } from "../../hooks/useMediaQuery";
 import type { TranslationKey } from "../../i18n/translations";
 import type { SkillKind } from "../../types";
+
+// Mirrors the grid's own `lg:grid-cols-3` breakpoint below, so SkillBox can
+// flip the last two rows' tooltips upward regardless of column count.
+const LG_BREAKPOINT = "(min-width: 1024px)";
 
 type FilterKind = SkillKind | "All";
 
@@ -33,6 +38,8 @@ const kindRank = (kind: SkillKind): number => {
 const SkillsFilterSection = () => {
   const { t } = useLanguage();
   const [selectedKind, setSelectedKind] = useState<FilterKind>("All");
+  const isLgUp = useMediaQuery(LG_BREAKPOINT);
+  const columns = isLgUp ? 3 : 2;
 
   const filteredSkills = (
     selectedKind !== "All"
@@ -77,6 +84,7 @@ const SkillsFilterSection = () => {
             item={item}
             index={index}
             total={filteredSkills.length}
+            columns={columns}
           />
         ))}
       </div>

@@ -263,6 +263,7 @@ export const translations = {
   },
   "location.goldenSands": { en: "Golden Sands", bg: "Златни пясъци" },
   "experience.tourism.title": { en: "Tourism", bg: "Туризъм" },
+  "company.tourism": { en: "Tourism", bg: "Туризъм" },
   "company.mypos": { en: "MyPOS Technologies" },
   "company.jamesIt": { en: "James IT Services" },
   "company.energoPro": { en: "ENERGO PRO" },

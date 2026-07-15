@@ -23,3 +23,20 @@ class MockIntersectionObserver implements IntersectionObserver {
 }
 
 vi.stubGlobal("IntersectionObserver", MockIntersectionObserver);
+
+// jsdom has no matchMedia either — useMediaQuery (SkillsFilterSection's
+// column-count check) needs it to even mount. Always reports no match;
+// tests don't assert on viewport-dependent behaviour.
+vi.stubGlobal(
+  "matchMedia",
+  (query: string): MediaQueryList => ({
+    matches: false,
+    media: query,
+    onchange: null,
+    addListener: () => {},
+    removeListener: () => {},
+    addEventListener: () => {},
+    removeEventListener: () => {},
+    dispatchEvent: () => false,
+  })
+);

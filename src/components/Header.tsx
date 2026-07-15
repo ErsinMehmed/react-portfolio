@@ -31,7 +31,7 @@ const Header = () => {
           currentRoute.title !== "nav.about" ? " | " + t(currentRoute.title) : ""
         }`
       : `${t("profile.name")} | ${t("notFound.title")}`;
-  });
+  }, [pathname, t]);
 
   return (
     <div className='mb-8 hidden lg:flex lg:flex-col lg:items-end'>

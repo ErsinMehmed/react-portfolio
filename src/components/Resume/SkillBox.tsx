@@ -198,13 +198,16 @@ interface SkillBoxProps {
   /** Total cards in the grid, so the bottom rows can open their tooltip
    * upward instead of downward. */
   total: number;
+  /** Current column count of the grid (2 on mobile, 3 at lg+) — the last-two-
+   * rows math below depends on it, so it can't be hardcoded. */
+  columns: number;
 }
 
-const SkillBox = ({ item, index, total }: SkillBoxProps) => {
-  // The last two rows (3-col desktop grid) would push their downward tooltip
-  // past the page bottom â€” which also stretches the document's scroll height
-  // beyond the app background, leaving a white strip. Flip those upward.
-  const flipUp = index >= total - 6;
+const SkillBox = ({ item, index, total, columns }: SkillBoxProps) => {
+  // The last two rows would push their downward tooltip past the page
+  // bottom — which also stretches the document's scroll height beyond the
+  // app background, leaving a white strip. Flip those upward.
+  const flipUp = index >= total - columns * 2;
   const tooltipPosition = flipUp ? "bottom-full mb-2" : "top-full mt-2";
 
   const card = (

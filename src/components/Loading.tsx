@@ -4,6 +4,14 @@ import { routes } from "../routes";
 import { useLanguage } from "../i18n/LanguageContext";
 import type { TranslationKey } from "../i18n/translations";
 
+// Skeleton item counts. Loading sits in the entry chunk (it's the pre-hydrate
+// fallback), so it must NOT import Data.ts and drag the whole dataset + icons
+// onto the critical path. These mirror the live data instead, and
+// Loading.test.tsx asserts they stay equal to techSkills / projects lengths,
+// so the skeleton can't silently lie when the data changes.
+export const SKELETON_SKILL_COUNT = 27;
+export const SKELETON_PROJECT_COUNTS = { professional: 5, personal: 8 };
+
 // Route-level Suspense fallback. A full skeleton of the whole shell — nav
 // tiles, language + theme toggles, ProfileCard, page title, footer — plus a
 // body that mirrors each page's real sections and card counts 1:1, so
@@ -305,7 +313,7 @@ const ResumeBody = () => (
       </div>
 
       <div className='mt-6 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3'>
-        {Array.from({ length: 27 }).map((_, i) => (
+        {Array.from({ length: SKELETON_SKILL_COUNT }).map((_, i) => (
           <SkillSkeleton key={i} />
         ))}
       </div>
@@ -316,11 +324,11 @@ const ResumeBody = () => (
 const ProjectsBody = () => (
   <div className='mt-8 space-y-14'>
     <CardSection
-      count={5}
+      count={SKELETON_PROJECT_COUNTS.professional}
       Card={ProjectCardSkeleton}
     />
     <CardSection
-      count={8}
+      count={SKELETON_PROJECT_COUNTS.personal}
       Card={ProjectCardSkeleton}
     />
   </div>

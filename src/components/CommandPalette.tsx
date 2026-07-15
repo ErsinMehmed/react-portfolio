@@ -342,7 +342,9 @@ const CommandPalette = () => {
                         data-index={i}
                         role='option'
                         aria-selected={isActive}
-                        onMouseMove={() => setActive(i)}
+                        onMouseMove={() => {
+                          if (active !== i) setActive(i);
+                        }}
                         onClick={() => run(item)}
                         className={`flex cursor-pointer items-center gap-3 rounded-xl px-3 py-2.5 text-sm ${
                           isActive
