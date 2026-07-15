@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 import InViewAnimation from "../InViewAnimation";
+import Button from "../ui/Button";
 import { useLanguage } from "../../i18n/LanguageContext";
 import { caseStudyOrder, getCaseStudy } from "../../data/caseStudies";
+import { routes } from "../../routes";
 
 interface CaseStudyFooterNavProps {
   slug: string;
@@ -43,26 +45,29 @@ const CaseStudyFooterNav = ({ slug, liveUrl }: CaseStudyFooterNavProps) => {
 
           <div className="flex flex-wrap items-center gap-3">
             {liveUrl && (
-              <a
+              <Button
                 href={liveUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-2 rounded-xl bg-[var(--cs-accent)] px-5 py-2.5 text-sm font-semibold text-white transition-transform duration-150 ease-out hover:brightness-105 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--cs-ink)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--cs-soft)]">
+                variant="accent"
+                size="md"
+                className="focus-visible:ring-offset-[var(--cs-soft)]">
                 <ExternalIcon className="h-4 w-4" />
                 {t("cs.viewLive")}
-              </a>
+              </Button>
             )}
-            <Link
-              to="/projects"
-              className="inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 transition-colors hover:border-slate-400 hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:border-slate-600">
+            <Button
+              to={routes.projects}
+              variant="secondary"
+              size="md">
               {t("cs.cta.allProjects")}
-            </Link>
+            </Button>
           </div>
         </div>
 
         {next && (
           <Link
-            to={`/projects/${next.slug}`}
+            to={routes.caseStudy(next.slug)}
             className="group mt-8 flex items-center justify-between border-t border-[color:var(--cs-line)] pt-6 focus-visible:outline-none">
             <span className="text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500">
               {t("cs.cta.next")}

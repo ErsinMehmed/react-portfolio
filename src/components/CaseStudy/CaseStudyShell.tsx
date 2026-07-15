@@ -9,6 +9,7 @@ import {
 import LanguageToggle from "../LanguageToggle";
 import ThemeToggle from "../ThemeToggle";
 import { useLanguage } from "../../i18n/LanguageContext";
+import { routes } from "../../routes";
 import type { CaseStudyAccent } from "../../types";
 
 interface CaseStudyShellProps {
@@ -101,7 +102,7 @@ const CaseStudyShell = ({
         }`}>
         <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
           <Link
-            to="/projects"
+            to={routes.projects}
             className="group inline-flex items-center gap-2 rounded-full py-1.5 pr-3 text-sm font-semibold text-slate-600 transition-colors hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--cs-ink)] dark:text-slate-300 dark:hover:text-white">
             <span className="flex h-7 w-7 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-500 transition-colors group-hover:text-slate-900 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-400 dark:group-hover:text-white">
               <ArrowLeft className="h-4 w-4 transition-transform duration-200 ease-out group-hover:-translate-x-0.5" />

@@ -1,6 +1,7 @@
 import { lazy, Suspense, useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import Loading from "./components/Loading";
+import { routes, routePatterns } from "./routes";
 
 // Lazy so framer-motion (pulled in by these) stays out of the entry chunk.
 // They self-load right after first paint and render nothing until opened, so
@@ -43,27 +44,27 @@ function App() {
           location={location}
           key={location.pathname}>
           <Route
-            path='/'
+            path={routes.home}
             element={<Home />}
           />
 
           <Route
-            path='/resume'
+            path={routes.resume}
             element={<Resume />}
           />
 
           <Route
-            path='/projects'
+            path={routes.projects}
             element={<Project />}
           />
 
           <Route
-            path='/projects/:slug'
+            path={routePatterns.caseStudy}
             element={<CaseStudy />}
           />
 
           <Route
-            path='/certifications'
+            path={routes.certifications}
             element={<Certification />}
           />
 

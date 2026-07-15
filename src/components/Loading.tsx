@@ -1,5 +1,8 @@
 import type { ComponentType } from "react";
 import { useLocation } from "react-router-dom";
+import { routes } from "../routes";
+import { useLanguage } from "../i18n/LanguageContext";
+import type { TranslationKey } from "../i18n/translations";
 
 // Route-level Suspense fallback. A full skeleton of the whole shell — nav
 // tiles, language + theme toggles, ProfileCard, page title, footer — plus a
@@ -57,30 +60,46 @@ const ProfileSkeleton = () => (
   </div>
 );
 
-// Desktop nav (language + theme toggles + the four tiles), matching Header.
-const NavSkeleton = () => (
-  <div className='mb-8 hidden lg:flex lg:flex-col lg:items-end'>
-    <div className='mb-3 flex items-center gap-2'>
-      <div className='h-8 w-[76px] rounded-full border border-slate-200 bg-white shadow-sm dark:border-slate-700 dark:bg-slate-900' />
-      <div className='inline-flex items-center rounded-full border border-slate-200 bg-white p-0.5 shadow-sm dark:border-slate-700 dark:bg-slate-900'>
-        <Pill className='h-6 w-9' />
-        <div className='h-6 w-9' />
-      </div>
-      <div className='h-8 w-8 rounded-full border border-slate-200 bg-white shadow-sm dark:border-slate-700 dark:bg-slate-900' />
-    </div>
+// Desktop nav (language + theme toggles + the segmented pill bar), matching
+// Header. The tab labels are the real (translated) text, only masked to a
+// slate bar, so each item is the exact live width and nothing reflows on
+// hydrate. Keep this list in sync with headerLinks in Data.ts.
+const NAV_KEYS: TranslationKey[] = [
+  "nav.about",
+  "nav.resume",
+  "nav.projects",
+  "nav.certifications",
+];
 
-    <div className='h-fit w-fit rounded-2xl bg-white p-4 shadow dark:bg-slate-900'>
-      <div className='flex'>
-        {Array.from({ length: 4 }).map((_, i) => (
+const NavSkeleton = () => {
+  const { t } = useLanguage();
+
+  return (
+    <div className='mb-8 hidden lg:flex lg:flex-col lg:items-end'>
+      <div className='mb-3 flex items-center gap-2'>
+        <div className='h-8 w-[76px] rounded-full border border-slate-200 bg-white shadow-sm dark:border-slate-700 dark:bg-slate-900' />
+        <div className='inline-flex items-center rounded-full border border-slate-200 bg-white p-0.5 shadow-sm dark:border-slate-700 dark:bg-slate-900'>
+          <Pill className='h-6 w-9' />
+          <div className='h-6 w-9' />
+        </div>
+        <div className='h-8 w-8 rounded-full border border-slate-200 bg-white shadow-sm dark:border-slate-700 dark:bg-slate-900' />
+      </div>
+
+      <div className='flex items-center gap-1 rounded-2xl border border-slate-200/70 bg-white/95 p-1.5 shadow-[0_12px_34px_-16px_rgba(27,74,120,0.35)] backdrop-blur dark:border-slate-800 dark:bg-slate-900/90'>
+        {NAV_KEYS.map((key) => (
           <div
-            key={i}
-            className='mx-2.5 h-[87px] w-[87px] rounded-lg bg-slate-100 dark:bg-slate-800'
-          />
+            key={key}
+            className='inline-flex items-center gap-2.5 rounded-xl px-4 py-2.5'>
+            <Bar className='h-[18px] w-[18px]' />
+            <span className='rounded-md bg-slate-200/70 text-[13px] font-semibold tracking-tight text-transparent dark:bg-slate-700/50'>
+              {t(key)}
+            </span>
+          </div>
         ))}
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 const TitleSkeleton = () => (
   <div className='flex items-center'>
@@ -328,13 +347,13 @@ const DefaultBody = () => (
 );
 
 const ROUTES: Record<string, ComponentType> = {
-  "/resume": ResumeBody,
-  "/projects": ProjectsBody,
-  "/certifications": CertBody,
+  [routes.resume]: ResumeBody,
+  [routes.projects]: ProjectsBody,
+  [routes.certifications]: CertBody,
 };
 
 const resolveBody = (pathname: string): ComponentType => {
-  if (pathname === "/") return HomeBody;
+  if (pathname === routes.home) return HomeBody;
   const key = Object.keys(ROUTES).find((r) => pathname.startsWith(r));
   return key ? ROUTES[key] : DefaultBody;
 };
@@ -342,8 +361,10 @@ const resolveBody = (pathname: string): ComponentType => {
 // /projects/:slug (case study) breaks out of the ProfileCard shell entirely
 // (see CaseStudyShell), so it needs its own full-bleed skeleton below instead
 // of slotting a Body into the generic sidebar layout.
+const caseStudyPrefix = `${routes.projects}/`;
 const isCaseStudyRoute = (pathname: string) =>
-  pathname.startsWith("/projects/") && pathname.length > "/projects/".length;
+  pathname.startsWith(caseStudyPrefix) &&
+  pathname.length > caseStudyPrefix.length;
 
 /* ---- Case study page (full-bleed shell, no ProfileCard) ---- */
 
@@ -671,14 +692,16 @@ const Loading = () => {
         </div>
       </div>
 
-      {/* Mobile bottom nav bar */}
-      <div className='fixed bottom-3.5 left-1/2 z-50 h-14 w-full max-w-sm -translate-x-1/2 rounded-full border border-gray-200 bg-white sm:max-w-lg lg:hidden dark:border-slate-700 dark:bg-slate-900'>
-        <div className='mx-auto grid h-full max-w-lg grid-cols-4'>
+      {/* Mobile bottom nav bar (matches MobileMenu: floating pill, blur, safe area) */}
+      <div
+        style={{ bottom: "max(0.875rem, env(safe-area-inset-bottom))" }}
+        className='fixed left-1/2 z-50 h-14 w-[calc(100%-1.5rem)] max-w-sm -translate-x-1/2 rounded-full border border-slate-200/80 bg-white/85 shadow-[0_14px_40px_-12px_rgba(27,74,120,0.45)] backdrop-blur-lg sm:max-w-lg lg:hidden dark:border-slate-800 dark:bg-slate-900/85'>
+        <div className='grid h-full grid-cols-4'>
           {Array.from({ length: 4 }).map((_, i) => (
             <div
               key={i}
               className='flex items-center justify-center'>
-              <div className='h-6 w-6 rounded bg-slate-200/70 dark:bg-slate-700/50' />
+              <div className='h-[22px] w-[22px] rounded-md bg-slate-200/70 dark:bg-slate-700/50' />
             </div>
           ))}
         </div>

@@ -5,6 +5,7 @@ import { useState, useEffect, lazy, Suspense, type MouseEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { openAskCv } from "./AskCvModal";
 import Dialog from "./ui/Dialog";
+import Button from "./ui/Button";
 import type { IconProps } from "../types/icon";
 import { BRAND } from "../theme/colors";
 
@@ -149,10 +150,13 @@ const ProfileCard = () => {
               })}
             </div>
 
-            <button
+            <Button
               type='button'
               onClick={openAskCv}
-              className='mt-4 inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-slate-300 px-8 py-2.5 text-sm font-semibold text-slate-700 transition-all duration-200 ease-out hover:border-brand hover:text-brand active:scale-[0.98] dark:border-slate-600 dark:text-slate-200 dark:hover:border-blue-400 dark:hover:text-blue-400'>
+              variant='secondary'
+              size='lg'
+              fullWidth
+              className='mt-4 hover:border-brand hover:text-brand dark:hover:border-blue-400 dark:hover:text-blue-400'>
               <svg
                 viewBox='0 0 24 24'
                 fill='currentColor'
@@ -160,15 +164,17 @@ const ProfileCard = () => {
                 <path d='M12 2l1.9 5.1L19 9l-5.1 1.9L12 16l-1.9-5.1L5 9l5.1-1.9L12 2zm7 12l.9 2.4L22 17l-2.1.6L19 20l-.9-2.4L16 17l2.1-.6L19 14z' />
               </svg>
               {t("askCv.open")}
-            </button>
+            </Button>
 
-            <button
+            <Button
               type='button'
-              className='group mt-2 inline-flex w-full items-center justify-center gap-2.5 rounded-2xl bg-brand px-8 py-2.5 text-base font-semibold text-white shadow-[0_14px_30px_-12px_theme(colors.brand.DEFAULT/70%)] transition-all duration-200 ease-out hover:bg-brand-dark active:scale-[0.98]'
-              onClick={handleDownload}>
+              onClick={handleDownload}
+              size='lg'
+              fullWidth
+              className='group mt-2'>
               <IconDownload className='h-5 w-5 transition-transform duration-200 ease-out group-hover:-translate-y-0.5' />
               {t("profile.downloadCv")}
-            </button>
+            </Button>
           </div>
         </div>
       </div>
@@ -239,12 +245,13 @@ const ProfileCard = () => {
 
               <p className='mt-3 text-xs text-slate-400 dark:text-slate-500'>{t("qr.openCamera")}</p>
 
-              <button
+              <Button
                 type='button'
                 onClick={() => setIsQrModalOpen(false)}
-                className='mt-6 rounded-xl bg-brand px-6 py-2.5 text-sm font-semibold text-white shadow-[0_8px_20px_-8px_theme(colors.brand.DEFAULT/50%)] transition-colors hover:bg-brand-dark'>
+                size='md'
+                className='mt-6'>
                 {t("qr.close")}
-              </button>
+              </Button>
       </Dialog>
     </>
   );

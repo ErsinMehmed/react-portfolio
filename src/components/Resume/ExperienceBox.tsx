@@ -1,4 +1,5 @@
 import { useLanguage } from "../../i18n/LanguageContext";
+import Chip from "../ui/Chip";
 import type { Experience } from "../../types";
 
 interface ExperienceBoxProps {
@@ -55,9 +56,7 @@ const ExperienceBox = ({ item, isLast }: ExperienceBoxProps) => {
 
       <div className={isLast ? "pb-0" : "pb-7"}>
         <div className='flex flex-wrap items-center gap-2'>
-          <span className='inline-block rounded-full bg-blue-50 px-2.5 py-0.5 text-xs font-semibold text-brand dark:bg-blue-500/10 dark:text-blue-400'>
-            {item.period.replace("Present", t("duration.present"))}
-          </span>
+          <Chip>{item.period.replace("Present", t("duration.present"))}</Chip>
 
           <span className='text-xs font-medium text-slate-500 dark:text-slate-400'>{duration}</span>
         </div>

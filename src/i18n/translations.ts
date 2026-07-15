@@ -18,6 +18,7 @@ export const translations = {
   "nav.resume": { en: "Resume", bg: "Резюме" },
   "nav.projects": { en: "Projects", bg: "Проекти" },
   "nav.certifications": { en: "Certifications", bg: "Сертификати" },
+  "nav.menu": { en: "Primary", bg: "Основна навигация" },
   "page.aboutMe": { en: "About Me", bg: "За мен" },
   loading: { en: "Loading ...", bg: "Зареждане ..." },
 

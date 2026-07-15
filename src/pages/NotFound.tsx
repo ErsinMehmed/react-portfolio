@@ -1,13 +1,9 @@
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { motion, useReducedMotion } from "framer-motion";
 import Layout from "../components/Layout";
+import Button from "../components/ui/Button";
 import { useLanguage } from "../i18n/LanguageContext";
-
-const primaryBtn =
-  "inline-flex items-center justify-center rounded-2xl bg-brand px-6 py-2.5 text-sm font-semibold text-white shadow-[0_14px_30px_-12px_theme(colors.brand.DEFAULT/70%)] transition-all duration-200 ease-out hover:bg-brand-dark active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900";
-
-const ghostBtn =
-  "inline-flex items-center justify-center rounded-2xl border border-slate-200 bg-white px-6 py-2.5 text-sm font-semibold text-slate-700 transition-all duration-200 ease-out hover:border-slate-300 hover:bg-slate-50 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300 dark:hover:border-slate-600 dark:hover:bg-slate-800 dark:focus-visible:ring-offset-slate-900";
+import { routes } from "../routes";
 
 const REVEAL_EASE: [number, number, number, number] = [0.23, 1, 0.32, 1];
 
@@ -64,16 +60,17 @@ const NotFound = () => {
           </p>
 
           <div className='mt-8 flex flex-wrap items-center justify-center gap-3'>
-            <Link
-              to='/'
-              className={primaryBtn}>
+            <Button
+              to={routes.home}
+              size='lg'>
               {t("notFound.backHome")}
-            </Link>
-            <Link
-              to='/projects'
-              className={ghostBtn}>
+            </Button>
+            <Button
+              to={routes.projects}
+              variant='secondary'
+              size='lg'>
               {t("nav.projects")}
-            </Link>
+            </Button>
           </div>
         </div>
       </div>

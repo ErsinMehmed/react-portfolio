@@ -2,6 +2,8 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useLanguage } from "../../i18n/LanguageContext";
 import { useTilt } from "../../hooks/useTilt";
+import { routes } from "../../routes";
+import Chip from "../ui/Chip";
 import type { Project, ProjectType } from "../../types";
 
 interface ProjectCardProps {
@@ -37,20 +39,16 @@ const ProjectCard = ({ project, type, onClick }: ProjectCardProps) => {
     <>
       <div className="mb-3 flex flex-wrap items-center gap-2">
         {type === "professional" ? (
-          <span className="rounded-full bg-blue-50 px-2.5 py-0.5 text-[11px] font-semibold text-brand dark:bg-blue-500/10 dark:text-blue-400">
-            {project.company ? t(project.company) : null}
-          </span>
+          <Chip>{project.company ? t(project.company) : null}</Chip>
         ) : (
-          <span className="rounded-full bg-slate-100 px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-slate-500 dark:bg-slate-800 dark:text-slate-400">
-            {t("projects.personal")}
-          </span>
+          <Chip tone="neutral">{t("projects.personal")}</Chip>
         )}
 
         {isCaseStudy && (
-          <span className="inline-flex items-center gap-1 rounded-full bg-brand px-2.5 py-0.5 text-[11px] font-semibold text-white">
+          <Chip tone="solid">
             <span className="h-1.5 w-1.5 rounded-full bg-white/90" />
             {t("projects.caseStudyBadge")}
-          </span>
+          </Chip>
         )}
       </div>
 
@@ -64,11 +62,11 @@ const ProjectCard = ({ project, type, onClick }: ProjectCardProps) => {
 
       <div className="mt-4 flex flex-wrap gap-1.5">
         {shown.map((tech, i) => (
-          <span
+          <Chip
             key={i}
-            className="rounded-md bg-slate-50 px-2 py-1 text-[11px] font-medium text-slate-600 ring-1 ring-slate-100 dark:bg-slate-800 dark:text-slate-300 dark:ring-slate-700">
+            tone="outline">
             {tech}
-          </span>
+          </Chip>
         ))}
         {extra > 0 && (
           <span className="px-1.5 py-1 text-[11px] font-semibold text-slate-500 dark:text-slate-400">
@@ -91,7 +89,7 @@ const ProjectCard = ({ project, type, onClick }: ProjectCardProps) => {
   if (isCaseStudy && project.caseStudySlug) {
     return (
       <MotionLink
-        to={`/projects/${project.caseStudySlug}`}
+        to={routes.caseStudy(project.caseStudySlug)}
         aria-label={`${t(project.name)} â€” ${t("projects.readCaseStudy")}`}
         {...shared}>
         {body}

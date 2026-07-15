@@ -1,4 +1,5 @@
 import { useLanguage } from "../../i18n/LanguageContext";
+import Chip from "../ui/Chip";
 import type { Education } from "../../types";
 
 interface EducationBoxProps {
@@ -17,9 +18,7 @@ const EducationBox = ({ item, isLast }: EducationBoxProps) => {
       </div>
 
       <div className={isLast ? "pb-0" : "pb-7"}>
-        <span className='inline-block rounded-full bg-blue-50 px-2.5 py-0.5 text-xs font-semibold text-brand dark:bg-blue-500/10 dark:text-blue-400'>
-          {item.period}
-        </span>
+        <Chip>{item.period}</Chip>
 
         <h3 className='mt-2 font-display text-lg font-semibold text-slate-800 dark:text-slate-100'>
           {t(item.title)}

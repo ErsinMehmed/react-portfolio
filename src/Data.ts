@@ -16,6 +16,7 @@ import IconWebDev from "./icons/WebDev";
 import IconBackend from "./icons/Backend";
 import IconAI from "./icons/AI";
 import IconQuality from "./icons/Quality";
+import { routes } from "./routes";
 import type {
   HeaderLink,
   SocialLink,
@@ -31,22 +32,22 @@ import type {
 const headerLinks: HeaderLink[] = [
   {
     title: "nav.about",
-    href: "/",
+    href: routes.home,
     icon: IconUser,
   },
   {
     title: "nav.resume",
-    href: "/resume",
+    href: routes.resume,
     icon: IconDocument,
   },
   {
     title: "nav.projects",
-    href: "/projects",
+    href: routes.projects,
     icon: IconRocket,
   },
   {
     title: "nav.certifications",
-    href: "/certifications",
+    href: routes.certifications,
     icon: IconStar,
   },
 ];

@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 import Dialog from "../ui/Dialog";
+import Button from "../ui/Button";
+import Chip from "../ui/Chip";
 import { useLanguage } from "../../i18n/LanguageContext";
 import type { IconProps } from "../../types/icon";
 import type { SelectedProject } from "../../types";
@@ -103,16 +105,11 @@ const ProjectModal = ({ data, onClose, onNavigate }: ProjectModalProps) => {
               </button>
             </div>
 
-            <span
-              className={`inline-block rounded-full px-2.5 py-0.5 text-[11px] font-semibold ${
-                type === "professional"
-                  ? "bg-blue-50 text-brand dark:bg-blue-500/10 dark:text-blue-400"
-                  : "bg-slate-100 uppercase tracking-wide text-slate-500 dark:bg-slate-800 dark:text-slate-400"
-              }`}>
+            <Chip tone={type === "professional" ? "brand" : "neutral"}>
               {type === "professional" && project.company
                 ? t(project.company)
                 : t("projects.personalProject")}
-            </span>
+            </Chip>
 
             <h3 className='mt-3 pr-28 font-display text-2xl font-bold leading-tight tracking-tight text-slate-800 dark:text-slate-100'>
               {t(project.name)}
@@ -128,11 +125,11 @@ const ProjectModal = ({ data, onClose, onNavigate }: ProjectModalProps) => {
               </p>
               <div className='flex flex-wrap gap-2'>
                 {(project.technologies || []).map((tech, i) => (
-                  <span
+                  <Chip
                     key={i}
-                    className='rounded-md bg-slate-50 px-2.5 py-1 text-xs font-medium text-slate-600 ring-1 ring-slate-100 dark:bg-slate-800 dark:text-slate-300 dark:ring-slate-700'>
+                    tone="outline">
                     {tech}
-                  </span>
+                  </Chip>
                 ))}
               </div>
             </div>
@@ -140,25 +137,26 @@ const ProjectModal = ({ data, onClose, onNavigate }: ProjectModalProps) => {
             {(project.live || project.github) && (
               <div className='mt-7 flex flex-wrap gap-3'>
                 {project.live && (
-                  <a
+                  <Button
                     href={project.live}
                     target='_blank'
                     rel='noreferrer'
-                    className='inline-flex items-center gap-2 rounded-xl bg-brand px-5 py-2.5 text-sm font-semibold text-white shadow-[0_12px_26px_-12px_theme(colors.brand.DEFAULT/70%)] transition-colors hover:bg-brand-dark'>
+                    size='md'>
                     <ExternalIcon className='h-4 w-4' />
                     {t("projects.liveDemo")}
-                  </a>
+                  </Button>
                 )}
 
                 {project.github && (
-                  <a
+                  <Button
                     href={project.github}
                     target='_blank'
                     rel='noreferrer'
-                    className='inline-flex items-center gap-2 rounded-xl border border-slate-200 px-5 py-2.5 text-sm font-semibold text-slate-700 transition-colors hover:border-slate-300 hover:bg-slate-50 dark:border-slate-700 dark:text-slate-300 dark:hover:border-slate-600 dark:hover:bg-slate-800'>
+                    variant='secondary'
+                    size='md'>
                     <GitHubMark className='h-4 w-4' />
                     {t("projects.viewCode")}
-                  </a>
+                  </Button>
                 )}
               </div>
             )}

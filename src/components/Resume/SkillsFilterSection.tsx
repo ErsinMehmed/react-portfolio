@@ -1,5 +1,6 @@
 import { useState } from "react";
 import SkillBox from "./SkillBox";
+import Chip from "../ui/Chip";
 import { techSkills } from "../../Data";
 import { useLanguage } from "../../i18n/LanguageContext";
 import type { TranslationKey } from "../../i18n/translations";
@@ -58,18 +59,14 @@ const SkillsFilterSection = () => {
 
       <div className='mt-5 flex flex-wrap gap-2'>
         {filterCategories.map((category, index) => (
-          <button
+          <Chip
             key={index}
-            type='button'
+            size='sm'
+            tone={selectedKind === category.kind ? "solid" : "muted"}
             onClick={() => setSelectedKind(category.kind)}
-            aria-pressed={selectedKind === category.kind}
-            className={`rounded-full px-3.5 py-1.5 text-sm font-semibold transition-colors duration-200 ${
-              selectedKind === category.kind
-                ? "bg-brand text-white"
-                : "bg-slate-100 text-slate-600 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700"
-            }`}>
+            aria-pressed={selectedKind === category.kind}>
             {t(category.labelKey)}
-          </button>
+          </Chip>
         ))}
       </div>
 
