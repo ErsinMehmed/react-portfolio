@@ -16,5 +16,4 @@ export interface PersonalInfoItem {
    */
   text: TranslatableText;
   icon: IconComponent;
-  iconColor: string;
 }

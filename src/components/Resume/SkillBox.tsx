@@ -123,7 +123,7 @@ const YearGauge = ({ years, className = "" }: { years: number; className?: strin
       <span
         key={i}
         className={`h-1 flex-1 rounded-full ${
-          i < years ? "bg-[#1b74e4]" : "bg-slate-200/80 dark:bg-slate-700/60"
+          i < years ? "bg-brand" : "bg-slate-200/80 dark:bg-slate-700/60"
         }`}
       />
     ))}
@@ -182,7 +182,7 @@ const SkillCard = ({ item }: { item: TechSkill }) => {
             <li
               key={i}
               className='flex items-center gap-2 text-[13px] text-slate-600 dark:text-slate-300'>
-              <span className='h-1.5 w-1.5 shrink-0 rounded-full bg-[#1b74e4]' />
+              <span className='h-1.5 w-1.5 shrink-0 rounded-full bg-brand' />
               {t(entry)}
             </li>
           ))}
@@ -202,7 +202,7 @@ interface SkillBoxProps {
 
 const SkillBox = ({ item, index, total }: SkillBoxProps) => {
   // The last two rows (3-col desktop grid) would push their downward tooltip
-  // past the page bottom — which also stretches the document's scroll height
+  // past the page bottom â€” which also stretches the document's scroll height
   // beyond the app background, leaving a white strip. Flip those upward.
   const flipUp = index >= total - 6;
   const tooltipPosition = flipUp ? "bottom-full mb-2" : "top-full mt-2";
@@ -248,7 +248,7 @@ const SkillBox = ({ item, index, total }: SkillBoxProps) => {
         <div className='group/skill relative h-full'>
           <div
             tabIndex={0}
-            className='h-full cursor-pointer rounded-xl outline-none focus-visible:ring-2 focus-visible:ring-[#1b74e4] focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-950'>
+            className='h-full cursor-pointer rounded-xl outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-950'>
             {card}
           </div>
 

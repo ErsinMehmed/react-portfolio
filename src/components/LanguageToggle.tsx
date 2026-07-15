@@ -18,9 +18,9 @@ const LanguageToggle = ({ className = "" }: LanguageToggleProps) => {
           type='button'
           onClick={() => setLang(code)}
           aria-label={`Switch language to ${code.toUpperCase()}`}
-          className={`cursor-pointer rounded-full px-2.5 py-1 text-xs font-bold uppercase transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1b74e4] ${
+          className={`cursor-pointer rounded-full px-2.5 py-1 text-xs font-bold uppercase transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand ${
             lang === code
-              ? "bg-[#1b74e4] text-white"
+              ? "bg-brand text-white"
               : "text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200"
           }`}>
           {code}

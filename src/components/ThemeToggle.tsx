@@ -46,7 +46,7 @@ const ThemeToggle = ({ className = "" }: ThemeToggleProps) => {
       type='button'
       onClick={toggleTheme}
       aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
-      className={`relative inline-flex h-8 w-8 shrink-0 items-center justify-center overflow-hidden rounded-full border border-slate-200 bg-white text-slate-500 transition-colors duration-200 hover:text-slate-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1b74e4] dark:border-slate-700 dark:bg-slate-900 dark:text-slate-400 dark:hover:text-slate-200 ${className}`}>
+      className={`relative inline-flex h-8 w-8 shrink-0 items-center justify-center overflow-hidden rounded-full border border-slate-200 bg-white text-slate-500 transition-colors duration-200 hover:text-slate-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand dark:border-slate-700 dark:bg-slate-900 dark:text-slate-400 dark:hover:text-slate-200 ${className}`}>
       <AnimatePresence
         mode='wait'
         initial={false}>

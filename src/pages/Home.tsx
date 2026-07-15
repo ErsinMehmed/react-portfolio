@@ -74,7 +74,7 @@ const Home = () => {
             key={index}
             delay={index * 0.07}>
             <div className='grid grid-cols-[2rem_1fr] gap-x-4 border-b border-slate-200/70 py-6 dark:border-slate-800 sm:grid-cols-[2.75rem_1fr] sm:gap-x-6'>
-              <span className='pt-1 font-display text-sm font-bold tabular-nums text-[#1b74e4]'>
+              <span className='pt-1 font-display text-sm font-bold tabular-nums text-brand'>
                 {String(index + 1).padStart(2, "0")}
               </span>
 

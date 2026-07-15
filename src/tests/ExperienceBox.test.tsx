@@ -10,7 +10,6 @@ const baseItem: Experience = {
   period: "01.2020 - 06.2021",
   location: "location.varna",
   company: "company.mypos",
-  color: "bg-white",
 };
 
 const renderExperience = (period: string) =>

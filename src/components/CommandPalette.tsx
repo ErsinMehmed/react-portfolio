@@ -7,7 +7,8 @@ import {
   type ReactNode,
 } from "react";
 import { useNavigate } from "react-router-dom";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { useReducedMotion } from "framer-motion";
+import Dialog from "./ui/Dialog";
 import { headerLinks } from "../Data";
 import { useLanguage } from "../i18n/LanguageContext";
 import { useTheme } from "../theme/ThemeContext";
@@ -120,10 +121,10 @@ export const CommandMenuButton = ({ className = "" }: { className?: string }) =>
       type='button'
       onClick={openCommandPalette}
       aria-label={t("cmd.open")}
-      className={`inline-flex h-8 items-center gap-2 rounded-full border border-slate-200 bg-white pl-2.5 pr-1.5 text-slate-500 transition-colors duration-200 hover:text-slate-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1b74e4] dark:border-slate-700 dark:bg-slate-900 dark:text-slate-400 dark:hover:text-slate-200 ${className}`}>
+      className={`inline-flex h-8 items-center gap-2 rounded-full border border-slate-200 bg-white pl-2.5 pr-1.5 text-slate-500 transition-colors duration-200 hover:text-slate-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand dark:border-slate-700 dark:bg-slate-900 dark:text-slate-400 dark:hover:text-slate-200 ${className}`}>
       <SearchIcon className='h-3.5 w-3.5' />
       <kbd className='rounded bg-slate-100 px-1.5 py-0.5 font-sans text-[11px] font-semibold text-slate-500 dark:bg-slate-800 dark:text-slate-400'>
-        {isMac ? "⌘K" : "Ctrl K"}
+        {isMac ? "âŒ˜K" : "Ctrl K"}
       </kbd>
     </button>
   );
@@ -143,7 +144,6 @@ const CommandPalette = () => {
 
   const inputRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
-  const triggerRef = useRef<Element | null>(null);
 
   const close = () => setOpen(false);
 
@@ -170,7 +170,7 @@ const CommandPalette = () => {
         id: "action:ask-cv",
         group: "actions",
         label: "askCv.open",
-        keywords: "ai chat ask cv resume question питай",
+        keywords: "ai chat ask cv resume question Ð¿Ð¸Ñ‚Ð°Ð¹",
         icon: <SparkGlyph className='h-4 w-4' />,
         perform: openAskCv,
       },
@@ -178,7 +178,7 @@ const CommandPalette = () => {
         id: "action:theme",
         group: "actions",
         label: theme === "dark" ? "cmd.theme.toLight" : "cmd.theme.toDark",
-        keywords: "theme dark light mode тема",
+        keywords: "theme dark light mode Ñ‚ÐµÐ¼Ð°",
         icon: <ThemeGlyph className='h-4 w-4' />,
         perform: toggleTheme,
       },
@@ -186,7 +186,7 @@ const CommandPalette = () => {
         id: "action:lang",
         group: "actions",
         label: lang === "en" ? "cmd.lang.toBg" : "cmd.lang.toEn",
-        keywords: "language език bulgarian english bg en",
+        keywords: "language ÐµÐ·Ð¸Ðº bulgarian english bg en",
         icon: <LangGlyph className='h-4 w-4' />,
         perform: () => setLang(lang === "en" ? "bg" : "en"),
       },
@@ -194,7 +194,7 @@ const CommandPalette = () => {
         id: "action:cv",
         group: "actions",
         label: "profile.downloadCv",
-        keywords: "cv resume download pdf свали",
+        keywords: "cv resume download pdf ÑÐ²Ð°Ð»Ð¸",
         icon: <DownloadGlyph className='h-4 w-4' />,
         perform: downloadCv,
       },
@@ -230,20 +230,12 @@ const CommandPalette = () => {
     };
   }, []);
 
-  // On open: reset, lock scroll, focus the input, remember the trigger.
+  // Reset the query/selection each time it opens. Scroll-lock, focus and focus
+  // restore are handled by <Dialog> (via initialFocusRef).
   useEffect(() => {
-    if (!open) return undefined;
-    triggerRef.current = document.activeElement;
+    if (!open) return;
     setQuery("");
     setActive(0);
-    document.body.style.overflow = "hidden";
-    const id = requestAnimationFrame(() => inputRef.current?.focus());
-
-    return () => {
-      document.body.style.overflow = "";
-      cancelAnimationFrame(id);
-      if (triggerRef.current instanceof HTMLElement) triggerRef.current.focus();
-    };
   }, [open]);
 
   // Keep the active row in view as it moves.
@@ -269,36 +261,36 @@ const CommandPalette = () => {
       e.preventDefault();
       const item = filtered[active];
       if (item) run(item);
-    } else if (e.key === "Escape") {
-      e.preventDefault();
-      close();
     }
+    // Escape is handled by <Dialog>.
   };
 
-  return (
-    <AnimatePresence>
-      {open && (
-        <motion.div
-          className='fixed inset-0 z-[60] flex items-start justify-center p-4 pt-[12vh]'
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.15 }}>
-          <div
-            className='absolute inset-0 bg-slate-900/40 backdrop-blur-sm dark:bg-black/60'
-            onClick={close}
-          />
+  const ease = [0.22, 1, 0.36, 1] as const;
+  const panelMotion = reduce
+    ? {
+        initial: { opacity: 0 },
+        animate: { opacity: 1 },
+        exit: { opacity: 0 },
+        transition: { duration: 0.18, ease },
+      }
+    : {
+        initial: { opacity: 0, scale: 0.97, y: -8 },
+        animate: { opacity: 1, scale: 1, y: 0 },
+        exit: { opacity: 0, scale: 0.98, y: -6 },
+        transition: { duration: 0.18, ease },
+      };
 
-          <motion.div
-            role='dialog'
-            aria-modal='true'
-            aria-label={t("cmd.open")}
-            className='relative z-10 w-full max-w-lg overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl dark:border-slate-700 dark:bg-slate-900'
-            initial={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.97, y: -8 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.98, y: -6 }}
-            transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}>
-            <div className='flex items-center gap-3 border-b border-slate-100 px-4 dark:border-slate-800'>
+  return (
+    <Dialog
+      open={open}
+      onClose={close}
+      ariaLabel={t("cmd.open")}
+      initialFocusRef={inputRef}
+      containerClassName='fixed inset-0 z-[60] flex items-start justify-center p-4 pt-[12vh]'
+      backdropClassName='absolute inset-0 bg-slate-900/40 backdrop-blur-sm dark:bg-black/60'
+      panelClassName='relative z-10 w-full max-w-lg overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl dark:border-slate-700 dark:bg-slate-900'
+      panelMotion={panelMotion}>
+      <div className='flex items-center gap-3 border-b border-slate-100 px-4 dark:border-slate-800'>
               <SearchIcon className='h-4 w-4 shrink-0 text-slate-400 dark:text-slate-500' />
               <input
                 ref={inputRef}
@@ -354,7 +346,7 @@ const CommandPalette = () => {
                         onClick={() => run(item)}
                         className={`flex cursor-pointer items-center gap-3 rounded-xl px-3 py-2.5 text-sm ${
                           isActive
-                            ? "bg-[#1b74e4] text-white"
+                            ? "bg-brand text-white"
                             : "text-slate-700 dark:text-slate-200"
                         }`}>
                         <span
@@ -375,10 +367,7 @@ const CommandPalette = () => {
                 })
               )}
             </div>
-          </motion.div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+    </Dialog>
   );
 };
 

@@ -5,9 +5,12 @@ import {
   type FormEvent,
   type ReactNode,
 } from "react";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { useReducedMotion } from "framer-motion";
+import Dialog from "./ui/Dialog";
 import { useLanguage } from "../i18n/LanguageContext";
 import type { TranslationKey } from "../i18n/translations";
+
+const EASE = [0.22, 1, 0.36, 1] as const;
 
 const OPEN_EVENT = "ask-cv:open";
 const ENDPOINT = "/.netlify/functions/ask-cv";
@@ -64,35 +67,17 @@ const AskCvModal = () => {
 
   const inputRef = useRef<HTMLInputElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
-  const triggerRef = useRef<Element | null>(null);
   const idRef = useRef(0);
 
   const close = () => setOpen(false);
 
+  // Opened from anywhere via the custom event; Escape/scroll-lock/focus are
+  // handled by <Dialog>.
   useEffect(() => {
     const onOpen = () => setOpen(true);
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpen(false);
-    };
     window.addEventListener(OPEN_EVENT, onOpen);
-    window.addEventListener("keydown", onKey);
-    return () => {
-      window.removeEventListener(OPEN_EVENT, onOpen);
-      window.removeEventListener("keydown", onKey);
-    };
+    return () => window.removeEventListener(OPEN_EVENT, onOpen);
   }, []);
-
-  useEffect(() => {
-    if (!open) return undefined;
-    triggerRef.current = document.activeElement;
-    document.body.style.overflow = "hidden";
-    const id = requestAnimationFrame(() => inputRef.current?.focus());
-    return () => {
-      document.body.style.overflow = "";
-      cancelAnimationFrame(id);
-      if (triggerRef.current instanceof HTMLElement) triggerRef.current.focus();
-    };
-  }, [open]);
 
   // Keep the transcript scrolled to the newest message.
   useEffect(() => {
@@ -154,33 +139,34 @@ const AskCvModal = () => {
     ask(input);
   };
 
-  return (
-    <AnimatePresence>
-      {open && (
-        <motion.div
-          className='fixed inset-0 z-[60] flex items-end justify-center p-0 sm:items-center sm:p-4'
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.15 }}>
-          <div
-            className='absolute inset-0 bg-slate-900/40 backdrop-blur-sm dark:bg-black/60'
-            onClick={close}
-          />
+  const panelMotion = reduce
+    ? {
+        initial: { opacity: 0 },
+        animate: { opacity: 1 },
+        exit: { opacity: 0 },
+        transition: { duration: 0.22, ease: EASE },
+      }
+    : {
+        initial: { opacity: 0, scale: 0.97, y: 16 },
+        animate: { opacity: 1, scale: 1, y: 0 },
+        exit: { opacity: 0, scale: 0.98, y: 12 },
+        transition: { duration: 0.22, ease: EASE },
+      };
 
-          <motion.div
-            role='dialog'
-            aria-modal='true'
-            aria-label={t("askCv.title")}
-            className='relative z-10 flex h-[85vh] w-full max-w-lg flex-col overflow-hidden rounded-t-3xl border border-slate-200 bg-white shadow-2xl dark:border-slate-700 dark:bg-slate-900 sm:h-[70vh] sm:max-h-[640px] sm:rounded-3xl'
-            initial={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.97, y: 16 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.98, y: 12 }}
-            transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}>
-            {/* Header */}
+  return (
+    <Dialog
+      open={open}
+      onClose={close}
+      ariaLabel={t("askCv.title")}
+      initialFocusRef={inputRef}
+      containerClassName='fixed inset-0 z-[60] flex items-end justify-center p-0 sm:items-center sm:p-4'
+      backdropClassName='absolute inset-0 bg-slate-900/40 backdrop-blur-sm dark:bg-black/60'
+      panelClassName='relative z-10 flex h-[85vh] w-full max-w-lg flex-col overflow-hidden rounded-t-3xl border border-slate-200 bg-white shadow-2xl dark:border-slate-700 dark:bg-slate-900 sm:h-[70vh] sm:max-h-[640px] sm:rounded-3xl'
+      panelMotion={panelMotion}>
+      {/* Header */}
             <div className='flex items-start justify-between gap-3 border-b border-slate-100 px-5 py-4 dark:border-slate-800'>
               <div className='flex items-center gap-3'>
-                <span className='flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-[#1b74e4] dark:bg-blue-500/10 dark:text-blue-400'>
+                <span className='flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-brand dark:bg-blue-500/10 dark:text-blue-400'>
                   <SparkIcon className='h-5 w-5' />
                 </span>
                 <div>
@@ -221,7 +207,7 @@ const AskCvModal = () => {
                         key={ex}
                         type='button'
                         onClick={() => ask(t(ex))}
-                        className='rounded-xl border border-slate-200 px-3.5 py-2.5 text-left text-sm text-slate-700 transition-colors hover:border-[#1b74e4] hover:bg-blue-50/50 dark:border-slate-700 dark:text-slate-200 dark:hover:border-blue-400/50 dark:hover:bg-blue-500/5'>
+                        className='rounded-xl border border-slate-200 px-3.5 py-2.5 text-left text-sm text-slate-700 transition-colors hover:border-brand hover:bg-blue-50/50 dark:border-slate-700 dark:text-slate-200 dark:hover:border-blue-400/50 dark:hover:bg-blue-500/5'>
                         {t(ex)}
                       </button>
                     ))}
@@ -261,24 +247,21 @@ const AskCvModal = () => {
                   onChange={(e) => setInput(e.target.value)}
                   placeholder={t("askCv.placeholder")}
                   maxLength={500}
-                  className='min-w-0 flex-1 rounded-xl bg-slate-100 px-3.5 py-2.5 text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#1b74e4] dark:bg-slate-800 dark:text-slate-100 dark:placeholder:text-slate-500'
+                  className='min-w-0 flex-1 rounded-xl bg-slate-100 px-3.5 py-2.5 text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-brand dark:bg-slate-800 dark:text-slate-100 dark:placeholder:text-slate-500'
                 />
                 <button
                   type='submit'
                   disabled={!input.trim() || loading}
                   aria-label={t("askCv.send")}
-                  className='flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#1b74e4] text-white transition-colors hover:bg-[#1667cf] disabled:cursor-not-allowed disabled:opacity-40'>
+                  className='flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand text-white transition-colors hover:bg-brand-dark disabled:cursor-not-allowed disabled:opacity-40'>
                   <SendIcon className='h-[18px] w-[18px]' />
                 </button>
               </div>
               <p className='mt-2 px-1 text-[11px] text-slate-400 dark:text-slate-500'>
                 {t("askCv.disclaimer")}
               </p>
-            </form>
-          </motion.div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+      </form>
+    </Dialog>
   );
 };
 
@@ -299,7 +282,7 @@ const MessageBubble = ({
   if (msg.role === "user") {
     return (
       <div className='flex justify-end'>
-        <div className='max-w-[85%] rounded-2xl rounded-br-md bg-[#1b74e4] px-3.5 py-2.5 text-sm text-white'>
+        <div className='max-w-[85%] rounded-2xl rounded-br-md bg-brand px-3.5 py-2.5 text-sm text-white'>
           {msg.text}
         </div>
       </div>
@@ -326,7 +309,7 @@ const MessageBubble = ({
             {msg.sources.map((src, i) => (
               <span
                 key={i}
-                className='rounded-md bg-blue-50 px-2 py-0.5 text-[11px] font-medium text-[#1b74e4] ring-1 ring-blue-100 dark:bg-blue-500/10 dark:text-blue-400 dark:ring-blue-500/20'>
+                className='rounded-md bg-blue-50 px-2 py-0.5 text-[11px] font-medium text-brand ring-1 ring-blue-100 dark:bg-blue-500/10 dark:text-blue-400 dark:ring-blue-500/20'>
                 {src}
               </span>
             ))}

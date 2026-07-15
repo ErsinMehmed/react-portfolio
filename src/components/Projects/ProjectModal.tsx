@@ -1,11 +1,8 @@
-import { useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useEffect } from "react";
+import Dialog from "../ui/Dialog";
 import { useLanguage } from "../../i18n/LanguageContext";
 import type { IconProps } from "../../types/icon";
 import type { SelectedProject } from "../../types";
-
-const FOCUSABLE =
-  'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
 
 interface ProjectModalProps {
   data: SelectedProject | null;
@@ -50,107 +47,35 @@ const ChevronIcon = ({ className }: IconProps) => (
 );
 
 const ProjectModal = ({ data, onClose, onNavigate }: ProjectModalProps) => {
-  const dialogRef = useRef<HTMLDivElement>(null);
-  const open = !!data;
-  const canNavigate = (data?.items?.length || 0) > 1;
-
-  // Body scroll lock + Escape / arrow nav / focus trap.
-  useEffect(() => {
-    if (!data) return undefined;
-
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        onClose();
-        return;
-      }
-
-      if (e.key === "ArrowRight") {
-        onNavigate(1);
-        return;
-      }
-
-      if (e.key === "ArrowLeft") {
-        onNavigate(-1);
-        return;
-      }
-
-      if (e.key === "Tab" && dialogRef.current) {
-        const nodes = dialogRef.current.querySelectorAll<HTMLElement>(FOCUSABLE);
-        if (nodes.length === 0) {
-          e.preventDefault();
-          dialogRef.current.focus();
-          return;
-        }
-
-        const first = nodes[0];
-        const last = nodes[nodes.length - 1];
-        const active = document.activeElement;
-        const atStart =
-          active === first ||
-          active === dialogRef.current ||
-          !dialogRef.current.contains(active);
-
-        if (e.shiftKey && atStart) {
-          e.preventDefault();
-          last.focus();
-        } else if (!e.shiftKey && active === last) {
-          e.preventDefault();
-          first.focus();
-        }
-      }
-    };
-
-    document.addEventListener("keydown", onKey);
-    document.body.style.overflow = "hidden";
-
-    return () => {
-      document.removeEventListener("keydown", onKey);
-      document.body.style.overflow = "";
-    };
-  }, [data, onClose, onNavigate]);
-
-  // Move focus into dialog on open, restore to trigger on close.
-  useEffect(() => {
-    if (!open) return undefined;
-
-    const trigger = document.activeElement;
-    dialogRef.current?.focus();
-
-    return () => {
-      if (trigger instanceof HTMLElement) trigger.focus();
-    };
-  }, [open]);
-
   const { t } = useLanguage();
   const project = data?.project;
   const type = data?.type;
+  const open = !!(data && project);
+  const canNavigate = (data?.items?.length || 0) > 1;
+
+  // Left/right arrows page through the set. Escape, scroll-lock, focus-trap and
+  // focus restore are all handled by <Dialog>.
+  useEffect(() => {
+    if (!open) return undefined;
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "ArrowRight") onNavigate(1);
+      else if (e.key === "ArrowLeft") onNavigate(-1);
+    };
+
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [open, onNavigate]);
 
   return (
-    <AnimatePresence>
-      {data && project && (
-        <motion.div
-          className='fixed inset-0 z-50 flex items-center justify-center p-4'
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.2 }}>
-          <div
-            className='absolute inset-0 bg-slate-900/50 backdrop-blur-sm dark:bg-black/60'
-            onClick={onClose}
-          />
-
-          <motion.div
-            ref={dialogRef}
-            role='dialog'
-            aria-modal='true'
-            aria-label={t(project.name)}
-            tabIndex={-1}
-            className='relative z-10 max-h-[85vh] w-full max-w-2xl overflow-y-auto rounded-3xl bg-white p-6 shadow-2xl outline-none dark:bg-slate-900 sm:p-8'
-            initial={{ opacity: 0, scale: 0.96, y: 24 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.97, y: 12 }}
-            transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}>
-            <div className='absolute right-4 top-4 flex items-center gap-1'>
+    <Dialog
+      open={open}
+      onClose={onClose}
+      ariaLabel={project ? t(project.name) : undefined}
+      panelClassName='relative z-10 max-h-[85vh] w-full max-w-2xl overflow-y-auto rounded-3xl bg-white p-6 shadow-2xl outline-none dark:bg-slate-900 sm:p-8'>
+      {project && (
+        <>
+          <div className='absolute right-4 top-4 flex items-center gap-1'>
               {canNavigate && (
                 <>
                   <button
@@ -181,7 +106,7 @@ const ProjectModal = ({ data, onClose, onNavigate }: ProjectModalProps) => {
             <span
               className={`inline-block rounded-full px-2.5 py-0.5 text-[11px] font-semibold ${
                 type === "professional"
-                  ? "bg-blue-50 text-[#1b74e4] dark:bg-blue-500/10 dark:text-blue-400"
+                  ? "bg-blue-50 text-brand dark:bg-blue-500/10 dark:text-blue-400"
                   : "bg-slate-100 uppercase tracking-wide text-slate-500 dark:bg-slate-800 dark:text-slate-400"
               }`}>
               {type === "professional" && project.company
@@ -219,7 +144,7 @@ const ProjectModal = ({ data, onClose, onNavigate }: ProjectModalProps) => {
                     href={project.live}
                     target='_blank'
                     rel='noreferrer'
-                    className='inline-flex items-center gap-2 rounded-xl bg-[#1b74e4] px-5 py-2.5 text-sm font-semibold text-white shadow-[0_12px_26px_-12px_rgba(27,116,228,0.7)] transition-colors hover:bg-[#1667cf]'>
+                    className='inline-flex items-center gap-2 rounded-xl bg-brand px-5 py-2.5 text-sm font-semibold text-white shadow-[0_12px_26px_-12px_theme(colors.brand.DEFAULT/70%)] transition-colors hover:bg-brand-dark'>
                     <ExternalIcon className='h-4 w-4' />
                     {t("projects.liveDemo")}
                   </a>
@@ -238,15 +163,14 @@ const ProjectModal = ({ data, onClose, onNavigate }: ProjectModalProps) => {
               </div>
             )}
 
-            {type === "professional" && !project.live && !project.github && (
-              <p className='mt-7 rounded-xl bg-slate-50 px-4 py-3 text-sm text-slate-500 dark:bg-slate-800 dark:text-slate-400'>
-                {t("projects.proprietaryNotice")}
-              </p>
-            )}
-          </motion.div>
-        </motion.div>
+          {type === "professional" && !project.live && !project.github && (
+            <p className='mt-7 rounded-xl bg-slate-50 px-4 py-3 text-sm text-slate-500 dark:bg-slate-800 dark:text-slate-400'>
+              {t("projects.proprietaryNotice")}
+            </p>
+          )}
+        </>
       )}
-    </AnimatePresence>
+    </Dialog>
   );
 };
 

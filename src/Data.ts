@@ -96,31 +96,26 @@ const personalInfo: PersonalInfoItem[] = [
     title: "profile.age",
     text: String(calculateAge(13, 7, 1999)),
     icon: IconUser,
-    iconColor: "text-red-400",
   },
   {
     title: "profile.location",
     text: "profile.locationValue",
     icon: IconLocation,
-    iconColor: "text-pink-400",
   },
   {
     title: "profile.phone",
     text: "+359 899 626273",
     icon: IconPhone,
-    iconColor: "text-emerald-400",
   },
   {
     title: "profile.email",
     text: "ersin99mehmed@gmail.com",
     icon: IconEmail,
-    iconColor: "text-blue-400",
   },
   {
     title: "profile.languages",
     text: "profile.languagesValue",
     icon: IconSpeaker,
-    iconColor: "text-purple-400",
   },
 ];
 
@@ -130,21 +125,18 @@ const educations: Education[] = [
     period: "02.2023 - 06.2024",
     degree: "education.master.degree",
     institution: "education.uniVarna",
-    color: "bg-[#fff4f4]",
   },
   {
     title: "education.bachelor.title",
     period: "09.2018 - 06.2022",
     degree: "education.bachelor.degree",
     institution: "education.uniVarna",
-    color: "bg-[#eef5fa]",
   },
   {
     title: "education.highSchool.title",
     period: "09.2013 - 05.2018",
     degree: "education.highSchool.degree",
     institution: "education.sportSchool",
-    color: "bg-[#eef5fa]",
   },
 ];
 
@@ -154,42 +146,36 @@ const experiences: Experience[] = [
     period: "07.2023 - 07.2026",
     location: "location.varna",
     company: "company.mypos",
-    color: "bg-[#fff4f4]",
   },
   {
     title: "experience.fullstackDev.title",
     period: "10.2022 - 06.2023",
     location: "location.varna",
     company: "company.jamesIt",
-    color: "bg-[#eef5fa]",
   },
   {
     title: "experience.itSupport.title",
     period: "04.2022 - 09.2022",
     location: "location.varna",
     company: "company.energoPro",
-    color: "bg-[#eef5fa]",
   },
   {
     title: "experience.managerSmallCompany.title",
     period: "04.2021 - 10.2021",
     location: "location.varna",
     company: "company.briella",
-    color: "bg-[#fff4f4]",
   },
   {
     title: "experience.currencyCashier.title",
     period: "04.2019 - 09.2019",
     location: "location.goldenSands",
     company: "company.edives",
-    color: "bg-[#fff4f4]",
   },
   {
     title: "experience.tourism.title",
     period: "04.2018 - 09.2018",
     location: "location.goldenSands",
     company: "experience.tourism.title",
-    color: "bg-[#eef5fa]",
   },
 ];
 
@@ -198,37 +184,31 @@ const mainSkills: MainSkill[] = [
     title: "skills.fullstack.title",
     text: "skills.fullstack.text",
     icon: IconWebDev,
-    color: "bg-[#eef5fa]",
   },
   {
     title: "skills.backend.title",
     text: "skills.backend.text",
     icon: IconBackend,
-    color: "bg-[#fff4f4]",
   },
   {
     title: "skills.frontend.title",
     text: "skills.frontend.text",
     icon: IconUIdesign,
-    color: "bg-[#eef5fa]",
   },
   {
     title: "skills.ai.title",
     text: "skills.ai.text",
     icon: IconAI,
-    color: "bg-[#fff4f4]",
   },
   {
     title: "skills.leadership.title",
     text: "skills.leadership.text",
     icon: IconManagement,
-    color: "bg-[#eef5fa]",
   },
   {
     title: "skills.quality.title",
     text: "skills.quality.text",
     icon: IconQuality,
-    color: "bg-[#fff4f4]",
   },
 ];
 

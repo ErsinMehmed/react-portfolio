@@ -9,7 +9,6 @@ export interface Education {
   period: PeriodRange;
   degree: TranslationKey;
   institution: TranslationKey;
-  color: string;
 }
 
 export interface Experience {
@@ -17,14 +16,12 @@ export interface Experience {
   period: PeriodRange;
   location: TranslationKey;
   company: TranslationKey;
-  color: string;
 }
 
 export interface MainSkill {
   title: TranslationKey;
   text: TranslationKey;
   icon: IconComponent;
-  color: string;
 }
 
 export type SkillKind = "Frontend" | "Backend" | "Database" | "AI" | "Other";

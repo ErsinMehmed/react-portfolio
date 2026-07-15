@@ -68,7 +68,7 @@ const Layout = ({ header, classes = "", contentClasses = "", children }: LayoutP
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, ease: EASE_OUT }}>
                   {t(header)}
-                  <div className='h-0.5 w-32 sm:w-44 ml-8 bg-[#1b74e4] mt-1.5 rounded' />
+                  <div className='h-0.5 w-32 sm:w-44 ml-8 bg-brand mt-1.5 rounded' />
                 </motion.h2>
 
                 {children}
@@ -80,7 +80,7 @@ const Layout = ({ header, classes = "", contentClasses = "", children }: LayoutP
 
         {showScrollButton && (
           <button
-            className='hidden lg:flex w-10 h-10 fixed z-20 right-4 bottom-4 bg-[#1b74e4] hover:opacity-80 rounded-full justify-center items-center transition-all text-white'
+            className='hidden lg:flex w-10 h-10 fixed z-20 right-4 bottom-4 bg-brand hover:opacity-80 rounded-full justify-center items-center transition-all text-white'
             onClick={scrollToTop}>
             <ChevronUp className='w-7 h-7' />
           </button>

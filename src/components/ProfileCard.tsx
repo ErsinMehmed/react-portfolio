@@ -4,7 +4,9 @@ import { useLanguage } from "../i18n/LanguageContext";
 import { useState, useEffect, lazy, Suspense, type MouseEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { openAskCv } from "./AskCvModal";
+import Dialog from "./ui/Dialog";
 import type { IconProps } from "../types/icon";
+import { BRAND } from "../theme/colors";
 
 // Only needed once the QR modal opens, so keep it out of the main bundle
 // (this component is pulled into the initial chunk by the Loading skeleton).
@@ -39,23 +41,6 @@ const ProfileCard = () => {
 
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
-
-  // Lock body scroll and close on Escape while the QR modal is open.
-  useEffect(() => {
-    if (!isQrModalOpen) return undefined;
-
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setIsQrModalOpen(false);
-    };
-
-    document.addEventListener("keydown", onKey);
-    document.body.style.overflow = "hidden";
-
-    return () => {
-      document.removeEventListener("keydown", onKey);
-      document.body.style.overflow = "";
-    };
-  }, [isQrModalOpen]);
 
   const handleDownload = () => {
     const file =
@@ -101,7 +86,7 @@ const ProfileCard = () => {
             </h2>
 
             <p className='mt-1 inline-flex items-center gap-2 text-sm font-medium text-slate-500 dark:text-slate-400'>
-              <span className='h-1.5 w-1.5 rounded-full bg-[#1b74e4]' />
+              <span className='h-1.5 w-1.5 rounded-full bg-brand' />
               {t("profile.jobTitle")}
             </p>
 
@@ -116,7 +101,7 @@ const ProfileCard = () => {
                     target='_blank'
                     rel='noreferrer'
                     aria-label={link.label}>
-                    <span className='flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 text-slate-500 transition-all duration-200 ease-out hover:-translate-y-0.5 hover:border-[#1b74e4] hover:bg-[#1b74e4] hover:text-white dark:border-slate-700 dark:text-slate-400'>
+                    <span className='flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 text-slate-500 transition-all duration-200 ease-out hover:-translate-y-0.5 hover:border-brand hover:bg-brand hover:text-white dark:border-slate-700 dark:text-slate-400'>
                       <IconComponent className='h-[18px] w-[18px]' />
                     </span>
                   </a>
@@ -143,14 +128,14 @@ const ProfileCard = () => {
                       <dd className='text-[15px] font-semibold text-slate-700 dark:text-slate-200'>
                         {isPhone ? (
                           <a
-                            className='transition-colors hover:text-[#1b74e4] cursor-pointer'
+                            className='transition-colors hover:text-brand cursor-pointer'
                             onClick={handlePhoneClick}
                             href={telLink}>
                             {item.text}
                           </a>
                         ) : isEmail ? (
                           <a
-                            className='transition-colors hover:text-[#1b74e4]'
+                            className='transition-colors hover:text-brand'
                             href='mailto:ersin99mehmed@gmail.com'>
                             {item.text}
                           </a>
@@ -167,7 +152,7 @@ const ProfileCard = () => {
             <button
               type='button'
               onClick={openAskCv}
-              className='mt-4 inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-slate-300 px-8 py-2.5 text-sm font-semibold text-slate-700 transition-all duration-200 ease-out hover:border-[#1b74e4] hover:text-[#1b74e4] active:scale-[0.98] dark:border-slate-600 dark:text-slate-200 dark:hover:border-blue-400 dark:hover:text-blue-400'>
+              className='mt-4 inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-slate-300 px-8 py-2.5 text-sm font-semibold text-slate-700 transition-all duration-200 ease-out hover:border-brand hover:text-brand active:scale-[0.98] dark:border-slate-600 dark:text-slate-200 dark:hover:border-blue-400 dark:hover:text-blue-400'>
               <svg
                 viewBox='0 0 24 24'
                 fill='currentColor'
@@ -179,7 +164,7 @@ const ProfileCard = () => {
 
             <button
               type='button'
-              className='group mt-2 inline-flex w-full items-center justify-center gap-2.5 rounded-2xl bg-[#1b74e4] px-8 py-2.5 text-base font-semibold text-white shadow-[0_14px_30px_-12px_rgba(27,116,228,0.7)] transition-all duration-200 ease-out hover:bg-[#1667cf] active:scale-[0.98]'
+              className='group mt-2 inline-flex w-full items-center justify-center gap-2.5 rounded-2xl bg-brand px-8 py-2.5 text-base font-semibold text-white shadow-[0_14px_30px_-12px_theme(colors.brand.DEFAULT/70%)] transition-all duration-200 ease-out hover:bg-brand-dark active:scale-[0.98]'
               onClick={handleDownload}>
               <IconDownload className='h-5 w-5 transition-transform duration-200 ease-out group-hover:-translate-y-0.5' />
               {t("profile.downloadCv")}
@@ -188,31 +173,16 @@ const ProfileCard = () => {
         </div>
       </div>
 
-      <AnimatePresence>
-        {isQrModalOpen && (
-          <motion.div
-            className='fixed inset-0 z-50 flex items-center justify-center p-4'
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}>
-            <div
-              className='absolute inset-0 bg-slate-900/50 backdrop-blur-sm'
-              onClick={() => setIsQrModalOpen(false)}
-            />
-
-            <motion.div
-              role='dialog'
-              aria-modal='true'
-              className='relative z-10 w-full max-w-md rounded-3xl bg-white p-6 text-center shadow-2xl dark:bg-slate-900 sm:p-8'
-              initial={{ opacity: 0, scale: 0.96, y: 24 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.97, y: 12 }}
-              transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}>
-              <p className='mb-4 text-sm text-slate-500 dark:text-slate-400'>{t("qr.scanPrompt")}</p>
+      <Dialog
+        open={isQrModalOpen}
+        onClose={() => setIsQrModalOpen(false)}
+        ariaLabel={t("qr.scanPrompt")}
+        backdropClassName='absolute inset-0 bg-slate-900/50 backdrop-blur-sm'
+        panelClassName='relative z-10 w-full max-w-md rounded-3xl bg-white p-6 text-center shadow-2xl dark:bg-slate-900 sm:p-8'>
+        <p className='mb-4 text-sm text-slate-500 dark:text-slate-400'>{t("qr.scanPrompt")}</p>
 
               <div className='mb-4 flex justify-center'>
-                {/* Always white/light, in both themes — a dark QR container
+                {/* Always white/light, in both themes Ã¢â‚¬â€ a dark QR container
                     would still need a white quiet zone around the code for
                     scanners to reliably lock onto it. */}
                 <div className='flex h-[232px] w-[232px] items-center justify-center rounded-xl border border-slate-200 bg-white p-4 shadow-lg'>
@@ -226,7 +196,7 @@ const ProfileCard = () => {
                       level='H'
                       includeMargin={true}
                       bgColor='#ffffff'
-                      fgColor='#1b74e4'
+                      fgColor={BRAND}
                     />
                   </Suspense>
                 </div>
@@ -235,7 +205,7 @@ const ProfileCard = () => {
               <div className='flex items-center justify-center gap-3'>
                 <a
                   href={telLink}
-                  className='text-base font-semibold text-[#1b74e4] transition-colors hover:text-[#1667cf] hover:underline'>
+                  className='text-base font-semibold text-brand transition-colors hover:text-brand-dark hover:underline'>
                   {phoneNumber}
                 </a>
 
@@ -246,7 +216,7 @@ const ProfileCard = () => {
                     className={`inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1 text-xs font-semibold transition-colors ${
                       isCopied
                         ? "border-emerald-200 bg-emerald-50 text-emerald-600 dark:border-emerald-500/30 dark:bg-emerald-500/10 dark:text-emerald-400"
-                        : "border-slate-200 text-[#1b74e4] hover:border-slate-300 hover:bg-slate-50 dark:border-slate-700 dark:hover:border-slate-600 dark:hover:bg-slate-800"
+                        : "border-slate-200 text-brand hover:border-slate-300 hover:bg-slate-50 dark:border-slate-700 dark:hover:border-slate-600 dark:hover:bg-slate-800"
                     }`}>
                     {isCopied ? t("qr.copied") : t("qr.copy")}
                   </button>
@@ -272,13 +242,10 @@ const ProfileCard = () => {
               <button
                 type='button'
                 onClick={() => setIsQrModalOpen(false)}
-                className='mt-6 rounded-xl bg-[#1b74e4] px-6 py-2.5 text-sm font-semibold text-white shadow-[0_8px_20px_-8px_rgba(27,116,228,0.5)] transition-colors hover:bg-[#1667cf]'>
+                className='mt-6 rounded-xl bg-brand px-6 py-2.5 text-sm font-semibold text-white shadow-[0_8px_20px_-8px_theme(colors.brand.DEFAULT/50%)] transition-colors hover:bg-brand-dark'>
                 {t("qr.close")}
               </button>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      </Dialog>
     </>
   );
 };

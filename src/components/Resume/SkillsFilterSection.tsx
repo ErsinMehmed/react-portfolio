@@ -65,7 +65,7 @@ const SkillsFilterSection = () => {
             aria-pressed={selectedKind === category.kind}
             className={`rounded-full px-3.5 py-1.5 text-sm font-semibold transition-colors duration-200 ${
               selectedKind === category.kind
-                ? "bg-[#1b74e4] text-white"
+                ? "bg-brand text-white"
                 : "bg-slate-100 text-slate-600 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700"
             }`}>
             {t(category.labelKey)}

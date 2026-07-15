@@ -57,6 +57,11 @@
     -->
     <style>
       #app-preloader {
+        /* Brand blue, kept in sync with tailwind.config.js `colors.brand`
+           and src/theme/colors.ts — this file runs before the JS bundle
+           loads, so it can't import either. */
+        --brand: #1b74e4;
+        --brand-rgb: 27, 116, 228;
         position: fixed;
         inset: 0;
         z-index: 9999;
@@ -108,7 +113,7 @@
         position: relative;
         width: 112px;
         height: 112px;
-        filter: drop-shadow(0 8px 18px rgba(27, 116, 228, 0.22));
+        filter: drop-shadow(0 8px 18px rgba(var(--brand-rgb), 0.22));
         animation: pl-float 4.5s ease-in-out infinite;
       }
       @keyframes pl-float {
@@ -123,7 +128,7 @@
       }
       #app-preloader .pl-stroke {
         fill: none;
-        stroke: #1b74e4;
+        stroke: var(--brand);
         stroke-width: 5;
         stroke-linecap: round;
         stroke-linejoin: round;
@@ -161,14 +166,14 @@
         height: 3px;
         border-radius: 99px;
         overflow: hidden;
-        background: rgba(27, 116, 228, 0.14);
+        background: rgba(var(--brand-rgb), 0.14);
       }
       #app-preloader .pl-track span {
         position: absolute;
         inset: 0;
         width: 42%;
         border-radius: 99px;
-        background: linear-gradient(90deg, rgba(27, 116, 228, 0.2), #1b74e4);
+        background: linear-gradient(90deg, rgba(var(--brand-rgb), 0.2), var(--brand));
         animation: pl-slide 1.2s cubic-bezier(0.77, 0, 0.175, 1) infinite;
       }
       @keyframes pl-slide {
