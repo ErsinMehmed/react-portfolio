@@ -38,8 +38,26 @@ const askCvDevServer = (env: Record<string, string>): Plugin => ({
 
           const response = await handler(request);
           res.statusCode = response.status;
-          res.setHeader("content-type", "application/json");
-          res.end(await response.text());
+          res.setHeader(
+            "content-type",
+            response.headers.get("content-type") ?? "application/json"
+          );
+
+          // Pipe the body through chunk-by-chunk so the function's streaming
+          // (SSE) responses reach the browser incrementally in dev, matching
+          // production Netlify. Non-streaming JSON errors flow through the same
+          // loop as a single chunk.
+          if (response.body) {
+            const reader = response.body.getReader();
+            for (;;) {
+              const { done, value } = await reader.read();
+              if (done) break;
+              res.write(Buffer.from(value));
+            }
+            res.end();
+          } else {
+            res.end(await response.text());
+          }
         } catch (err) {
           res.statusCode = 500;
           res.setHeader("content-type", "application/json");

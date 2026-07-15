@@ -99,6 +99,19 @@ export const translations = {
     en: "The assistant isn't configured on this deployment yet.",
     bg: "Асистентът още не е конфигуриран на този сайт.",
   },
+  "askCv.followups": { en: "Ask next", bg: "Продължи с" },
+  "askCv.interview": {
+    en: "Prepare interview questions",
+    bg: "Подготви въпроси за интервю",
+  },
+  "askCv.interviewLabel": {
+    en: "Prepare interview questions about me",
+    bg: "Подготви въпроси за интервю с мен",
+  },
+  "askCv.interviewHint": {
+    en: "Tailored questions with grounded sample answers, for a recruiter.",
+    bg: "Подбрани въпроси с примерни отговори по CV-то, за рекрутер.",
+  },
 
   // --- Profile card ---
   "profile.name": { en: "Ersin Hyusein", bg: "Ерсин Хюсеин" },
@@ -460,6 +473,19 @@ export const translations = {
   "cs.decision.choice": { en: "Approach", bg: "Подход" },
   "cs.decision.why": { en: "Why", bg: "Защо" },
   "cs.decision.impact": { en: "Result", bg: "Резултат" },
+  "cs.decision.askAi": {
+    en: "Why this, and not the alternatives?",
+    bg: "Защо това, а не алтернативите?",
+  },
+  "cs.decision.aiTag": { en: "AI analysis", bg: "AI анализ" },
+  "cs.decision.aiDisclaimer": {
+    en: "AI-generated reasoning about the trade-offs, grounded in this decision.",
+    bg: "AI обосновка на компромисите, стъпъла на това решение.",
+  },
+  "cs.decision.aiError": {
+    en: "Couldn't generate that right now. Try again in a moment.",
+    bg: "В момента не може да се генерира. Опитай пак след малко.",
+  },
   "cs.cta.title": { en: "See the rest of the work", bg: "Виж останалата работа" },
   "cs.cta.subtitle": {
     en: "Every project on the list, from production platforms to side experiments.",

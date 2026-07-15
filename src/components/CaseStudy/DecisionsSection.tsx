@@ -1,6 +1,8 @@
+import { useState } from "react";
 import InViewAnimation from "../InViewAnimation";
 import { useBilingual } from "./shared";
 import { useLanguage } from "../../i18n/LanguageContext";
+import { streamAskCv } from "../../lib/askCv";
 import type { CaseStudyDecision } from "../../types";
 
 interface DecisionsSectionProps {
@@ -23,6 +25,98 @@ const Part = ({ label, children, className = "" }: PartProps) => (
     </p>
   </div>
 );
+
+const SparkIcon = ({ className }: { className?: string }) => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    aria-hidden
+    className={className}>
+    <path d="M12 2l1.9 5.1L19 9l-5.1 1.9L12 16l-1.9-5.1L5 9l5.1-1.9L12 2zm7 12l.9 2.4L22 17l-2.1.6L19 20l-.9-2.4L16 17l2.1-.6L19 14z" />
+  </svg>
+);
+
+type RationaleStatus = "idle" | "streaming" | "done" | "error";
+
+/**
+ * On demand, an LLM explains why this option beat the realistic alternatives
+ * and what trade-offs were accepted, streamed in. The static "Why" states the
+ * decision; this adds the senior-signal reasoning around it, grounded in the
+ * decision the client hands the function (see netlify/functions/ask-cv.mjs).
+ */
+const DecisionRationale = ({ decision }: { decision: CaseStudyDecision }) => {
+  const { t, lang } = useLanguage();
+  const bt = useBilingual();
+  const [status, setStatus] = useState<RationaleStatus>("idle");
+  const [text, setText] = useState("");
+
+  const run = async () => {
+    if (status === "streaming") return;
+    setStatus("streaming");
+    setText("");
+    try {
+      const raw = await streamAskCv({
+        mode: "decision",
+        lang,
+        decision: {
+          title: bt(decision.title),
+          problem: bt(decision.problem),
+          choice: bt(decision.choice),
+          why: bt(decision.why),
+          tags: decision.tags,
+        },
+        onToken: setText,
+      });
+      setText(raw.trim());
+      setStatus("done");
+    } catch {
+      setStatus("error");
+    }
+  };
+
+  if (status === "idle") {
+    return (
+      <button
+        type="button"
+        onClick={run}
+        className="mt-5 inline-flex items-center gap-2 rounded-full border border-[color:var(--cs-line)] bg-[var(--cs-soft)] px-3.5 py-1.5 text-[13px] font-medium text-[color:var(--cs-ink)] transition-colors hover:border-[color:var(--cs-ink)]/40 dark:bg-[var(--cs-glow)] dark:text-[color:var(--cs-on-dark)]">
+        <SparkIcon className="h-3.5 w-3.5" />
+        {t("cs.decision.askAi")}
+      </button>
+    );
+  }
+
+  return (
+    <div className="mt-5 rounded-xl border border-[color:var(--cs-line)] bg-[var(--cs-soft)] p-4 dark:bg-[var(--cs-glow)]">
+      <div className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider text-[color:var(--cs-ink)] dark:text-[color:var(--cs-on-dark)]">
+        <SparkIcon className="h-3.5 w-3.5" />
+        {t("cs.decision.aiTag")}
+      </div>
+
+      {status === "error" ? (
+        <p className="mt-2 text-[13px] leading-relaxed text-slate-500 dark:text-slate-400">
+          {t("cs.decision.aiError")}
+        </p>
+      ) : status === "streaming" && !text ? (
+        <div className="mt-3 space-y-2">
+          <div className="h-2.5 w-11/12 animate-pulse rounded bg-[color:var(--cs-line)]" />
+          <div className="h-2.5 w-3/4 animate-pulse rounded bg-[color:var(--cs-line)]" />
+        </div>
+      ) : (
+        <>
+          <p className="mt-2 whitespace-pre-wrap text-[13px] leading-relaxed text-slate-700 dark:text-slate-200">
+            {text}
+          </p>
+          {status === "done" && (
+            <p className="mt-2.5 text-[11px] leading-snug text-slate-400 dark:text-slate-500">
+              {t("cs.decision.aiDisclaimer")}
+            </p>
+          )}
+        </>
+      )}
+    </div>
+  );
+};
 
 /**
  * The senior-signal section: each decision told as problem then approach then
@@ -89,6 +183,8 @@ const DecisionsSection = ({ decisions }: DecisionsSectionProps) => {
                     ))}
                   </div>
                 )}
+
+                <DecisionRationale decision={decision} />
               </div>
             </div>
           </article>

@@ -37,21 +37,87 @@ const json = (obj, status = 200) =>
     headers: { "Content-Type": "application/json" },
   });
 
-// The model is told to end with a "SOURCES:" line listing the [Source: ...]
-// labels it used. Splitting on that is more robust across models than JSON mode.
-const parseAnswer = (raw) => {
-  const idx = raw.lastIndexOf("SOURCES:");
-  if (idx === -1) return { answer: raw.trim(), sources: [] };
-  const answer = raw.slice(0, idx).trim();
-  const tail = raw.slice(idx + "SOURCES:".length).trim();
-  const sources = /^none$/i.test(tail)
-    ? []
-    : tail
-        .split(",")
-        .map((s) => s.trim())
-        .filter(Boolean)
-        .slice(0, 3);
-  return { answer, sources };
+const LANG_NAME = { en: "English", bg: "Bulgarian" };
+
+// --- Prompt builders, one per mode ------------------------------------------
+
+// Free-form recruiter Q&A. Answer, then a machine-parsable SOURCES line and a
+// FOLLOWUPS line the client peels off (see parseAskAnswer on the client).
+const askSystem = () => `You are an assistant that answers recruiters' questions about Ersin Hyusein, a Senior Full Stack Web Developer, using ONLY the CV context below.
+
+Rules:
+- Reply in the SAME language as the question (English or Bulgarian).
+- Keep it concise: 2-4 sentences, factual, no hype.
+- Base every claim strictly on the context. If it isn't covered, say you don't have that information rather than guessing.
+- Then, on a new line, output "SOURCES:" followed by up to THREE comma-separated section titles you relied on (the exact text inside the [Source: ...] labels, without the word "Source:"), or exactly "SOURCES: none".
+- Then, on a new final line, output "FOLLOWUPS:" followed by up to THREE short, natural follow-up questions the recruiter might ask next, separated by " | ", each answerable from this context and written in the same language as your answer, or exactly "FOLLOWUPS: none".
+
+CV CONTEXT:
+${cvContext}`;
+
+// "Prepare interview questions about me" mode: a grouped question set, each
+// with a short grounded model answer, so a recruiter can walk in prepared.
+const interviewSystem = (lang) => `You are helping a recruiter prepare to interview Ersin Hyusein, a Senior Full Stack Web Developer, using ONLY the CV context below.
+
+Produce 6 to 8 strong interview questions that probe his real strengths, grouped under these three headers, in this order: Technical, Experience, Behavioral & Leadership. Under each header list its questions. For every question add a concise suggested answer (1-2 sentences) grounded strictly in the context.
+
+Format each item on two lines, exactly:
+Q: <question>
+A: <answer>
+Put each group's header on its own line above that group's items.
+
+Rules:
+- Reply in ${LANG_NAME[lang] ?? "English"}.
+- Factual and specific, no hype. Every answer must be supported by the context.
+- Do not invent facts that are not present in the context.
+
+CV CONTEXT:
+${cvContext}`;
+
+// Per case-study decision: explain the trade-off, why this over the realistic
+// alternatives. Grounded only in the decision the client sends.
+const decisionSystem = (lang) => `You explain one technical decision made by a senior full-stack developer to a technically literate visitor, using ONLY the decision details the user provides.
+
+In 2 to 4 sentences, explain why this option was chosen over the realistic alternatives and what trade-offs were accepted. Be concrete and specific. Do not restate the choice verbatim, do not add hype, and do not invent project facts beyond the details given (you may reason about well-known properties of the named technologies).
+
+Reply in ${LANG_NAME[lang] ?? "English"}.`;
+
+const buildMessages = (mode, lang, payload) => {
+  if (mode === "interview") {
+    return [
+      { role: "system", content: interviewSystem(lang) },
+      { role: "user", content: "Generate the interview questions now." },
+    ];
+  }
+
+  if (mode === "decision") {
+    const d = payload?.decision ?? {};
+    const userText = [
+      `Title: ${String(d.title ?? "").slice(0, 300)}`,
+      `Problem: ${String(d.problem ?? "").slice(0, 600)}`,
+      `Choice: ${String(d.choice ?? "").slice(0, 600)}`,
+      `Stated reason: ${String(d.why ?? "").slice(0, 600)}`,
+      `Tech: ${(Array.isArray(d.tags) ? d.tags : []).join(", ").slice(0, 200)}`,
+    ].join("\n");
+    return [
+      { role: "system", content: decisionSystem(lang) },
+      { role: "user", content: userText },
+    ];
+  }
+
+  const question = String(payload?.question ?? "").trim().slice(0, 500);
+  if (!question) return null;
+  return [
+    { role: "system", content: askSystem() },
+    { role: "user", content: question },
+  ];
+};
+
+// Groq caps and temperature per mode: the interview set is long, the others short.
+const GEN = {
+  ask: { max_tokens: 400, temperature: 0.2 },
+  interview: { max_tokens: 900, temperature: 0.4 },
+  decision: { max_tokens: 320, temperature: 0.3 },
 };
 
 export default async (req) => {
@@ -81,19 +147,13 @@ export default async (req) => {
     return json({ error: "bad_request" }, 400);
   }
 
-  const question = String(payload?.question ?? "").trim().slice(0, 500);
-  if (!question) return json({ error: "empty_question" }, 400);
+  const mode = ["interview", "decision"].includes(payload?.mode) ? payload.mode : "ask";
+  const lang = payload?.lang === "bg" ? "bg" : "en";
 
-  const system = `You are an assistant that answers recruiters' questions about Ersin Hyusein, a Senior Full Stack Web Developer, using ONLY the CV context below.
+  const messages = buildMessages(mode, lang, payload);
+  if (!messages) return json({ error: "empty_question" }, 400);
 
-Rules:
-- Reply in the SAME language as the question (English or Bulgarian).
-- Keep it concise: 2-4 sentences, factual, no hype.
-- Base every claim strictly on the context. If it isn't covered, reply that you don't have that information rather than guessing.
-- On a new final line, output "SOURCES:" followed by up to THREE comma-separated section titles you actually relied on (the exact text inside the [Source: ...] labels, without the word "Source:"). List only the most relevant ones. If you could not answer from the context, output exactly "SOURCES: none".
-
-CV CONTEXT:
-${cvContext}`;
+  const { max_tokens, temperature } = GEN[mode];
 
   let res;
   try {
@@ -105,23 +165,27 @@ ${cvContext}`;
       },
       body: JSON.stringify({
         model: MODEL,
-        temperature: 0.2,
-        max_tokens: 400,
-        messages: [
-          { role: "system", content: system },
-          { role: "user", content: question },
-        ],
+        temperature,
+        max_tokens,
+        stream: true,
+        messages,
       }),
     });
   } catch {
     return json({ error: "upstream_unreachable" }, 502);
   }
 
-  if (!res.ok) return json({ error: "upstream_error" }, 502);
+  if (!res.ok || !res.body) return json({ error: "upstream_error" }, 502);
 
-  const data = await res.json();
-  const raw = data?.choices?.[0]?.message?.content ?? "";
-  if (!raw) return json({ error: "empty_response" }, 502);
-
-  return json(parseAnswer(raw));
+  // Pass Groq's OpenAI-style SSE straight through; the client reads the token
+  // deltas. Streaming keeps the answer appearing word-by-word instead of after
+  // a multi-second wait, which matters most for the long interview set.
+  return new Response(res.body, {
+    status: 200,
+    headers: {
+      "Content-Type": "text/event-stream; charset=utf-8",
+      "Cache-Control": "no-cache, no-transform",
+      Connection: "keep-alive",
+    },
+  });
 };
