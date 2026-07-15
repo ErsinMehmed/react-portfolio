@@ -29,7 +29,10 @@ const askCvDevServer = (env: Record<string, string>): Plugin => ({
           const handler = mod.default as (req: Request) => Promise<Response>;
           const request = new Request("http://localhost/.netlify/functions/ask-cv", {
             method: req.method,
-            headers: { "content-type": "application/json" },
+            headers: {
+              "content-type": "application/json",
+              origin: (req.headers.origin as string) ?? "",
+            },
             body: req.method === "POST" ? body : undefined,
           });
 

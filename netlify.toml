@@ -35,3 +35,17 @@
   for = "/fonts/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+
+# Baseline hardening: no external scripts on this site, so a strict CSP costs
+# nothing. The two static inline <script> tags in index.html (dark-mode flash
+# guard + ResizeObserver error swallow) are allowlisted by hash instead of
+# 'unsafe-inline' — recompute if either script's content ever changes.
+# connect-src covers the Groq call made server-side by the function, not the
+# browser, but is kept tight anyway for defense-in-depth.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Content-Security-Policy = "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'sha256-cUhZ6etdzUBeqaivfQlkMcBjsEXT7SEbdfcSin5qkO4=' 'sha256-vtWRx+K6GKlq/moueuXvE9QqaFkLN//y/OigmCtzPG8='; connect-src 'self'; font-src 'self'; frame-ancestors 'none'"

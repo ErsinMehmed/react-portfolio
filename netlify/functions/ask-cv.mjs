@@ -6,11 +6,30 @@ import { cvContext } from "./cv-knowledge.mjs";
 const GROQ_URL = "https://api.groq.com/openai/v1/chat/completions";
 const MODEL = "llama-3.3-70b-versatile";
 
+// Only the site itself (and local dev) may call this — blocks other sites
+// from burning the free Groq quota via cross-origin POSTs.
+const ALLOWED_ORIGINS = [
+  "https://ersin-mehmed.netlify.app",
+  "http://localhost:5173",
+  "http://localhost:8888",
+];
+
 // Best-effort per-IP rate limit. In-memory, so it resets on cold starts — that
 // is fine: it only exists to blunt abuse of the free tier, not to be airtight.
 const WINDOW_MS = 60_000;
 const MAX_PER_WINDOW = 8;
 const hits = new Map();
+
+// The Map would otherwise grow one entry per unique IP until the next cold
+// start. Sweep out fully-elapsed windows, but only once it is large enough to
+// be worth the pass, so the common request path stays O(1).
+const MAX_TRACKED_IPS = 5000;
+const pruneStale = (now) => {
+  if (hits.size < MAX_TRACKED_IPS) return;
+  for (const [key, rec] of hits) {
+    if (now - rec.ts >= WINDOW_MS) hits.delete(key);
+  }
+};
 
 const json = (obj, status = 200) =>
   new Response(JSON.stringify(obj), {
@@ -38,11 +57,15 @@ const parseAnswer = (raw) => {
 export default async (req) => {
   if (req.method !== "POST") return json({ error: "method_not_allowed" }, 405);
 
+  const origin = req.headers.get("origin");
+  if (!origin || !ALLOWED_ORIGINS.includes(origin)) return json({ error: "forbidden_origin" }, 403);
+
   const apiKey = process.env.GROQ_API_KEY;
   if (!apiKey) return json({ error: "not_configured" }, 503);
 
   const ip = req.headers.get("x-nf-client-connection-ip") || "unknown";
   const now = Date.now();
+  pruneStale(now);
   const rec = hits.get(ip);
   if (rec && now - rec.ts < WINDOW_MS) {
     if (rec.count >= MAX_PER_WINDOW) return json({ error: "rate_limited" }, 429);
