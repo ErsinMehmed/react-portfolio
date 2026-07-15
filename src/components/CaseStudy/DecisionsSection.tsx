@@ -15,7 +15,7 @@ interface PartProps {
 
 const Part = ({ label, children, className = "" }: PartProps) => (
   <div className={className}>
-    <p className="text-[11px] font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+    <p className="text-[11px] font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-500">
       {label}
     </p>
     <p className="mt-1.5 leading-relaxed text-slate-600 dark:text-slate-300">

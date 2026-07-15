@@ -62,14 +62,14 @@ const Layout = ({ header, classes = "", contentClasses = "", children }: LayoutP
             <div
               className={`lg:rounded-2xl bg-white py-8 lg:py-10 ${classes} shadow dark:bg-slate-900`}>
               <main>
-                <motion.h2
+                <motion.h1
                   className='font-display font-bold tracking-tight text-3xl sm:text-4xl text-slate-800 dark:text-slate-100 flex items-center'
                   initial={reduce ? { opacity: 0 } : { opacity: 0, y: 18 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, ease: EASE_OUT }}>
                   {t(header)}
                   <div className='h-0.5 w-32 sm:w-44 ml-8 bg-brand mt-1.5 rounded' />
-                </motion.h2>
+                </motion.h1>
 
                 {children}
               </main>

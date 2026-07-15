@@ -647,47 +647,57 @@ const projects: ProjectsData = {
 const certifications: Certification[] = [
   {
     kind: "Award",
+    title: "cert.myposAutopilotAward.title",
     description: "cert.myposAutopilotAward.description",
   },
   {
     kind: "Award",
+    title: "cert.craictAward.title",
     description: "cert.craictAward.description",
   },
   {
     kind: "Certificate",
+    title: "cert.studentActivityAward.title",
     description: "cert.studentActivityAward.description",
     link: "https://drive.google.com/file/d/1nDOgwq-P4clUqj1Do4z7geZeRlp3ydts/view?usp=drive_link",
   },
   {
     kind: "Sport achievements",
+    title: "cert.sportAchievements.title",
     description: "cert.sportAchievements.description",
   },
   {
     kindEn: "Course",
+    title: "cert.itMasterClass9.title",
     description: "cert.itMasterClass9.description",
     link: "https://drive.google.com/file/d/17jWjvh_H5fHYULY8PMjKXbe8h5MlxwNa/view?usp=sharing",
   },
   {
     kindEn: "Course",
+    title: "cert.itMasterClass10.title",
     description: "cert.itMasterClass10.description",
   },
   {
     kindEn: "Scientific publication",
+    title: "cert.scientificPublication.title",
     description: "cert.scientificPublication.description",
     link: "https://ue-varna.bg/uploads/filemanager/303/publishing-complex/2022/Studentska-nauchna-konferencia-2022.pdf#page=100",
   },
   {
     kind: "Certificate",
+    title: "cert.azureCourse.title",
     description: "cert.azureCourse.description",
     link: "https://drive.google.com/file/d/1I9w_0YEFwDuOgDsLr3Vpf1MgFiGLaB9v/view?usp=sharing",
   },
   {
     kind: "Certificate",
+    title: "cert.safeCourse.title",
     description: "cert.safeCourse.description",
     link: "https://drive.google.com/file/d/1mJdWkQU58tuGvJj2yO5DRz5qD0dlZqnj/view?usp=sharing",
   },
   {
     kind: "Certificate",
+    title: "cert.computerLiteracy.title",
     description: "cert.computerLiteracy.description",
   },
 ];

@@ -192,9 +192,13 @@ const AskCvModal = () => {
               </button>
             </div>
 
-            {/* Transcript */}
+            {/* Transcript. role=log + aria-live announces each new answer to
+                screen readers as it streams in, without re-reading the history. */}
             <div
               ref={scrollRef}
+              role='log'
+              aria-live='polite'
+              aria-relevant='additions'
               className='flex-1 space-y-4 overflow-y-auto px-5 py-4'>
               {messages.length === 0 && (
                 <div className='pt-2'>
@@ -303,7 +307,7 @@ const MessageBubble = ({
 
         {msg.sources && msg.sources.length > 0 && (
           <div className='mt-2 flex flex-wrap items-center gap-1.5'>
-            <span className='text-[11px] font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500'>
+            <span className='text-[11px] font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-500'>
               {sourcesLabel}
             </span>
             {msg.sources.map((src, i) => (

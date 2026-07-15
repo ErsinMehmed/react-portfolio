@@ -24,7 +24,7 @@ const EducationBox = ({ item, isLast }: EducationBoxProps) => {
           {t(item.title)}
           <span className='font-medium text-slate-500 dark:text-slate-400'>
             {" "}
-            Â· {t(item.degree)}
+            · {t(item.degree)}
           </span>
         </h3>
 

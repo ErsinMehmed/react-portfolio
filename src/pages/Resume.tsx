@@ -20,9 +20,9 @@ const Resume = () => {
         <InViewAnimation>
           <div className='mb-6 flex items-center gap-2.5'>
             <IconAcademicCap className='h-5 w-5 text-brand' />
-            <h3 className='font-display text-xl font-bold tracking-tight text-slate-800 dark:text-slate-100 sm:text-2xl'>
+            <h2 className='font-display text-xl font-bold tracking-tight text-slate-800 dark:text-slate-100 sm:text-2xl'>
               {t("resume.education")}
-            </h3>
+            </h2>
           </div>
 
           <div>
@@ -42,9 +42,9 @@ const Resume = () => {
         <InViewAnimation>
           <div className='mb-6 mt-12 flex items-center gap-2.5'>
             <IconWork className='h-5 w-5 text-brand' />
-            <h3 className='font-display text-xl font-bold tracking-tight text-slate-800 dark:text-slate-100 sm:text-2xl'>
+            <h2 className='font-display text-xl font-bold tracking-tight text-slate-800 dark:text-slate-100 sm:text-2xl'>
               {t("resume.experience")}
-            </h3>
+            </h2>
           </div>
 
           <div>

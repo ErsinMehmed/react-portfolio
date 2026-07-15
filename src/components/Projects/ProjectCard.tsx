@@ -52,9 +52,9 @@ const ProjectCard = ({ project, type, onClick }: ProjectCardProps) => {
         )}
       </div>
 
-      <h4 className="line-clamp-2 font-display text-lg font-semibold leading-snug text-slate-800 dark:text-slate-100">
+      <h3 className="line-clamp-2 font-display text-lg font-semibold leading-snug text-slate-800 dark:text-slate-100">
         {t(project.name)}
-      </h4>
+      </h3>
 
       <p className="mt-2 line-clamp-3 flex-1 text-[13.5px] leading-relaxed text-slate-500 dark:text-slate-400">
         {t(project.description)}
@@ -90,7 +90,7 @@ const ProjectCard = ({ project, type, onClick }: ProjectCardProps) => {
     return (
       <MotionLink
         to={routes.caseStudy(project.caseStudySlug)}
-        aria-label={`${t(project.name)} â€” ${t("projects.readCaseStudy")}`}
+        aria-label={`${t(project.name)} €” ${t("projects.readCaseStudy")}`}
         {...shared}>
         {body}
       </MotionLink>

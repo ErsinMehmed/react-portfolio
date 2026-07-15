@@ -188,9 +188,6 @@ const ProfileCard = () => {
         <p className='mb-4 text-sm text-slate-500 dark:text-slate-400'>{t("qr.scanPrompt")}</p>
 
               <div className='mb-4 flex justify-center'>
-                {/* Always white/light, in both themes Ã¢â‚¬â€ a dark QR container
-                    would still need a white quiet zone around the code for
-                    scanners to reliably lock onto it. */}
                 <div className='flex h-[232px] w-[232px] items-center justify-center rounded-xl border border-slate-200 bg-white p-4 shadow-lg'>
                   <Suspense
                     fallback={

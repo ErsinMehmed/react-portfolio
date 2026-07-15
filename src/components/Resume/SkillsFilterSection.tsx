@@ -56,9 +56,9 @@ const SkillsFilterSection = () => {
 
   return (
     <div className='mt-14'>
-      <h3 className='font-display text-xl font-bold tracking-tight text-slate-800 dark:text-slate-100 sm:text-2xl'>
+      <h2 className='font-display text-xl font-bold tracking-tight text-slate-800 dark:text-slate-100 sm:text-2xl'>
         {t("resume.professionalSkills")}
-      </h3>
+      </h2>
 
       <p className='mt-1.5 max-w-[60ch] text-sm text-slate-500 dark:text-slate-400'>
         {t("resume.hoverHint")}

@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect } from "react";
+import { lazy, Suspense, useLayoutEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import Loading from "./components/Loading";
 import { routes, routePatterns } from "./routes";
@@ -16,11 +16,26 @@ const CaseStudy = lazy(() => import("./pages/CaseStudy"));
 const Certification = lazy(() => import("./pages/Certification"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
-// Jump to top on every route change so a new page never inherits the
-// previous page's scroll offset.
+const SCROLL_KEY_PREFIX = "scroll:";
+
+// Remembers each path's scroll offset (sessionStorage, so it survives the
+// route subtree's remount below) and restores it on return — e.g. back from
+// a case study lands where /projects was left, instead of always at the top.
+// Two layoutEffects, in this order: React runs all of one render's cleanups
+// before any of the next render's setups, so the outgoing path's offset is
+// always captured (first effect's cleanup) before the incoming path's
+// restore runs (second effect) — and both fire before paint, so there's no
+// flash at y=0 first.
 const ScrollToTop = ({ pathname }: { pathname: string }) => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
+  useLayoutEffect(() => {
+    return () => {
+      sessionStorage.setItem(`${SCROLL_KEY_PREFIX}${pathname}`, String(window.scrollY));
+    };
+  }, [pathname]);
+
+  useLayoutEffect(() => {
+    const saved = sessionStorage.getItem(`${SCROLL_KEY_PREFIX}${pathname}`);
+    window.scrollTo(0, saved ? Number(saved) : 0);
   }, [pathname]);
 
   return null;

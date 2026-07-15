@@ -128,9 +128,9 @@ const CaseStudyShell = ({
         </div>
       </header>
 
-      <div className="mx-auto max-w-6xl px-4 pb-28 sm:px-6 lg:px-8">
+      <main className="mx-auto max-w-6xl px-4 pb-28 sm:px-6 lg:px-8">
         {children}
-      </div>
+      </main>
     </div>
   );
 };

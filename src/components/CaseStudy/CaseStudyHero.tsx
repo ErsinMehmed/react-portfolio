@@ -89,7 +89,7 @@ const CaseStudyHero = ({ cs }: CaseStudyHeroProps) => {
           variants={item}
           className="mt-9 flex flex-wrap gap-x-10 gap-y-4">
           <div>
-            <dt className="text-xs font-medium uppercase tracking-wider text-slate-400 dark:text-slate-500">
+            <dt className="text-xs font-medium uppercase tracking-wider text-slate-500 dark:text-slate-500">
               {t("cs.role")}
             </dt>
             <dd className="mt-1 max-w-xs text-sm font-semibold text-slate-700 dark:text-slate-200">
@@ -97,7 +97,7 @@ const CaseStudyHero = ({ cs }: CaseStudyHeroProps) => {
             </dd>
           </div>
           <div>
-            <dt className="text-xs font-medium uppercase tracking-wider text-slate-400 dark:text-slate-500">
+            <dt className="text-xs font-medium uppercase tracking-wider text-slate-500 dark:text-slate-500">
               {t("cs.timeline")}
             </dt>
             <dd className="mt-1 text-sm font-semibold tabular-nums text-slate-700 dark:text-slate-200">

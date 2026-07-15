@@ -42,9 +42,9 @@ const Project = () => {
           <InViewAnimation key={section.key}>
             <div className='mb-6 flex items-center gap-3'>
               <span className='h-5 w-1.5 rounded-full bg-brand' />
-              <h3 className='font-display text-xl font-bold tracking-tight text-slate-800 dark:text-slate-100 sm:text-2xl'>
+              <h2 className='font-display text-xl font-bold tracking-tight text-slate-800 dark:text-slate-100 sm:text-2xl'>
                 {t(section.title)}
-              </h3>
+              </h2>
               <span className='text-sm font-semibold text-slate-500 dark:text-slate-400'>
                 {section.items.length}
               </span>

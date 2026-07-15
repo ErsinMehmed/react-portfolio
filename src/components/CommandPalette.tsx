@@ -124,7 +124,7 @@ export const CommandMenuButton = ({ className = "" }: { className?: string }) =>
       className={`inline-flex h-8 items-center gap-2 rounded-full border border-slate-200 bg-white pl-2.5 pr-1.5 text-slate-500 transition-colors duration-200 hover:text-slate-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand dark:border-slate-700 dark:bg-slate-900 dark:text-slate-400 dark:hover:text-slate-200 ${className}`}>
       <SearchIcon className='h-3.5 w-3.5' />
       <kbd className='rounded bg-slate-100 px-1.5 py-0.5 font-sans text-[11px] font-semibold text-slate-500 dark:bg-slate-800 dark:text-slate-400'>
-        {isMac ? "âŒ˜K" : "Ctrl K"}
+        {isMac ? "Œ˜K" : "Ctrl K"}
       </kbd>
     </button>
   );
@@ -333,7 +333,7 @@ const CommandPalette = () => {
                   return (
                     <div key={item.id}>
                       {showHeader && (
-                        <div className='px-3 pb-1 pt-3 text-[11px] font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500'>
+                        <div className='px-3 pb-1 pt-3 text-[11px] font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-500'>
                           {t(item.group === "pages" ? "cmd.pages" : "cmd.actions")}
                         </div>
                       )}

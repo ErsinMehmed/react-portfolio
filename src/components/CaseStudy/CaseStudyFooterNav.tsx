@@ -69,7 +69,7 @@ const CaseStudyFooterNav = ({ slug, liveUrl }: CaseStudyFooterNavProps) => {
           <Link
             to={routes.caseStudy(next.slug)}
             className="group mt-8 flex items-center justify-between border-t border-[color:var(--cs-line)] pt-6 focus-visible:outline-none">
-            <span className="text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+            <span className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-500">
               {t("cs.cta.next")}
             </span>
             <span className="flex items-center gap-2 font-display text-lg font-semibold text-slate-900 group-hover:text-[color:var(--cs-ink)] dark:text-slate-50 dark:group-hover:text-[color:var(--cs-on-dark)]">

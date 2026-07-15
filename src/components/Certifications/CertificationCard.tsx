@@ -81,7 +81,11 @@ const CertificationCard = ({ item }: CertificationCardProps) => {
         )}
       </div>
 
-      <p className='text-[13.5px] leading-relaxed text-slate-500 dark:text-slate-400'>
+      <h4 className='font-display text-[15px] font-semibold leading-snug text-slate-800 dark:text-slate-100'>
+        {t(item.title)}
+      </h4>
+
+      <p className='mt-1 text-[13.5px] leading-relaxed text-slate-500 dark:text-slate-400'>
         {t(item.description)}
       </p>
     </>

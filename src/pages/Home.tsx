@@ -32,11 +32,11 @@ const Home = () => {
       header='page.aboutMe'>
       <InViewAnimation>
         <div className='space-y-4 pt-6'>
-          <p className='sm:text-justify text-lg leading-8 text-slate-600 dark:text-slate-300'>
+          <p className='text-lg leading-8 text-slate-600 dark:text-slate-300'>
             {t("about.intro1")}
           </p>
 
-          <p className='sm:text-justify leading-7 text-slate-500 dark:text-slate-400'>
+          <p className='leading-7 text-slate-500 dark:text-slate-400'>
             {t("about.intro2")}
           </p>
         </div>
@@ -63,9 +63,9 @@ const Home = () => {
       </InViewAnimation>
 
       <InViewAnimation>
-        <h3 className='mb-1 mt-14 font-display text-2xl font-bold tracking-tight text-slate-800 dark:text-slate-100 sm:text-3xl'>
+        <h2 className='mb-1 mt-14 font-display text-2xl font-bold tracking-tight text-slate-800 dark:text-slate-100 sm:text-3xl'>
           {t("whatIDo.heading")}
-        </h3>
+        </h2>
       </InViewAnimation>
 
       <div className='mt-6 border-t border-slate-200/70 dark:border-slate-800'>
@@ -79,12 +79,12 @@ const Home = () => {
               </span>
 
               <div>
-                <h4 className='flex items-center gap-2.5 font-display text-lg font-semibold text-slate-800 dark:text-slate-100 sm:text-xl'>
+                <h3 className='flex items-center gap-2.5 font-display text-lg font-semibold text-slate-800 dark:text-slate-100 sm:text-xl'>
                   <item.icon className='h-5 w-5 shrink-0' />
                   {t(item.title)}
-                </h4>
+                </h3>
 
-                <p className='mt-2 sm:text-justify leading-7 text-slate-500 dark:text-slate-400'>{t(item.text)}</p>
+                <p className='mt-2 leading-7 text-slate-500 dark:text-slate-400'>{t(item.text)}</p>
               </div>
             </div>
           </InViewAnimation>

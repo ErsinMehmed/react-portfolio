@@ -203,6 +203,7 @@ export const translations = {
     bg: "Всяко умение показва години практически опит и брой проекти. Задръжте върху умение, за да видите как съм го използвал.",
   },
   "skill.projects": { en: "projects", bg: "проекта" },
+  "skill.closeTooltip": { en: "Close", bg: "Затвори" },
 
   // --- Filters ---
   "filter.all": { en: "All", bg: "Всички" },
@@ -479,8 +480,8 @@ export const translations = {
   },
 
   "project.paymentsSystem.name": {
-    en: "Web-based system for managing business processes related to payments.",
-    bg: "Уеб платформа за управление на търговски акаунти, плащания и финансови операции.",
+    en: "MyPOS Merchant Platform",
+    bg: "MyPOS Търговска платформа",
   },
   "project.paymentsSystem.description": {
     en: "The project has two parts: a public website and a user account area. From their account, users manage everything around the payments they receive through their terminals - they can set up online stores with products, issue invoices to their clients, and track all incoming funds in one place.",
@@ -582,6 +583,43 @@ export const translations = {
   "cert.categorySportAchievements": {
     en: "Sport achievements",
     bg: "Спортни постижения",
+  },
+
+  // --- Certification titles --- (scannable headline; the long-form
+  // description below it is what actually needs reading)
+  "cert.myposAutopilotAward.title": {
+    en: "1st Place – MyPOS AI Innovation Contest",
+    bg: "1-во място – конкурс за AI иновации в MyPOS",
+  },
+  "cert.craictAward.title": {
+    en: "CRAICT Award, UE-Varna 2023",
+    bg: "Награда CRAICT, ИУ-Варна 2023",
+  },
+  "cert.studentActivityAward.title": {
+    en: "1st Place – Student Activity Review 2022",
+    bg: "1-во място – Преглед на студентската дейност 2022",
+  },
+  "cert.computerLiteracy.title": {
+    en: "Computer Literacy Certificate",
+    bg: "Сертификат за компютърна грамотност",
+  },
+  "cert.sportAchievements.title": {
+    en: "Sportsman of the Year – Varna Sports School",
+    bg: "Спортист на годината – Спортно училище Варна",
+  },
+  "cert.itMasterClass9.title": { en: "IT Master Class 9", bg: "IT Master Class 9" },
+  "cert.itMasterClass10.title": { en: "IT Master Class 10", bg: "IT Master Class 10" },
+  "cert.scientificPublication.title": {
+    en: "Scientific Publication – Web Platforms",
+    bg: "Научна публикация – уеб платформи",
+  },
+  "cert.azureCourse.title": {
+    en: "Microsoft Azure Cloud Fundamentals",
+    bg: "Microsoft Azure Cloud – основи",
+  },
+  "cert.safeCourse.title": {
+    en: "Scaled Agile (SAFe) Certificate",
+    bg: "Сертификат по Scaled Agile (SAFe)",
   },
 
   // --- Certification descriptions ---

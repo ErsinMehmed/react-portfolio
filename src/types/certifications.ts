@@ -13,6 +13,8 @@ export interface Certification {
    * in Certification.tsx and CertificationCard.tsx. */
   kind?: CertificationKind;
   kindEn?: CertificationKind;
+  /** Short, scannable headline shown above the description paragraph. */
+  title: TranslationKey;
   description: TranslationKey;
   link?: string;
 }

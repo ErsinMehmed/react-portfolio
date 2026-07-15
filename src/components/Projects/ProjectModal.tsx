@@ -84,14 +84,14 @@ const ProjectModal = ({ data, onClose, onNavigate }: ProjectModalProps) => {
                     type='button'
                     onClick={() => onNavigate(-1)}
                     aria-label={t("projects.prevProject")}
-                    className='flex h-9 w-9 items-center justify-center rounded-full text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-700 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-200'>
+                    className='flex h-11 w-11 items-center justify-center rounded-full text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-700 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-200'>
                     <ChevronIcon className='h-5 w-5' />
                   </button>
                   <button
                     type='button'
                     onClick={() => onNavigate(1)}
                     aria-label={t("projects.nextProject")}
-                    className='flex h-9 w-9 items-center justify-center rounded-full text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-700 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-200'>
+                    className='flex h-11 w-11 items-center justify-center rounded-full text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-700 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-200'>
                     <ChevronIcon className='h-5 w-5 rotate-180' />
                   </button>
                 </>
@@ -111,7 +111,7 @@ const ProjectModal = ({ data, onClose, onNavigate }: ProjectModalProps) => {
                 : t("projects.personalProject")}
             </Chip>
 
-            <h3 className='mt-3 pr-28 font-display text-2xl font-bold leading-tight tracking-tight text-slate-800 dark:text-slate-100'>
+            <h3 className='mt-3 pr-36 font-display text-2xl font-bold leading-tight tracking-tight text-slate-800 dark:text-slate-100'>
               {t(project.name)}
             </h3>
 

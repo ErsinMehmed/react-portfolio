@@ -65,7 +65,7 @@ const ExperienceBox = ({ item, isLast }: ExperienceBoxProps) => {
           {t(item.title)}
           <span className='font-medium text-slate-500 dark:text-slate-400'>
             {" "}
-            Â· {t(item.location)}
+            · {t(item.location)}
           </span>
         </h3>
 

@@ -17,12 +17,18 @@ module.exports = {
       fontFamily: {
         sans: [
           '"Hanken Grotesk"',
+          // Cyrillic-only fallback (see the Onest @font-face in index.css):
+          // covers base Cyrillic that Hanken Grotesk lacks, so BG renders in a
+          // real webfont instead of a system default.
+          '"Onest"',
           "ui-sans-serif",
           "system-ui",
           "sans-serif",
         ],
         display: [
           '"Bricolage Grotesque"',
+          // Same Cyrillic fallback for headings — Bricolage has no Cyrillic.
+          '"Onest"',
           "ui-sans-serif",
           "system-ui",
           "sans-serif",
