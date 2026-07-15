@@ -1,13 +1,16 @@
 import IconDownload from "../icons/Download";
 import { socialLinks, personalInfo } from "../Data";
 import { useLanguage } from "../i18n/LanguageContext";
-import { useState, useEffect, lazy, Suspense, type MouseEvent } from "react";
+import { useState, useEffect, useRef, lazy, Suspense, type MouseEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { openAskCv } from "./AskCvModal";
 import Dialog from "./ui/Dialog";
 import Button from "./ui/Button";
+import Toast from "./ui/Toast";
 import type { IconProps } from "../types/icon";
 import { BRAND } from "../theme/colors";
+
+const EMAIL = "ersin99mehmed@gmail.com";
 
 // Only needed once the QR modal opens, so keep it out of the main bundle
 // (this component is pulled into the initial chunk by the Loading skeleton).
@@ -28,11 +31,33 @@ const CheckIcon = ({ className }: IconProps) => (
   </svg>
 );
 
+const CopyIcon = ({ className }: IconProps) => (
+  <svg
+    viewBox='0 0 24 24'
+    fill='none'
+    stroke='currentColor'
+    strokeWidth='2'
+    strokeLinecap='round'
+    strokeLinejoin='round'
+    className={className}>
+    <rect
+      x='9'
+      y='9'
+      width='11'
+      height='11'
+      rx='2'
+    />
+    <path d='M6 15a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2' />
+  </svg>
+);
+
 const ProfileCard = () => {
   const { t, lang } = useLanguage();
   const [isQrModalOpen, setIsQrModalOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [isCopied, setIsCopied] = useState(false);
+  const [toast, setToast] = useState<string | null>(null);
+  const toastTimer = useRef<ReturnType<typeof setTimeout>>();
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
@@ -42,6 +67,24 @@ const ProfileCard = () => {
 
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
+
+  // Clear any pending toast dismissal if the card unmounts mid-show.
+  useEffect(() => () => clearTimeout(toastTimer.current), []);
+
+  const showToast = (message: string) => {
+    setToast(message);
+    clearTimeout(toastTimer.current);
+    toastTimer.current = setTimeout(() => setToast(null), 2200);
+  };
+
+  const handleCopyEmail = async () => {
+    try {
+      await navigator.clipboard?.writeText(EMAIL);
+      showToast(t("profile.emailCopied"));
+    } catch {
+      /* clipboard blocked; the mailto link beside it still works */
+    }
+  };
 
   const handleDownload = () => {
     const file =
@@ -135,11 +178,20 @@ const ProfileCard = () => {
                             {item.text}
                           </a>
                         ) : isEmail ? (
-                          <a
-                            className='transition-colors hover:text-brand'
-                            href='mailto:ersin99mehmed@gmail.com'>
-                            {item.text}
-                          </a>
+                          <span className='flex items-center gap-1.5'>
+                            <a
+                              className='min-w-0 truncate transition-colors hover:text-brand'
+                              href={`mailto:${EMAIL}`}>
+                              {item.text}
+                            </a>
+                            <button
+                              type='button'
+                              onClick={handleCopyEmail}
+                              aria-label={t("profile.copyEmail")}
+                              className='shrink-0 rounded-md p-1 text-slate-400 transition-colors hover:bg-slate-200/60 hover:text-brand dark:text-slate-500 dark:hover:bg-slate-700/60 dark:hover:text-blue-400'>
+                              <CopyIcon className='h-4 w-4' />
+                            </button>
+                          </span>
                         ) : (
                           t(item.text)
                         )}
@@ -250,6 +302,12 @@ const ProfileCard = () => {
                 {t("qr.close")}
               </Button>
       </Dialog>
+
+      <Toast
+        open={!!toast}
+        icon={<CheckIcon className='h-4 w-4 text-emerald-500' />}>
+        {toast}
+      </Toast>
     </>
   );
 };

@@ -130,6 +130,11 @@ export const translations = {
     bg: "Български, Английски, Турски",
   },
   "profile.downloadCv": { en: "Download CV", bg: "Свали CV" },
+  "profile.copyEmail": { en: "Copy email address", bg: "Копирай имейл адреса" },
+  "profile.emailCopied": {
+    en: "Email copied to clipboard",
+    bg: "Имейлът е копиран в клипборда",
+  },
 
   // --- QR Code Modal ---
   "qr.scanPrompt": {
