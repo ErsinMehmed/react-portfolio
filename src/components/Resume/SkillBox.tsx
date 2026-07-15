@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { type CSSProperties } from "react";
 import { motion } from "framer-motion";
 import { useLanguage } from "../../i18n/LanguageContext";
 import { techSkills } from "../../Data";
@@ -86,6 +86,17 @@ const customIcons: Record<string, CustomIcon> = {
   },
 };
 
+// Perceived brightness (0-1) of a simple-icons hex. Near-black brand marks
+// (Codex, GitHub, Next.js, Symfony) sit around 0, so they vanish against
+// dark:bg-slate-800/900 — those get flipped to a light fill in dark mode.
+const isDarkHex = (hex: string): boolean => {
+  const n = parseInt(hex, 16);
+  const r = (n >> 16) & 255;
+  const g = (n >> 8) & 255;
+  const b = n & 255;
+  return (0.299 * r + 0.587 * g + 0.114 * b) / 255 < 0.3;
+};
+
 const TechLogo = ({ item, className }: { item: TechSkill; className?: string }) => {
   const icon = iconMap[item.title] || customIcons[item.title];
 
@@ -97,13 +108,17 @@ const TechLogo = ({ item, className }: { item: TechSkill; className?: string }) 
     );
   }
 
+  // Brand color via CSS var + arbitrary `fill` class (not the inline `fill`
+  // attribute) so the `dark:` override can actually win over it.
   return (
     <svg
       role='img'
       viewBox='0 0 24 24'
       aria-label={item.title}
-      className={className}
-      fill={`#${icon.hex}`}>
+      style={{ "--logo-fill": `#${icon.hex}` } as CSSProperties}
+      className={`${className ?? ""} [fill:var(--logo-fill)] ${
+        isDarkHex(icon.hex) ? "dark:[fill:#e2e8f0]" : ""
+      }`}>
       <path d={icon.path} />
     </svg>
   );
@@ -149,7 +164,7 @@ const SkillCard = ({ item }: { item: TechSkill }) => {
   const { t } = useLanguage();
 
   return (
-    <div className='w-[248px] p-3.5 text-left'>
+    <div className='w-full p-3.5 text-left'>
       <div className='flex items-center gap-3'>
         <span className='flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-slate-50 ring-1 ring-slate-100 dark:bg-slate-800 dark:ring-slate-700'>
           <TechLogo
@@ -205,14 +220,24 @@ interface SkillBoxProps {
 }
 
 const SkillBox = ({ item, index, total, columns }: SkillBoxProps) => {
-  const { t } = useLanguage();
-  const triggerRef = useRef<HTMLDivElement>(null);
-
   // The last two rows would push their downward tooltip past the page
   // bottom — which also stretches the document's scroll height beyond the
   // app background, leaving a white strip. Flip those upward.
   const flipUp = index >= total - columns * 2;
   const tooltipPosition = flipUp ? "bottom-full mb-2" : "top-full mt-2";
+
+  // Keep the 248px tooltip inside the grid horizontally. Edge columns anchor to
+  // their own edge and open inward; only inner columns center. Centering an
+  // edge card's tooltip would push it past a 2-col phone's viewport and stretch
+  // the document scrollWidth — the sideways shake the audit flagged. max-w is a
+  // belt for sub-320px screens where even the grid is narrower than the card.
+  const col = index % columns;
+  const horizontalPosition =
+    col === 0
+      ? "left-0"
+      : col === columns - 1
+        ? "right-0"
+        : "left-1/2 -translate-x-1/2";
 
   const card = (
     <div className='group flex h-full flex-col rounded-xl border border-slate-200/70 bg-white px-3.5 py-3 transition-all duration-200 ease-out hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-[0_14px_30px_-18px_rgba(27,74,120,0.45)] dark:border-slate-800 dark:bg-slate-900 dark:hover:border-slate-700 dark:hover:shadow-[0_14px_30px_-18px_rgba(0,0,0,0.5)]'>
@@ -259,7 +284,6 @@ const SkillBox = ({ item, index, total, columns }: SkillBoxProps) => {
       {item.description ? (
         <div className='group/skill relative h-full'>
           <div
-            ref={triggerRef}
             tabIndex={0}
             className='h-full cursor-pointer rounded-xl outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-950'>
             {card}
@@ -268,27 +292,12 @@ const SkillBox = ({ item, index, total, columns }: SkillBoxProps) => {
           {/* Custom hover/focus tooltip (replaces flowbite). A named group keeps
               it independent of the card's own internal `group` hover. Stays
               pointer-events-none while hidden so it can't block taps on the
-              cards it overlaps; only the visible state (hover or focus, which
-              is how a tap opens it on touch) turns pointer events back on so
-              the close button below is reachable. */}
+              cards it overlaps; only the visible state (hover, or focus, which
+              is how a tap opens it on touch) re-enables pointer events, so a
+              tap elsewhere blurs the trigger and dismisses it. */}
           <div
             role='tooltip'
-            className={`pointer-events-none absolute left-1/2 ${tooltipPosition} z-20 w-[248px] -translate-x-1/2 rounded-2xl border border-slate-200/80 bg-white opacity-0 shadow-[0_16px_40px_-12px_rgba(27,74,120,0.35)] transition-opacity duration-150 group-hover/skill:pointer-events-auto group-hover/skill:opacity-100 group-focus-within/skill:pointer-events-auto group-focus-within/skill:opacity-100 dark:border-slate-700 dark:bg-slate-900 dark:shadow-[0_16px_40px_-12px_rgba(0,0,0,0.6)]`}>
-            {/* Touch has no hover-away to dismiss this, so give it an explicit
-                close button; mouse users just move the pointer off instead. */}
-            <button
-              type='button'
-              onClick={() => triggerRef.current?.blur()}
-              aria-label={t("skill.closeTooltip")}
-              className='absolute right-2 top-2 flex h-6 w-6 items-center justify-center rounded-full text-slate-400 hover:bg-slate-100 hover:text-slate-600 dark:text-slate-500 dark:hover:bg-slate-800 dark:hover:text-slate-300 [@media(hover:hover)]:hidden'>
-              <svg
-                viewBox='0 0 24 24'
-                fill='currentColor'
-                className='h-3.5 w-3.5'>
-                <path d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z' />
-              </svg>
-            </button>
-
+            className={`pointer-events-none absolute ${horizontalPosition} ${tooltipPosition} z-20 w-[248px] max-w-[calc(100vw-3rem)] rounded-2xl border border-slate-200/80 bg-white opacity-0 shadow-[0_16px_40px_-12px_rgba(27,74,120,0.35)] transition-opacity duration-150 group-hover/skill:pointer-events-auto group-hover/skill:opacity-100 group-focus-within/skill:pointer-events-auto group-focus-within/skill:opacity-100 dark:border-slate-700 dark:bg-slate-900 dark:shadow-[0_16px_40px_-12px_rgba(0,0,0,0.6)]`}>
             <SkillCard item={item} />
           </div>
         </div>

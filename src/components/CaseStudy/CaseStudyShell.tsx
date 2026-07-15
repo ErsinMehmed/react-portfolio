@@ -6,6 +6,7 @@ import {
   useSpring,
   useReducedMotion,
 } from "framer-motion";
+import CaseStudyBreadcrumb from "./CaseStudyBreadcrumb";
 import LanguageToggle from "../LanguageToggle";
 import ThemeToggle from "../ThemeToggle";
 import { useLanguage } from "../../i18n/LanguageContext";
@@ -129,6 +130,7 @@ const CaseStudyShell = ({
       </header>
 
       <main className="mx-auto max-w-6xl px-4 pb-28 sm:px-6 lg:px-8">
+        <CaseStudyBreadcrumb title={title} />
         {children}
       </main>
     </div>

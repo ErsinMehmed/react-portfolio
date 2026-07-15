@@ -30,6 +30,15 @@ export const translations = {
   },
   "notFound.backHome": { en: "Back to home", bg: "Обратно към началото" },
 
+  // --- Error boundary (root render crash) ---
+  "error.title": { en: "Something went wrong", bg: "Нещо се обърка" },
+  "error.message": {
+    en: "This part of the site ran into an unexpected error. Reloading usually clears it.",
+    bg: "Тази част от сайта срещна неочаквана грешка. Презареждането обикновено помага.",
+  },
+  "error.console": { en: "unexpected error", bg: "неочаквана грешка" },
+  "error.reload": { en: "Reload page", bg: "Презареди страницата" },
+
   // --- Command palette ---
   "cmd.placeholder": {
     en: "Search pages and actions…",
@@ -203,7 +212,6 @@ export const translations = {
     bg: "Всяко умение показва години практически опит и брой проекти. Задръжте върху умение, за да видите как съм го използвал.",
   },
   "skill.projects": { en: "projects", bg: "проекта" },
-  "skill.closeTooltip": { en: "Close", bg: "Затвори" },
 
   // --- Filters ---
   "filter.all": { en: "All", bg: "Всички" },
@@ -432,6 +440,7 @@ export const translations = {
   "projects.caseStudyBadge": { en: "Case study", bg: "Инфо за проекта" },
 
   // --- Case study pages ---
+  "breadcrumb.home": { en: "Home", bg: "Начало" },
   "cs.viewLive": { en: "View live", bg: "Виж на живо" },
   "cs.role": { en: "Role", bg: "Роля" },
   "cs.timeline": { en: "Timeline", bg: "Период" },
