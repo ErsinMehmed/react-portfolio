@@ -24,8 +24,10 @@ const LanguageContext = createContext<LanguageContextValue>({
 });
 
 // A returning visitor's saved choice wins; a first-time visitor gets Bulgarian
-// only if their browser is set to it, otherwise English.
-const getInitialLang = (): Lang => {
+// only if their browser is set to it, otherwise English. Exported so the
+// index.tsx console signature can match the same detection without a second
+// copy of this logic.
+export const getInitialLang = (): Lang => {
   const saved = localStorage.getItem("lang");
   if (saved === "en" || saved === "bg") return saved;
 

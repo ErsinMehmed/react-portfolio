@@ -30,6 +30,12 @@ export const translations = {
   },
   "notFound.backHome": { en: "Back to home", bg: "Обратно към началото" },
 
+  // --- Console signature (DevTools easter egg) ---
+  "console.signature": {
+    en: "You're one of the people who open the console - nice.",
+    bg: "Ти си от хората, които отварят конзолата - браво.",
+  },
+
   // --- Error boundary (root render crash) ---
   "error.title": { en: "Something went wrong", bg: "Нещо се обърка" },
   "error.message": {
