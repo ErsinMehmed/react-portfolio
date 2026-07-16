@@ -15,6 +15,7 @@ import { openAskCv } from "./AskCvModal";
 import Dialog from "./ui/Dialog";
 import Button from "./ui/Button";
 import Toast from "./ui/Toast";
+import { track } from "../lib/track";
 import type { IconProps } from "../types/icon";
 import { BRAND } from "../theme/colors";
 
@@ -139,6 +140,7 @@ const ProfileCard = () => {
     try {
       await navigator.clipboard?.writeText(EMAIL);
       showToast(t("profile.emailCopied"));
+      track("copy_email");
     } catch {
       /* clipboard blocked; the mailto link beside it still works */
     }
@@ -151,6 +153,7 @@ const ProfileCard = () => {
         : "/files/Ersin_Hyusein_CV_EN.pdf";
     window.open(file, "_blank");
     setBurstKey((k) => k + 1);
+    track("cv_download", lang);
   };
 
   const handlePhoneClick = (e: MouseEvent<HTMLAnchorElement>) => {

@@ -1,6 +1,7 @@
-import { lazy, Suspense, useLayoutEffect } from "react";
+import { lazy, Suspense, useEffect, useLayoutEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import Loading from "./components/Loading";
+import { track } from "./lib/track";
 import { routes, routePatterns } from "./routes";
 
 // Lazy so framer-motion (pulled in by these) stays out of the entry chunk.
@@ -43,6 +44,12 @@ const ScrollToTop = ({ pathname }: { pathname: string }) => {
 
 function App() {
   const location = useLocation();
+
+  // One pageview per route, including the first — the SPA never reloads, so
+  // there is no other moment the server could count it.
+  useEffect(() => {
+    track("pageview");
+  }, [location.pathname]);
 
   // Key the route subtree by path so each navigation remounts the page and its
   // in-view reveals replay — the transition lives entirely in those section

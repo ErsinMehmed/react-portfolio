@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useLanguage } from "../../i18n/LanguageContext";
 import { useTilt } from "../../hooks/useTilt";
+import { track } from "../../lib/track";
 import { routes } from "../../routes";
 import Chip from "../ui/Chip";
 import type { Project, ProjectType } from "../../types";
@@ -90,6 +91,7 @@ const ProjectCard = ({ project, type, onClick }: ProjectCardProps) => {
     return (
       <MotionLink
         to={routes.caseStudy(project.caseStudySlug)}
+        onClick={() => track("case_study_open", project.caseStudySlug)}
         aria-label={`${t(project.name)} €” ${t("projects.readCaseStudy")}`}
         {...shared}>
         {body}
@@ -100,7 +102,10 @@ const ProjectCard = ({ project, type, onClick }: ProjectCardProps) => {
   return (
     <motion.button
       type="button"
-      onClick={onClick}
+      onClick={() => {
+        track("project_open", t(project.name));
+        onClick();
+      }}
       {...shared}>
       {body}
     </motion.button>

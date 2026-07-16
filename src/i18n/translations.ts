@@ -78,8 +78,8 @@ export const translations = {
     bg: "Пробвай някой от тези:",
   },
   "askCv.disclaimer": {
-    en: "Answers are AI-generated from my CV and may be imperfect.",
-    bg: "Отговорите са AI-генерирани от CV-то ми и може да не са перфектни.",
+    en: "Answers are AI-generated from my CV and may be imperfect. Questions are stored so I can improve them.",
+    bg: "Отговорите са AI-генерирани от CV-то ми и може да не са перфектни. Въпросите се запазват, за да ги подобрявам.",
   },
   "askCv.ex1": {
     en: "Has he worked with payment systems?",

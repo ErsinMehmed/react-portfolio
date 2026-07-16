@@ -7,6 +7,7 @@ import {
 } from "react";
 import { useReducedMotion } from "framer-motion";
 import Dialog from "./ui/Dialog";
+import { track } from "../lib/track";
 import { useLanguage } from "../i18n/LanguageContext";
 import type { TranslationKey } from "../i18n/translations";
 import {
@@ -95,7 +96,10 @@ const AskCvModal = () => {
   // Opened from anywhere via the custom event; Escape/scroll-lock/focus are
   // handled by <Dialog>.
   useEffect(() => {
-    const onOpen = () => setOpen(true);
+    const onOpen = () => {
+      setOpen(true);
+      track("askcv_open");
+    };
     window.addEventListener(OPEN_EVENT, onOpen);
     return () => window.removeEventListener(OPEN_EVENT, onOpen);
   }, []);

@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { LanguageProvider, getInitialLang } from "./i18n/LanguageContext";
 import { ThemeProvider } from "./theme/ThemeContext";
 import { logConsoleSignature } from "./lib/consoleSignature";
+import { captureAttribution } from "./lib/track";
 
 const rootElement = document.getElementById("root");
 if (!rootElement) {
@@ -14,6 +15,10 @@ if (!rootElement) {
 }
 
 logConsoleSignature(getInitialLang());
+
+// Before the first render, so the entry URL's ?ref / ?utm_* are recorded and
+// scrubbed from the address bar ahead of the first pageview beacon.
+captureAttribution();
 
 const root = ReactDOM.createRoot(rootElement);
 root.render(

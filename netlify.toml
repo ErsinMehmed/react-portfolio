@@ -14,6 +14,16 @@
 [build.environment]
   NODE_VERSION = "24"
 
+# Private analytics dashboard. Must stay ABOVE the SPA catch-all: Netlify
+# applies the first matching rule, so otherwise /stats would just serve the app.
+# The function enforces HTTP Basic Auth against STATS_USER / STATS_PASS (plain
+# server-side env vars — no VITE_ prefix, so they are never bundled into the
+# client). Without valid credentials the HTML is never produced at all.
+[[redirects]]
+  from = "/stats"
+  to = "/.netlify/functions/stats"
+  status = 200
+
 # React Router is client-side; every deep link must fall back to index.html
 # so refreshing /resume or /projects doesn't 404 on Netlify's CDN.
 [[redirects]]

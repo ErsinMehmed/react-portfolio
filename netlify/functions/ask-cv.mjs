@@ -1,4 +1,5 @@
 import { cvContext } from "./cv-knowledge.mjs";
+import { putRecord, KIND } from "./analytics-store.mjs";
 
 // Groq is OpenAI-compatible and free (llama-3.3-70b-versatile is fast + strong
 // enough for grounded CV Q&A). The API key lives only here, server-side, in the
@@ -120,7 +121,51 @@ const GEN = {
   decision: { max_tokens: 320, temperature: 0.3 },
 };
 
-export default async (req) => {
+// What to file the exchange under on the /stats dashboard.
+const questionLabel = (mode, payload) => {
+  if (mode === "interview") return "[interview prep]";
+  if (mode === "decision")
+    return `[decision] ${String(payload?.decision?.title ?? "").slice(0, 200)}`;
+  return String(payload?.question ?? "").slice(0, 500);
+};
+
+// Tees Groq's SSE: every chunk goes to the browser untouched and is also
+// accumulated here, so the finished answer can be logged. `flush` runs when the
+// upstream ends — still inside this invocation, while the response is being
+// streamed — so there is no background work to get killed after the return.
+const answerLogger = (meta) => {
+  const decoder = new TextDecoder();
+  let buffer = "";
+  let answer = "";
+
+  return new TransformStream({
+    transform(chunk, controller) {
+      controller.enqueue(chunk);
+      buffer += decoder.decode(chunk, { stream: true });
+
+      let nl;
+      while ((nl = buffer.indexOf("\n")) !== -1) {
+        const line = buffer.slice(0, nl).trim();
+        buffer = buffer.slice(nl + 1);
+        if (!line.startsWith("data:")) continue;
+
+        const data = line.slice(5).trim();
+        if (!data || data === "[DONE]") continue;
+        try {
+          const delta = JSON.parse(data)?.choices?.[0]?.delta?.content;
+          if (delta) answer += delta;
+        } catch {
+          /* keepalive or a partial frame — the next chunk completes it */
+        }
+      }
+    },
+    async flush() {
+      await putRecord(KIND.qa, { ...meta, answer: answer.slice(0, 8000) });
+    },
+  });
+};
+
+export default async (req, context) => {
   if (req.method !== "POST") return json({ error: "method_not_allowed" }, 405);
 
   const origin = req.headers.get("origin");
@@ -177,10 +222,20 @@ export default async (req) => {
 
   if (!res.ok || !res.body) return json({ error: "upstream_error" }, 502);
 
-  // Pass Groq's OpenAI-style SSE straight through; the client reads the token
-  // deltas. Streaming keeps the answer appearing word-by-word instead of after
-  // a multi-second wait, which matters most for the long interview set.
-  return new Response(res.body, {
+  // Pass Groq's OpenAI-style SSE through; the client reads the token deltas.
+  // Streaming keeps the answer appearing word-by-word instead of after a
+  // multi-second wait, which matters most for the long interview set. The tee
+  // records the exchange for /stats without delaying a single token.
+  const logged = res.body.pipeThrough(
+    answerLogger({
+      mode,
+      lang,
+      question: questionLabel(mode, payload),
+      country: context?.geo?.country?.code ?? undefined,
+    })
+  );
+
+  return new Response(logged, {
     status: 200,
     headers: {
       "Content-Type": "text/event-stream; charset=utf-8",
