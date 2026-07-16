@@ -485,8 +485,8 @@ export const translations = {
   "cs.decision.why": { en: "Why", bg: "Защо" },
   "cs.decision.impact": { en: "Result", bg: "Резултат" },
   "cs.decision.askAi": {
-    en: "Why this, and not the alternatives?",
-    bg: "Защо това, а не алтернативите?",
+    en: "Why did I choose this approach?",
+    bg: "Защо избрах този подход?",
   },
   "cs.decision.aiTag": { en: "AI analysis", bg: "AI анализ" },
   "cs.decision.aiDisclaimer": {
