@@ -1,8 +1,16 @@
 import IconDownload from "../icons/Download";
 import { socialLinks, personalInfo } from "../Data";
 import { useLanguage } from "../i18n/LanguageContext";
-import { useState, useEffect, useRef, lazy, Suspense, type MouseEvent } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import {
+  useState,
+  useEffect,
+  useRef,
+  useMemo,
+  lazy,
+  Suspense,
+  type MouseEvent,
+} from "react";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { openAskCv } from "./AskCvModal";
 import Dialog from "./ui/Dialog";
 import Button from "./ui/Button";
@@ -11,6 +19,54 @@ import type { IconProps } from "../types/icon";
 import { BRAND } from "../theme/colors";
 
 const EMAIL = "ersin99mehmed@gmail.com";
+
+// Brand blue fanning out into a few cousin hues — a small arc of colour, not
+// a full confetti storm, to stay on the restrained side.
+const BURST_COLORS = ["#1b74e4", "#60a5fa", "#38bdf8", "#818cf8", "#22d3ee", "#34d399"];
+const BURST_COUNT = 16;
+const BURST_EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
+
+// A one-shot radial spark that plays when the CV download fires. Rendered
+// keyed by a counter so each click remounts it and replays; positioned from
+// the button's centre by its parent. Never mounted for reduced-motion users.
+const DownloadBurst = () => {
+  const particles = useMemo(
+    () =>
+      Array.from({ length: BURST_COUNT }).map((_, i) => {
+        const angle = (i / BURST_COUNT) * Math.PI * 2 + (Math.random() - 0.5) * 0.5;
+        const dist = 40 + Math.random() * 48;
+        return {
+          dx: Math.cos(angle) * dist,
+          dy: Math.sin(angle) * dist - 12, // slight upward bias reads as an arc
+          color: BURST_COLORS[i % BURST_COLORS.length],
+          size: 5 + Math.random() * 4,
+          duration: 0.7 + Math.random() * 0.35,
+        };
+      }),
+    []
+  );
+
+  return (
+    <span className='pointer-events-none absolute left-1/2 top-1/2 z-10 h-0 w-0'>
+      {particles.map((p, i) => (
+        <motion.span
+          key={i}
+          className='absolute rounded-full'
+          style={{
+            width: p.size,
+            height: p.size,
+            marginLeft: -p.size / 2,
+            marginTop: -p.size / 2,
+            backgroundColor: p.color,
+          }}
+          initial={{ x: 0, y: 0, opacity: 1, scale: 1 }}
+          animate={{ x: p.dx, y: p.dy, opacity: 0, scale: 0.4 }}
+          transition={{ duration: p.duration, ease: BURST_EASE }}
+        />
+      ))}
+    </span>
+  );
+};
 
 // Only needed once the QR modal opens, so keep it out of the main bundle
 // (this component is pulled into the initial chunk by the Loading skeleton).
@@ -57,7 +113,9 @@ const ProfileCard = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [isCopied, setIsCopied] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
+  const [burstKey, setBurstKey] = useState(0);
   const toastTimer = useRef<ReturnType<typeof setTimeout>>();
+  const reduce = useReducedMotion();
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
@@ -92,6 +150,7 @@ const ProfileCard = () => {
         ? "/files/Ersin_Hyusein_CV_BG.pdf"
         : "/files/Ersin_Hyusein_CV_EN.pdf";
     window.open(file, "_blank");
+    setBurstKey((k) => k + 1);
   };
 
   const handlePhoneClick = (e: MouseEvent<HTMLAnchorElement>) => {
@@ -218,15 +277,18 @@ const ProfileCard = () => {
               {t("askCv.open")}
             </Button>
 
-            <Button
-              type='button'
-              onClick={handleDownload}
-              size='lg'
-              fullWidth
-              className='group mt-2'>
-              <IconDownload className='h-5 w-5 transition-transform duration-200 ease-out group-hover:-translate-y-0.5' />
-              {t("profile.downloadCv")}
-            </Button>
+            <span className='relative mt-2 block'>
+              <Button
+                type='button'
+                onClick={handleDownload}
+                size='lg'
+                fullWidth
+                className='group'>
+                <IconDownload className='h-5 w-5 transition-transform duration-200 ease-out group-hover:-translate-y-0.5' />
+                {t("profile.downloadCv")}
+              </Button>
+              {!reduce && burstKey > 0 && <DownloadBurst key={burstKey} />}
+            </span>
           </div>
         </div>
       </div>

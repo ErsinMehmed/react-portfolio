@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import InViewAnimation from "../InViewAnimation";
 import Button from "../ui/Button";
+import Magnetic from "../ui/Magnetic";
 import { useLanguage } from "../../i18n/LanguageContext";
 import { caseStudyOrder, getCaseStudy } from "../../data/caseStudies";
 import { routes } from "../../routes";
@@ -45,23 +46,27 @@ const CaseStudyFooterNav = ({ slug, liveUrl }: CaseStudyFooterNavProps) => {
 
           <div className="flex flex-wrap items-center gap-3">
             {liveUrl && (
-              <Button
-                href={liveUrl}
-                target="_blank"
-                rel="noreferrer"
-                variant="accent"
-                size="md"
-                className="focus-visible:ring-offset-[var(--cs-soft)]">
-                <ExternalIcon className="h-4 w-4" />
-                {t("cs.viewLive")}
-              </Button>
+              <Magnetic>
+                <Button
+                  href={liveUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  variant="accent"
+                  size="md"
+                  className="focus-visible:ring-offset-[var(--cs-soft)]">
+                  <ExternalIcon className="h-4 w-4" />
+                  {t("cs.viewLive")}
+                </Button>
+              </Magnetic>
             )}
-            <Button
-              to={routes.projects}
-              variant="secondary"
-              size="md">
-              {t("cs.cta.allProjects")}
-            </Button>
+            <Magnetic>
+              <Button
+                to={routes.projects}
+                variant="secondary"
+                size="md">
+                {t("cs.cta.allProjects")}
+              </Button>
+            </Magnetic>
           </div>
         </div>
 

@@ -1,5 +1,5 @@
 import { type CSSProperties } from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { useLanguage } from "../../i18n/LanguageContext";
 import { techSkills } from "../../Data";
 import type { TechSkill } from "../../types";
@@ -130,21 +130,44 @@ const MAX_YEARS = Math.max(...techSkills.map((s) => s.years));
 
 // A segmented meter where each segment is one real year of experience,
 // filled up to the skill's tenure. Unlike a "proficiency %", every mark
-// maps to a concrete quantity.
-const YearGauge = ({ years, className = "" }: { years: number; className?: string }) => (
-  <span
-    className={`flex items-center gap-[3px] ${className}`}
-    aria-hidden='true'>
-    {Array.from({ length: MAX_YEARS }).map((_, i) => (
-      <span
-        key={i}
-        className={`h-1 flex-1 rounded-full ${
-          i < years ? "bg-brand" : "bg-slate-200/80 dark:bg-slate-700/60"
-        }`}
-      />
-    ))}
-  </span>
-);
+// maps to a concrete quantity. The filled segments sweep in left-to-right
+// when the card scrolls into view, one after the next, so the gauge reads
+// as "counting up" the years instead of appearing pre-filled.
+const YearGauge = ({ years, className = "" }: { years: number; className?: string }) => {
+  const reduce = useReducedMotion();
+
+  return (
+    <span
+      className={`flex items-center gap-[3px] ${className}`}
+      aria-hidden='true'>
+      {Array.from({ length: MAX_YEARS }).map((_, i) => {
+        const filled = i < years;
+
+        if (filled && !reduce) {
+          return (
+            <motion.span
+              key={i}
+              className='h-1 flex-1 origin-left rounded-full bg-brand'
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true, amount: 0.6 }}
+              transition={{ duration: 0.5, ease: easeOutStrong, delay: i * 0.06 }}
+            />
+          );
+        }
+
+        return (
+          <span
+            key={i}
+            className={`h-1 flex-1 rounded-full ${
+              filled ? "bg-brand" : "bg-slate-200/80 dark:bg-slate-700/60"
+            }`}
+          />
+        );
+      })}
+    </span>
+  );
+};
 
 const SkillMetrics = ({ item }: { item: TechSkill }) => {
   const { t } = useLanguage();
