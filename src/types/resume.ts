@@ -18,6 +18,19 @@ export interface Experience {
   company: TranslationKey;
 }
 
+/**
+ * A real reference/recommendation. `url` links to the scanned letter (kept
+ * off-site), `role` is the referrer's position at `company`. `quote` is an
+ * optional pull-quote to surface if a short excerpt is later transcribed —
+ * left unset rather than inventing one.
+ */
+export interface Recommendation {
+  company: TranslationKey;
+  role: TranslationKey;
+  url: string;
+  quote?: TranslationKey;
+}
+
 export interface MainSkill {
   title: TranslationKey;
   text: TranslationKey;

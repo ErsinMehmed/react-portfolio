@@ -227,6 +227,16 @@ export const translations = {
   // --- Resume sections ---
   "resume.education": { en: "Education", bg: "Образование" },
   "resume.experience": { en: "Experience", bg: "Опит" },
+
+  // --- Recommendations (real reference letters) ---
+  "reco.heading": { en: "Recommendations", bg: "Препоръки" },
+  "reco.subtitle": {
+    en: "Reference letters from people I reported to directly.",
+    bg: "Препоръки от хора, на които съм се отчитал пряко.",
+  },
+  "reco.role.directManager": { en: "Direct manager", bg: "Пряк ръководител" },
+  "reco.role.manager": { en: "Manager", bg: "Управител" },
+  "reco.viewLetter": { en: "View reference letter", bg: "Виж препоръката" },
   "resume.professionalSkills": {
     en: "Professional Skills",
     bg: "Професионални умения",

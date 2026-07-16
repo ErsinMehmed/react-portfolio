@@ -171,6 +171,20 @@ const CertCardSkeleton = () => (
   </div>
 );
 
+// Mirrors RecommendationCard.
+const RecoCardSkeleton = () => (
+  <div className='flex h-full flex-col rounded-2xl border border-slate-200/80 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900'>
+    <div className='flex items-center gap-3'>
+      <div className='h-11 w-11 rounded-xl bg-slate-200/70 dark:bg-slate-700/50' />
+      <div className='flex-1'>
+        <Bar className='h-4 w-28' />
+        <Bar className='mt-2 h-3.5 w-20' />
+      </div>
+    </div>
+    <Bar className='mt-4 h-3.5 w-36' />
+  </div>
+);
+
 // Mirrors SkillBox (collapsed state).
 const SkillSkeleton = () => (
   <div className='rounded-xl border border-slate-200/70 bg-white px-3.5 py-3 dark:border-slate-800 dark:bg-slate-900'>
@@ -295,6 +309,16 @@ const ResumeBody = () => (
             key={i}
             last={i === 5}
           />
+        ))}
+      </div>
+    </div>
+
+    <div className='mt-14'>
+      <Bar className='h-6 w-44' />
+      <Bar className='mt-2 h-3.5 w-72 max-w-full' />
+      <div className='mt-6 grid gap-4 sm:grid-cols-2'>
+        {Array.from({ length: 2 }).map((_, i) => (
+          <RecoCardSkeleton key={i} />
         ))}
       </div>
     </div>

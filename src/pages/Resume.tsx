@@ -2,6 +2,7 @@ import IconAcademicCap from "../icons/AcademicCap";
 import Layout from "../components/Layout";
 import EducationBox from "../components/Resume/EducationBox";
 import ExperienceBox from "../components/Resume/ExperienceBox";
+import Recommendations from "../components/Resume/Recommendations";
 import SkillsFilterSection from "../components/Resume/SkillsFilterSection";
 import InViewAnimation from "../components/InViewAnimation";
 import IconWork from "../icons/Work";
@@ -61,6 +62,10 @@ const Resume = () => {
           </div>
         </InViewAnimation>
       </div>
+
+      <InViewAnimation>
+        <Recommendations />
+      </InViewAnimation>
 
       <InViewAnimation delay={0.15}>
         <SkillsFilterSection />

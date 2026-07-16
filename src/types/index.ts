@@ -5,6 +5,7 @@ export type {
   PeriodRange,
   Education,
   Experience,
+  Recommendation,
   MainSkill,
   SkillKind,
   TechSkill,

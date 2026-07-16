@@ -23,6 +23,7 @@ import type {
   PersonalInfoItem,
   Education,
   Experience,
+  Recommendation,
   MainSkill,
   TechSkill,
   ProjectsData,
@@ -177,6 +178,21 @@ const experiences: Experience[] = [
     period: "04.2018 - 09.2018",
     location: "location.goldenSands",
     company: "company.tourism",
+  },
+];
+
+// Real reference letters (scanned, hosted off-site). Only the referrer's role
+// and company are shown, plus a link to the letter — no invented quote text.
+const recommendations: Recommendation[] = [
+  {
+    company: "company.jamesIt",
+    role: "reco.role.directManager",
+    url: "https://drive.google.com/file/d/1cB7LH5g-zI6RVLqu14TKRKh7gTIGIkW3/view?usp=sharing",
+  },
+  {
+    company: "company.energoPro",
+    role: "reco.role.manager",
+    url: "https://drive.google.com/file/d/1NCR6BU7uCGl0rN_QdlK7MsQSJYTWAAz8/view?usp=sharing",
   },
 ];
 
@@ -708,6 +724,7 @@ export {
   personalInfo,
   educations,
   experiences,
+  recommendations,
   mainSkills,
   techSkills,
   projects,
